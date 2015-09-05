@@ -41,3 +41,12 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# ingnore lyx VCS files and backups
+\#*.lyx\#
+*.lyx,v
+*.lyx~
+
+# Ignore JabRef bkup files
+*.bib.bak
+.$*.bib$
