@@ -1322,7 +1322,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset listings
-lstparams "language=C,numbers=left,basicstyle={\footnotesize\sffamily},breaklines=true,showstringspaces=false,backgroundcolor={\color{lightgray}},frame={leftline,bottomline,rightline,topline},xleftmargin=15pt"
+lstparams "language=csh,numbers=left,basicstyle={\footnotesize\sffamily},breaklines=true,showstringspaces=false,backgroundcolor={\color{lightgray}},frame={leftline,bottomline,rightline,topline},xleftmargin=15pt"
 inline false
 status open
 
@@ -1358,18 +1358,18 @@ main()
 
 \begin_layout Plain Layout
 
-        fork();
+	        fork();
 \end_layout
 
 \begin_layout Plain Layout
 
-        setvbuf(stdout, NULL, _IOLBF, 0); //(Stream, Pufferangabe, Puffertyp,
+	        setvbuf(stdout, NULL, _IOLBF, 0); //(Stream, Pufferangabe, Puffertyp,
  Puffergroesse)
 \end_layout
 
 \begin_layout Plain Layout
 
-        printf("PID=%6d, i=%d
+	        printf("PID=%6d, i=%d
 \backslash
 n", getpid(), i);
 \end_layout
