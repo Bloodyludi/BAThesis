@@ -448,7 +448,7 @@ Hochschule Harz
 \begin_inset Text
 
 \begin_layout Plain Layout
-Zweitprüfer
+Zweitprüfer:
 \end_layout
 
 \end_inset
@@ -777,7 +777,7 @@ LatexCommand tableofcontents
 
 \begin_layout Standard
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 ACHTUNG: Hier am Ende noch die richtige Seite einstellen! Sonst passt die
@@ -1322,7 +1322,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset listings
-lstparams "backgroundcolor={\color{lightgray}},basicstyle={\normalsize\sffamily},breaklines=true,frame={leftline,bottomline,rightline,topline},language=C,numbers=left,showstringspaces=false,xleftmargin=15pt"
+lstparams "language=C,numbers=left,basicstyle={\footnotesize\sffamily},breaklines=true,showstringspaces=false,backgroundcolor={\color{lightgray}},frame={leftline,bottomline,rightline,topline},xleftmargin=15pt"
 inline false
 status open
 
