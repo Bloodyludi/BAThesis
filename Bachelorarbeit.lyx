@@ -742,14 +742,58 @@ Exposé
 \end_layout
 
 \begin_layout Standard
-Dieses Beispiel soll ein paar Tipps geben, wie man eine schöne Bachelorarbeit
- schreibt.
- Ich selbst habe mit dieser Vorlage bereits drei Arbeiten geschrieben und
- es gab keine Beanstandungen.
- Wichtigster Punkt aber zuvor: Fragt euren betreuenden Professor ob das
- Layout so passt.
- Dieser Entscheidet schlussendlich über eure Note und sollte auch mit dem
- Layout zufrieden sein.
+Unity3D hat sich in den letzten Jahren als Spieleengine etabliert.
+ Immer größere und ambitioniertere Projekte werden mit der Engine umgesetzt.
+ Da Unity als Rapid Prototyping Tool für unabhängige Spieleentwickler konzipiert
+ wurde, fällt die parallele Entwicklung in mittleren bis großen Teams schwer.
+ Eine der Ursachen dieses Problems ist die enge Kopplung von Abhängigkeiten
+ zwischen Objekten.
+ Die Folgen sind Starrheit und Zerbrechlichkeit bei Veränderung des Programmcode
+s.
+\end_layout
+
+\begin_layout Standard
+In der objektorientierten Programmierung gilt Inversion Of Control als Maßnahme
+ um lose Kopplung zu erzielen.
+ In dieser Arbeit soll untersucht werden, ob sich das Paradigma auch in
+ der komponentenbasierten Architektur von Unity3D anwenden lässt.
+ Dafür soll das Framework StrangeIoC herangezogen und genauer betrachtet
+ werden.
+ Mit Features wie Automated Dependency Injection, eigenem Eventsystem und
+ einer MVC(S) Architektur sollen die Qualität, Testbarkeit, Skalierbarkeit
+ und Wartbarkeit der Anwendung erhöht werden.
+\end_layout
+
+\begin_layout Standard
+Ziel der Bachelorarbeit ist folglich das Erstellen einer lose gekoppelten
+ Beispielanwendung in Unity3D unter Verwendung von StrangeIoC.
+ Zudem soll untersucht werden, welche Praktiken die Ursache von enger Kopplung
+ in Unity3D sind, welche Folgen diese haben und wie diese mit Inversion
+ Of Control, Dependency Injection und StrangeIoC im speziellen, vermeidbar
+ sind.
+\end_layout
+
+\begin_layout Standard
+Die Bachelorarbeit beinhaltet folgende Teilaufgaben:
+\end_layout
+
+\begin_layout Itemize
+Analyse von Ursachen und Folgen enger Kopplung zwischen Objekten in Unity3D
+\end_layout
+
+\begin_layout Itemize
+Auseinandersetzung mit den Paradigmen Inversion Of Control und Dependency
+ Injection
+\end_layout
+
+\begin_layout Itemize
+Entwicklung einer Beispielanwendung mit StrangeIoC mit dem Ziel lose Kopplung
+ unter Objekten umzusetzen
+\end_layout
+
+\begin_layout Itemize
+Kritische Betrachtung von Entwicklungsaufwand, Qualität, Testbarkeit, Skalierbar
+keit und Wartbarkeit im Vergleich mit anderen Architekturansätzen 
 \end_layout
 
 \begin_layout Standard
