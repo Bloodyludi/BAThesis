@@ -1218,7 +1218,7 @@ Game Objects can be composed in the unity engine tool by designers
 \end_layout
 
 \begin_layout Section
-Kommunikation
+Kommunikation und Abhängigkeiten
 \end_layout
 
 \begin_layout Itemize
@@ -1250,7 +1250,36 @@ Für jede Art der Kommunikation wird ein Kanal benötigt.
 \end_layout
 
 \begin_layout Itemize
-it’s sometimes nessassary to expose data structures to wire up dependencies
+Direkte Kommunikation
+\end_layout
+
+\begin_layout Itemize
+Indirekte Kommunkation mittels Messages oder Events
+\end_layout
+
+\begin_layout Itemize
+Solange kein Mittelmann im Spiel is wird entweder Sender oder Empfänger
+ aufeinander referenzieren müssen
+\end_layout
+
+\begin_layout Itemize
+Ausnahme ist SendMessage oder Eventsystem
+\end_layout
+
+\begin_layout Itemize
+Game object queries
+\end_layout
+
+\begin_layout Itemize
+“Find”-Functions
+\end_layout
+
+\begin_layout Itemize
+Object.FindObjectOfType<T>
+\end_layout
+
+\begin_layout Itemize
+Assign it through the inspector
 \end_layout
 
 \begin_layout Section
