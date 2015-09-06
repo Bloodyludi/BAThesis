@@ -911,91 +911,343 @@ Einführung
 \end_layout
 
 \begin_layout Section
-Vorspann und alle Verzeichnisse
-\end_layout
-
-\begin_layout Standard
-Im Vorspann könnt ihr verschiedene Listen sehen.
- In dieser Testarbeit sind mal alle nur erdenklichen Punkte vorhanden:
+Motivation
 \end_layout
 
 \begin_layout Itemize
-Ehrenwörtliche Erklärung (nach Guttenberg wohl pflicht)
+Unity 3D kurz als Spieleengine vorstellen: Spieleengine, 3D, Multiplatform,
+ Rendertechniken
 \end_layout
 
 \begin_layout Itemize
-Sperrvermerk: Eigentlich nur nötig wenn von der Firma verlangt wird.
- Dieser kann dann natürlich auch anders aussehen.
- Hier am besten mit der Firma sprechen
+Relevanz von Unity in der Spielebranche beschreiben
 \end_layout
 
 \begin_layout Itemize
-Kurzfassung: Die Kurzfassung ist eigentlich Pflicht.
- Manche Betreuer möchten, dss die Kurzfassung auch in Englisch verfasst
- wird.
+Entwicklung der Ausrichtung auf personale Projekte zu professionellen Projekten
 \end_layout
 
 \begin_layout Itemize
-Inhaltsverzeichnis: Ist Pflicht.
- Da dürfte es keine Diskussion geben.
+Marktentwicklung: AAA, Casual Games
 \end_layout
 
 \begin_layout Itemize
-Abbildungsverzeichnis: War bisher bei all meine Arbeiten Pflicht
+Beschreibung, dass dies zu Problemen führt
 \end_layout
 
 \begin_layout Itemize
-Tabellenverzeichnis: War auch Pflicht bei allen Arbeiten
+Größtes Problem: Architektur und Auflösung von Abhängigkeiten
+\end_layout
+
+\begin_layout Itemize
+Viele Lösungen, in OO.
+ Kaum welche für Unitys Komponentenbasierte Architektur
 \end_layout
 
 \begin_layout Section
-Abschnitt
+Zielsetzung
 \end_layout
 
-\begin_layout Standard
-Einfach mal um zu zeigen, wie es im Inhaltsverzeichnis aussieht.
+\begin_layout Itemize
+Untersuchen, ob und wie Inversion Of Control auch in der komponentenbasierten
+ Architektur von Unity anwendbar ist
+\end_layout
+
+\begin_layout Itemize
+Inversion of Control Frameworks für Unity erläutern: Testbarkeit, Wartbarkeit,
+ Aufwand, Performance, Erweiterbarkeit allgemein und im speziellen
+\end_layout
+
+\begin_layout Itemize
+Alternative Lösungsansätze für Decoupling und Architektur in Unity präsentieren
+ und untersuchen
+\end_layout
+
+\begin_layout Itemize
+Entscheiden, für welche Anwendungsgebiete die Architekturen am besten geeignet
+ sind/ob sie immer zu empfehlen sind
 \end_layout
 
 \begin_layout Section
-Weiterer Abschnitt
-\end_layout
-
-\begin_layout Subsection
-Ein Beispiel für einen Unterabschnitt
-\end_layout
-
-\begin_layout Subsection
-Und gleich nochmal ein Beispiel
-\end_layout
-
-\begin_layout Subsubsection
-Ein Unterunterabschnitt
+Aufbau der Arbeit
 \end_layout
 
 \begin_layout Standard
-Wie ihr seht wird ein Unterunterabschnitt nicht mehr in die Auflistung aufgenomm
-en.
- Dies kann unter 
-\begin_inset Quotes gld
-\end_inset
+Teil 1
+\end_layout
 
-Dokument --> Einstellungen --> Nummerierung & Inhaltsverzeichnis
-\begin_inset Quotes grd
-\end_inset
+\begin_layout Itemize
+Unity Architektur, Komponentensystem, Objektlebenszyklus: Beschreiben und
+ Probleme aufzeigen
+\end_layout
 
- angepasst werden.
+\begin_layout Itemize
+Auf das Problem der Auflösung von Abhängigkeiten tiefer eingehen
+\end_layout
+
+\begin_layout Standard
+Teil 2
+\end_layout
+
+\begin_layout Itemize
+Inversion Of Control als Lösung und alle verbundenen Begriffe beschreiben,
+ Beispielhaft erläutern
+\end_layout
+
+\begin_layout Itemize
+Herkunft von Inversion Of Control: OO, Enterprise Architecture
+\end_layout
+
+\begin_layout Itemize
+Anwendung von Inversion Of Control in Unity beschreiben
+\end_layout
+
+\begin_layout Itemize
+Funktionalität auf Basis des eigenen DIContainers erläutern
+\end_layout
+
+\begin_layout Itemize
+Anwendbarkeit in der Komponentenbasierten Welt von Unity kritisch betrachten
+\end_layout
+
+\begin_layout Standard
+Teil 3
+\end_layout
+
+\begin_layout Itemize
+Existierende Inversion Of Control Frameworks in Unity
+\end_layout
+
+\begin_layout Itemize
+StrangeIoC
+\end_layout
+
+\begin_layout Itemize
+Zenject
+\end_layout
+
+\begin_layout Itemize
+ADIC
+\end_layout
+
+\begin_layout Standard
+Teil 4
+\end_layout
+
+\begin_layout Itemize
+Beispiel Anwendung
+\end_layout
+
+\begin_layout Itemize
+Entwicklungsaufwand, Wartbarkeit, Erweiterbarkeit, Testbarkeit, Wiederverwendbar
+keit, Performance
+\end_layout
+
+\begin_layout Standard
+Teil 5 
+\end_layout
+
+\begin_layout Itemize
+Alternative Architekturansätze
+\end_layout
+
+\begin_layout Itemize
+Entity Component System
+\end_layout
+
+\begin_layout Standard
+Teil 6
+\end_layout
+
+\begin_layout Itemize
+Fazit
+\end_layout
+
+\begin_layout Itemize
+Entscheiden, für welche Anwendungsgebiete die Architekturen am besten geeignet
+ sind/ob sie immer zu empfehlen sind
 \end_layout
 
 \begin_layout Chapter
-Beispiel für Bilder
-\end_layout
-
-\begin_layout Standard
-Hier testen wir mal ein Bild und wie dieses Dargestellt wird
+Komposition als Architekturgrundlage
 \end_layout
 
 \begin_layout Section
-Bild mit Untertitel
+Klassischer objektorientierter Ansatz 
+\end_layout
+
+\begin_layout Itemize
+Spielobjekte werden von einer Vererbungshierarchie abgeleitet
+\end_layout
+
+\begin_layout Itemize
+Alle Objekte werden von einer Basisklasse, meistens GameObject, abgeleitet
+\end_layout
+
+\begin_layout Itemize
+Basisklasse enthält Funktionalität die für alle Klassen notwendig ist (z.b.
+ Serialisierung)
+\end_layout
+
+\begin_layout Itemize
+Mit Wachstum des Projektes wird die Hierarchie immer tiefer und weiter
+\end_layout
+
+\begin_layout Itemize
+Eine Monolytische Klassenhierarchie entsteht und Probleme folgen (Doesn't
+ scale)
+\end_layout
+
+\begin_layout Itemize
+Es kann nur ein Merkmal als Basis für die Vererbungshierarchie gewählt werden
+\end_layout
+
+\begin_layout Itemize
+An Axis has to be picked to set the hierarchy, once this axis changes an
+ object needs behaviour of two different classes
+\end_layout
+
+\begin_layout Itemize
+Beispiel:
+\end_layout
+
+\begin_layout Itemize
+Geteilte Funktionalitäten müssen in der Hierarchie nach oben verschoben
+ werden, obwohl sie nicht von allen abgeleiten Klassen benötigt werden
+\end_layout
+
+\begin_layout Itemize
+Das Problem kann in einigen Sprachen auch durch multiple Vererbung gelöst
+ werden, welche aber zu einem Deadly Diamond führen kann
+\end_layout
+
+\begin_layout Itemize
+Lösung: Komposition und Aggregation anstelle von Vererbung
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+compose: object owns other objects, they get destroyed once the owner is
+ destroyed 
+\end_layout
+
+\begin_layout Itemize
+aggregate: object is linked to other object, not destroyed when owner is
+ destroyed 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+not to be confused with: “In business software, there’s a “Component” design
+ pattern that describes decoupled services that communicate over the web.”
+\end_layout
+
+\begin_layout Section
+Komponentenbasierte Architektur von Unity3D
+\end_layout
+
+\begin_layout Itemize
+Unity implementiert eine komponentenbasierte Game Object Architektur
+\end_layout
+
+\begin_layout Itemize
+has-a anstelle von is-a
+\end_layout
+
+\begin_layout Itemize
+Purpose: “Allow a single entity to span multiple domains without coupling
+ the domains to each other.”
+\end_layout
+
+\begin_layout Itemize
+SpielObjekte werden mit Komponenten dekoriert
+\end_layout
+
+\begin_layout Itemize
+Komponenten sollen eine Funktionalität kapseln
+\end_layout
+
+\begin_layout Itemize
+Keeps different domains in a program isolated from each other 
+\end_layout
+
+\begin_layout Itemize
+Components contain Data and Behaviour
+\end_layout
+
+\begin_layout Itemize
+data can be exposed to the editor and then be edited by the artists
+\end_layout
+
+\begin_layout Itemize
+GameObjects sind Objekte die eine variable Kombination von MonoBehaviours
+ besitzen (container of components)
+\end_layout
+
+\begin_layout Itemize
+Components are reusable plugins that can be plugged into the socket on the
+ entity
+\end_layout
+
+\begin_layout Itemize
+Scripte müssen Komponenten sein.
+ Unity3D insists that scripts you write are components.
+ Components attach to objects, and the objects belong to a scene or prefab
+\end_layout
+
+\begin_layout Itemize
+Code can be reused because classes can own an instance of the same Component
+ 
+\end_layout
+
+\begin_layout Itemize
+Some Component will need to communicate to others, but communication is
+ restricted to those cases.
+\end_layout
+
+\begin_layout Itemize
+The Game Object is completely decoupled from it’s components 
+\end_layout
+
+\begin_layout Itemize
+It is possible to add and remove components without the enitiy even knowing
+\end_layout
+
+\begin_layout Itemize
+Game Objects can be composed in the unity engine tool by designers 
+\end_layout
+
+\begin_layout Section
+Kommunikation
+\end_layout
+
+\begin_layout Itemize
+it’s sometimes nessassary to expose data structures to wire up dependencies
+\end_layout
+
+\begin_layout Section
+Resultierende Probleme
+\end_layout
+
+\begin_layout Itemize
+Scripts about never affect just one object.
+ Sometimes they do not affect an object at all
+\end_layout
+
+\begin_layout Itemize
+other objects can only be created within components
+\end_layout
+
+\begin_layout Itemize
+unless they are a singleton
+\end_layout
+
+\begin_layout Itemize
+No way to keep state (data) independent of a game object
+\end_layout
+
+\begin_layout Itemize
+This forces Developers to Create “Manager” GameObjects
 \end_layout
 
 \begin_layout Standard
@@ -1349,8 +1601,12 @@ Dies ist wieder der Kurztitel zur Tabelle
 
 \end_layout
 
+\begin_layout Chapter
+Ausseinandersetzung mit Paradigmen
+\end_layout
+
 \begin_layout Section
-Programmcode schön darstellen
+SOLID, Inversion Of Control, DI, DIContainer
 \end_layout
 
 \begin_layout Standard
@@ -1486,11 +1742,12 @@ Einstellungen --> Erweitert
 \end_layout
 
 \begin_layout Chapter
-Das große Thema: Zitieren
+Entwicklung einer Beispielanwendung mit StrangeIoC mit dem Ziel lose Kopplung
+ unter Objekten umzusetzen 
 \end_layout
 
 \begin_layout Section
-Zitieren nach DIN 1505-2
+StrangeIoC und verwendete Entwurfsmuster
 \end_layout
 
 \begin_layout Standard
@@ -1556,8 +1813,12 @@ Das hier ist die supertolle Fußnote, hier steht jetzt irgendwas von BGB
 Zum Bearbeiten der Literatur-Datenbank verwende ich JabRef.
 \end_layout
 
+\begin_layout Section
+Walk-Through Beispielanwendung
+\end_layout
+
 \begin_layout Chapter
-Abschluss
+Kritische Betrachtung & Fazit
 \end_layout
 
 \begin_layout Standard
