@@ -1222,6 +1222,34 @@ Kommunikation
 \end_layout
 
 \begin_layout Itemize
+Für eine interaktive Spielwelt ist es notwendig, dass Komponenten miteinander
+ interagieren
+\end_layout
+
+\begin_layout Itemize
+Kommunikationsarten:
+\end_layout
+
+\begin_layout Itemize
+Inter-Objekt-Kommunikation: Beschreibt die Kommunikation von zwei oder mehreren
+ getrennten Spielobjekten.
+ Sonderfälle davon treten im Bereich der Netzwerkspiele auf, wo die Kommunikatio
+n zusätzlich zwischen Client und Server erfolgen kann.
+\end_layout
+
+\begin_layout Itemize
+Intra-Objekt-Kommunikation: Besonders in der komponentenbasierten Spieleentwickl
+ung ist es notwendig, dass die Bausteine eines einzelnen Spielobjektes miteinand
+er kommunizieren.
+ 
+\end_layout
+
+\begin_layout Itemize
+Für jede Art der Kommunikation wird ein Kanal benötigt.
+ Der Kanal beschreibt einen Weg zur Übermittlung von Informationen
+\end_layout
+
+\begin_layout Itemize
 it’s sometimes nessassary to expose data structures to wire up dependencies
 \end_layout
 
