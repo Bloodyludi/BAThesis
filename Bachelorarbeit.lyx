@@ -1221,6 +1221,48 @@ Game Objects can be composed in the unity engine tool by designers
 Kommunikation und Abhängigkeiten
 \end_layout
 
+\begin_layout Standard
+Im Idealfall sind MonoBehaviours komplett unabhängig voneinander.
+ Dennoch sind Sie Teile eines größeren Ganzen und müssen somit kommunizieren
+ und interagieren.
+ Oft beschränkt sich diese Kommunikation auf Komponenten des selben GameObjects.
+ Es kommt jedoch auch vor, dass ein MonoBehaviour mit einem MonoBehaviour
+ eines anderen GameObjects kommunizieren muss.
+ Folglich wird zwischen zwei Arten der Kommunikation unterschieden:
+\end_layout
+
+\begin_layout Standard
+Die Intra-Objekt-Kommunikation erfolgt unter MonoBehaviours des selben GameObjec
+ts oder Children von diesem.
+\end_layout
+
+\begin_layout Standard
+Inter-Objekt-Kommunikation beschreibt die Kommunikation zu anderen GameObjetcts
+ die ansonsten in keiner Relation zueinander stehen.
+\end_layout
+
+\begin_layout Standard
+In beiden Fällen kann die Kommunikation direkt oder indirekt erfolgen.
+ Bei direkter Kommunikation ist es notwendig, dass entweder Sender oder
+ Empfänger einander kennen.
+ Eines der Objekte muss also eine Referenz zu dem anderen halten.
+ Kommunikation erfolgt indirekt, wenn Sie über ein drittes Objekt \SpecialChar \nobreakdash-
+ einem
+ Vermittler \SpecialChar \nobreakdash-
+ stattfindet.
+ In jedem Fall wird eine Referenz auf ein weiteres Objekt benötigt.
+ In Unity gibt es eine Vielzahl von Möglichkeiten wie diese Abhängigkeiten
+ aufgelöst werden können.
+ Diese sollen an dieser Stelle genauer beschrieben werden.
+\end_layout
+
+\begin_layout Itemize
+Inter-Objekt-Kommunikation: Beschreibt die Kommunikation von zwei oder mehreren
+ getrennten Spielobjekten.
+ Sonderfälle davon treten im Bereich der Netzwerkspiele auf, wo die Kommunikatio
+n zusätzlich zwischen Client und Server erfolgen kann.
+\end_layout
+
 \begin_layout Itemize
 Für eine interaktive Spielwelt ist es notwendig, dass Komponenten miteinander
  interagieren
