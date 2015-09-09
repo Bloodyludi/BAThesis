@@ -99,7 +99,29 @@
 \renewcommand{\nomname}{Glossar}
 
 %Farbe für Programmcode festlegen
-\definecolor{lightgray}{rgb}{0.8,0.8,0.8}
+\definecolor{bluekeywords}{rgb}{0,0,1}
+\definecolor{greencomments}{rgb}{0,0.5,0}
+\definecolor{redstrings}{rgb}{0.64,0.08,0.08}
+\definecolor{xmlcomments}{rgb}{0.5,0.5,0.5}
+\definecolor{types}{rgb}{0.17,0.57,0.68}
+
+\lstset{language=[Sharp]C,
+captionpos=b,
+numbers=left, %Nummerierung
+numberstyle=\tiny, % kleine Zeilennummern
+frame=lines, % Oberhalb und unterhalb des Listings ist eine Linie
+showspaces=false,
+showtabs=false,
+breaklines=true,
+showstringspaces=false,
+breakatwhitespace=true,
+escapeinside={(*@}{@*)},
+commentstyle=\color{greencomments},
+morekeywords={partial, var, value, get, set},
+keywordstyle=\color{bluekeywords},
+stringstyle=\color{redstrings},
+basicstyle=\ttfamily\small,
+}
 \end_preamble
 \options pointlessnumbers, abstracton, headsepline,
 \use_default_options true
@@ -1257,7 +1279,7 @@ In beiden Fällen kann die Kommunikation direkt oder indirekt erfolgen.
 \end_layout
 
 \begin_layout Subsection
-Referenzieren von anderen MonoBehaviour
+Referenzieren von anderen MonoBehaviours
 \end_layout
 
 \begin_layout Standard
@@ -1281,6 +1303,142 @@ status open
 \begin_layout Plain Layout
 
 [SerializeField]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+SerializeField ist ein Attribut, das es ermöglicht private Member einer
+ Komponente zu serialisieren und somit im Inspektor zu setzen.
+ Setzbare Datentypen sind primitive Datentypen wie int, float, bool und
+ in Unity eingebaute Datentypen wie Vector, Quaternion und Color, sowie
+ Strings, Enums und Structs.
+ Desweiteren ist es möglich Referenzen zu Klassen und Objekten durch drag-and-dr
+op im Editor zu setzen.
+ Dabei ist zu beachten, dass diese Objekte vom Typ UnityEngine.Object ableiten
+ müssen.
+ Es ist also möglich andere Komponenten oder Spielobjekte zu referenzieren.
+ Jedoch ist es aufgrund dieser Limitierung nicht möglich, Interfaces im
+ Editor zugänglich zu machen.
+ Neben Variablen mit dem SerializeField-Attribut werden Variablen, die mit
+ dem Zugriffsmodifizierer public gekennzeichnet wurden im Editor zugänglich
+ gemacht.
+ Dies ist jedoch ausdrücklich nicht zu empfehlen, da so die Datenkapselung
+ des Objektes gebrochen wird.
+\end_layout
+
+\begin_layout Standard
+Ist bereits vor Ausführung des Spiels bekannt welche Referenzen benötigt
+ werden, sollten diese wenn möglich über ein SerializeField aufgelöst werden.
+ Um sicherzugehen, dass die Referenz im Editor aufgelöst wurde, ist es ratsam
+ einen Guard Clause in die OnValidate-Funktion der Komponente hinzuzufügen.
+ Abb.
+ X verdeutlicht dies anhand eines einfachen Beispiels.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+lstparams "language={[Sharp]C},numbers=left,numberstyle={\footnotesize},basicstyle={\footnotesize\ttfamily},tabsize=5"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+using UnityEngine;
+\end_layout
+
+\begin_layout Plain Layout
+
+using UnityEngine.UI;
+\end_layout
+
+\begin_layout Plain Layout
+
+using UnityEngine.Assertions;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+public class SomeBehaviour : MonoBehaviour
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	[SerializeField]
+\end_layout
+
+\begin_layout Plain Layout
+
+	private Image myImage;
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	private void OnValidate()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		Assert.IsNotNull(myImage);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+SerializeField mit Guard Clause in OnValidate
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -1810,7 +1968,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset listings
-lstparams "language=csh,numbers=left,basicstyle={\footnotesize\sffamily},breaklines=true,showstringspaces=false,backgroundcolor={\color{lightgray}},frame={leftline,bottomline,rightline,topline},xleftmargin=15pt"
+lstparams "language={[Sharp]C},numbers=left,basicstyle={\footnotesize\sffamily},breaklines=true,showstringspaces=false"
 inline false
 status open
 
