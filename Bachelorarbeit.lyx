@@ -1342,7 +1342,13 @@ Ist bereits vor Ausführung des Spiels bekannt welche Referenzen benötigt
  Um sicherzugehen, dass die Referenz im Editor aufgelöst wurde, ist es ratsam
  einen Guard Clause in die OnValidate-Funktion der Komponente hinzuzufügen.
  Abb.
- X verdeutlicht dies anhand eines einfachen Beispiels.
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:SerializeField"
+
+\end_inset
+
+ verdeutlicht dies anhand eines einfachen Beispiels.
 \end_layout
 
 \begin_layout Standard
@@ -1436,6 +1442,13 @@ public class SomeBehaviour : MonoBehaviour
 
 \begin_layout Plain Layout
 SerializeField mit Guard Clause in OnValidate
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:SerializeField"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1609,74 +1622,282 @@ Im Gegensatz zu den anderen Find Functions ist FindObjectOfType typsicher.
  Anzumerken ist, dass der gewünschte Typ von UnityEngine.Object abgeleitet
  sein muss.
  Somit funktioniert auch FindObjectOfType nicht mit Interfaces.
+ Die generische Variante von FindObjectOfType ist anderen Find Funktionen
+ vorzuziehen, da sie direkt die Instanz der gesuchten Komponente vom Typ
+ T als Rückgabewert liefert.
+ Es ist also nicht nötig GetComponent zu nutzen.
 \end_layout
 
-\begin_layout Itemize
-Inter-Objekt-Kommunikation: Beschreibt die Kommunikation von zwei oder mehreren
- getrennten Spielobjekten.
- Sonderfälle davon treten im Bereich der Netzwerkspiele auf, wo die Kommunikatio
-n zusätzlich zwischen Client und Server erfolgen kann.
+\begin_layout Standard
+In der Dokumentation der Funktion wird angemerkt, dass FindObjectOfType
+ sehr langsam ist.
+ Sie sollte daher nicht jeden Frame genutzt werden.
+ Als Alternative wird das Singleton Pattern vorgeschlagen.
 \end_layout
 
-\begin_layout Itemize
-Für eine interaktive Spielwelt ist es notwendig, dass Komponenten miteinander
- interagieren
+\begin_layout Subsubsection*
+Singleton und Statics
 \end_layout
 
-\begin_layout Itemize
-Kommunikationsarten:
-\end_layout
-
-\begin_layout Itemize
-Inter-Objekt-Kommunikation: Beschreibt die Kommunikation von zwei oder mehreren
- getrennten Spielobjekten.
- Sonderfälle davon treten im Bereich der Netzwerkspiele auf, wo die Kommunikatio
-n zusätzlich zwischen Client und Server erfolgen kann.
-\end_layout
-
-\begin_layout Itemize
-Intra-Objekt-Kommunikation: Besonders in der komponentenbasierten Spieleentwickl
-ung ist es notwendig, dass die Bausteine eines einzelnen Spielobjektes miteinand
-er kommunizieren.
+\begin_layout Standard
+Singletons stellen sicher, dass nur eine Instanz einer Klasse gibt, auf
+ welche ein globaler Zugriffspunkt existiert.
+ Hier mit aufgeführt, weil sie in Unitz alternativ zu FindObjectOfType genutzt
+ werden können, mit der Beschränkung, dass sie auf eine Instanz limitiert
+ sind.
+ Abb.
  
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:Singleton"
+
+\end_inset
+
+ zeigt eine mögliche Implementation eines Singletons welches von MonoBehaviour
+ ableitet.
+ Die Singletonkomponente muss lediglich einem Spielobjekt in der Szene hinzugefü
+gt werden um es global verfügbar zu machen.
+ Der Zugriff auf die Singleton-Komponente erfolgt über die statische Variable
+ Instance.
 \end_layout
 
-\begin_layout Itemize
-Für jede Art der Kommunikation wird ein Kanal benötigt.
- Der Kanal beschreibt einen Weg zur Übermittlung von Informationen
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+using UnityEngine;
 \end_layout
 
-\begin_layout Itemize
-Direkte Kommunikation
+\begin_layout Plain Layout
+
 \end_layout
 
-\begin_layout Itemize
-Indirekte Kommunkation mittels Messages oder Events
+\begin_layout Plain Layout
+
+public class Singleton : MonoBehaviour
 \end_layout
 
-\begin_layout Itemize
-Solange kein Mittelmann im Spiel is wird entweder Sender oder Empfänger
- aufeinander referenzieren müssen
+\begin_layout Plain Layout
+
+{
 \end_layout
 
-\begin_layout Itemize
-Ausnahme ist SendMessage oder Eventsystem
+\begin_layout Plain Layout
+
+	public static Singleton Instance { get; private set; }
 \end_layout
 
-\begin_layout Itemize
-Game object queries
+\begin_layout Plain Layout
+
 \end_layout
 
-\begin_layout Itemize
-“Find”-Functions
+\begin_layout Plain Layout
+
+	public void Awake ()
 \end_layout
 
-\begin_layout Itemize
-Object.FindObjectOfType<T>
+\begin_layout Plain Layout
+
+	{
 \end_layout
 
-\begin_layout Itemize
-Assign it through the inspector
+\begin_layout Plain Layout
+
+		if (Instance == null)
+\end_layout
+
+\begin_layout Plain Layout
+
+		{
+\end_layout
+
+\begin_layout Plain Layout
+
+			Instance = this;
+\end_layout
+
+\begin_layout Plain Layout
+
+			DontDestroyOnLoad (this);
+\end_layout
+
+\begin_layout Plain Layout
+
+		}
+\end_layout
+
+\begin_layout Plain Layout
+
+		else
+\end_layout
+
+\begin_layout Plain Layout
+
+		{
+\end_layout
+
+\begin_layout Plain Layout
+
+			Destroy (gameObject);
+\end_layout
+
+\begin_layout Plain Layout
+
+		}
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Implementation des Singleton Patterns in Form eines MonoBehaviours
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Singleton"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Diese Form des Singletons erlaubt dem Objekt die Funktionalitäten eines
+ MonoBehaviours - wie dem Update Loop - zu nutzen.
+ Sollten diese Funktionalitäten nicht notwendig sein, oder soll der Singleton
+ Lazy intitalisiert werden, kann auch ein klassischer Singleton nach GoF
+ verwendet werden.
+ Sollte gar keine Vererbung notwendig sein, gibt es oft jedoch gar keinen
+ Grund ein Singleton zu implementierten.
+ Stattdessen kann eine statische Klasse verwendet werden.
+\end_layout
+
+\begin_layout Standard
+An dieser Stelle sei bereits anzumerken, dass Singletons aus vielen Gründen
+ als Anti-Pattern angesehen werden.
+ Eine der Ursachen dafür ist, dass sie einen Globalen Zustand einführen.
+ Gleiches gilt für statische Klassen.
+\end_layout
+
+\begin_layout Subsection
+Events und Messages
+\end_layout
+
+\begin_layout Subsubsection*
+Sending Messages
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public void SendMessage(string methodName, object value = null, SendMessageOptio
+ns options = SendMessageOptions.RequireReceiver);
+\end_layout
+
+\begin_layout Plain Layout
+
+public void SendMessage(string methodName, SendMessageOptions options);
+\end_layout
+
+\begin_layout Plain Layout
+
+public void BroadcastMessage(string methodName, object parameter = null,
+ SendMessageOptions options = SendMessageOptions.RequireReceiver); public
+ void BroadcastMessage(string methodName, SendMessageOptions options);
+\end_layout
+
+\begin_layout Plain Layout
+
+public void SendMessageUpwards(string methodName, SendMessageOptions options);
+ public void SendMessageUpwards(string methodName, object value = null,
+ SendMessageOptions options = SendMessageOptions.RequireReceiver);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Neues Event System (Unity 4.6+)
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public static bool Execute(GameObject target, EventSystems.BaseEventData
+ eventData, EventFunction<T> functor);
+\end_layout
+
+\begin_layout Plain Layout
+
+public static GameObject ExecuteHierarchy(GameObject root, EventSystems.BaseEvent
+Data eventData, EventFunction<T> callbackFunction);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+UnityAction (Unity 4.6+)
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public delegate void UnityAction<T,...,Tn>(T arg, ..., Tn argN);
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
