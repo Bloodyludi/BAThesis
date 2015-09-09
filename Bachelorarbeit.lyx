@@ -99,17 +99,21 @@
 \renewcommand{\nomname}{Glossar}
 
 %Farbe für Programmcode festlegen
+\usepackage{color}
+\usepackage{listings}
 \definecolor{bluekeywords}{rgb}{0,0,1}
 \definecolor{greencomments}{rgb}{0,0.5,0}
 \definecolor{redstrings}{rgb}{0.64,0.08,0.08}
 \definecolor{xmlcomments}{rgb}{0.5,0.5,0.5}
 \definecolor{types}{rgb}{0.17,0.57,0.68}
+\definecolor{background}{rgb}{0.95,0.95,0.95}
 
 \lstset{language=[Sharp]C,
 captionpos=b,
-numbers=left, %Nummerierung
-numberstyle=\tiny, % kleine Zeilennummern
-frame=lines, % Oberhalb und unterhalb des Listings ist eine Linie
+%numbers=left, %Nummerierung
+%numberstyle=\tiny, % kleine Zeilennummern
+%xleftmargin = 15pt,
+%frame=lines, % Oberhalb und unterhalb des Listings ist eine Linie
 showspaces=false,
 showtabs=false,
 breaklines=true,
@@ -120,7 +124,9 @@ commentstyle=\color{greencomments},
 morekeywords={partial, var, value, get, set},
 keywordstyle=\color{bluekeywords},
 stringstyle=\color{redstrings},
-basicstyle=\ttfamily\small,
+basicstyle=\ttfamily\footnotesize,
+backgroundcolor = \color{background},
+tabsize=4,
 }
 \end_preamble
 \options pointlessnumbers, abstracton, headsepline,
@@ -1311,8 +1317,8 @@ status open
 \end_layout
 
 \begin_layout Standard
-SerializeField ist ein Attribut, das es ermöglicht private Member einer
- Komponente zu serialisieren und somit im Inspektor zu setzen.
+SerializeField ist ein Attribut, das ermöglicht private Member einer Komponente
+ zu serialisieren und somit im Inspektor zu setzen.
  Setzbare Datentypen sind primitive Datentypen wie int, float, bool und
  in Unity eingebaute Datentypen wie Vector, Quaternion und Color, sowie
  Strings, Enums und Structs.
@@ -1347,7 +1353,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset listings
-lstparams "language={[Sharp]C},numbers=left,numberstyle={\footnotesize},basicstyle={\footnotesize\ttfamily},tabsize=5"
+lstparams "language={[Sharp]C}"
 inline false
 status open
 
@@ -1437,16 +1443,19 @@ SerializeField mit Guard Clause in OnValidate
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
 \end_layout
 
-\begin_layout Paragraph*
+\begin_layout Standard
+Wenn erst zur Laufzeit bestimmt werden kann welches das benötigte Objekt
+ ist, zum Beispiel wenn sich die Abhängigkeit ausserhalb eines instanziierten
+ Prefab befindet, so muss auf eine andere Methode der Referenzierung zurückgegri
+ffen werden.
+\end_layout
+
+\begin_layout Subsubsection*
 GetComponent
 \end_layout
 
@@ -1501,6 +1510,105 @@ public Component GetComponentInParent(Type t);
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Alle GetComponent-Methoden spezifizieren einen Typparameter T als Suchkriterium.
+ Da T nicht weiter \SpecialChar \nobreakdash-
+ zum Beispiel auf UnityEngine.Object \SpecialChar \nobreakdash-
+ eingeschränkt wird,
+ ist es Möglich, anstatt konkreten Komponenten auch Komponenten anhand eines
+ Interfaces zu finden.
+\end_layout
+
+\begin_layout Standard
+Beim Verwenden von GetComponent wird implizit eine Anordnung in der Objekthierar
+chie festgelegt.
+ Wird zum Beispiel eine benötigte Komponente in ein Child-GameObject verschoben,
+ ist das Spiel ohne Änderung im Programmcode nicht mehr lauffähig.
+ Aus diesem Grund sollte GetComponent nur in Ausnahmefällen, wenn Beispielsweise
+ eine Komponete zur Laufzeit hinzugefügt wird, verwendet werden.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+String-Based Find Functions
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public static GameObject Find(string name);
+\end_layout
+
+\begin_layout Plain Layout
+
+public static GameObject FindWithTag(string tag);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Unity's Find Functions sind klassische Game Object Queries zur Inter-Objekt-Komm
+unikation.
+ Das gewünschte Spielobjekt wird auf Basis eines Strings als Suchkriterium
+ zurückgegeben.
+ Dieser String kann entweder der Name oder ein Tag sein.
+ Die Funktionen unterscheiden sich im Verhalten, falls kein GameObject mit
+ dem passenden Namen gefunden wird: Wird kein Objekt mit dem passenden Namen
+ gefunden, gibt Find null zurück.
+ Wird kein Objekt mit dem passenden Tag gefunden, wirft FindWithTag eine
+ UnityException.
+ Nachdem das gesuchte Objekt gefunden wurde, muss die gewünschte Komponente
+ mittels GetComponent ausfindig gemacht werden.
+\end_layout
+
+\begin_layout Standard
+Generell ist von der Nutzung beider Funktionen abzuraten, da sie nicht gewährlei
+sten, dass das gesuchte GameObject tatsächlich auffindbar ist.
+ Es wird sich darauf verlassen, dass ein GameObject mit bestimmten Namen/Tag
+ in der Szene existiert und bestimmte Komponenten an diesem vorhanden sind.
+ Es gibt somit viel Raum für Fehlkonfiguration.
+\end_layout
+
+\begin_layout Subsubsection*
+FindObjectOfType
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public static Object FindObjectOfType(Type type);
+\end_layout
+
+\begin_layout Plain Layout
+
+public static T FindObjectOfType<T>() where T : Object;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Im Gegensatz zu den anderen Find Functions ist FindObjectOfType typsicher.
+ Es wird gewährt, dass eine in der Szene aktive Instanz eines bestimmten
+ Typs erhalten wird.
+ Anzumerken ist, dass der gewünschte Typ von UnityEngine.Object abgeleitet
+ sein muss.
+ Somit funktioniert auch FindObjectOfType nicht mit Interfaces.
 \end_layout
 
 \begin_layout Itemize
