@@ -1243,7 +1243,11 @@ It is possible to add and remove components without the enitiy even knowing
 \end_layout
 
 \begin_layout Itemize
-Game Objects can be composed in the unity engine tool by designers 
+Game Objects can be composed in the unity engine tool by designers
+\end_layout
+
+\begin_layout Section
+Objektlebenszyklus
 \end_layout
 
 \begin_layout Section
@@ -1356,7 +1360,7 @@ reference "fig:SerializeField"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -1666,7 +1670,7 @@ gt werden um es global verfügbar zu machen.
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -1885,7 +1889,7 @@ reference "fig:UnityEventCode"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -2053,7 +2057,7 @@ reference "fig:UnityEvent"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -2190,7 +2194,7 @@ reference "fig:SendMessage"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -2369,8 +2373,189 @@ Data eventData, EventFunction<T> callbackFunction);
 
 \end_layout
 
+\begin_layout Standard
+Das Event System wurde in Verbindung mit uGUI in Unity 4.6 eingeführt.
+ Es wird dazu verwendet um Events bei Nutzereingaben zu senden.
+ Man kann es jedoch auch für benutzerdefinierte Events verwenden.
+ Anstelle eines Strings wird ein Interface verwendet um eine Komponente
+ zu kennzeichnen, die eine Callback-Funktion für ein bestimmtes Event implementi
+eren.
+ Events können mittels ExecuteHierarchy in der Objekthierarchie nach oben,
+ jedoch nicht nach unten, gesendet werden.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+using UnityEngine;
+\end_layout
+
+\begin_layout Plain Layout
+
+using UnityEngine.EventSystems;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+public class EventPublisher : MonoBehaviour 
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	private void Start()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		ExecuteEvents.Execute<IEventTarget>(this.gameObject, null, (target, data)
+ => target.Receive());
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+public interface IEventTarget : IEventSystemHandler
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	void Receive();
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+public class EventSubscriber : MonoBehaviour, IEventTarget 
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	public void Receive()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		Debug.Log("Received");
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Verwenden von UnityEngine.EventSystems
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Das neue EventSystem ist ein typsicherer Ansatz Events an Komponenten in
+ der Szenehierarchie zu senden.
+ Ohne das Spielobjekt der Empfängerkomponente zu kennen, kann jedoch nur
+ an das eigene oder direkte parent Spielobjekte gesendet werden.
+ 
+\end_layout
+
 \begin_layout Section
-Resultierende Probleme
+Wertung und Konsequenzen
+\end_layout
+
+\begin_layout Standard
+Unitys Komponentenbasierte Architektur hilft dabei Klassen mit nur einer
+ Verantwortung zu erstellen.
+ Spielobjekte lassen sich durch Komposition aus Komponenten in der Szenehierarch
+ie arrangieren.
+ Sobald Komponenten jedoch Kommunizieren müssen oder Abhängigkeiten zu anderen
+ Objekten haben, muss sich für ein Kommunikationsmittel entschieden werden.
+ Unity stellt unterschiedliche Wege zur Kommunikation mit anderen Komponenten
+ bereit.
+ Eine Sache haben jedoch alle Methoden miteinander gemeinsam: Das andere
+ Objekt muss eine Komponente sein.
+ Dies führt dazu, dass Objekte nur aus dem Grund der Kommunikation von MonoBehav
+iour ableiten.
+ 
 \end_layout
 
 \begin_layout Itemize
