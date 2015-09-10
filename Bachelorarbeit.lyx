@@ -1569,8 +1569,8 @@ public static GameObject FindWithTag(string tag);
 \end_layout
 
 \begin_layout Standard
-Unity's Find Functions sind klassische Game Object Queries zur Inter-Objekt-Komm
-unikation.
+Unity's Find Functions sind klassische Game Object Queries zur Inter-Objekt
+ Kommunikation.
  Das gewünschte Spielobjekt wird auf Basis eines Strings als Suchkriterium
  zurückgegeben.
  Dieser String kann entweder der Name oder ein Tag sein.
@@ -1816,6 +1816,245 @@ An dieser Stelle sei bereits anzumerken, dass Singletons aus vielen Gründen
 Events und Messages
 \end_layout
 
+\begin_layout Standard
+Alternativ kann die Kommunikation zwischen Objekten auch über Events erfolgen.
+ Events können im Unterschied zu Methodenaufrufen keinen oder mehrere Empfänger
+ haben.
+ Events sind eine Umsetzung des Observer Patterns.
+ Die Klasse die den Event auslöst wird als Publisher und die Klassen, die
+ das Ereignis behandeln als Subscriber bezeichnet.
+ Ein typischer Anwendungsfall für Events sind UI-Elemente wie Buttons, Slider
+ und Toggles.
+ Mit Events kann nichtsdestotrotz das gleiche Ergebnis wie mit Referenzierung
+ und Methodenaufruf erzielt werden.
+ Unity und C# bieten mehrere Möglichkeiten um die Kommunikation mittels
+ Events umzusetzen.
+ In dieser Arbeit wird davon abgesehen, darzustellen wie C# Events implementiert
+ werden, da Sie ohne Mediation oder Statics nicht das Problem der Referenzierung
+ lösen.
+ Wird ein gewöhnlicher C# Event als Kommunikationskanal gewählt, so muss
+ der Empfänger über einen der im letzten Abschnitt beschriebenen Wege Zugriff
+ auf den Sender erhalten.
+ Um diese Limitierung zu umgehen bietet Unity ab der Version 4.6 eine eigene
+ Implementierung von Events.
+\end_layout
+
+\begin_layout Subsubsection*
+UnityEvent (Unity 4.6+)
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public abstract class UnityEvent<T,...,Tn>
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+UnityEvents ermöglichen das Setzen von Callbacks über das Editorfenster.
+ Auf diese Weise sind Sender und Empfänger komplett voneinander entkoppelt.
+ Zudem bieten sie zusätzlich nahezu identische Funktionalität wie klassische
+ C# Events.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+using UnityEngine;
+\end_layout
+
+\begin_layout Plain Layout
+
+using UnityEngine.Events;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+public class EventPublisher : MonoBehaviour
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	public UnityEvent myEvent;
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	private void Start()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		if (myEvent != null)
+\end_layout
+
+\begin_layout Plain Layout
+
+		{
+\end_layout
+
+\begin_layout Plain Layout
+
+			myEvent.Invoke();
+\end_layout
+
+\begin_layout Plain Layout
+
+		}
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+public class EventSubscriber : MonoBehaviour
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	public void Receive()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		Debug.Log("Recieved");
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Beispiel eines Publishers und Subscribers unter Verwendung eines UnityEvents
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:UnityEventCode"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/UnityEvent.png
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Hinzufügen einer Callback-Methode für einen UnityEvent im Editor
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:UnityEvent"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection*
 Sending Messages
 \end_layout
@@ -1839,15 +2078,23 @@ public void SendMessage(string methodName, SendMessageOptions options);
 \begin_layout Plain Layout
 
 public void BroadcastMessage(string methodName, object parameter = null,
- SendMessageOptions options = SendMessageOptions.RequireReceiver); public
- void BroadcastMessage(string methodName, SendMessageOptions options);
+ SendMessageOptions options = SendMessageOptions.RequireReceiver);
+\end_layout
+
+\begin_layout Plain Layout
+
+public void BroadcastMessage(string methodName, SendMessageOptions options);
 \end_layout
 
 \begin_layout Plain Layout
 
 public void SendMessageUpwards(string methodName, SendMessageOptions options);
- public void SendMessageUpwards(string methodName, object value = null,
- SendMessageOptions options = SendMessageOptions.RequireReceiver);
+\end_layout
+
+\begin_layout Plain Layout
+
+public void SendMessageUpwards(string methodName, object value = null, SendMessa
+geOptions options = SendMessageOptions.RequireReceiver);
 \end_layout
 
 \end_inset
@@ -1874,25 +2121,6 @@ public static bool Execute(GameObject target, EventSystems.BaseEventData
 
 public static GameObject ExecuteHierarchy(GameObject root, EventSystems.BaseEvent
 Data eventData, EventFunction<T> callbackFunction);
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection*
-UnityAction (Unity 4.6+)
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-
-public delegate void UnityAction<T,...,Tn>(T arg, ..., Tn argN);
 \end_layout
 
 \end_inset
