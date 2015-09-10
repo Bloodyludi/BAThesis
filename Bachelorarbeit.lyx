@@ -133,6 +133,7 @@ tabsize=4,
 \use_default_options true
 \begin_modules
 theorems-ams
+todonotes
 \end_modules
 \maintain_unincluded_children false
 \language ngerman
@@ -1866,6 +1867,21 @@ UnityEvents ermöglichen das Setzen von Callbacks über das Editorfenster.
 \end_layout
 
 \begin_layout Standard
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:UnityEventCode"
+
+\end_inset
+
+ zeigt die Verwendung eines nicht generischen UnityEvents ohne Parameter.
+ Die Publisher Komponente löst den Event in der Start-Methode aus.
+ Ein Subscriber benötigt lediglich eine öffentliche Methode mit der passenden
+ Signatur.
+ 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -2016,6 +2032,24 @@ name "fig:UnityEventCode"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Auffällig ist, dass bis jetzt noch keine Verbindung zwischen Publisher und
+ Subscriber existiert.
+ Diese kann im Editor gesetzt werden (siehe Abbildung 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:UnityEvent"
+
+\end_inset
+
+).
+ Somit wird es ohne weiteren Programmcode möglich zu bestimmen wer auf ein
+ Event reagieren soll.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -2053,6 +2087,24 @@ name "fig:UnityEvent"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+UnityEvents bieten somit eine Möglichkeit Sender von Empfänger komplett
+ zu entkoppeln.
+ Andererseits gibt es auch hier viel Raum zur Fehlkonfiguration.
+ Es ist nicht im Programmcode ersichtlich ob und wer die Subscriber eines
+ Events sind.
+ Genauso wenig ist ersichtlich ob eine als öffentlich gekennzeichnete Methode
+ als Callback genutzt wird oder nicht.
+ Oft werden Methoden und Events auf die keine Referenzen im Programmcode
+ existieren einfach gelöscht.
+\end_layout
+
+\begin_layout Standard
+Events sind ein geeignetes Mittel um optionale Abhängigkeiten aufzulösen.
+ Ist eine Abhängigkeit jedoch zwingend erforderlich, sollte zu einer anderen
+ Möglichkeit gegriffen werden.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -2102,8 +2154,197 @@ geOptions options = SendMessageOptions.RequireReceiver);
 
 \end_layout
 
+\begin_layout Standard
+MonoBehaviours bieten die Funktionalität untereinander mittels Messages
+ zu kommunizieren.
+ SendMessage ermöglicht die Kommunikation zwischen Komponenten innerhalb
+ eines Spielobjekts.
+ BroadcastMessage sendet eine Message an das gewählte Spielobjekt und dessen
+ Children.
+ SendMessageUpwards sendet die Nachricht an alle Spielobjekte die sich dem
+ gewählten Spielobjekt übergeordnet in der Szene-Hierarchie befinden.
+\end_layout
+
+\begin_layout Standard
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:SendMessage"
+
+\end_inset
+
+ zeigt die Verwendung von SendMessage anhand von zwei Komponenten, die sich
+ am gleichen Spielobjekt befinden.
+ Der Publisher eines Events spezifiziert die Callback-Methode mittels eines
+ Strings.
+ Dieser String repräsentiert den Namen der gesuchten Callback-Methode.
+ Der Zugriffsmodifizierer der Callback-Methode ist dabei nicht relevant.
+ Sie kann wie im Beispiel auch als private deklariert werden.
+ Durch den Aufzählungstyp SendMessageOptions ist es möglich zu spezifizeren,
+ ob ein Empfänger zwingend erforderlich ist.
+ Wenn dieser als erforderlich gekennzeichnet wurde und dennoch kein Empfänger
+ gefunden wird, wirft SendMessage eine Exception zur Laufzeit.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+using UnityEngine;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+public class MessagePublisher : MonoBehaviour
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	private void Start()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		SendMessage("Receive");
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+public class MessageSubscriber : MonoBehaviour
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	private void Receive()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		Debug.Log("Received");
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Verwendung von SendMessage
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:SendMessage"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+SendMessage verwendet 
+\begin_inset Quotes gld
+\end_inset
+
+Magic Strings
+\begin_inset Quotes grd
+\end_inset
+
+ zur Identifikation der Callback-Methode.
+ Refactorings der Methodennamen haben keinen Einfluss.
+ Auch hier ist es nicht ersichtlich, dass die private Methode als Callback
+ genutzt wird.
+ Nach dem YAGNI Prinzip werden nicht verwendete private Methode einfach
+ gelöscht.
+ SendMessage legt implitzit eine Anordnung in der Hierarchie fest.
+\end_layout
+
+\begin_layout Standard
+Aus diesen Gründen ist der Nutzung von SendMessage generell abzuraten.
+ Besonders, da mit der Unity Version 4.6 ein neues Messaging System als Ersatz
+ für SendMessage vorgestellt wurde.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+http://docs.unity3d.com/Manual/MessagingSystem.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection*
-Neues Event System (Unity 4.6+)
+UnityEngine.EventSystems (Unity 4.6+)
 \end_layout
 
 \begin_layout Standard
@@ -2718,6 +2959,22 @@ Zum Bearbeiten der Literatur-Datenbank verwende ich JabRef.
 
 \begin_layout Section
 Walk-Through Beispielanwendung
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+todo{Elobarate example!}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Chapter
