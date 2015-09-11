@@ -965,8 +965,32 @@ http://unity3d.com/public-relations
  Dies bewegt nicht nur Indieentwickler und kleine Teams dazu, sich die Vorteile
  der Engine zunutze zu machen: Unity findet immer mehr Einzug in professionelle
  Spieleprojekte mit mittleren und großen Teams.
- Hier unterscheiden sich die Anforderungen an die Spieleengine.
- Parallele Entwicklung muss gewährleistet sein.
+ Hier sind Tätigkeitsbereiche spezialisiert und klar definiert.
+ Die Anforderungen an die Spieleengine beginnen sich zu unterscheiden.
+ Parallele Entwicklung muss gewährleistet werden.
+ Der Programmcode muss modular, skalierbar und wiederverwendbar sein.
+ Es darf keinen Raum für Fehlkonfigurationen geben.
+ Neue Geschäftsmodelle wie Free-to-Play bewirken, dass Spiele immer mehr
+ zur Dienstleistung werden.
+ Sie müssen über mehrere Jahre hinweg wartbar und erweiterbar bleiben.
+\end_layout
+
+\begin_layout Standard
+Schaut man sich auf den zahlreichen Websites, Blogs und Foren über Unity
+ um, scheinen diese Anforderungen Unity's Schwachstelle zu sein: Frustration
+ und Beschwerden über entstehenden Spaghetti-Code, Kritik an der Komponentenbasi
+erten Architektur, Aussagen, dass Unity nur als Rapid Prototyping Tool tauglich
+ ist und Kollaboration in großen Teams kaum möglich ist.
+\end_layout
+
+\begin_layout Standard
+Immer wieder wird unter anderem eine Ursache genannt: Die Auflösung von
+ Abhängigkeiten und Kommunikation zwischen Objekten.
+\end_layout
+
+\begin_layout Standard
+Oft sind es gerade die Möglichkeiten, die es sogar einzelnen unerfahrenen
+ Programmierern ermöglichen komplette Spiele zu entwickeln, d
 \end_layout
 
 \begin_layout Itemize
