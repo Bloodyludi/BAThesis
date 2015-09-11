@@ -966,7 +966,7 @@ http://unity3d.com/public-relations
  der Engine zunutze zu machen: Unity findet immer mehr Einzug in professionelle
  Spieleprojekte mit mittleren und großen Teams.
  Hier sind Tätigkeitsbereiche spezialisiert und klar definiert.
- Die Anforderungen an die Spieleengine beginnen sich zu unterscheiden.
+ Die Anforderungen an die Spieleengine beginnen sich zu wandeln.
  Parallele Entwicklung muss gewährleistet werden.
  Der Programmcode muss modular, skalierbar und wiederverwendbar sein.
  Es darf keinen Raum für Fehlkonfigurationen geben.
@@ -978,49 +978,74 @@ http://unity3d.com/public-relations
 \begin_layout Standard
 Schaut man sich auf den zahlreichen Websites, Blogs und Foren über Unity
  um, scheinen diese Anforderungen Unity's Schwachstelle zu sein: Frustration
- und Beschwerden über entstehenden Spaghetti-Code, Kritik an der Komponentenbasi
-erten Architektur, Aussagen, dass Unity nur als Rapid Prototyping Tool tauglich
- ist und Kollaboration in großen Teams kaum möglich ist.
+ und Beschwerden über entstehenden Spaghetti-Code
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+https://np.reddit.com/r/gamedev/comments/3hr8al/coming_from_a_net_programming_back
+ground_unitys/
+\end_layout
+
+\end_inset
+
+, Kritik an der Komponentenbasierten Architektur
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+http://www.unityninjas.com/code-architecture/unity3d-game-code-architecture/
+\end_layout
+
+\end_inset
+
+, Fehlende Testbarkeit
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+http://www.mikecann.co.uk/games/taming-unity/
+\end_layout
+
+\end_inset
+
+ und Aussagen, dass Unity nur als Rapid Prototyping Tool tauglich ist und
+ Kollaboration in großen Teams kaum möglich ist.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+http://www.namekdev.net/2014/06/why-i-hate-unity3d-popularity/
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Immer wieder wird unter anderem eine Ursache genannt: Die Auflösung von
- Abhängigkeiten und Kommunikation zwischen Objekten.
+Oft sollen die Ursachen gerade die Dinge sein, die unerfahrenen Programmierern
+ den einfachen Umgang mit Unity ermöglichen.
+ Dabei taucht immer wieder eine Sache auf: Die Auflösung von Abhängigkeiten
+ und Kommunikation zwischen Objekten.
+ Enge Kopplung von Abhängigkeiten zwischen Objekten führt zu Starrheit und
+ Zerbrechlichkeit bei Veränderung des Programmcodes.
+ In der objektorientierten Programmierung ist dieses Problem seit langem
+ bekannt und es existieren zahlreiche Lösungen.
+ Oft sind diese Lösungen Frameworks, die eng mit den Begriffen Inversion
+ Of Control und Dependency Injection in Verbindung stehen.
 \end_layout
 
 \begin_layout Standard
-Oft sind es gerade die Möglichkeiten, die es sogar einzelnen unerfahrenen
- Programmierern ermöglichen komplette Spiele zu entwickeln, d
+Nun implementiert Unity keine klassische objektorientierte Hierarchie, sondern
+ eine komponentenbasierte Architektur.
+ Trotzdem haben auch für Unity eine Handvoll Inversion of Control Frameworks
+ das Licht der Welt erblickt.
+ 
 \end_layout
 
 \begin_layout Itemize
-Unity 3D kurz als Spieleengine vorstellen: Spieleengine, 3D, Multiplatform,
- Rendertechniken
-\end_layout
-
-\begin_layout Itemize
-Relevanz von Unity in der Spielebranche beschreiben
-\end_layout
-
-\begin_layout Itemize
-Entwicklung der Ausrichtung auf personale Projekte zu professionellen Projekten
-\end_layout
-
-\begin_layout Itemize
-Marktentwicklung: AAA, Casual Games
-\end_layout
-
-\begin_layout Itemize
-Beschreibung, dass dies zu Problemen führt
-\end_layout
-
-\begin_layout Itemize
-Größtes Problem: Architektur und Auflösung von Abhängigkeiten
-\end_layout
-
-\begin_layout Itemize
-Viele Lösungen, in OO.
- Kaum welche für Unitys Komponentenbasierte Architektur
+Polymorphismus kann trotzdem genutzt werden
 \end_layout
 
 \begin_layout Section
