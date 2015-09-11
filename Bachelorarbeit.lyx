@@ -943,6 +943,32 @@ Einführung
 Motivation
 \end_layout
 
+\begin_layout Standard
+Unity hat sich in den letzten Jahren zur führenden Spieleengine entwickelt.
+ Mit über 45% des globalen Marktanteils
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+http://unity3d.com/public-relations
+\end_layout
+
+\end_inset
+
+ unter Spieleengines trägt Unity maßgeblich an dem Independent Videogame
+ Boom der letzten Jahre bei.
+ Unity ermöglicht die plattformunabhägige Erstellung von 2D und 3D Spielen.
+ Dies hat besonders auf dem fragmentierten Markt der mobilen Spieleindustrie
+ Anklang gefunden.
+ Mit der sich fortlaufend verbessernden Performance und Rendertechnik sind
+ immer ambitioniertere Projekte möglich.
+ Dies bewegt nicht nur Indieentwickler und kleine Teams dazu, sich die Vorteile
+ der Engine zunutze zu machen: Unity findet immer mehr Einzug in professionelle
+ Spieleprojekte mit mittleren und großen Teams.
+ Hier unterscheiden sich die Anforderungen an die Spieleengine.
+ Parallele Entwicklung muss gewährleistet sein.
+\end_layout
+
 \begin_layout Itemize
 Unity 3D kurz als Spieleengine vorstellen: Spieleengine, 3D, Multiplatform,
  Rendertechniken
@@ -1248,6 +1274,44 @@ Game Objects can be composed in the unity engine tool by designers
 
 \begin_layout Section
 Objektlebenszyklus
+\end_layout
+
+\begin_layout Itemize
+In Unity gibt es keine Main Methode
+\end_layout
+
+\begin_layout Itemize
+Die Kontrolle über die Komposition von Objekten ist bereits invertiert,
+ Sie liegt in den Händen von Unity
+\end_layout
+
+\begin_layout Itemize
+Es gibt keine Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+Die Instanziierung und Ausführung von Spielobjekten und Komponenten wird
+ von Unity übernommen
+\end_layout
+
+\begin_layout Itemize
+Soweit nicht anders spezifiziert, erfolgt die Aufrufreihenfolge von Scripten
+ zufällig nach der Reihenfolge in der sie geladen werden
+\end_layout
+
+\begin_layout Itemize
+Es ist möglich, eine Reihenfolge in den Script Execution Order settings
+ anzugeben
+\end_layout
+
+\begin_layout Itemize
+Aufgrund der fehlender Main und Constructors ist es nicht möglich Scripte
+ von aussen mit ihren Abhängigkeiten zu versorgen
+\end_layout
+
+\begin_layout Itemize
+Aus diesem Grund stellt unity wege bereit, wie das Script seine Abhängigkeiten
+ auflösen kann
 \end_layout
 
 \begin_layout Section
