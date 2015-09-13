@@ -945,7 +945,7 @@ Motivation
 
 \begin_layout Standard
 Unity hat sich in den letzten Jahren zur führenden Spieleengine entwickelt.
- Mit über 45% des globalen Marktanteils
+ Mit über 45% des globalen Marktanteils unter Spieleengines
 \begin_inset Foot
 status open
 
@@ -955,12 +955,12 @@ http://unity3d.com/public-relations
 
 \end_inset
 
- unter Spieleengines trägt Unity maßgeblich an dem Independent Videogame
- Boom der letzten Jahre bei.
+ trägt Unity maßgeblich an dem Independent Videogame Boom der letzten Jahre
+ bei.
  Unity ermöglicht die plattformunabhägige Erstellung von 2D und 3D Spielen.
  Dies hat besonders auf dem fragmentierten Markt der mobilen Spieleindustrie
  Anklang gefunden.
- Mit der sich fortlaufend verbessernden Performance und Rendertechnik sind
+ Mit sich fortlaufend verbessernder Performance und Rendertechniken sind
  immer ambitioniertere Projekte möglich.
  Dies bewegt nicht nur Indieentwickler und kleine Teams dazu, sich die Vorteile
  der Engine zunutze zu machen: Unity findet immer mehr Einzug in professionelle
@@ -1026,12 +1026,14 @@ http://www.namekdev.net/2014/06/why-i-hate-unity3d-popularity/
 \begin_layout Standard
 Oft sollen die Ursachen gerade die Dinge sein, die unerfahrenen Programmierern
  den einfachen Umgang mit Unity ermöglichen.
- Dabei taucht immer wieder eine Sache auf: Die Auflösung von Abhängigkeiten
- und Kommunikation zwischen Objekten.
+ Unter diesen Ursachen ist eine Sache so gut wie immer vertreten: Die Auflösung
+ von Abhängigkeiten und Kommunikation zwischen Objekten.
  Enge Kopplung von Abhängigkeiten zwischen Objekten führt zu Starrheit und
  Zerbrechlichkeit bei Veränderung des Programmcodes.
  In der objektorientierten Programmierung ist dieses Problem seit langem
- bekannt und es existieren zahlreiche Lösungen.
+ bekannt.
+ Es existieren zahlreiche Lösungen für die unteschiedlichsten Situationen
+ und Entwicklungsumgebungen.
  Oft sind diese Lösungen Frameworks, die eng mit den Begriffen Inversion
  Of Control und Dependency Injection in Verbindung stehen.
 \end_layout
@@ -1044,12 +1046,68 @@ Nun implementiert Unity keine klassische objektorientierte Hierarchie, sondern
  
 \end_layout
 
-\begin_layout Itemize
-Polymorphismus kann trotzdem genutzt werden
-\end_layout
-
 \begin_layout Section
 Zielsetzung
+\end_layout
+
+\begin_layout Standard
+In dieser Arbeit wird sich auf ein Problem beschränkt: Die Kopplung von
+ Abhängigkeiten zwischen Objekten in Unity.
+\end_layout
+
+\begin_layout Standard
+Zunächst soll die Problematik der Kopplung beschrieben werden.
+ Vorraussetzung dafür ist, zu erläutern, was Abhängigkeiten sind und warum
+ Sie entstehen.
+ Weiter sollen auch die Folgen von enger Kopplung erläutert werden.
+ Dabei soll klar werden, dass Kopplung direkten Einfluss auf die Erweiterbarkeit
+ des Programmcodes hat.
+ 
+\end_layout
+
+\begin_layout Standard
+Weiter soll anhand eines Beispiels erklärt werden, wie lose Kopplung mittels
+ Dependency Injection umzusetzen ist.
+ In diesem Zusammenhang sollen auch die zugrunde liegenden Prinzipien erläutert
+ werden.
+\end_layout
+
+\begin_layout Standard
+Infolgedessen soll der Schritt zu Unity getätigt werden.
+ Es soll untersucht werden inwiefern Unity von einer herrkömmlichten objektiorie
+ntierten Hierarchie abweicht und ob dies hinderlich dabei ist, lose Kopplung
+ umzusetzen.
+ Es sollen häufig verwendete Praktiken wie das Singleton-Pattern und Managerobje
+kte untersucht werden.
+ Wie später im Detail erklärt wird, entstehen Abhängigkeiten unter anderem
+ aus dem Bedürfnis, dass Objekte miteinander kommunizieren müssen.
+ Unity stellt dafür unterschiedliche Wege der Kommunikation bereit.
+ Es soll untersucht werden, ob diese Wege es bereits ermöglichen lose Kopplung
+ umzusetzen.
+ Auf Basis dieser Erkenntnisse soll ein Zwischenfazit gezogen werden.
+\end_layout
+
+\begin_layout Standard
+Im nächsten Schritt soll Inversion Of Control in Unity implementiert werden.
+ Das Resulat dieses Teils ist ein Dependency Injection Container der es
+ eine lose gekoppelte Anwendung in Unity zu schreiben.
+ Die technische Umsetzung soll erläutert werden.
+ Mit Unity in Verbinung stehende Hürden bei der Umsetzung sollen überwunden
+ und beschrieben werden.
+\end_layout
+
+\begin_layout Standard
+Der nächste Teil gibt einen Überblick über die vorhandenen Inversion Of
+ Control Frameworks für Unity.
+ Besonderheiten, Funktionsweise und -Umfang soll beschrieben werden.
+ Besondere Betrachtung soll StrangeIoC finden.
+\end_layout
+
+\begin_layout Standard
+Im nächsten Teil sollen Entwicklungsaufwand, Wartbarkeit, Erweiterbarkeit,
+ Testbarkeit, Wiederverwendbarkeit und Performance von einer Anwendung,
+ die mithilfe von StrangeIoc umgesetzt wurde, untersucht werden.
+ Dies soll anhand von Beispielen geschehen.
 \end_layout
 
 \begin_layout Itemize
@@ -2690,6 +2748,10 @@ No way to keep state (data) independent of a game object
 
 \begin_layout Itemize
 This forces Developers to Create “Manager” GameObjects
+\end_layout
+
+\begin_layout Itemize
+Polymorphismus kann trotzdem genutzt werden
 \end_layout
 
 \begin_layout Standard
