@@ -1068,14 +1068,14 @@ Zunächst soll die Problematik der Kopplung beschrieben werden.
 \begin_layout Standard
 Weiter soll anhand eines Beispiels erklärt werden, wie lose Kopplung mittels
  Dependency Injection umzusetzen ist.
- In diesem Zusammenhang sollen auch die zugrunde liegenden Prinzipien erläutert
+ In diesem Zusammenhang sollen auch zugrunde liegende Prinzipien erläutert
  werden.
 \end_layout
 
 \begin_layout Standard
 Infolgedessen soll der Schritt zu Unity getätigt werden.
- Es soll untersucht werden inwiefern Unity von einer herrkömmlichten objektiorie
-ntierten Hierarchie abweicht und ob dies hinderlich dabei ist, lose Kopplung
+ Es soll untersucht werden inwiefern Unity von einer herrkömmlichten objektorien
+tierten Hierarchie abweicht und ob dies hinderlich dabei ist, lose Kopplung
  umzusetzen.
  Es sollen häufig verwendete Praktiken wie das Singleton-Pattern und Managerobje
 kte untersucht werden.
