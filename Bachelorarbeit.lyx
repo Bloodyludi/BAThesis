@@ -1052,7 +1052,9 @@ Zielsetzung
 
 \begin_layout Standard
 In dieser Arbeit wird sich auf ein Problem beschränkt: Die Kopplung von
- Abhängigkeiten zwischen Objekten in Unity.
+ Abhängigkeiten zwischen Modulen in Unity.
+ Ziel dieser Arbeit ist die Umsetzung Spiels in Unity zu ermöglichen, dessen
+ Module lose miteinander gekoppelt sind.
 \end_layout
 
 \begin_layout Standard
@@ -1228,6 +1230,68 @@ Fazit
 \begin_layout Itemize
 Entscheiden, für welche Anwendungsgebiete die Architekturen am besten geeignet
  sind/ob sie immer zu empfehlen sind
+\end_layout
+
+\begin_layout Chapter
+Grundlagen
+\end_layout
+
+\begin_layout Standard
+Geringe Kopplung zwischen Modulen wird als Indiz für gute Softwarearchitektur
+ angesehen.
+ Inversion Of Control und genauer Dependency Injection werden als Werkzeuge
+ angesehen um lose Kopplung umzusetzen.
+ In diesem Teil der Arbeit soll erläutert werden was Kopplung zwischen Modulen
+ ist und wie diese Zustande kommt.
+ 
+\end_layout
+
+\begin_layout Itemize
+Das Problem soll verstanden werden
+\end_layout
+
+\begin_layout Itemize
+Wie die Lösung (DI) in einer Konsolenanwendung umzusetzen ist
+\end_layout
+
+\begin_layout Itemize
+Was lose Kopplung ermöglicht
+\end_layout
+
+\begin_layout Section
+Kopplung
+\end_layout
+
+\begin_layout Standard
+Kopplung ist ein Maß, das die Stärke von Abhängigkeiten unter Modulen einer
+ Anwendung beschreibt.
+\begin_inset CommandInset citation
+LatexCommand cite
+after "S. 2-3"
+key "Society2014"
+
+\end_inset
+
+ Ist ein Softwaremodul direkt von einem anderen Modul abhängig, so sind
+ diese eng miteinander gekoppelt.
+ Ziel ist es, die Anzahl und Stärke von Abhängigkeiten zu minimieren und
+ so lose Kopplung umzusetzen.
+\end_layout
+
+\begin_layout Section
+Inversion of Control und Dependency Injection
+\end_layout
+
+\begin_layout Standard
+\begin_inset Quotes gld
+\end_inset
+
+Dependency Injection is a set of software design principles and patterns
+ that enable us to develop loosely coupled code.
+\begin_inset Quotes grd
+\end_inset
+
+
 \end_layout
 
 \begin_layout Chapter
