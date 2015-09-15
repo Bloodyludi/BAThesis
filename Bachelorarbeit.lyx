@@ -1237,8 +1237,8 @@ Grundlagen
 \end_layout
 
 \begin_layout Standard
-Geringe Kopplung zwischen Modulen wird als Indiz für gute Softwarearchitektur
- angesehen.
+Lose Kopplung zwischen Softwareentitäten (Modulen, Klassen, Methoden) wird
+ als Indiz für gute Softwarearchitektur angesehen.
  Inversion Of Control und genauer Dependency Injection werden als Werkzeuge
  angesehen um lose Kopplung umzusetzen.
  In diesem Teil der Arbeit soll erläutert werden was Kopplung zwischen Modulen
@@ -1259,12 +1259,12 @@ Was lose Kopplung ermöglicht
 \end_layout
 
 \begin_layout Section
-Kopplung
+Kopplung und Kohäsion
 \end_layout
 
 \begin_layout Standard
-Kopplung ist ein Maß, das die Stärke von Abhängigkeiten unter Modulen einer
- Anwendung beschreibt.
+Kopplung ist ein Maß, das die Anzahl und Stärke von Abhängigkeiten unter
+ Softwareentitäten einer Anwendung beschreibt.
 \begin_inset CommandInset citation
 LatexCommand cite
 after "S. 2-3"
@@ -1272,10 +1272,30 @@ key "Society2014"
 
 \end_inset
 
- Ist ein Softwaremodul direkt von einem anderen Modul abhängig, so sind
- diese eng miteinander gekoppelt.
+ Ist eine Softwareentität direkt von der Implementation einer anderen Entität
+ abhängig, so sind diese eng miteinander gekoppelt.
  Ziel ist es, die Anzahl und Stärke von Abhängigkeiten zu minimieren und
  so lose Kopplung umzusetzen.
+\end_layout
+
+\begin_layout Standard
+Eine Abhänigigkeit zwischen Entitäten entsteht, sobald eine Entität von
+ der anderen wissen muss um zu funktionieren.
+ Abhängigkeiten können unterschiedliche Stärken und Ausprägungen haben.
+ Je größer das Wissen über eine andere Entität ist, desto stärker ist die
+ Abhängigkeit zu ihr.
+ Muss also eine Entität von der konkreten Implementation einer anderen Entität
+ wissen, so existiert eine starke Abhängigkeit und folglich eine enge Kopplung.
+ Wird sich hingegen auf eine Schnittstelle zur Kommunikation geeinigt, existiert
+ lediglich eine Abhängigkeit zu eben dieser Schnittstelle.
+ Die Entitäten selbst sind lose miteinander gekoppelt.
+\end_layout
+
+\begin_layout Standard
+Kopplung steht im Kontrast zu dem Begriff der Kohäsion.
+ Kohäsion beschreibt ein Maß für den inneren Zusammenhalt einer Softwareentität.
+ Hohe Kohäsion liegt dann vor, wenn sich eine Softwareentität nur Funktionalität
+en aufweist die einer einzelnen, wohldefinierten Aufgabe dienen.
 \end_layout
 
 \begin_layout Section
@@ -3476,16 +3496,40 @@ addcontentsline{toc}{chapter}{Glossar}
 \begin_layout Standard
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
-symbol "APT"
-description "Advanced Packaging Tool (kurz. APT) ist ein Paketverwaltungssystem das z.B. bei Debian und Ubuntu eingesetzt wird. Das Paketverwaltungssystem stellt einen Großteil der für das Betriebssystem verfügbaren Programme und Erweiterungen bereit. Diese können durch den Benutzer meist in der Befehlszeile oder über eine grafische Oberfläche installiert und konfiguriert werden. "
+symbol "Single Responsibility Principle"
+description "Eine Klasse soll nur eine Verantowrtlichkeit haben."
 
 \end_inset
 
 
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
-symbol "API"
-description "Application Programming Interface (kurz API) ist eine Programmierschnittstelle die eine Anbindung von Außen an ein bestehendes System bietet. Die Schnittstelle wird vom Hersteller der Software zur Verfügung gestellt um Dritten die Möglichkeit eines Addons oder einer Erweiterung zu geben. Die Schnittstelle definiert dabei ein Standardformat und Standardbefehle."
+symbol "Open Closed Principle"
+description "Eine Klasse soll offen für Erweiterung, jedoch geschlossen für Modifikation sein."
+
+\end_inset
+
+ 
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "Liskov Subsitituion Principle"
+description "Abgeleite Klassen sollen sich so verhalten wie der Basistyp es von ihnen erwartet."
+
+\end_inset
+
+ 
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "Interface Segregation Principle"
+description "Interfaces sollen nur die Funktionalität wiederspiegeln die ihre Klienten erwarten."
+
+\end_inset
+
+ 
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "Dependency Inversion Principle"
+description "High-Level Klassen sollen nicht von Low-Level Klassen abhängig sein, sondern beide von Interfaces. Interfaces sollen nicht von Details abhängig sein sondern Details von Interfaces"
 
 \end_inset
 
