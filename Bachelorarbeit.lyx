@@ -1276,6 +1276,26 @@ key "Society2014"
  abhängig, so sind diese eng miteinander gekoppelt.
  Ziel ist es, die Anzahl und Stärke von Abhängigkeiten zu minimieren und
  so lose Kopplung umzusetzen.
+ Martin Fowler beschreibt in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Fowler2001"
+
+\end_inset
+
+ Kopplung wie folgt:
+\end_layout
+
+\begin_layout Verse
+\begin_inset Quotes gld
+\end_inset
+
+If changing one module in a program requires changing another module, then
+ coupling exists.
+\begin_inset Quotes grd
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1294,24 +1314,124 @@ Eine Abhänigigkeit zwischen Entitäten entsteht, sobald eine Entität von
 \begin_layout Standard
 Kopplung steht im Kontrast zu dem Begriff der Kohäsion.
  Kohäsion beschreibt ein Maß für den inneren Zusammenhalt einer Softwareentität.
- Hohe Kohäsion liegt dann vor, wenn sich eine Softwareentität nur Funktionalität
-en aufweist die einer einzelnen, wohldefinierten Aufgabe dienen.
-\end_layout
-
-\begin_layout Section
-Inversion of Control und Dependency Injection
+ Hohe Kohäsion liegt dann vor, wenn eine Entität nur Funktionalitäten aufweist
+ die einer einzelnen, wohldefinierten Aufgabe dienen.
+ In anderen Worten: Eine Entität weist eine hohe Kohäsion auf, wenn ihre
+ Elemente in einem engen Zusammenhang stehen.
 \end_layout
 
 \begin_layout Standard
+Kohäsion beschreibt wie gut Entitäten aufgeteilt wurden.
+ Kopplung beschreibt wie gut die Verbindungen zwischen Entitäten sind.
+ Ein qualitativ hochwertiges Softwaredesign weist also hohe Kohäsion unter
+ minimaler Kopplung auf.
+ Im nächsten Abschnitt soll Inversion Of Control als Maßnahme präsentiert
+ werden um lose Kopplung umzusetzen.
+\end_layout
+
+\begin_layout Section
+Inversion of Control
+\end_layout
+
+\begin_layout Standard
+Im ursprünglichen Sinne beschreibt Inversion Of Control nach 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Johnson1988"
+
+\end_inset
+
+ lediglich die Charakteristik eines Frameworks: 
+\end_layout
+
+\begin_layout Quote
 \begin_inset Quotes gld
 \end_inset
 
-Dependency Injection is a set of software design principles and patterns
- that enable us to develop loosely coupled code.
+[...] methods defined by the user to tailor the framework will often be called
+ from within the framework itself, rather than from the user's application
+ code.
+ The framework often plays the role of the main program in coordinating
+ and sequencing application activity.
 \begin_inset Quotes grd
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Frameworks diktieren die Architektur und den Kontrollfluss einer Anwendung.
+ Sie definieren einen wiederverwendbaren Teil eines Softwaredesigns.
+ Der vom Nutzer des Frameworks geschriebene, anwendungsspeziefische Code
+ wird vom Framework aufgerufen.
+ (vgl.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "S. 27"
+key "Gamma1994"
+
+\end_inset
+
+) Der Nutzer gibt also die Kontrolle über den Fluss der Anwendung an das
+ Framework.
+ Die Kontrolle über den Anwendungsfluss ist somit invertiert: Es ist nicht
+ der Nutzer der das Framework aufruft sondern das Framework den Code des
+ Nutzers.
+ Diese Tatsache wird oft als Hollywood-Prinzip bezeichnet: "Don't call us,
+ we'll call you".
+ (vgl.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Fowler2005"
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+Inversion Of Control ist eines der zentralen Merkmale welches Frameworks
+ von Bibliotheken unterscheidet.
+ Allein Inversion Of Control ermöglicht die Definition einer wiederverwendbaren
+ Softwarearchitektur ohne die konkrete Implementation zu kennen.
+ Das Framework ist lose mit der Implementation der eigentlichen Anwendung
+ gekoppelt.
+ 
+\end_layout
+
+\begin_layout Standard
+Es gibt zahlreiche Wege und Entwurfsmuster um Inversion Of Control in unterschie
+dlichen Aspekten einer Anwendung umzusetzen.
+ In dieser Arbeit soll der Fokus auf der Umkehr der Kontrolle über Abhängikeiten
+ liegen, mit dem Ziel lose Kopplung zu ermöglichen.
+ Um diese spezielle Art von Inversion Of Control besser abzugrenzen, verwendet
+ Fowler in seinem Artikel 
+\begin_inset Quotes gld
+\end_inset
+
+Inversion of Control Containers and the Dependency Injection pattern
+\begin_inset Quotes grd
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Fowler2004"
+
+\end_inset
+
+ den Begriff Dependency Injection.
+\end_layout
+
+\begin_layout Section
+Dependency Injection
+\end_layout
+
+\begin_layout Quote
+Dependency Injection is a set of software design principles and patterns
+ that enable us to develop loosely coupled code.
 \end_layout
 
 \begin_layout Chapter
