@@ -1429,9 +1429,175 @@ key "Fowler2004"
 Dependency Injection
 \end_layout
 
+\begin_layout Standard
+Seemann gibt in 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "S. 4"
+key "Seemann2011"
+
+\end_inset
+
+ eine sehr vage Definitition des Begriffs Dependency Injection:
+\end_layout
+
 \begin_layout Quote
+\begin_inset Quotes gld
+\end_inset
+
 Dependency Injection is a set of software design principles and patterns
  that enable us to develop loosely coupled code.
+\begin_inset Quotes grd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Wobei alles an dieser Aussage stimmt, lässt sich der Kern von Dependency
+ Injection auf eine einzige Praktik reduzieren.
+ James Shore beschreibt diese in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Shore2006"
+
+\end_inset
+
+ wie folgt:
+\end_layout
+
+\begin_layout Quote
+\begin_inset Quotes gld
+\end_inset
+
+Dependency injection means giving an object its instance variables.
+\begin_inset Quotes grd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Anstatt, dass sich das Objekt selbst um die Erstellung seiner Abhängigkeiten
+ - seiner Intanzvariablen - kümmert, wird diese Aufgabe an einen Dritten
+ übergeben.
+ Die Verwendung des benötigten Objekts ist von der Konfiguration des Objekts
+ getrennt.
+ 
+\end_layout
+
+\begin_layout Standard
+Doch dies allein genügt noch nicht: Um lose Kopplung mittels Dependency
+ Injection zu ermöglichen, müssen zudem eine Reihe von Prinzipien gewahrt
+ werden.
+ Diese wurden von Robert C.
+ Martin geprägt und sind im allgemeinen als SOLID-Prinzipien bekannt.
+\end_layout
+
+\begin_layout Section
+SOLID
+\end_layout
+
+\begin_layout Standard
+SOLID ist ein Akronym, welches für die folgenden Prinzipien steht: Das Single-Re
+sponsibility Prinzip, das Open/Closed Prinzip, das Liskov Substitution Prinzip,
+ das Interface Segregation Prinzip und das Dependency-Inversion Prinzip.
+ Es handelt sich um eine Sammlung von Richtlinien, die eine saubere Softwarearch
+itektur ermöglichen sollen.
+ An dieser Stelle wird auf eine ausführliche Beschreibung aller Prinzipien
+ verzichtet.
+ Es soll jedoch eine kurze Vorstellung der Prinzipien stattfinden und auf
+ ihre Relevanz bei der Umsetzung von Dependency Injection eingegangen werden.
+\end_layout
+
+\begin_layout Subsection
+Single-Responsibility Prinzip
+\end_layout
+
+\begin_layout Standard
+Das Single-Responsibility Prinzip besagt, dass es niemals mehr als einen
+ Grund geben sollte um eine Klasse zu ändern.
+ Darauf Folgend wird eine Verantwortung in dem Zusammenhang als ein 
+\begin_inset Quotes gld
+\end_inset
+
+Grund zur Änderung
+\begin_inset Quotes grd
+\end_inset
+
+ definiert.
+ Jedoch wurde 
+\begin_inset Quotes gld
+\end_inset
+
+Grund zur Änderung
+\begin_inset Quotes grd
+\end_inset
+
+ bewusst gewählt, da es auch legitim ist mehrere Verantwortlichkeiten in
+ einer Klasse unterzubringen, wenn diese sich mit hoher Wahrscheinlichkeit
+ gemeinsam ändern.
+\end_layout
+
+\begin_layout Standard
+Wird das Single-Responsibility Prinzip gewahrt, so ist davon auszugehen,
+ dass Klassen hohe Kohäsion aufweisen.
+ Hohe Kohäsion ist jedoch nicht immer auf das Single-Responsibility Prinzip
+ zurückzuführen.
+ So kann eine Klasse hohe Kohäsion aufweisen, aber trotzdem mehrere Verantwortun
+gen haben.
+\end_layout
+
+\begin_layout Standard
+Dependency Injection wendet das Single-Responsibility Prinzip an, indem
+ Klassen die Verantwortung über die Erstellung von Instanzen ihrer Abhängigkeite
+n entzieht.
+\end_layout
+
+\begin_layout Subsection
+Open/Closed Prinzip
+\end_layout
+
+\begin_layout Standard
+Software-Einheiten (Klassen, Methoden, Funktionen) sollen offen für Erweiterung
+ aber geschlossen für Modifikation sein.
+ 
+\begin_inset Quotes gld
+\end_inset
+
+Offen für Erweiterung
+\begin_inset Quotes grd
+\end_inset
+
+ meint, dass es möglich sein soll, das Modul in seinem Umfang und Verhalten
+ zu erweitern.
+ 
+\begin_inset Quotes gld
+\end_inset
+
+Geschlossen für Modifikation
+\begin_inset Quotes grd
+\end_inset
+
+ zum anderen bedeutet, dass zur Erweiterung keine Änderungen an dem Modul
+ notwendig sind.
+ 
+\end_layout
+
+\begin_layout Subsection
+Liskov Substitution Prinzip
+\end_layout
+
+\begin_layout Subsection
+Interface Segregation Prinzip
+\end_layout
+
+\begin_layout Subsection
+Dependency-Inversion Prinzip
+\end_layout
+
+\begin_layout Section
+Umsetzung von Dependency Injection
 \end_layout
 
 \begin_layout Chapter
