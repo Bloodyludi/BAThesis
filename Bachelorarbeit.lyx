@@ -1711,8 +1711,733 @@ key "Seemann2011"
 Dependency-Inversion Prinzip
 \end_layout
 
+\begin_layout Standard
+Das Dependency-Inversion Prinzip besteht aus zwei Teilen:
+\end_layout
+
+\begin_layout Itemize
+High-Level Module sollen nicht von Low-Level Modulen abhängig sein.
+ Beide sollten von Abstraktionen abhängen.
+\end_layout
+
+\begin_layout Itemize
+Abstraktionen sollten nicht von Details abhängen.
+ Details sollten von Abstraktionen abhängen.
+\end_layout
+
+\begin_layout Standard
+Zum einen beschreibt das Dependency-Inversion Prinzip, dass die Architektur
+ einer Anwendung in Schichten erfolgen sollte.
+ Dabei soll die abstraktere, höher liegende Schicht ihre Abhängigkeiten
+ in Form von Interfaces deklarieren.
+ Die ihr untergeordnete Schicht wird basierend auf diesen Interfaces realisiert.
+ Folglich sind die übergeordnete Schichten nicht von untergeordneten Schichten
+ abhängig.
+ Stattdessen sind untergeordnete Schichten von den abstrakten Interfaces
+ in den übergeordneten Schichten abhängig.
+ 
+\end_layout
+
+\begin_layout Standard
+Zum anderen beschreibt Martin eine weitere, allgemeinere Interpretation
+ des Dependency-Inversion Prinzips:
+\end_layout
+
+\begin_layout Quote
+\begin_inset Quotes gld
+\end_inset
+
+Depend on abstractions.
+\begin_inset Quotes grd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+So sollen Klassen keine Referenzen zu anderen konkreten Klassen halten,
+ von ihnen ableiten oder Methoden ihrer Basisklasse überschreiben.
+ Diese Praxis wurde bereits von der Gang of Four in 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "S. 17-18"
+key "Gamma1994"
+
+\end_inset
+
+ mit folgenden Worten beschrieben:
+\end_layout
+
+\begin_layout Quote
+\begin_inset Quotes gld
+\end_inset
+
+Program to an interface, not an implementation.
+\begin_inset Quotes grd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Deklaration von Abhängigkeiten in Form von Abstraktionen ist die Grundlage
+ um Inversion Of Control mittels Dependency Injection umzusetzen.
+ Späte Bindung ermöglicht es, dass die konkrete Implementation auf diesem
+ Wege erst zur Laufzeit bekannt sein muss.
+\end_layout
+
 \begin_layout Section
 Umsetzung von Dependency Injection
+\end_layout
+
+\begin_layout Standard
+Um zu erläutern wie die in den vorherigen Abschnitten erklärten Prinzipien
+ bei der Umsetzung von Inversion of Control mittels Dependency Injection
+ zusammenspielen, soll ein Beispiel herangezogen werden.
+ Anhand dieses Beispiels sollen Patterns die im direkten Zusammenhang zu
+ Dependency Injection stehen, beschrieben werden.
+ Um das Beispiel so einfach wie möglich zu halten, wird hierfür eine Konsolenanw
+endung in C# gewählt.
+\end_layout
+
+\begin_layout Subsection
+Ausgangspunkt
+\end_layout
+
+\begin_layout Itemize
+Angriffslogik wird an das Schwert delegiert, verantwortungen sind getrennt
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public class Knight 
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	private Sword sword;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	public Knight()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		sword = new Sword();
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	public void Attack()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		sword.Hit();
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+public class Sword
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	public void Hit()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		System.Console.WriteLine("Hitting with a Sword");
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+//Somewhere else:
+\end_layout
+
+\begin_layout Plain Layout
+
+var enemy = new Knight();
+\end_layout
+
+\begin_layout Plain Layout
+
+enemy.Attack();
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Beispiel von enger Kopplung zwischen Klassen
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Neue Anforderungen
+\end_layout
+
+\begin_layout Itemize
+Es soll nicht nur Ritter als Gegner geben.
+\end_layout
+
+\begin_layout Itemize
+Gangster sollen im Unterschied zu Rittern eine Pistole als Waffe haben.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public class Pistol
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	public void Fire()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		System.Console.WriteLine("Shooting a Pistol");
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Beispiel einer neuen Anforderung
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public class Knight
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	private IWeapon weapon;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	public Knight()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		weapon = new Sword();
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	public void Attack()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		weapon.Hit();
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+public interface IWeapon
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	void Use();
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+public class Sword : IWeapon
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	public void Use()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		System.Console.WriteLine("Hitting with a Sword");
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+public class Pistol : IWeapon
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	public void Use()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		System.Console.WriteLine("Hitting with a Sword");
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Deklaration der Abhängigkeit in Form eines Interfaces
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public class Enemy
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	private IWeapon weapon;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	public Enemy(IWeapon weapon)
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		this.weapon = weapon;
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	public void Attack()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		weapon.Hit();
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Beispiel von Constructor Injection
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public class Enemy
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	public IEnemy Weapon { get; set; }
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	public void Attack()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		Weapon.Hit();
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Beispiel von Constructor Injection
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Resultierende Vorteile und Möglichkeiten
 \end_layout
 
 \begin_layout Chapter
