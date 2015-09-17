@@ -1552,6 +1552,16 @@ gen haben.
 Dependency Injection wendet das Single-Responsibility Prinzip an, indem
  Klassen die Verantwortung über die Erstellung von Instanzen ihrer Abhängigkeite
 n entzieht.
+ (vgl.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "S. 24"
+key "Seemann2011"
+
+\end_inset
+
+)
 \end_layout
 
 \begin_layout Subsection
@@ -1581,11 +1591,75 @@ Geschlossen für Modifikation
 
  zum anderen bedeutet, dass zur Erweiterung keine Änderungen an dem Modul
  notwendig sind.
+\end_layout
+
+\begin_layout Standard
+Abstraktion ermöglicht die Umsetzung des Open/Closed Prinzips.
+ Wird von einer abstrakten Basisklasse geerbt, so ist es möglich das Verhalten
+ der Abstraktion zu ändern, ohne die Abstraktion selbst zu manipulieren.
+ Die Entwurfsmuster Strategy und Template Method sind Beispiele für das
+ Open/Closed Prinzip.
+\end_layout
+
+\begin_layout Standard
+Auch Dependency Injection setzt das Open/Closed Prinzip um, indem Abhängigkeiten
+ lediglich in Form von Abstraktionen existieren.
+ Dieses Prinzip ist eine Grundlage für lose Kopplung.
+ (vgl.
  
+\begin_inset CommandInset citation
+LatexCommand cite
+after "S. 106"
+key "Seemann2011"
+
+\end_inset
+
+)
 \end_layout
 
 \begin_layout Subsection
 Liskov Substitution Prinzip
+\end_layout
+
+\begin_layout Standard
+Das Liskov Substitution Prinzip beschreibt einer grundlegende Anforderung
+ beim Einsatz von Vererbung: Untertypen einer Basisklasse sollen untereinander
+ ersetzbar sein, ohne dabei die Verhalten des Programms selbst zu verändern.
+ Das Programm selbst darf zu keinem Zeitpunkt einen Untertyp anders als
+ ein anderen behandelt.
+\end_layout
+
+\begin_layout Standard
+Dependency Injection ermöglicht es, dass Abhängigkeiten beliebig austauschbar
+ sind, solange sie die nötige Abstraktion implementieren.
+ Dies ist jedoch nur möglich, wenn das Liskov Substitution Prinzip gewahrt
+ wird.
+ (vgl.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "S. 9-10"
+key "Seemann2011"
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+Dieses Prinzip kommt besonders beim Unit-Testing zum Vorschein: Abhängigkeiten
+ eines System Under Test können durch Test Doubles ersetzt werden, ohne
+ das Verhalten des Systems selbst zu verändern.
+ (vgl.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "S.19"
+key "Seemann2011"
+
+\end_inset
+
+)
 \end_layout
 
 \begin_layout Subsection
