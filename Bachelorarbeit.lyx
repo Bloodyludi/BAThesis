@@ -1666,6 +1666,47 @@ key "Seemann2011"
 Interface Segregation Prinzip
 \end_layout
 
+\begin_layout Standard
+Anstatt große (
+\begin_inset Quotes gld
+\end_inset
+
+fat
+\begin_inset Quotes grd
+\end_inset
+
+) Interfaces zu nutzen, sollten diese in mehrere schlanke Interfaces aufgeteilt
+ werden.
+ Die Aufteilung soll nach Methodengruppen erfolgen, entsprechend wie sie
+ von Modulen, die das Interface nutzen gebraucht werden.
+ So wird gewährleistet, dass andere Module nur von Abstraktionen mit hoher
+ Interfacekohäsion abhängig sind.
+ Auch wenn diese Abstraktionen von einem einzigen nicht-kohäsiven Modul
+ implementiert werden.
+\end_layout
+
+\begin_layout Standard
+Das Interface Segregation Prinzip scheint zunächst nicht mit Dependency
+ Injection im Zusammenhang zu stehen.
+ Es ist eher eine Richtlinie die bei der Anwendung von Dependency Injection
+ gewahrt werden sollte.
+ Wird eine Abhängigkeit von einem einzigen großen Interface repräsentiert,
+ lenkt dieses Interface in die Richtung einer konkreten Implementation.
+ Die Folge ist, dass Abhängigkeiten schwieriger auszutauschen sind und Interface
+methoden implementieren, die sie eigentlich gar nicht benötigen um die Abhängigk
+eit zu erfüllen.
+ (vgl.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "S. 284"
+key "Seemann2011"
+
+\end_inset
+
+)
+\end_layout
+
 \begin_layout Subsection
 Dependency-Inversion Prinzip
 \end_layout
