@@ -2418,8 +2418,46 @@ name "fig:Depend-Abstractions"
 Injecting Dependencies
 \end_layout
 
+\begin_layout Standard
+Anstatt, dass sich eine Klasse selbst um die Auflösung ihrer Abhängigkeiten
+ kümmert, sollte sie von Aussen mit diesen versorgt werden.
+ Die Verantwortung über die Auflösung der Abhängigkeiten wird abgegeben.
+ Die Klasse selbst macht lediglich deutlich, dass Sie ein Objekt benötigt,
+ welches die abstrakten Bedürfnisse eines Interfaces umsetzt.
+ In diesem Fall, die eines ILocalizationService.
+ Die Klassen sind durch Dependency Injection lose miteinander gekoppelt.
+ Dependency Injection lässt sich auf unterschiedlichen Wegen umsetzten.
+ Die gebräuchlichsten sind Constructor Injection und Property Injection.
+\end_layout
+
 \begin_layout Subsubsection
 Constructor Injection
+\end_layout
+
+\begin_layout Standard
+Die Abhängigkeit wird über den Konstruktor bei der Instanziierung des Objektes
+ bereitgestellt.
+ In Abbildung 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:Beispiel-von-Constructor"
+
+\end_inset
+
+ wird Constructor Injection in der DamageRenderer angewandt.
+ Eine Instanz von ILocalizationService muss bei Aufruf des Konstruktors
+ bereitgestellt werden.
+\end_layout
+
+\begin_layout Standard
+Constructor Injection stellt sicher, dass die nötige Abhängigkeit auch tatsächli
+ch verfügbar ist, indem eine Instanziierung des Objektes (ein Konstruktoraufruf)
+ ohne sie nicht möglich ist.
+ Eine Guard Clause stellt sicher, dass nicht null als Argument übergeben
+ wird.
+ Constructor Injection sollte in den meisten Fällen angewand werden, denn
+ in den meisten Fällen ist die benötigte Abhängigkeit zwingend notwendig.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -2464,6 +2502,30 @@ public class DamageRenderer
 
 \begin_layout Plain Layout
 
+		if (localization == null)
+\end_layout
+
+\begin_layout Plain Layout
+
+		{
+\end_layout
+
+\begin_layout Plain Layout
+
+			throw new ArgumentNullException("localization");
+\end_layout
+
+\begin_layout Plain Layout
+
+		}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
 		this.localization = localization;
 \end_layout
 
@@ -2488,7 +2550,7 @@ public class DamageRenderer
 
 \begin_layout Plain Layout
 
-		var output = string.Format(localization.GetLocale(), target, damage);
+		var output = string.Format(localization.GetText(), target, damage);
 \end_layout
 
 \begin_layout Plain Layout
@@ -2516,6 +2578,13 @@ public class DamageRenderer
 
 \begin_layout Plain Layout
 Beispiel von Constructor Injection
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Beispiel-von-Constructor"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -2530,6 +2599,46 @@ Beispiel von Constructor Injection
 
 \begin_layout Subsubsection*
 Property Injection
+\end_layout
+
+\begin_layout Standard
+Ist eine Abhängigkeit optional, kann die Klasse über ein Property mit einer
+ Instanz dieser Abhängigkeit versorgt werden.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:Beispiel-von-Property"
+
+\end_inset
+
+ zeigt die Umsetzung von Property Injection anhand des gewählten Beispiels.
+ Die Klasse stellt ein öffentlich setzbares Property vom Typ der Abhängigkeit
+ bereit.
+ In dem gezeigten Beispiel ist Property Injection wenig angebracht, da die
+ Abhängigkeit notwendig ist.
+ Man könnte jedoch, falls kein LocalizationService bereitgestellt wird,
+ beispielsweise im Getter eine Instanz von EnglishLocalization erstellen
+ und diese so als Local Default verwenden.
+\end_layout
+
+\begin_layout Standard
+Mit Properties lässt sich so das Open-Closed Principle umsetzen: Sie bieten
+ eine optionale Abhängigkeit zur Erweiterung der Funktionalität einer Klasse
+ ohne dabei die Klasse selbst zu modifizieren.
+\end_layout
+
+\begin_layout Standard
+Ein Nachteil ist, dass andere Klassen zu jeder Zeit Veränderungen an dem
+ Property vornehmen können.
+ Aus diesem Grund wird Property Injection in manchen Kreisen kritisiert,
+ da es die Datenkapselung bricht.
+\end_layout
+
+\begin_layout Standard
+Oft hindert auch die Verwendung eines Frameworks die Verwendung von Constructor
+ Injection, zum Beispiel, wenn dieses Framework vorscheibt, dass Klassen
+ einen Default Constructor haben.
+ In diesem Fall kann auch auf Property Injection zurückgegriffen werden.
 \end_layout
 
 \begin_layout Standard
@@ -2555,10 +2664,11 @@ public class DamageRenderer : IDamageRenderer
 
 \begin_layout Plain Layout
 
-	public ILocalizationService Localization { get; set; }
+	public ILocalizationService Localization { private get; set; }
 \end_layout
 
 \begin_layout Plain Layout
+
 	
 \end_layout
 
@@ -2574,7 +2684,31 @@ public class DamageRenderer : IDamageRenderer
 
 \begin_layout Plain Layout
 
-		var output = string.Format(Localization.GetLocale(), target, damage);
+		if (localization == null)
+\end_layout
+
+\begin_layout Plain Layout
+
+		{
+\end_layout
+
+\begin_layout Plain Layout
+
+			throw new ArgumentNullException("localization");
+\end_layout
+
+\begin_layout Plain Layout
+
+		}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		var output = string.Format(Localization.GetText(), target, damage);
 \end_layout
 
 \begin_layout Plain Layout
@@ -2602,6 +2736,13 @@ public class DamageRenderer : IDamageRenderer
 
 \begin_layout Plain Layout
 Beispiel von Property Injection
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Beispiel-von-Property"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -2697,8 +2838,17 @@ Die Main-Methode erfüllt die Eigenschaften des Composition Roots in einer
 
 \end_layout
 
+\begin_layout Subsection
+Seams
+\end_layout
+
 \begin_layout Section
 Resultierende Vorteile und Möglichkeiten
+\end_layout
+
+\begin_layout Standard
+Programming to an interface ist eine Vorraussetzung um lose Kopplung über
+ Dependency Injection umzusetzen
 \end_layout
 
 \begin_layout Chapter
