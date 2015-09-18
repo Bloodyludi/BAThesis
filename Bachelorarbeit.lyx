@@ -1801,11 +1801,23 @@ endung in C# gewählt.
 \end_layout
 
 \begin_layout Subsection
-Ausgangspunkt
+Ausgangssituation
 \end_layout
 
-\begin_layout Itemize
-Angriffslogik wird an das Schwert delegiert, verantwortungen sind getrennt
+\begin_layout Standard
+Eine gewünschte Funktionalität eines zu entwickelnden Spiels ist auszugeben,
+ dass eine verwundbare Entität schaden genommen hat.
+ Die in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:Ausgangssituation"
+
+\end_inset
+
+ dargestellte Klasse DamageRenderer setzt diese Funktionalität um.
+ Zunächst scheint alles zu stimmen: Die Klasse beschränkt ihre Verantwortung
+ auf eine einzige Funktionalität, formatiert die Information in ein lesbares
+ Format und gibt diese in der Konsole aus.
 \end_layout
 
 \begin_layout Standard
@@ -1821,7 +1833,7 @@ status open
 
 \begin_layout Plain Layout
 
-public class Knight 
+public class DamageRenderer
 \end_layout
 
 \begin_layout Plain Layout
@@ -1831,16 +1843,7 @@ public class Knight
 
 \begin_layout Plain Layout
 
-	private Sword sword;
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-	public Knight()
+	public void Render(string target, int damage)
 \end_layout
 
 \begin_layout Plain Layout
@@ -1850,32 +1853,8 @@ public class Knight
 
 \begin_layout Plain Layout
 
-		sword = new Sword();
-\end_layout
-
-\begin_layout Plain Layout
-
-	}
-\end_layout
-
-\begin_layout Plain Layout
-
-	
-\end_layout
-
-\begin_layout Plain Layout
-
-	public void Attack()
-\end_layout
-
-\begin_layout Plain Layout
-
-	{
-\end_layout
-
-\begin_layout Plain Layout
-
-		sword.Hit();
+		var output = string.Format("{0} was attacked and took {1} damage.", target,
+ damage);         		System.Console.WriteLine(output);
 \end_layout
 
 \begin_layout Plain Layout
@@ -1886,64 +1865,6 @@ public class Knight
 \begin_layout Plain Layout
 
 }
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-public class Sword
-\end_layout
-
-\begin_layout Plain Layout
-
-{
-\end_layout
-
-\begin_layout Plain Layout
-
-	public void Hit()
-\end_layout
-
-\begin_layout Plain Layout
-
-	{
-\end_layout
-
-\begin_layout Plain Layout
-
-		System.Console.WriteLine("Hitting with a Sword");
-\end_layout
-
-\begin_layout Plain Layout
-
-	}
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-//Somewhere else:
-\end_layout
-
-\begin_layout Plain Layout
-
-var enemy = new Knight();
-\end_layout
-
-\begin_layout Plain Layout
-
-enemy.Attack();
 \end_layout
 
 \end_inset
@@ -1955,15 +1876,18 @@ enemy.Attack();
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Beispiel von enger Kopplung zwischen Klassen
-\end_layout
+Ausgangssituation des Beispiels
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Ausgangssituation"
 
 \end_inset
 
 
 \end_layout
 
-\begin_layout Plain Layout
+\end_inset
+
 
 \end_layout
 
@@ -1976,12 +1900,20 @@ Beispiel von enger Kopplung zwischen Klassen
 Neue Anforderungen
 \end_layout
 
-\begin_layout Itemize
-Es soll nicht nur Ritter als Gegner geben.
-\end_layout
+\begin_layout Standard
+Im Verlauf der Entwicklung des Spieles wird klar, dass das Spiel in verschiedene
+n Sprachen veröffentlicht werden soll.
+ Lokalisierung ist eine gängige Anforderung für jegliche Art von Software.
+ Es wird mit dem Refactoring begonnen und die Klasse EnglishLocalization
+ extrahiert.
+ Abbildung
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:Extraction"
 
-\begin_layout Itemize
-Gangster sollen im Unterschied zu Rittern eine Pistole als Waffe haben.
+\end_inset
+
+ zeigt das Resultat.
 \end_layout
 
 \begin_layout Standard
@@ -1997,7 +1929,7 @@ status open
 
 \begin_layout Plain Layout
 
-public class Pistol
+public class DamageRenderer
 \end_layout
 
 \begin_layout Plain Layout
@@ -2007,7 +1939,16 @@ public class Pistol
 
 \begin_layout Plain Layout
 
-	public void Fire()
+	private readonly EnglishLocalization localization;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	public DamageRenderer()
 \end_layout
 
 \begin_layout Plain Layout
@@ -2017,7 +1958,75 @@ public class Pistol
 
 \begin_layout Plain Layout
 
-		System.Console.WriteLine("Shooting a Pistol");
+		localization = new EnglishLocalization();
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	public void Render(string target, int damage)
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		var output = string.Format(localization.GetText(), target, damage);
+\end_layout
+
+\begin_layout Plain Layout
+
+		System.Console.WriteLine(output);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+public class EnglishLocalization
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	public string GetText()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		return "{0} was attacked and took {1} damage.";
 \end_layout
 
 \begin_layout Plain Layout
@@ -2039,8 +2048,10 @@ public class Pistol
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Beispiel einer neuen Anforderung
-\end_layout
+Extraction der englischen Lokalisierung aus der existierenden Klasse
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Extraction"
 
 \end_inset
 
@@ -2050,6 +2061,30 @@ Beispiel einer neuen Anforderung
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Klasse DamageRenderer funktioniert immernoch wie im vorherigen Beispiel.
+ Der Unterschied ist, dass DamageRenderer nun eine Abhängigkeit zu EnglishLocali
+zation besitzt.
+ Wie kann es nun ermöglicht werden, die englische Lokalisierung mit der
+ Deutschen in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:Deutsche-Lokalisierung"
+
+\end_inset
+
+ auszutauchen? Das Problem ist, dass DamageRenderer eine konkrete Abhängigkeit
+ zu EnglishLocalization hat.
+ Mit anderen Worten, sie sind eng miteinander gekoppelt.
+ Die Folge ist, dass EnglishLocalization nicht ohne DamageRenderer zu ändern
+ durch GermanLocalization ausgetauscht werden kann.
 \end_layout
 
 \begin_layout Standard
@@ -2065,7 +2100,7 @@ status open
 
 \begin_layout Plain Layout
 
-public class Knight
+public class GermanLocalization
 \end_layout
 
 \begin_layout Plain Layout
@@ -2075,16 +2110,7 @@ public class Knight
 
 \begin_layout Plain Layout
 
-	private IWeapon weapon;
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-	public Knight()
+	public string GetText()
 \end_layout
 
 \begin_layout Plain Layout
@@ -2094,134 +2120,7 @@ public class Knight
 
 \begin_layout Plain Layout
 
-		weapon = new Sword();
-\end_layout
-
-\begin_layout Plain Layout
-
-	}
-\end_layout
-
-\begin_layout Plain Layout
-
-	
-\end_layout
-
-\begin_layout Plain Layout
-
-	public void Attack()
-\end_layout
-
-\begin_layout Plain Layout
-
-	{
-\end_layout
-
-\begin_layout Plain Layout
-
-		weapon.Hit();
-\end_layout
-
-\begin_layout Plain Layout
-
-	}
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-public interface IWeapon
-\end_layout
-
-\begin_layout Plain Layout
-
-{
-\end_layout
-
-\begin_layout Plain Layout
-
-	void Use();
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-public class Sword : IWeapon
-\end_layout
-
-\begin_layout Plain Layout
-
-{
-\end_layout
-
-\begin_layout Plain Layout
-
-	public void Use()
-\end_layout
-
-\begin_layout Plain Layout
-
-	{
-\end_layout
-
-\begin_layout Plain Layout
-
-		System.Console.WriteLine("Hitting with a Sword");
-\end_layout
-
-\begin_layout Plain Layout
-
-	}
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-public class Pistol : IWeapon
-\end_layout
-
-\begin_layout Plain Layout
-
-{
-\end_layout
-
-\begin_layout Plain Layout
-
-	public void Use()
-\end_layout
-
-\begin_layout Plain Layout
-
-	{
-\end_layout
-
-\begin_layout Plain Layout
-
-		System.Console.WriteLine("Hitting with a Sword");
+		return "{0} wurde angegriffen und hat {1} Schaden genommen.";
 \end_layout
 
 \begin_layout Plain Layout
@@ -2243,8 +2142,10 @@ public class Pistol : IWeapon
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Deklaration der Abhängigkeit in Form eines Interfaces
-\end_layout
+Deutsche Lokalisierung 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Deutsche-Lokalisierung"
 
 \end_inset
 
@@ -2254,6 +2155,15 @@ Deklaration der Abhängigkeit in Form eines Interfaces
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Programming to an Interface
 \end_layout
 
 \begin_layout Standard
