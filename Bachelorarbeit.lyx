@@ -1914,6 +1914,8 @@ reference "fig:Extraction"
 \end_inset
 
  zeigt das Resultat.
+ Die Verantwortung für die Lokalisierung wurde in eine allein dafür vorgesehene
+ Klasse verschoben.
 \end_layout
 
 \begin_layout Standard
@@ -2080,8 +2082,8 @@ reference "fig:Deutsche-Lokalisierung"
 
 \end_inset
 
- auszutauchen? Das Problem ist, dass DamageRenderer eine konkrete Abhängigkeit
- zu EnglishLocalization hat.
+ auszutauchen? Das Problem hierbei ist, dass DamageRenderer eine konkrete
+ Abhängigkeit zu EnglishLocalization hat.
  Mit anderen Worten, sie sind eng miteinander gekoppelt.
  Die Folge ist, dass EnglishLocalization nicht ohne DamageRenderer zu ändern
  durch GermanLocalization ausgetauscht werden kann.
@@ -2167,105 +2169,25 @@ Programming to an Interface
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-
-public class Enemy
-\end_layout
-
-\begin_layout Plain Layout
-
-{
-\end_layout
-
-\begin_layout Plain Layout
-
-	private IWeapon weapon;
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-	public Enemy(IWeapon weapon)
-\end_layout
-
-\begin_layout Plain Layout
-
-	{
-\end_layout
-
-\begin_layout Plain Layout
-
-		this.weapon = weapon;
-\end_layout
-
-\begin_layout Plain Layout
-
-	}
-\end_layout
-
-\begin_layout Plain Layout
-
-	
-\end_layout
-
-\begin_layout Plain Layout
-
-	public void Attack()
-\end_layout
-
-\begin_layout Plain Layout
-
-	{
-\end_layout
-
-\begin_layout Plain Layout
-
-		weapon.Hit();
-\end_layout
-
-\begin_layout Plain Layout
-
-	}
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
+Um lose Kopplung umzusetzen darf keine Abhängigkeit zu einer konkreten Implement
+ation existieren.
+ Stattdessen muss sich auf eine Abstraktion als Abhängigkeit verlassen werden.
+ In dem Beispiel in Abb.
+ 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:Depend-Abstractions"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Beispiel von Constructor Injection
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
+ wird dies umgesetzt indem English- und GermanLocalization das Interface
+ ILocalizationService implementieren.
+ Dadurch, dass DamageRenderer nur noch eine Variable des Interfaces ILocalizatio
+nService hält, lässt sich die konkrete Implementation austauschen.
+ Dies ist jedoch immernoch nur möglich wenn DamageRenderer geändert wird.
+ Der Grund dafür ist, dass EnglishLocalization im Konstruktor von DamageRenderer
+ instanziiert wird.
+ Somit ist DamageRenderer immernoch eng mit EnglishLocalization gekoppelt.
 \end_layout
 
 \begin_layout Standard
@@ -2281,7 +2203,7 @@ status open
 
 \begin_layout Plain Layout
 
-public class Enemy
+public class DamageRenderer
 \end_layout
 
 \begin_layout Plain Layout
@@ -2291,7 +2213,7 @@ public class Enemy
 
 \begin_layout Plain Layout
 
-	public IEnemy Weapon { get; set; }
+	private readonly ILocalizationService localization;
 \end_layout
 
 \begin_layout Plain Layout
@@ -2301,7 +2223,7 @@ public class Enemy
 
 \begin_layout Plain Layout
 
-	public void Attack()
+	public DamageRenderer()
 \end_layout
 
 \begin_layout Plain Layout
@@ -2311,7 +2233,267 @@ public class Enemy
 
 \begin_layout Plain Layout
 
-		Weapon.Hit();
+		localization = new EnglishLocalization();
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	public void Render(string target, int damage)
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		var output = string.Format(localization.GetText(), target, damage);
+\end_layout
+
+\begin_layout Plain Layout
+
+		System.Console.WriteLine(output);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+public interface ILocalizationService
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	string GetText();
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+public class EnglishLocalization : ILocalizationService
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	public string GetText()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		return "{0} was attacked and took {1} damage.";
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+public class GermanLocalization : ILocalizationService
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	public string GetText()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		return "{0} wurde angegriffen und hat {1} Schaden genommen.";
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Beispiel von 
+\begin_inset Quotes gld
+\end_inset
+
+Depend on abstractions
+\begin_inset Quotes grd
+\end_inset
+
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Depend-Abstractions"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Injecting Dependencies
+\end_layout
+
+\begin_layout Subsubsection
+Constructor Injection
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public class DamageRenderer
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	private readonly ILocalizationService localization;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	public DamageRenderer(ILocalizationService localization)
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		this.localization = localization;
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	public void Render(string target, int damage)
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		var output = string.Format(localization.GetLocale(), target, damage);
+\end_layout
+
+\begin_layout Plain Layout
+
+		System.Console.WriteLine(output);
 \end_layout
 
 \begin_layout Plain Layout
@@ -2334,6 +2516,175 @@ public class Enemy
 
 \begin_layout Plain Layout
 Beispiel von Constructor Injection
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Property Injection
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public class DamageRenderer : IDamageRenderer
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	public ILocalizationService Localization { get; set; }
+\end_layout
+
+\begin_layout Plain Layout
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	public void Render(string target, int damage)
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		var output = string.Format(Localization.GetLocale(), target, damage);
+\end_layout
+
+\begin_layout Plain Layout
+
+		System.Console.WriteLine(output);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Beispiel von Property Injection
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Composition Root
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public class Programm
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	public static void Main(string[] args)
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		var localization = new GermanLocalization();
+\end_layout
+
+\begin_layout Plain Layout
+
+		var renderer = new DamageRenderer(localization);
+\end_layout
+
+\begin_layout Plain Layout
+
+		renderer.Render("Mario", 10);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Die Main-Methode erfüllt die Eigenschaften des Composition Roots in einer
+ Konsolenanwendung
 \end_layout
 
 \end_inset
