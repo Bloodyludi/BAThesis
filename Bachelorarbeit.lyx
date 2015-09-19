@@ -2983,8 +2983,85 @@ Resultierende Vorteile und Möglichkeiten
 \end_layout
 
 \begin_layout Standard
-Programming to an interface ist eine Vorraussetzung um lose Kopplung über
- Dependency Injection umzusetzen
+In den vorherigen Abschnitten wurde ausführlich beschrieben wie lose Kopplung
+ umzusetzen ist.
+ Jedoch sind eventuell die Gründe für lose Kopplung aufgrund des einfachen
+ Beispiels noch nicht ganz klar geworden.
+ Lose Kopplung trägt maßgeblich zu der Qualität eines Softwareproduktes
+ bei.
+ Welche Faktoren genau beeinflusst werden, soll im Folgenden erläutert werden.
+\end_layout
+
+\begin_layout Subsection
+Erweiterbarkeit
+\end_layout
+
+\begin_layout Standard
+Während der Entwicklung einer Anwendung werden neue Anforderungen bekannt
+ und existierende beginnen sich zu verändern.
+ Trotzdem muss die Anwendung erweiterbar und wartbar bleiben.
+ Erweiterbarkeit wird problematischer je größer die Anwendung ist.
+ In sehr großen Softwaresystemen ist es schwer abzusehen welche Auswirkungen
+ auch nur die kleinste Änderung hat.
+ Aus diesem Grund ist es notwendig Module so autonom wie möglich zu halten.
+ Dadurch, dass die Abhängigkeiten eines Modules auf Interfaces reduziert
+ werden, haben Änderungen der konkreten Implementation keinen Einfluss auf
+ sie.
+\end_layout
+
+\begin_layout Standard
+Lose Kopplung setzt das Open/Closed Principle in die Tat um: Module sind
+ offen für Erweiterung und geschlossen für Veränderung.
+ Maßgeblich verantwortlich hierfür ist das Konzept der späten Bindung, welches
+ durch programming to an interface konsequent umgesetzt wird.
+ Die konkrete Implementation ist austauschbar und wird erst zur Laufzeit
+ bekannt.
+ Sie ist unabhängig vom Rest der Anwendung veränderbar.
+\end_layout
+
+\begin_layout Standard
+Dependency Injection hilft dabei, Verantwortungen klarer aufzuteilen und
+ zu definieren.
+ Durch das Einhalten des Single Responcibility Principles wird es deutlicher
+ wo Änderungen gemacht werden müssen.
+ Oft genügt es eine konkrete Implementation durch eine andere auszutauschen
+ um ein gewünschtes Verhalten zu erzielen.
+ Dependency Injection macht dies trivial.
+\end_layout
+
+\begin_layout Subsection
+Wiederverwendbarkeit
+\end_layout
+
+\begin_layout Standard
+Einzelne Softwaremodule sind wiederverwendbar, da sie lose mit ihren Abhängigkei
+ten gekoppelt sind.
+ Die eigentliche Implementation dieser Abhängigkeiten ist für das Modul
+ nicht relevant.
+ Ist in einer anderen Umgebung eine andere konkrete Implementation notwendig
+ so kann sie einfach ausgetauscht werden.
+\end_layout
+
+\begin_layout Subsection
+Parallelisierung
+\end_layout
+
+\begin_layout Standard
+Lose Kopplung ermöglicht die parallele Entwicklung einer Softwareanwendung
+ indem klare Schnittstellen zur Kommunikation definiert werden.
+ Unter den kollaborierenden Entwicklern muss sich lediglich auf diese Schnittste
+llen geeinigt werden.
+ Die konkreten Implementationen sind nicht mehr relevant und können unabhängig
+ voneinander im Parallelen umgesetzt werden.
+\end_layout
+
+\begin_layout Subsection
+Testbarkeit
+\end_layout
+
+\begin_layout Standard
+Lose Kopplung ermöglicht, dass Module in Isolation betrachtet werden können.
+ Vorhandene Funktionalität kann durch andere ersetzt werden.
 \end_layout
 
 \begin_layout Chapter
