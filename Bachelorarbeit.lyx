@@ -2453,6 +2453,8 @@ reference "fig:Beispiel-von-Constructor"
 Constructor Injection stellt sicher, dass die nötige Abhängigkeit auch tatsächli
 ch verfügbar ist, indem eine Instanziierung des Objektes (ein Konstruktoraufruf)
  ohne sie nicht möglich ist.
+ Damit wird erzwungen, dass der gesamte Abhängigkeitsgraph aufgebaut wird,
+ bevor die Klasse genutzt werden kann.
  Eine Guard Clause stellt sicher, dass nicht null als Argument übergeben
  wird.
  Constructor Injection sollte in den meisten Fällen angewand werden, denn
@@ -2760,6 +2762,45 @@ Composition Root
 \end_layout
 
 \begin_layout Standard
+In den letzten Abschnitten wurde verdeutlicht, dass Dependency Injection
+ es verlangt, die Verantwortung über die Auflösung der Abhängigkeiten abzugeben.
+ Es wurde jedoch nicht beschrieben, an wen diese Verantwortung übertragen
+ werden soll.
+ Die Antwort ergibt sich, wenn man Dependency Injection konsequent umsetzt:
+ Abhängigkeiten werden in der Objekthierarchie nach oben gereicht, bis dies
+ nicht mehr möglich ist.
+ Die Auflösung der Abhängigkeiten sollte also so nah wie möglich beim Einstiegsp
+unkt der Applikation geschehen.
+ Soweit möglich sollte die Initialisierungslogik aller Objekte an diesem
+ zentralen Ort umgesetzt werden.
+ Dieser zentrale Ort wird als Composition Root bezeichnet.
+ (vgl.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "S. 76-77"
+key "Seemann2011"
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+In einer Konsolenapplikation, wie dem gezeigten Beispiel, erfüllt die Main-Metho
+de die Vorraussetzungen für einen Composition Root: Sie ist der Einstiegspunkt
+ in die Anwendung und zugleich der höchste Punkt in der Objekthierarchie.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CompositionRoot"
+
+\end_inset
+
+ zeigt den Composition Root des gewählten Beispiels.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -2772,7 +2813,7 @@ status open
 
 \begin_layout Plain Layout
 
-public class Programm
+public class CompositionRoot
 \end_layout
 
 \begin_layout Plain Layout
@@ -2826,7 +2867,9 @@ public class Programm
 \begin_layout Plain Layout
 Die Main-Methode erfüllt die Eigenschaften des Composition Roots in einer
  Konsolenanwendung
-\end_layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:CompositionRoot"
 
 \end_inset
 
@@ -2836,10 +2879,103 @@ Die Main-Methode erfüllt die Eigenschaften des Composition Roots in einer
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Im Composition Root wird die Konfiguration der Anwendung vorgenommen.
+ Es ist der einzige Ort an dem die konkreten Instanzen von Objekten bekannt
+ sein müssen.
+ Er sollte unabhängig von dem Rest der Anwendung kompilierbar sein und sich
+ deswegen in einem seperaten Assembly befinden.
 \end_layout
 
 \begin_layout Subsection
-Seams
+Stable and volatile Dependencies
+\end_layout
+
+\begin_layout Standard
+Nicht jede Abhängigkeit muss lose mit der Anwendung gekoppelt werden.
+ Tatsächlich ist dies für bestimmte, feste Abhängigkeiten unnötig.
+ Wichtig ist jedoch unterscheiden zu können, wann eine Abhängigkeit als
+ fest (stable) und wann als unbeständig (volatile) angesehen werden sollte.
+ 
+\end_layout
+
+\begin_layout Standard
+Kann davon ausgegangen werden, dass ein bereits existierendes Modul niemals
+ ausgetauscht oder verändert wird, so kann es als eine feste Abängigkeit
+ angesehen werden.
+ Ein Beispiel hierfür sind die meisten Module der Base Class Library, da
+ sie fester Bestandteil des .NET Frameworks sind.
+ Ob ein Modul als feste Abhängigkeit angesehen werden kann, lässt sich anhand
+ der folgenden Kriterien beurteilen:
+\end_layout
+
+\begin_layout Itemize
+Die Klasse oder das Modul existiert bereits.
+\end_layout
+
+\begin_layout Itemize
+Es ist zu erwarten ist, dass neue Versionen keine Änderungen enthalten werden
+ die Auswirkungen auf den Programmcode haben werden.
+\end_layout
+
+\begin_layout Itemize
+Das Modul lediglich deterministische Algorithmen beinhaltet.
+\end_layout
+
+\begin_layout Itemize
+Es nicht zu erwarten ist, dass das Modul jemals durch ein anderes ausgetauscht
+ wird.
+\end_layout
+
+\begin_layout Standard
+Den Gegensatz zu festen Abhängigkeiten bilden Klassen und Module bei denen
+ es absehbar ist, dass sie sich verändern werden.
+ Ist eine Abhängigkeit unbeständig, sollte sie lose mit dem Rest der Anwendung
+ gekoppelt werden, um ihre Austauschbarkeit zu ermöglichen.
+ Eine Abhängigkeit wird als unbeständig angesehen, wenn eines der folgenden
+ Kriterien auf sie zutrifft:
+\end_layout
+
+\begin_layout Itemize
+Durch die Abhängigkeit wird eine bestimmte Laufzeitumgebung vorrausgesetzt.
+ 
+\end_layout
+
+\begin_layout Itemize
+Die Abhängigkeit existiert noch nicht.
+\end_layout
+
+\begin_layout Itemize
+Die Abhängigkeit nutzt eine thrid-party Library, die nicht auf allen Systemen
+ vorhanden ist.
+\end_layout
+
+\begin_layout Itemize
+Die Abhängigkeit nichtdeterministisches Verhalten aufweist.
+ (vgl.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "S. 23-24"
+key "Seemann2011"
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+Ein Beispiel für eine in der Base Class Library vorhandene Klasse die als
+ unbeständige Abhängigkeit behandelt werden sollte, ist System.Random.
+ Die Klasse weist nichtdeterministisches Verhalten auf, was sich besonders
+ auf die Testbarkeit der Anwendung auswirkt.
 \end_layout
 
 \begin_layout Section
