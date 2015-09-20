@@ -3160,7 +3160,7 @@ Es kann nur ein Merkmal als Basis für eine Vererbungshierarchie gewählt
  werden.
  Ein Merkmal kann beispielsweise die Beweglichkeit eines Objekts sein.
  Ein Anderes die Fähigkeit mit anderen Objekten zu kollidieren.
- Möchte man ein Objekt mit beiden Merkmalen haben, so stößst man schnell
+ Möchte man ein Objekt mit beiden Merkmalen haben, so stößt man schnell
  an die Grenzen einer solchen Architektur: Die benötigten Funktionalitäten
  müssen in der Hierarchie nach oben verschoben werden und bewirken so, dass
  sie eventuell in Klassen vorhanden sind in denen sie nicht gebraucht werden.
@@ -3225,6 +3225,14 @@ abhängige Entwicklung von Komponenten in C# und UnityScript zu ermöglichen.
 \begin_layout Standard
 Der Rest, also die Konfiguration und Komposition von Komponenten erfolgt
  in einem visuellen Editor.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:Unity-Editor"
+
+\end_inset
+
+ zeigt das Benutzerinterface des Unity Editors.
  Der Editor erlaubt das Anlegen von Szenen, die den Lebensraum für Spielobjekte
  darstellen.
  Spielobjekte werden im sogenannten Hierarchiefenster erstellt und in einem
@@ -3237,14 +3245,40 @@ Der Rest, also die Konfiguration und Komposition von Komponenten erfolgt
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
+\begin_inset Float figure
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename images/Editor-Breakdown.jpg
+	width 100text%
+
+\end_inset
 
 
-\backslash
-todo{Screenshot Unity Editor einfügen!}
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Das Benutzerinterface vom Unity Editor
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Unity-Editor"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -3253,7 +3287,7 @@ todo{Screenshot Unity Editor einfügen!}
 \end_layout
 
 \begin_layout Standard
-Betrachtet man die in 
+Betrachtet man die in Abschnitt 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "sec:Inversion-of-Control"
@@ -3324,9 +3358,12 @@ In beiden Fällen kann die Kommunikation direkt oder indirekt erfolgen.
  Vermittler \SpecialChar \nobreakdash-
  stattfindet.
  In jedem Fall wird eine Referenz auf ein weiteres Objekt benötigt.
- In Unity gibt es eine Vielzahl von Möglichkeiten wie diese Abhängigkeiten
- aufgelöst werden können.
- Diese sollen an dieser Stelle genauer beschrieben werden.
+\end_layout
+
+\begin_layout Standard
+Im folgenden Abschnitt soll untersucht werden, ob Unity's integrierte Möglichkei
+ten Abhängigkeiten aufzulösen es ermöglichen lose Kopplung zwischen Komponenten
+ umzusetzen.
 \end_layout
 
 \begin_layout Subsection
@@ -3338,7 +3375,7 @@ Unity bietet unterschiedliche Möglichkeiten um Zugriff auf unterschiedliche
  Objekte zu erlangen.
  So werden zahlreiche Game Object Queries für die Inter-Objekt-Kommunikation
  bereit gestellt.
- Um andere Komponenten referenzieren zu können gibt es Component Queries.
+ Um andere Komponenten referenzieren zu können, gibt es Component Queries.
  Desweiteren gibt es auch komponentenunabhängige Kommunikation über Events.
 \end_layout
 
@@ -3710,7 +3747,7 @@ gt werden um es global verfügbar zu machen.
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -3929,7 +3966,7 @@ reference "fig:UnityEventCode"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -4097,12 +4134,14 @@ reference "fig:UnityEvent"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
+\noindent
+\align center
 \begin_inset Graphics
 	filename images/UnityEvent.png
-	width 100text%
+	width 70text%
 
 \end_inset
 
