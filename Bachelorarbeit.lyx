@@ -1331,6 +1331,13 @@ Kohäsion beschreibt wie gut Entitäten aufgeteilt wurden.
 
 \begin_layout Section
 Inversion of Control
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Inversion-of-Control"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3064,195 +3071,206 @@ Lose Kopplung ermöglicht, dass Module in Isolation betrachtet werden können.
  Vorhandene Funktionalität kann durch andere ersetzt werden.
 \end_layout
 
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+todo{Hier Beispiel für Testbarkeit einfügen!}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Chapter
 Analyse der Architektur von Unity3D
 \end_layout
 
-\begin_layout Section
-Klassischer objektorientierter Ansatz 
-\end_layout
-
-\begin_layout Itemize
-Spielobjekte werden von einer Vererbungshierarchie abgeleitet
-\end_layout
-
-\begin_layout Itemize
-Alle Objekte werden von einer Basisklasse, meistens GameObject, abgeleitet
-\end_layout
-
-\begin_layout Itemize
-Basisklasse enthält Funktionalität die für alle Klassen notwendig ist (z.b.
- Serialisierung)
-\end_layout
-
-\begin_layout Itemize
-Mit Wachstum des Projektes wird die Hierarchie immer tiefer und weiter
-\end_layout
-
-\begin_layout Itemize
-Eine Monolytische Klassenhierarchie entsteht und Probleme folgen (Doesn't
- scale)
-\end_layout
-
-\begin_layout Itemize
-Es kann nur ein Merkmal als Basis für die Vererbungshierarchie gewählt werden
-\end_layout
-
-\begin_layout Itemize
-An Axis has to be picked to set the hierarchy, once this axis changes an
- object needs behaviour of two different classes
-\end_layout
-
-\begin_layout Itemize
-Beispiel:
-\end_layout
-
-\begin_layout Itemize
-Geteilte Funktionalitäten müssen in der Hierarchie nach oben verschoben
- werden, obwohl sie nicht von allen abgeleiten Klassen benötigt werden
-\end_layout
-
-\begin_layout Itemize
-Das Problem kann in einigen Sprachen auch durch multiple Vererbung gelöst
- werden, welche aber zu einem Deadly Diamond führen kann
-\end_layout
-
-\begin_layout Itemize
-Lösung: Komposition und Aggregation anstelle von Vererbung
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-compose: object owns other objects, they get destroyed once the owner is
- destroyed 
-\end_layout
-
-\begin_layout Itemize
-aggregate: object is linked to other object, not destroyed when owner is
- destroyed 
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-not to be confused with: “In business software, there’s a “Component” design
- pattern that describes decoupled services that communicate over the web.”
+\begin_layout Standard
+In dem letzten Kapitel wurde beschrieben, was lose Kopplung ist und wie
+ Inversion of Control und genauer Dependency Injection, dabei hilft diese
+ umzusetzen.
+ Es wurde beschrieben, dass lose Kopplung maßgeblich zu der Qualität des
+ Softwareproduktes beiträgt.
+ Dependency Injection wurde beispielhaft in einer Konsolenapplikation angewendet.
+ In diesem Kapitel sollen relevante Unterschiede zwischen der klassischen
+ objektorientierten Programmierung bei der Entwicklung einer Konsolenapplikation
+ und der komponentenbasierten Architektur von Unity beschrieben werden.
+ Gute und schlechte Praktiken bei der Arbeit mit Unity sollen erläutert
+ werden.
+ Unity stellt von sich aus Wege bereit um die Kommunikation zwischen Klassen
+ zu ermöglichen.
+ Es soll untersucht werden, ob diese es bereits ermöglichen lose Kopplung
+ umzusetzen.
 \end_layout
 
 \begin_layout Section
 Komponentenbasierte Architektur von Unity3D
 \end_layout
 
-\begin_layout Itemize
-Unity implementiert eine komponentenbasierte Game Object Architektur
+\begin_layout Standard
+Jede Spieleengine implementiert eine Form eines Game Object Models.
+ Ein Game Object Model beschreibt Hilfsmittel, die es ermöglichen Entitäten
+ innerhalb der Spielwelt zu modellieren und zu simulieren.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "S. 854"
+key "Gregory2014"
+
+\end_inset
+
+ Meistens bestehen diese Hilfsmittel aus zwei Teilen: Einer visuellen Repräsenta
+tion der Spielobjekte innerhalb des Editors der Engine und einer Laufzeitumgebun
+g, die die Entwicklung neuer Spielobjekte ermöglicht.
+ In jedem Fall wird ein Framework bereitgestellt, das die Konstruktion neuer
+ Spielobjekte erlaubt.
+\begin_inset CommandInset citation
+LatexCommand cite
+after "S. 869"
+key "Gregory2014"
+
+\end_inset
+
+
 \end_layout
 
-\begin_layout Itemize
-has-a anstelle von is-a
+\begin_layout Standard
+In klassischen objektorientierten Implementationen eines Game Object Models
+ werden Spielobjekte von einer Vererbungshierarchie abgeleitet.
+ Es handelt sich um eine monolitische Klassenhierarchie: Alle Objekte werden
+ von einer gemeinsamen Basisklasse namens GameObject abgeleitet.
+ Diese Basisklasse enthält Funktionalität, die für alle Klassen notwendig
+ ist.
+ Ein Beispiel hierfür ist Serialisierung.
+ Mit dem Wachstum des Projektes wächst auch die Hierarchie immer tiefer
+ und weiter.
+ Es folgt eine Reihe von Problemen: Klassen die sich tief in der Vererbungshiera
+rchie befinden, sind schwierig zu verstehen und zu verändern, da hierfür
+ auch alle Basisklassen bekannt sein müssen.
 \end_layout
 
-\begin_layout Itemize
-Purpose: “Allow a single entity to span multiple domains without coupling
- the domains to each other.”
+\begin_layout Standard
+Es kann nur ein Merkmal als Basis für eine Vererbungshierarchie gewählt
+ werden.
+ Ein Merkmal kann beispielsweise die Beweglichkeit eines Objekts sein.
+ Ein Anderes die Fähigkeit mit anderen Objekten zu kollidieren.
+ Möchte man ein Objekt mit beiden Merkmalen haben, so stößst man schnell
+ an die Grenzen einer solchen Architektur: Die benötigten Funktionalitäten
+ müssen in der Hierarchie nach oben verschoben werden und bewirken so, dass
+ sie eventuell in Klassen vorhanden sind in denen sie nicht gebraucht werden.
+ Das Problem kann in einigen Sprachen auch durch multiple Vererbung gelöst
+ werden, was aber zu einem Deadly Diamond führen kann.
+ Klassen von denen geerbt wird haben die selbe Basisklasse.
 \end_layout
 
-\begin_layout Itemize
-SpielObjekte werden mit Komponenten dekoriert
-\end_layout
+\begin_layout Standard
+Um diesen Problemen vorzubeugen implementiert Unity ein komponentenbasiertes
+ Game Object Model.
+ Das Grundprinzip dieses Models ist Komposition der Vererbung vorzuziehen.
+ Anstatt Objekte mittels Vererbung und des 
+\begin_inset Quotes gld
+\end_inset
 
-\begin_layout Itemize
-Komponenten sollen eine Funktionalität kapseln
-\end_layout
+is a
+\begin_inset Quotes grd
+\end_inset
 
-\begin_layout Itemize
-Keeps different domains in a program isolated from each other 
-\end_layout
+ Verhältnisses zu erweiteren, erfolgt die Komposition eines Spielobjekts
+ aus einzelnen Komponenten über das 
+\begin_inset Quotes gld
+\end_inset
 
-\begin_layout Itemize
-Components contain Data and Behaviour
-\end_layout
+has a
+\begin_inset Quotes grd
+\end_inset
 
-\begin_layout Itemize
-data can be exposed to the editor and then be edited by the artists
-\end_layout
+ Verhältnis.
+ In Unity werden Spielobjekte von der Klasse GameObject abgebildet.
+ Ein GameObject fungiert als Knotenpunkt für eine variable Anzahl von Komponente
+n und hat kaum bis gar keine weitere Funktionalität.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "S. 887"
+key "Gregory2014"
 
-\begin_layout Itemize
-GameObjects sind Objekte die eine variable Kombination von MonoBehaviours
- besitzen (container of components)
-\end_layout
+\end_inset
 
-\begin_layout Itemize
-Components are reusable plugins that can be plugged into the socket on the
- entity
-\end_layout
-
-\begin_layout Itemize
-Scripte müssen Komponenten sein.
- Unity3D insists that scripts you write are components.
- Components attach to objects, and the objects belong to a scene or prefab
-\end_layout
-
-\begin_layout Itemize
-Code can be reused because classes can own an instance of the same Component
+ Funktionalität wird erst durch das Anfügen von Komponenten hinzugefügt.
+ Komponenten werden in Unity von der Klasse MonoBehaviour abgeleitet.
  
 \end_layout
 
-\begin_layout Itemize
-Some Component will need to communicate to others, but communication is
- restricted to those cases.
-\end_layout
-
-\begin_layout Itemize
-The Game Object is completely decoupled from it’s components 
-\end_layout
-
-\begin_layout Itemize
-It is possible to add and remove components without the enitiy even knowing
-\end_layout
-
-\begin_layout Itemize
-Game Objects can be composed in the unity engine tool by designers
-\end_layout
-
 \begin_layout Section
-Objektlebenszyklus
+Programmierung und Konfiguration
 \end_layout
 
-\begin_layout Itemize
-In Unity gibt es keine Main Methode
+\begin_layout Standard
+MonoBehaviours sind die Schnittstelle, die es Programmierern ermöglicht
+ die Engine mit individuellem Verhalten zu erweitern um ein Spiel umzusetzen.
+ Unity verwendet die .NET-kompatible und Laufzeitumgebung Mono um die plattformun
+abhängige Entwicklung von Komponenten in C# und UnityScript zu ermöglichen.
+ Dem Nutzer stehen folglich alle gängigen Sprachfeatures wie Polymorphismus
+ und Vererbung innerhalb der Komponenten zur Verfügung.
+ Komponenten können durch die Implementierung von einer Reihe von vordefinierten
+ Eventfunktionen Einfluss auf das Spielgeschehen nehmen.
 \end_layout
 
-\begin_layout Itemize
-Die Kontrolle über die Komposition von Objekten ist bereits invertiert,
- Sie liegt in den Händen von Unity
+\begin_layout Standard
+Der Rest, also die Konfiguration und Komposition von Komponenten erfolgt
+ in einem visuellen Editor.
+ Der Editor erlaubt das Anlegen von Szenen, die den Lebensraum für Spielobjekte
+ darstellen.
+ Spielobjekte werden im sogenannten Hierarchiefenster erstellt und in einem
+ Szenegraph angeordnert.
+ Per Drag-and-Drop können Spielobjekten Komponenten hinzugefügt werden.
+ Öffentliche Member einer Komponente können im Inspector konfiguriert werden.
+ Wird eine Szene geladen, kümmert sich Unity um die Instanziierung aller
+ sich in ihr befindlichen Spielobjekte und deren Komponenten.
+ 
 \end_layout
 
-\begin_layout Itemize
-Es gibt keine Konstruktoren
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+todo{Screenshot Unity Editor einfügen!}
 \end_layout
 
-\begin_layout Itemize
-Die Instanziierung und Ausführung von Spielobjekten und Komponenten wird
- von Unity übernommen
+\end_inset
+
+
 \end_layout
 
-\begin_layout Itemize
-Soweit nicht anders spezifiziert, erfolgt die Aufrufreihenfolge von Scripten
- zufällig nach der Reihenfolge in der sie geladen werden
-\end_layout
+\begin_layout Standard
+Betrachtet man die in 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:Inversion-of-Control"
 
-\begin_layout Itemize
-Es ist möglich, eine Reihenfolge in den Script Execution Order settings
- anzugeben
-\end_layout
+\end_inset
 
-\begin_layout Itemize
-Aufgrund der fehlender Main und Constructors ist es nicht möglich Scripte
- von aussen mit ihren Abhängigkeiten zu versorgen
-\end_layout
-
-\begin_layout Itemize
-Aus diesem Grund stellt unity wege bereit, wie das Script seine Abhängigkeiten
- auflösen kann
+ gegebene Definition von Inversion Of Control, stellt man fest, dass diese
+ auch auf Unity zutrifft.
+ Die Kontrolle über die Komposition und Lebenszeit von Objekten ist bereits
+ invertiert, sie liegt in den Händen von Unity.
+ Ein Indiz hierfür ist, dass Unity keine Konstruktoren in MonoBehaviours
+ zulässt.
+ Es ist also nicht möglich Komponenten über einen Konstruktor mit ihren
+ Abhängigkeiten zu versorgen.
+ Aus diesem Grund stellt Unity alternative Wege zur Kommunikation mit anderen
+ Komponenten bereit.
+ Diese sollen im folgenden Abschnitt erläutert werden.
 \end_layout
 
 \begin_layout Section
@@ -3260,23 +3278,40 @@ Kommunikation und Abhängigkeiten
 \end_layout
 
 \begin_layout Standard
-Im Idealfall sind MonoBehaviours komplett unabhängig voneinander.
- Dennoch sind Sie Teile eines größeren Ganzen und müssen somit kommunizieren
- und interagieren.
- Oft beschränkt sich diese Kommunikation auf Komponenten des selben GameObjects.
+Jede Komponente soll eine einzige Funktionalität kapseln und sie wiederverwendba
+r machen.
+ Mit anderen Worten: Komposition anstelle von Vererbung soll es ermöglichen
+ Funktionalitäten aus unterscheidlichen Bereichen in wiederverwendbare Komponent
+en aufzuteilen ohne sie miteinander zu koppeln.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "S. 213"
+key "Nystrom2014"
+
+\end_inset
+
+ In der Realität ist dies jedoch nur begrenzt möglich: Komponenten sind
+ Teile eines größeren Ganzen und müssen somit kommunizieren und interagieren.
+ Komponenten haben folglich Abhängigkeiten zueinander.
+ 
+\end_layout
+
+\begin_layout Standard
+Oft beschränkt sich diese Kommunikation auf Komponenten des selben GameObjects.
  Es kommt jedoch auch vor, dass ein MonoBehaviour mit einem MonoBehaviour
  eines anderen GameObjects kommunizieren muss.
  Folglich wird zwischen zwei Arten der Kommunikation unterschieden:
 \end_layout
 
-\begin_layout Standard
+\begin_layout Itemize
 Die Intra-Objekt-Kommunikation erfolgt unter MonoBehaviours des selben GameObjec
-ts oder Children von diesem.
+ts oder Kindern von diesem.
 \end_layout
 
-\begin_layout Standard
-Inter-Objekt-Kommunikation beschreibt die Kommunikation zu anderen GameObjetcts
- die ansonsten in keiner Relation zueinander stehen.
+\begin_layout Itemize
+Die Inter-Objekt-Kommunikation beschreibt die Kommunikation zu anderen GameObjet
+cts die ansonsten in keiner Relation zueinander stehen.
 \end_layout
 
 \begin_layout Standard
@@ -4590,6 +4625,40 @@ Polymorphismus kann trotzdem genutzt werden
 
 \begin_layout Chapter
 Dependency Injection in Unity3D
+\end_layout
+
+\begin_layout Itemize
+Die Kontrolle über die Komposition von Objekten ist bereits invertiert,
+ Sie liegt in den Händen von Unity
+\end_layout
+
+\begin_layout Itemize
+Es gibt keine Konstruktoren
+\end_layout
+
+\begin_layout Itemize
+Die Instanziierung und Ausführung von Spielobjekten und Komponenten wird
+ von Unity übernommen
+\end_layout
+
+\begin_layout Itemize
+Soweit nicht anders spezifiziert, erfolgt die Aufrufreihenfolge von Scripten
+ zufällig nach der Reihenfolge in der sie geladen werden
+\end_layout
+
+\begin_layout Itemize
+Es ist möglich, eine Reihenfolge in den Script Execution Order settings
+ anzugeben
+\end_layout
+
+\begin_layout Itemize
+Aufgrund der fehlender Main und Constructors ist es nicht möglich Scripte
+ von aussen mit ihren Abhängigkeiten zu versorgen
+\end_layout
+
+\begin_layout Itemize
+Aus diesem Grund stellt unity wege bereit, wie das Script seine Abhängigkeiten
+ auflösen kann
 \end_layout
 
 \begin_layout Section
