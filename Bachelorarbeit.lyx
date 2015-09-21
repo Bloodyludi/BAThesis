@@ -2766,6 +2766,13 @@ name "fig:Beispiel-von-Property"
 
 \begin_layout Subsection
 Composition Root
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Composition-Root"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4666,6 +4673,78 @@ Polymorphismus kann trotzdem genutzt werden
 Dependency Injection in Unity3D
 \end_layout
 
+\begin_layout Standard
+Aus dem Fazit des letzten Kapitels geht hervor, dass keine der in Unity
+ zur Verfügung stehenden Kommunikationsmechanismen den gewünschten Ansprüchen
+ entsprechen.
+ Das Ziel lose Kopplung in Unity umzusetzen, besteht weiterhin.
+ Weiter wurde im letzten Kapitel festgestellt, das Unity Programmierer in
+ vieler Hinsicht einschränkt.
+ Unter Anderem ist die Kontrolle über die Komposition von Objekten bereits
+ invertiert.
+ In diesem Kapitel soll beschrieben werden, wie es dennoch ermöglich wurde
+ Dependency Injection in Unity umzusetzen.
+ 
+\end_layout
+
+\begin_layout Section
+Automating Dependency Injection
+\end_layout
+
+\begin_layout Standard
+In Abschnitt 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Composition-Root"
+
+\end_inset
+
+ wurde verdeutlicht, wie Dependency Injection 
+\begin_inset Quotes gld
+\end_inset
+
+per Hand
+\begin_inset Quotes grd
+\end_inset
+
+ angewendet werden kann.
+ Benötigte Instanzen werden manuell im Composition Root instanziiert.
+ In dem gezeigten Beispiel war dies noch sehr überschaubar.
+ In einer echten Anwendung entstehen jedoch schnell komplexe Abhängigkeitshierar
+chien, die eine Dependency Injection von Hand unübersichtlich und fehleranfällig
+ machen.
+ Aus diesem Grund wird sich oft dazu entschlossen, die Auflösung von Abhängigkei
+ten zu automatisieren.
+ 
+\end_layout
+
+\begin_layout Standard
+In Unity ist diese Automatisierung sogar notwendig.
+ Die Kontrolle über die Erstellung von Komponenten liegt in den Händen von
+ Unity.
+ Es ist nicht möglich Komponenten über den Konstruktor mit ihren Abhängigkeiten
+ zu versorgen.
+ Es existiert kein klarer Einstiegspunkt in die Anwendung der es ermöglichen
+ würde Komponenten von aussen mit ihren Abhängigkeiten zu versorgen.
+ Beim laden einer Szene werden alle sich in ihr befindlichen Spielobjekte
+ instanziiert.
+\end_layout
+
+\begin_layout Standard
+Die Kontrolle über die Komposition von Objekten soll an einen sogenannten
+ Inversion Of Control Container abgegeben werden.
+ Im Composition Root wird vom Nutzer lediglich die Konfiguration des Containers
+ vorgenommen.
+ Die zu instanziierenden Typen werden registriert.
+ Der Container kümmert sich um alles weitere: Er versorgt alle Klassen mit
+ ihren registrierten konkreten Abhängigkeiten und managt die Lebenszeit
+ aller Objekte.
+ Im Folgenden wird eine Möglichkeit der Implementation eines Inversion Of
+ Control Containers in Unity beschrieben.
+ Dabei soll besonders darauf eingegangen werden, wo aufgrund von Unitys
+ Architektur einschränkungen gemacht werden müssen.
+\end_layout
+
 \begin_layout Itemize
 Die Kontrolle über die Komposition von Objekten ist bereits invertiert,
  Sie liegt in den Händen von Unity
@@ -4701,11 +4780,11 @@ Aus diesem Grund stellt unity wege bereit, wie das Script seine Abhängigkeiten
 \end_layout
 
 \begin_layout Section
-Automating Dependency Injection
+Umsetzung eines Inversion Of Control Containers für Unity3D
 \end_layout
 
-\begin_layout Section
-Umsetzung eines Dependency Injection Containers für Unity3D
+\begin_layout Standard
+In diesem Teil soll sich
 \end_layout
 
 \begin_layout Subsection
