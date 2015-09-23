@@ -4832,10 +4832,6 @@ http://docs.unity3d.com/Manual/class-ScriptExecution.html
 \end_layout
 
 \begin_layout Standard
-
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -5114,7 +5110,7 @@ Container
 \end_layout
 
 \begin_layout Subsubsection
-Transient (Default-Scope)
+Register Transient (Default-Scope)
 \end_layout
 
 \begin_layout Standard
@@ -5130,7 +5126,7 @@ Wird eine Klasse beim Container mit der Lebensdauer Transient registriert,
 \end_layout
 
 \begin_layout Subsubsection
-Singleton
+Register Singleton
 \end_layout
 
 \begin_layout Standard
@@ -5284,6 +5280,559 @@ reference "fig:Minimales-IBinder-Interface"
 
 \begin_layout Subsection
 Implementation des Dependency Injection Containers
+\end_layout
+
+\begin_layout Standard
+Die Implementation beginnt mit der Erstellung der Klasse Binder, die das
+ IBinder Interface implementiert.
+ Um eine grundlegende Typregistrierung vornehmen zukönnen, müssen die Zuordnunge
+n abgespeichert werden.
+\end_layout
+
+\begin_layout Subsubsection
+Registrieren und Speichern von Typzuordnungen
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public class Binder : IBinder
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	private readonly IDictionary<Type, Type> transientMap = new Dictionary<Type,
+ Type>();
+\end_layout
+
+\begin_layout Plain Layout
+
+	private readonly IDictionary<Type, object> singletonMap = new Dictionary<Type,
+ object>();
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	public void RegisterTransient<TInter, TClass>() where TClass : class, TInter
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		transientMap[typeof(TInter)] = typeof(TClass);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	public void RegisterInstance<TInter, TClass>(TClass instance = null) where
+ TClass : class, TInter
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		//Eager instantiation of Singleton Objects
+\end_layout
+
+\begin_layout Plain Layout
+
+		if (instance == null)
+\end_layout
+
+\begin_layout Plain Layout
+
+		{
+\end_layout
+
+\begin_layout Plain Layout
+
+			instance = (TClass)Instantiate(typeof(TClass));
+\end_layout
+
+\begin_layout Plain Layout
+
+		}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		singletonMap[typeof(TInter)] = instance;
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	private object Instantiate(Type type)
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		//...
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	//...
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+RegisterMappings in Binder.cs
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:RegisterMappings"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:RegisterMappings"
+
+\end_inset
+
+ zeigt die Implementation der beiden Register-Methoden in Binder.cs.
+ Um die Registrierung abzuspeichern werden zwei Dictionaries als Datenstruktur
+ verwendet.
+ Dabei werden in beiden Methoden die Abstraktionen als Schlüssel verwendet.
+ Der Unterschied zwischen Transient und Singleton besteht in der Speicherung
+ der Datenwerte: Bei der Registrierung als Transient wird der Typ der konkreten
+ Klasse als Wert in der transientMap abgespeichert.
+ Bei der Registrierung eines Singletons wird eine konkrete Instanz der Klasse
+ gespeichert.
+ Diese Instanz kann als Parameter übergeben werden.
+ Wie man sehen kann ist es nicht zwingend notwendig eine Instanz bereitzustellen.
+ Für diesen Fall wurde sich dazu entschieden, direkt eine eager Intantiation
+ vorzunehmen.
+ Die Implementation der Instantiate-Methode wird zu einem späteren Zeitpunkt
+ in dieser Arbeit erklärt.
+\end_layout
+
+\begin_layout Subsubsection
+Implementation der Resolve-Methode
+\end_layout
+
+\begin_layout Standard
+Wie in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Implementation-Resolve"
+
+\end_inset
+
+ zu sehen ist, delegiert die generische Resolve-Methode ihren Aufruf an
+ eine nicht-generische Version.
+ Diese prüft zunächst ob eine Instanz in der Singleton-Registrierung vorliegt
+ und gibt diese zurück.
+ Ist der Typ jedoch als Transient registriert, so soll eine Instanz des
+ in der transientMap registrierten konkreten Typs erstellt werden.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public T Resolve<T>()
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	var type = typeof(T);
+\end_layout
+
+\begin_layout Plain Layout
+
+	return (T)Resolve(type);
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+private object Resolve(Type type)
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	object instance;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	if (singletonMap.ContainsKey(type))
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		instance = singletonMap[type];
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+	else if (transientMap.ContainsKey(type))
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		instance = Instantiate(transientMap[type]);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+	else
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		throw new Exception("Couldn't resolve binding for " + type);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	return instance;
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Implementation der Resolve-Methode
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Implementation-Resolve"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Instanziieren von Klassen basierend auf Typinformationen
+\end_layout
+
+\begin_layout Standard
+Die tatsächliche Erstellung von Objekten übernimmt die Instantiate-Methode
+ in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Instantiate-Methode"
+
+\end_inset
+
+ der Klasse Binder.
+ Unter Vorgabe eines konkreten Typs eine Instanz dieses Typs gelierfert
+ werden.
+ Die Methode nutzt eine Methode namens CreateInstance der Systemklasse Activator.
+ Es sind jedoch noch weitere Informationen über die Klasse notwendig.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+private object Instantiate(Type type)
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	object instance;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	var constructor = GetConstructor(type);
+\end_layout
+
+\begin_layout Plain Layout
+
+	if (constructor != null)
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		var paramInfos = constructor.GetParameters();
+\end_layout
+
+\begin_layout Plain Layout
+
+		var paramInstances = ResolveParameters(paramInfos);
+\end_layout
+
+\begin_layout Plain Layout
+
+		instance = Activator.CreateInstance(type, paramInstances);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+	else
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		instance = Activator.CreateInstance(type);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	InjectProperties(instance);
+\end_layout
+
+\begin_layout Plain Layout
+
+	return instance;
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Instantiate-Methode in Binder.cs
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Instantiate-Methode"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
