@@ -5078,7 +5078,124 @@ Container
 \end_layout
 
 \begin_layout Subsection
-Implementierung der Typregistrierung des Binders
+Aufgaben eines Dependency Injection Containers
+\end_layout
+
+\begin_layout Standard
+Bevor mit der Implementierung des Binders begonnen werden kann, müssen zunächst
+ dessen grundlegenden Aufgaben erläutert werden.
+ Die Hauptaufgabe eines Dependency Injection Containers ist die Erstellung
+ von Objekten.
+ Hierfür muss dem Container bekannt sein, wie der Objekt Graph der Anwendung
+ aufzulösen ist.
+ Dem Nutzer des Containers muss es folglich ermöglicht werden, ihn zu Konfigurie
+ren: Er muss auswählen können, welche konkreten Implementationen einer Abstrakti
+on injektziert werden sollen.
+ Die Register-Methoden bilden diese Funktionalität ab.
+\end_layout
+
+\begin_layout Standard
+Mit der Aufgabe der Erstellung von Objekten, geht eine weitere Aufgabe einher:
+ Die Kontrolle über die Lebensdauer der Objekte.
+ Der Container muss bestimmen wann eine Instanz eines Objektes erstellt
+ werden soll und wann diese nicht mehr gebraucht wird.
+ Hierfür ist es für den Container wichtig den Sichtbarkeitsbereich (Scope)
+ eines Objektes zu kennen.
+ Der Sichtbarkeitsbereich beschreibt Im 
+\begin_inset Quotes gld
+\end_inset
+
+Container
+\begin_inset Quotes grd
+\end_inset
+
+-Framework soll sich auf zwei Arten des Sichtbarkeitsbereiches beschränkt
+ werden: Transient und Singleton.
+\end_layout
+
+\begin_layout Subsubsection
+Transient (Default-Scope)
+\end_layout
+
+\begin_layout Standard
+Wird eine Klasse beim Container mit der Lebensdauer Transient registriert,
+ so wird dieser bei jeder Anfrage zur Auflösung eine neue Instanz des Typs
+ liefern.
+ Instanzen können unabhängig voneinander Zustand halten.
+ Aus diesem Grund ist Transient die sicherste Variante der Sichtbarkeitsbereiche.
+ Sollte es beispielsweise Zweifel an der Threadsicherheit einer Klasse geben,
+ sollte diese als Transient registriert werden.
+ Die Möglichkeit Klassen als Transient zu registrieren, soll vom Container
+ in der Methode RegisterTransient implementiert werden.
+\end_layout
+
+\begin_layout Subsubsection
+Singleton
+\end_layout
+
+\begin_layout Standard
+Im Gegensatz zu Transient wird bei der Singleton Lebensdauer bei jeder Anfrage
+ zur Auflösung eines Typs die selbe Instanz geliefert.
+ Zur Registrierung eines Objektes mit Singleton Lebensdauer soll die Methode
+ RegisterInstance dienen.
+ Genauso wie beim Singleton Entwurfsmuster kann die Instanz entweder Eager
+ oder Lazy instanziiert werden.
+ 
+\end_layout
+
+\begin_layout Standard
+Die Singleton Lebensdauer sollte nicht mit dem Singleton Entwurfsmuster
+ verwechselt werden: Ein Container liefert immer die selbe Instanz eines
+ Typs, jedoch verwendet er im Gegensatz zum Singleton Entwurfsmuster hierzu
+ keine statische Membervariable.
+ Der Sichtbarkeitsbereich eines als Singleton registrierten Typs ist der
+ des Containers an dem er registriert wurde.
+ Durch die Definition von mehr als einem Context, ist möglich mehrere Container
+ zu verwenden.
+ Somit ist es auch möglich, dass unterschiedliche Container eine unterschiedlich
+e Instanz liefern.
+\end_layout
+
+\begin_layout Subsubsection
+Resolve
+\end_layout
+
+\begin_layout Standard
+Analog zu den Register-Methoden liefert die Methode Resolve eine zuvor registrie
+rte Instanz eines Typs.
+ Mit dieser Instanz soll auch ihr gesamter Abhängigkeitsgraph instanziiert
+ werden.
+ In den meisen Fällen genügt ein einmaliger Aufruf der Resolve-Methode für
+ das Root-Objekt des Object Graphs.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Release
+\end_layout
+
+\begin_layout Standard
+Üblicherweise gehört zu dem Management der Lebensdauer eines Objektes, zu
+ bestimmen was mit Objekten geschieht die sich ausserhalb des Sichtbarkeitsberei
+ches befinden.
+ Mit dem Aufruf einer Release-Methode soll der Speicherbereich eines nicht
+ mehr benötigten Objekts korrekt freigegeben werden.
+ In .NET ist dies jedoch in den meisten Fällen nicht nötig da ein Objekt,
+ welches nicht mehr referenziert wird, vom Garbage-Collector entfernt wird.
+ Aus diesem Grund wurde beim 
+\begin_inset Quotes gld
+\end_inset
+
+Container
+\begin_inset Quotes grd
+\end_inset
+
+-Framework wurde auf die Implementierung einer Release-Methode verzichtet.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Das Interface des DI Containers
 \end_layout
 
 \begin_layout Standard
@@ -5104,23 +5221,18 @@ public interface IBinder
 
 \begin_layout Plain Layout
 
-	void Bind<TInter, TClass>() where TClass : class, TInter;
+	void RegisterTransient<TInter, TClass>() where TClass : class, TInter;
 \end_layout
 
 \begin_layout Plain Layout
 
-	void BindToInstance<TInter, TClass>(TClass instance = null) where TClass
+	void RegisterInstance<TInter, TClass>(TClass instance = null) where TClass
  : class, TInter;
 \end_layout
 
 \begin_layout Plain Layout
 
 	T Resolve<T>();
-\end_layout
-
-\begin_layout Plain Layout
-
-	Release<T>();
 \end_layout
 
 \begin_layout Plain Layout
@@ -5138,7 +5250,9 @@ public interface IBinder
 
 \begin_layout Plain Layout
 Minimales IBinder Interface
-\end_layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Minimales-IBinder-Interface"
 
 \end_inset
 
@@ -5148,6 +5262,28 @@ Minimales IBinder Interface
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Aus den beschriebenen Aufgaben ergibt sich das in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Minimales-IBinder-Interface"
+
+\end_inset
+
+ gezeigte Interface des zu implementierenden DI Containers.
+ Im nächsten Abschnitt wird die konkrete Implementation der Klasse Binder
+ beschrieben.
+\end_layout
+
+\begin_layout Subsection
+Implementation des Dependency Injection Containers
 \end_layout
 
 \begin_layout Subsection
