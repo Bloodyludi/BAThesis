@@ -3375,6 +3375,13 @@ ten Abhängigkeiten aufzulösen es ermöglichen lose Kopplung zwischen Komponent
 
 \begin_layout Subsection
 Referenzieren von anderen MonoBehaviours
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Referenzieren"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -5696,6 +5703,15 @@ reference "fig:Instantiate-Methode"
  werden.
  Die Methode nutzt eine Methode namens CreateInstance der Systemklasse Activator.
  Es sind jedoch noch weitere Informationen über die Klasse notwendig.
+ Dies ist zum einen der zu verwendende Konstruktor der Klasse mitsamt seinen
+ Parametern und zum Anderen Porperties in die Abhängigkeiten injektziert
+ werden sollen.
+ Über die GetConstructor-Methode erhält der Containter Informationen über
+ den Konstruktor den er zur Erstellung des Objektes nutzen soll.
+ Dieser kann vom Nutzer des Containers spezifiziert werden.
+ Um zu beschreiben, wie dies genau von statten geht, müssen zunächst die
+ zwei Sprachfeatures von C# die diese Funkionalität ermöglichen, vorgestellt
+ werden: Attributes und Reflection.
 \end_layout
 
 \begin_layout Standard
@@ -5775,6 +5791,11 @@ private object Instantiate(Type type)
 
 \begin_layout Plain Layout
 
+		//No constructor defined, use the default constructor
+\end_layout
+
+\begin_layout Plain Layout
+
 		instance = Activator.CreateInstance(type);
 \end_layout
 
@@ -5835,12 +5856,693 @@ name "fig:Instantiate-Methode"
 
 \end_layout
 
-\begin_layout Subsection
-Reflection
+\begin_layout Subsubsection
+Attribute
 \end_layout
 
-\begin_layout Subsection
-Einschränkungen
+\begin_layout Standard
+Mittels Attributen lassen sich Metadaten für Programmcodeelemente definieren.
+ Diese Metadaten sind Informationen, die von der Anwendung zur Laufzeit
+ ausgewertet werden können.
+ Es können praktisch alle Elemente des Programmcodes mit Metadaten versehen
+ werden: Assemblys, Klassen, Methoden, Eigenschaften usw.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+https://msdn.microsoft.com/de-de/library/z0w1kczw.aspx
+\end_layout
+
+\end_inset
+
+ Ein Beispiel ist das bereits in Abschnitt 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Referenzieren"
+
+\end_inset
+
+ gezeigte SerializeField-Attribut.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Verwendung-Attribute"
+
+\end_inset
+
+ zeigt eine Membervariable, der das SerializeField-Attribut zugewiesen wurde.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+[SerializeField]
+\end_layout
+
+\begin_layout Plain Layout
+
+private Text sampleWithAttribute;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Beispiel für die Verwendung eines Attributes
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Verwendung-Attribute"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Für den DI Container sind im Grunde zwei Metadaten einer Klasse relevant:
+ Ihm muss bekannt sein welcher Konstruktor zur Instanziierung eines Objektes
+ verwendet werden soll und in welche Properties Abhängigkeiten injektziert
+ werden sollen.
+ Es ist ausreichend ein einziges benutzerdefiniertes Attribut zu definieren,
+ um beide Funktionalitäten abzubilden.
+ Bei der späteren Auswertung des Attributes kann geprüft werden, ob sich
+ dieses an einem Konstruktor oder einem Property befindet und dementsprechend
+ gehandelt werden.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Definition-des-Inject-Attributs"
+
+\end_inset
+
+ zeigt die Erstellung des InjectAttribute-Attributes.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+[AttributeUsage(AttributeTargets.Property | AttributeTargets.Constructor)]
+\end_layout
+
+\begin_layout Plain Layout
+
+public class InjectAttribute : Attribute
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Definition des Inject-Attributs
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Definition-des-Inject-Attributs"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Es wird zunächst eine Klasse definiert, die von der Klasse Attribute ableitet.
+ Um die Gültigkeit des Attributes festzulegen, wird die Klasse selbst mit
+ einem AttributeUsage-Attribut gekennzeichnet.
+ Im Fall des Inject-Attributs wird die Gültigigkeit auf Properties und Konstrukt
+oren beschränkt.
+ Bei der Verwenung entspricht der Attributname dem Klassennamen des Attributs.
+ Die Endung Attribute kann weggelassen werden.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Verwendungmöglichkeiten"
+
+\end_inset
+
+ zeigt die gültigen Verwendungmöglichkeiten des Inject-Attributes.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public class SampleClass
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	//Alternativ [InjectAttribute]
+\end_layout
+
+\begin_layout Plain Layout
+
+	[Inject]
+\end_layout
+
+\begin_layout Plain Layout
+
+	public ISomeProperty property { get; set; }
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	[Inject]
+\end_layout
+
+\begin_layout Plain Layout
+
+	public SampleClass(ISomeDependency first, IAnotherDependency second)
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		//...
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Verwendungmöglichkeiten des Inject-Attributes
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Verwendungmöglichkeiten"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Reflektion
+\end_layout
+
+\begin_layout Standard
+Der Zugriff auf die mit dem Inject-Attribut gekennzeichneten Attribute erfolgt
+ mittels Reflektion.
+ Reflektion ermöglicht das Auslesen und Auswerten von Metadaten eines Assemblys
+ oder Typs zur Laufzeit.
+ Metadaten werden über die System.Type-Klasse abgebildet.
+ Diese wurde bereits an einigen Stellen zur Implementation des Containers
+ verwendet.
+ Es wurde also genaugenommen bereits Reflektion eingesetzt.
+ 
+\end_layout
+
+\begin_layout Standard
+Bei der Implementation des Containers wird an zwei Stellen intensiver Zugriff
+ auf die Typinformationen des zu instanziierenden Objekts benötigt.
+ Als erstes muss mittels Reflektion herausgefunden werden, welcher Konstruktor
+ zur Instanziierung genutzt werden soll.
+ Diese Funktionalität wird von der Methode GetConstructor in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Zugriff-auf-Typinformationen"
+
+\end_inset
+
+ implmentiert.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+private ConstructorInfo GetConstructor(Type type)
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	var constructors = type.GetConstructors();
+\end_layout
+
+\begin_layout Plain Layout
+
+	ConstructorInfo constructor;
+\end_layout
+
+\begin_layout Plain Layout
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	if (constructors.Length == 1)
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		constructor = constructors[0];
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+	else
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		constructor = constructors.Single(x => Attribute.IsDefined(x, typeof(InjectAttri
+bute)));
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	return constructor;
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Zugriff auf Typinformationen mittels Reflektion in der Methode GetConstructor
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Zugriff-auf-Typinformationen"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Methode GetConstructors der Klasse Type liefert Informationen zu allen
+ definierten Konstruktoren einer Klasse.
+ Um den gewünschten, mit dem Inject-Attribut gekennzeichneten Konstruktor
+ zu erhalten, wird über die vorhandenen Konstruktoren iteriert und der gewünscht
+e Konstruktor mithilfe der statischen Methode IsDefined der Klasse Attribute
+ identifiziert.
+ Existiert nur ein einziger Konstruktor für einen Typ, muss dieser nicht
+ explizit mit dem Inject-Attribut gekennzeichnet werden, um vom Container
+ zu Instanziierung genutzt zu werden.
+\end_layout
+
+\begin_layout Standard
+Betrachtet man die Instantitate-Methode in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:Instantiate-Methode"
+
+\end_inset
+
+ ein weiteres Mal, stellt man fest, dass bevor die tatsächliche Instanziierung
+ über den Konstruktor vorgenommen wird, zunächst alle Parameter instanziiert
+ werden müssen.
+ Diese Aufgabe übernimmt die Methode ResolveParameters aus Abbildung 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:Auflösen-Konstruktorparameter"
+
+\end_inset
+
+.
+ Es wird über die Parameterinformationen des Konstruktors iterriert und
+ alle Parameter der Reihe nach instanziiert.
+ Dies geschieht über einen rekursiven Aufruf der Resolve-Methode.
+ Somit ist es Vorraussetzung, dass alle Typen der Konstruktorparameter zuvor
+ bei dem Container registriert wurden.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+private object[] ResolveParameters(ParameterInfo[] parameterInfos)
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	var parameters = new object[parameterInfos.Length];
+\end_layout
+
+\begin_layout Plain Layout
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	for (int i = 0; i < parameters.Length; i++)
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		var parameterInfo = parameterInfos[i];
+\end_layout
+
+\begin_layout Plain Layout
+
+		parameters[i] = Resolve(parameterInfo.ParameterType);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	return parameters;
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Auflösen der Konstruktorparameter durch die ResolveParameters-Methode
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Auflösen-Konstruktorparameter"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Nach der Instanziierung eines Typs, ist es notwendig die Klasse mit Abhängigkeit
+en die in Form von Properties vorliegen zu versorgen.
+ Die Methode InjectProperties, gezeigt in der Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Auflösen-von-Properties"
+
+\end_inset
+
+, bildet diese Funktionalität des Containers ab.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public void InjectProperties(object instance)
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	var type = instance.GetType();
+\end_layout
+
+\begin_layout Plain Layout
+
+	var injectProperties = type.GetProperties().Where(prop => Attribute.IsDefined(prop
+, typeof(InjectAttribute))).GetEnumerator();
+\end_layout
+
+\begin_layout Plain Layout
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	while (injectProperties.MoveNext())
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		var property = injectProperties.Current;
+\end_layout
+
+\begin_layout Plain Layout
+
+		var binding = Resolve(property.PropertyType);
+\end_layout
+
+\begin_layout Plain Layout
+
+		property.SetValue(instance, binding, null);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Auflösen von Properties durch die InjectProperties-Methode
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Auflösen-von-Properties"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
