@@ -6443,6 +6443,12 @@ reference "fig:Auflösen-von-Properties"
 \end_inset
 
 , bildet diese Funktionalität des Containers ab.
+ In diesem Fall werden Informationen zu Properties mit dem Inject-Attribut
+ über die Methode GetProperties der Klasse Type geliefert.
+ Im nächsten Schritt wird über die PropertyInfos iteriert und mittels Aufruf
+ der Resolve-Methode eine Instanz des Properties geholt.
+ Diese Instanz wird danach dem Property des Objektes mittels SetValue-Methode
+ zugewiesen.
 \end_layout
 
 \begin_layout Standard
@@ -6473,17 +6479,18 @@ public void InjectProperties(object instance)
 
 \begin_layout Plain Layout
 
-	var injectProperties = type.GetProperties().Where(prop => Attribute.IsDefined(prop
-, typeof(InjectAttribute))).GetEnumerator();
+	var propertyInfos = type.GetProperties().Where(prop => Attribute.IsDefined(prop,
+ typeof(InjectAttribute))).GetEnumerator();
 \end_layout
 
 \begin_layout Plain Layout
+
 	
 \end_layout
 
 \begin_layout Plain Layout
 
-	while (injectProperties.MoveNext())
+	while (propertyInfos.MoveNext())
 \end_layout
 
 \begin_layout Plain Layout
@@ -6493,17 +6500,17 @@ public void InjectProperties(object instance)
 
 \begin_layout Plain Layout
 
-		var property = injectProperties.Current;
+		var propertyInfo = propertyInfos.Current;
 \end_layout
 
 \begin_layout Plain Layout
 
-		var binding = Resolve(property.PropertyType);
+		var propertyInstance = Resolve(propertyInfo.PropertyType);
 \end_layout
 
 \begin_layout Plain Layout
 
-		property.SetValue(instance, binding, null);
+		propertyInfo.SetValue(instance, propertyInstance, null);
 \end_layout
 
 \begin_layout Plain Layout
@@ -6543,6 +6550,17 @@ name "fig:Auflösen-von-Properties"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Damit ist die grundlegende Implementation des Containers abgeschlossen.
+ Zur optimalen Zusammenarbeit mit Unity sollten jedoch noch einige Erweiterungen
+ vorgenommen werden.
+ Diese Erweiterungen sollen im folgenden Abschnitt beschrieben werden.
+\end_layout
+
+\begin_layout Subsection
+Erweiterungsmöglichkeiten des Containers
 \end_layout
 
 \begin_layout Section
