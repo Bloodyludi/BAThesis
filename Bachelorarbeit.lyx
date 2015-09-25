@@ -4812,6 +4812,13 @@ en, beschrieben werden.
 
 \begin_layout Subsection
 Definieren des Composition Roots
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Definieren-des-Composition"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6709,7 +6716,7 @@ public static class ServiceLocator
 
 \begin_layout Plain Layout
 
-		binder.Resolve<T>();
+		return binder.Resolve<T>();
 \end_layout
 
 \begin_layout Plain Layout
@@ -6790,6 +6797,613 @@ Jedoch ermöglicht der Service Locator die Auflösung von Abhängigkeiten eines
  Das Problem ist jedoch, dass der Service Locator, aufgrund der globalen
  Sichtbarkeit als statische Klasse, von unwissenden Programmierern auch
  in anderen Bereichen genutzt werden kann.
+ Im folgenden sollen zwei weitere Möglichkeiten vergestellt werden, mit
+ denen sich Abhängigkeiten eines MonoBehaviours lassen.
+ Alle haben ihre Vor- und Nachteile.
+ Der Service Locator ist die einfachste, aber zugleich auch die am wenigsten
+ elegante Lösung des Problems.
+\end_layout
+
+\begin_layout Subsubsection
+\begin_inset Quotes gld
+\end_inset
+
+Inject
+\begin_inset Quotes grd
+\end_inset
+
+-Event als MonoBehaviour-Extension
+\end_layout
+
+\begin_layout Standard
+Die Grundidee dieser Methode ist, dem Container über einen Event bescheid
+ zu geben, dass ein MonoBehaviour in der Szene erstellt wurde und dessen
+ Abhängigkeiten aufgelöst werden müssen.
+ Hierzu wird die Klasse MonoBehaviour mit der in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Erweiterungsmethode"
+
+\end_inset
+
+ gezeigten Extension erweitert.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public static class MonoInjectionExtension
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	public static void Inject(this MonoBehaviour script)
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		ExecuteEvents.ExecuteHierarchy<IMonoInjectionHandler>(script.gameObject,
+ null, (target, data) => target.InjectDependencies(script));
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Erweiterungsmethode für MonoBehaviours
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Erweiterungsmethode"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Mittels der ExecuteHierarchy-Methode der Klasse ExecuteEvents wird ein Event
+ in der Hierarchie nach oben gesendet.
+ Das Event soll vom Composition Root entegengenommen werden, damit dieser
+ die Aufllösung der Abhängigkeiten an den Container delegieren kann.
+ Dazu muss CompositionRoot das für diesen Fall erstellte IMonoInjectionHandler-I
+nterface implementieren.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:IMonoInjectionHandler"
+
+\end_inset
+
+ zeigt das Interface IMonoInjectionHandler und dessen Implementation vom
+ Composition Root.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public interface IMonoInjectionHandler : IEventSystemHandler
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	void InjectDependencies(MonoBehaviour script);
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+public abstract class CompositionRoot : IMonoInjectionHandler
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	//...
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	public void InjectDependencies(MonoBehaviour script)
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		container.InjectProperties(script);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Implementation von IMonoInjectionHandler
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:IMonoInjectionHandler"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Bei dieser Methode is zu Beachten, dass alle Spielobjekte im Szenengraph
+ Kindknoten des Composition Roots sein müssen.
+ Jedes MonoBehaviour muss im Start-Event explizit die Inject-Erweiterungsmethode
+ aufrufen, damit die Abhängigkeiten vom Container aufgelöst werden.
+ Dies könnte bereits im Awake-Event geschehen, da durch das Festlegen der
+ Script Execution Order in Abschnitt 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Definieren-des-Composition"
+
+\end_inset
+
+ gewährleistet wurde, dass der Composition-Root den Container bereits initialisi
+ert hat.
+ Instanziiert man jedoch ein Spielobjekt zur Laufzeit, so muss der Composition
+ Root unmittelbar darauf als Elternelement festgelegt werden.
+ Es ist nicht möglich ein Spielobjekt direkt als Kindelement eines anderen
+ Spielobjekts zu instanziieren.
+ Zum Aurufzeitpunkt der Awake-Methode hat noch kein Parenting stattgefunden,
+ auch wenn dies unmittelbar nach Instanziierung geschieht.
+ Demzufolge sollte die Inject-Methode im Start-Event des MonoBehaviours
+ aufgerufen werden.
+\end_layout
+
+\begin_layout Standard
+Bei Verwendung der beschriebenen Methode ist es nötig, dass der Nutzer des
+ Containers sich strikt an die beschriebenen Anweisungen hält.
+ Ein Aufruf der Inject-Methode muss im Start-Event erfolgen.
+ Alle Spielobjekte müssen Kindobjekte des Composition Roots sein.
+ Nachfolgend soll eine letzte Möglichkeit vorgestellt werden, die dem Nutzer
+ weniger Verantwortung abverlangt.
+\end_layout
+
+\begin_layout Subsubsection
+Auflösung des Szenegraphs und Factories
+\end_layout
+
+\begin_layout Standard
+Bei dieser Methode wird die Auflösung von Abhängigkeiten von MonoBehaviours
+ in zwei Teile unterteilt.
+ Durch den ersten Teil werden bereits in der Szene existierende MonoBehaviours
+ mit ihren Abhängigkeiten versorgt.
+ Dies wird bewerkstelligt indem dem CompositionRoot die ResolveScene-Methode
+ hinzugefügt wird.
+ Diese Methode wird im Awake-Event unmittelbar nach der Konfiguration des
+ Containers aufgerufen.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:ResolveScene"
+
+\end_inset
+
+ zeigt die Änderungen an der CompositionRoot-Klasse.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public abstract class CompositionRoot
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	//...
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	protected override void Awake()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		container = new Binder();
+\end_layout
+
+\begin_layout Plain Layout
+
+		SetupBindings();
+\end_layout
+
+\begin_layout Plain Layout
+
+		ResolveScene();
+\end_layout
+
+\begin_layout Plain Layout
+
+		Init();
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	private void ResolveScene()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		foreach (var script in Object.FindObjectsOfType(typeof(MonoBehaviour)))
+\end_layout
+
+\begin_layout Plain Layout
+
+		{
+\end_layout
+
+\begin_layout Plain Layout
+
+			container.InjectProperties(script);
+\end_layout
+
+\begin_layout Plain Layout
+
+		}
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Hinzugefügte ResolveScene-Methode in CompositionRoot.cs
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ResolveScene"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Um die Abhängigkeiten der existierenden MonoBehaviours aufzulösen, wird
+ über alle MonoBehaviours in der Szene iteriert und dem Container mitgeteilt
+ alle Properties zu instanziieren.
+ Durch das Festlegen der Script Execution Order in Abschnitt 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Definieren-des-Composition"
+
+\end_inset
+
+, wird gewährleistet, dass alle sich in der Szene befindenden MonoBehaviours
+ ihre Abhängigkeiten bereits vor dem Aufruf der Awake-Methode erhalten haben.
+\end_layout
+
+\begin_layout Standard
+Weiter muss der Fall berücksichtigt werden, dass Spielobjekte dynamisch
+ zur Laufzeit instanziiert werden können.
+ Unmittelbar nach der Instanziierung müssen die Abhängigkeiten aller MonoBehavio
+urs des Spielobjektes vom Container aufgelöst werden.
+ Damit dies sichergestellt wird und an einem zentralen Ort geschieht, soll
+ hierfür eine Factory implementiert werden.
+ Über diese Factory sollen alle Spielobjekte zur Laufzeit erstellt werden.
+ Das heißt, dass es im Programmcode keine weiteren Aufrufe der Instantiate-Metho
+de der Klasse Object geben darf.
+ Der einzige Aufruf der Instantiate-Methode findet in der Create-Methode
+ der GameObjectFactory-Klasse wie in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:GameObjectFactory"
+
+\end_inset
+
+ dargestellt, statt.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public class GameObjectFactory : IGameObjectFactory
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	//...
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	public GameObject Create(GameObject original)
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		var instance = Object.Instantiate(original);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		foreach (var script in instance.GetComponents<MonoBehaviour>())
+\end_layout
+
+\begin_layout Plain Layout
+
+		{
+\end_layout
+
+\begin_layout Plain Layout
+
+			binder.InjectProperties(script);
+\end_layout
+
+\begin_layout Plain Layout
+
+		}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		return instance;
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	//...
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Ausschnitt GameObjectFactory.cs
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:GameObjectFactory"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Direkt nach dem Instanziieren werden die Properties aller MonoBehaviours
+ vom Container instanziiert.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Injecting MonoBehaviours
+\end_layout
+
+\begin_layout Subsubsection
+Weitere Erweiterungsmöglichkeiten
 \end_layout
 
 \begin_layout Section
