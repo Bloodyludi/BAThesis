@@ -6204,6 +6204,7 @@ private ConstructorInfo GetConstructor(Type type)
 \end_layout
 
 \begin_layout Plain Layout
+
 	
 \end_layout
 
@@ -6249,6 +6250,7 @@ bute)));
 \end_layout
 
 \begin_layout Plain Layout
+
 	
 \end_layout
 
@@ -6357,6 +6359,7 @@ private object[] ResolveParameters(ParameterInfo[] parameterInfos)
 \end_layout
 
 \begin_layout Plain Layout
+
 	
 \end_layout
 
@@ -6561,6 +6564,232 @@ Damit ist die grundlegende Implementation des Containers abgeschlossen.
 
 \begin_layout Subsection
 Erweiterungsmöglichkeiten des Containers
+\end_layout
+
+\begin_layout Standard
+Damit bessere Zusammenarbeit des Containers mit Unity gewährleistet werden
+ kann, sollten noch ein paar Erweiterungen an diesem vorgenommen werden.
+ Es gibt beispielsweise derzeit keine Möglichkeit Abhängigkeiten in MonoBehaviou
+rs zu injekzieren.
+\end_layout
+
+\begin_layout Subsubsection
+Injecting into MonoBehaviours
+\end_layout
+
+\begin_layout Standard
+Wie bereits in den vorigen Abschnitten festgestellt, übernimmt Unity selbst
+ die Verantwortung über die Erstellung von MonoBehaviours.
+ Es folglich keinen Konstruktor über den Abhängigkeiten aufgelöst werden
+ können.
+ Es muss sich auf Property-Injection beschränkt werden.
+ Dabei ist zu berücksichtigen, dass MonoBehaviours bereits in der Szene
+ existieren, bevor die Awake Methode des Composition Roots aufgerufen wird.
+ Desweiteren können Spielobjekte und MonoBehaviours auch zur Laufzeit instanziie
+rt werden.
+ In beiden Fällen muss es ermöglicht werden, dass diese ihre Abhängigkeiten
+ erhalten.
+ Im Folgenden sollen drei Ansätze hierfür erläutert werden: Das Verwenden
+ des Containers als Service Locator, Factories und ExecuteEvents als MonoBehavio
+ur-Extension.
+\end_layout
+
+\begin_layout Subsubsection
+Service Locator
+\end_layout
+
+\begin_layout Standard
+Eine mögliche Lösung für das Problem ist die Verwendung des Containers als
+ Service Locator.
+ Bei einem ServiceLocator handelt es sich um einen statischen Wrapper für
+ den Container.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Implementation-Service-Locator"
+
+\end_inset
+
+ zeigt eine mögliche Implementation des Service Locator Patterns unter Verwendun
+g der Binder-Klasse.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public static class ServiceLocator
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	private static readonly IBinder binder = new Binder();
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	public static void RegisterTransient<TInter, TClass>() where TClass : class,
+ TInter
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		binder.RegisterTransient<TInter, TClass>();
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	public static void RegisterInstance<TInter, TClass>(TClass instance = null)
+ where TClass : class, TInter
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		binder.RegisterInstance<TInter, TClass>(instance);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	public static T Resolve<T>()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		binder.Resolve<T>();
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Implementation des Service Locators
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Implementation-Service-Locator"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Konfiguration des ServiceLocators würde, wie die des Containers, in
+ der zuvor definierten CompositionRoot-Klasse stattfinden.
+ Der Unterschied zwischen einem ServiceLocator und einem DI Container liegt
+ nicht in der Implemenation sondern in der Verwendung.
+ Die Verwendung der Resolve Methode des DI Containers beschränkt sich üblicherwe
+ise auf einen einzigen Aufruf im Composition Root und setzt somit die rekursive
+ Auflösung des gesamten Objektgraphs in Gang.
+ Wird ein Service Locator verwendet, können Abhängigkeiten von überall im
+ Programm durch Aufruf der Resolve-Methode angefordert werden.
+ MonoBehaviours würden also in der Awake-Methode durch Anfrage beim ServiceLocat
+or ihre Abhängigkeiten erhalten.
+ 
+\end_layout
+
+\begin_layout Standard
+Auf den ersten Blick scheinen keine Vorteile bei der Verwendung des Service
+ Locators verloren zu gehen: Abhängigkeiten sind lose gekoppelt, die Programmier
+ung im parallelen ist gewährleistet und Testbarkeit ist durch Konfiguration
+ des Service Locators in der Testumgebung möglich.
+ Trotzdem wird der Service Locator oft als Anti-Pattern angesehen.
+ Klassen haben eine unnötige konkrete Abhängigkeit an den Service Locator.
+ Die Klasse wird explizit für eine Verwendung mit dem Service Locator implementi
+ert.
+ Von Aussen ist es nicht sichtbar, dass die Klasse andere Abhängigkeiten
+ hat.
+ Es kann keine Aussage darüber getroffen werden, welche Abhängigkeiten notwendig
+ sind, damit eine Klasse funktioniert.
+ 
+\end_layout
+
+\begin_layout Standard
+Jedoch ermöglicht der Service Locator die Auflösung von Abhängigkeiten eines
+ MonoBehaviours.
+ Die Verwendung des ServiceLocators kann auf MonoBehaviours reduziert werden
+ und in diesem Fall als notwendig angesehen werden.
+ Das Problem ist jedoch, dass der Service Locator, aufgrund der globalen
+ Sichtbarkeit als statische Klasse, von unwissenden Programmierern auch
+ in anderen Bereichen genutzt werden kann.
 \end_layout
 
 \begin_layout Section
