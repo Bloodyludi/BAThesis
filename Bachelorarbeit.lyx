@@ -1194,6 +1194,14 @@ Zenject
 ADIC
 \end_layout
 
+\begin_layout Itemize
+Suice
+\end_layout
+
+\begin_layout Itemize
+MinMVC
+\end_layout
+
 \begin_layout Standard
 Teil 4
 \end_layout
@@ -7691,7 +7699,7 @@ Weitere Ansatzpunkte zur Erweiterung
 \end_layout
 
 \begin_layout Itemize
-Caching von Reflection Aufrufen
+Caching von Reflection Aufrufen und Performance
 \end_layout
 
 \begin_layout Itemize
@@ -7703,7 +7711,19 @@ Circular Dependencies
 \end_layout
 
 \begin_layout Itemize
-MessagingSystem
+MessagingSystem/Event Bus
+\end_layout
+
+\begin_layout Itemize
+Verschiedene Szenen/Nested Containers
+\end_layout
+
+\begin_layout Itemize
+IDisposable
+\end_layout
+
+\begin_layout Itemize
+Andere Injection Typen
 \end_layout
 
 \begin_layout Itemize
@@ -7714,8 +7734,30 @@ Proof of Concept, es gibt ausgereiftere IoC Container für Unity
 Übersicht Dependency Injection Container für Unity3D
 \end_layout
 
+\begin_layout Standard
+Es existieren bereits eine Reihe von Dependency Injection Containern für
+ Unity.
+ 
+\end_layout
+
+\begin_layout Itemize
+StrangeIoC: http://strangeioc.github.io/strangeioc/
+\end_layout
+
+\begin_layout Itemize
+Zenject: https://github.com/modesttree/Zenject
+\end_layout
+
+\begin_layout Itemize
+ADIC: https://github.com/intentor/adic
+\end_layout
+
+\begin_layout Itemize
+Suice: https://github.com/Disturbing/UnitySuice
+\end_layout
+
 \begin_layout Section
-Funktionsumfang von StrangeIoC unter der Lupe
+MVCS-Architektur in Unity mithilfe von StrangeIoC
 \end_layout
 
 \begin_layout Standard
@@ -7739,7 +7781,7 @@ Kritische Betrachtung & Fazit
 \end_layout
 
 \begin_layout Section
-Alternative Architekturen
+Alternative Architekturen/Aussicht
 \end_layout
 
 \begin_layout Standard
