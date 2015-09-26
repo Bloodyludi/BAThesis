@@ -6570,7 +6570,7 @@ Damit ist die grundlegende Implementation des Containers abgeschlossen.
 \end_layout
 
 \begin_layout Subsection
-Erweiterungsmöglichkeiten des Containers
+Erweiterungen des Containers für die Zusammenarbeit mit Unity
 \end_layout
 
 \begin_layout Standard
@@ -6591,7 +6591,7 @@ Wie bereits in den vorigen Abschnitten festgestellt, übernimmt Unity selbst
  können.
  Es muss sich auf Property-Injection beschränkt werden.
  Dabei ist zu berücksichtigen, dass MonoBehaviours bereits in der Szene
- existieren, bevor die Awake Methode des Composition Roots aufgerufen wird.
+ existieren, bevor die Awake-Methode des Composition Roots aufgerufen wird.
  Desweiteren können Spielobjekte und MonoBehaviours auch zur Laufzeit instanziie
 rt werden.
  In beiden Fällen muss es ermöglicht werden, dass diese ihre Abhängigkeiten
@@ -7154,6 +7154,7 @@ public abstract class CompositionRoot
 \end_layout
 
 \begin_layout Plain Layout
+
 	
 \end_layout
 
@@ -7395,15 +7396,318 @@ name "fig:GameObjectFactory"
 \begin_layout Standard
 Direkt nach dem Instanziieren werden die Properties aller MonoBehaviours
  vom Container instanziiert.
+ Es ist sichergestellt, dass MonoBehaviours zum Start-Event über alle Abhängigke
+iten verfügen.
+ Die GameObjectFactory bietet eine weitere Überladung der Create Methode.
+ Aus Platzgründen wurde diese hier ausgelassen.
+ Mit ihr lassen sich Prefabs anhand ihres Namens im Resource-Ordner instanziiere
+n.
+ Spielobjekte die aus dem Resource-Ordner geladen wurden, werden in einem
+ Cache zwischengespeichert.
  
+\end_layout
+
+\begin_layout Standard
+Bei Verwendung dieser Methode muss der Nutzer des Container Frameworks keine
+ frameworkspezifischen Operationen innerhalb einer MonoBehaviour-Komponente
+ vornehmen.
+ Dem Nutzer muss lediglich bewusst sein, dass er die Klasse GameObjectFactory
+ zur Instanziierung von Spielobjekten zu Laufzeit verwenden muss.
+ Es ist nicht nötig, dass Spielobjekte Kindobjekte des Composition Roots
+ sind, um ihre Abhängigkeiten zu erhalten.
+ Aus diesem Grund ist aus Sicht des Autors, diese Methode den anderen vorzuziehe
+n.
 \end_layout
 
 \begin_layout Subsubsection
 Injecting MonoBehaviours
 \end_layout
 
-\begin_layout Subsubsection
-Weitere Erweiterungsmöglichkeiten
+\begin_layout Standard
+Alle bis jetzt gezeigten Methoden beschreiben wie Abhängigkeiten in MonoBehaviou
+rs injektziert werden können.
+ An dieser Stelle soll beschrieben werden, wie mit Abhängigkeiten zu anderen
+ MonoBehaviours umgegangen werden soll.
+ Zunächst sollte überprüft werden, ob es tatsächlich notwendig ist, dass
+ die benötigte Klasse von MonoBehaviour erbt.
+ Durch strike Trennung der Belange (Seperation Of Concerns) kann dies meist
+ auf die Darstellungslogik reduziert werden.
+ Die benötigten Komponenten sind meist Unity-eigene Klassen wie Button,
+ Label oder RigidBody am selben Spielobjekt.
+ In diesen Fällen können sie mithilfe des SerializeField-Attributs im Editor
+ gesetzt werden.
+ 
+\end_layout
+
+\begin_layout Standard
+Liegen dennoch Gründe vor, dass eine Abhängigkeit zu einem MonoBehaviour
+ benötigt wird, könnte dieses theoretisch beim Container registriert werden.
+ Vorrausgesetzt es implementiert ein Interface welches die benötigte Funktionali
+tät abbildet.
+ Das Spielobjekt des MonoBehaviours kann mittels Find-Methode vom Composition
+ Root ausfindig gemacht und im Anschluss beim Container registriert werden.
+ Die Registration ist somit jedoch auf eine einzige Instanz eines Typs beschränk
+t.
+ Hiervon wird jedoch ausdrücklich abgeraten.
+ Anhand eines Beispiels soll im Folgenden ein alternativer Ansatz beschrieben
+ werden.
+\end_layout
+
+\begin_layout Standard
+Die Idee dieses Ansatzes ist, nicht ein MonoBehaviour, sondern einen Wrapper
+ für dieses beim Container zu registrieren.
+ Ein Feature eines MonoBehaviours welches auch ausserhalb von diesem benötigt
+ werden könnte, ist das Ausführen von Coroutines.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+http://docs.unity3d.com/ScriptReference/MonoBehaviour.StartCoroutine.html
+\end_layout
+
+\end_inset
+
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Implementation-des-Coroutine"
+
+\end_inset
+
+ zeigt die Verwendung dieses Ansatzes bei der Umsetzung der beschriebenen
+ Funktionalität.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public interface ICoroutineRunner
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	Coroutine StartCoroutine(IEnumerator routine);
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+public class CoroutineRunnerBehaviour : MonoBehaviour, ICoroutineRunner
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+public class CoroutineRunner : ICoroutineRunner
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	private readonly IGameObjectFactory gameObjectFactory;
+\end_layout
+
+\begin_layout Plain Layout
+
+	private readonly ICoroutineRunner coroutineRunnerBehaviour;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	public CoroutineRunner(IGameObjectFactory gameObjectFactory)
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		this.gameObjectFactory = gameObjectFactory;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		var go = this.gameObjectFactory.Create("CoroutineRunnerPrefab");
+\end_layout
+
+\begin_layout Plain Layout
+
+		coroutineRunnerBehaviour = go.GetComponent<ICoroutineRunner>();
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	Coroutine StartCoroutine(IEnumerator routine)
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		return coroutineRunnerBehaviour.StartCoroutine(routine);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Implementation des CoroutineRunners
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Implementation-des-Coroutine"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die gewünschte Funktionalität wird zunächst durch die ICoroutineRunner-Schnittst
+elle definiert.
+ Die Implementation erfolgt von der Klasse CoroutineRunnerBehaviour indem
+ sie von MonoBehaviour erbt.
+ Weiter wird die Schnittstelle auch von der Klasse CoroutineRunner implementiert.
+ Im Konstruktor erstellt sie, durch den Aufruf der Create-Methode der GameObject
+Factory ein Prefab, welches die CoroutineRunnerBehaviour-Komponente besitzt.
+ Den Aufruf der StartCoroutine-Methode delegiert die Klasse an diese CoroutineRu
+nnerBehaviour-Komponente.
+ Die Klasse CoroutineRunner kann ohne Weiteres im Composition Root beim
+ Container registriert werden:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+container.RegisterTransient<ICoroutineRunner, CoroutineRunner>();
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Sie kann nun in alle anderen Module injekziert und genutzt werden.
+ Damit ist eine grundlegende Zusammenarbeit zwischen Unity und dem Inversion
+ Of Control-Container gewährleistet.
+ Um die gezeigten Beispiele auf das Wesentliche zu reduzieren, wurde auf
+ die Darstellung und Implementierung einiger Funktionalitäten verzichtet.
+ Diese sollen jedoch im folgenden Abschnitt kurz Erwähnung finden.
+\end_layout
+
+\begin_layout Subsection
+Weitere Ansatzpunkte zur Erweiterung
+\end_layout
+
+\begin_layout Itemize
+Caching von Reflection Aufrufen
+\end_layout
+
+\begin_layout Itemize
+Eager und Lazy loading von Singletons
+\end_layout
+
+\begin_layout Itemize
+Circular Dependencies
+\end_layout
+
+\begin_layout Itemize
+MessagingSystem
+\end_layout
+
+\begin_layout Itemize
+Proof of Concept, es gibt ausgereiftere IoC Container für Unity
 \end_layout
 
 \begin_layout Section
