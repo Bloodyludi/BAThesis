@@ -7844,19 +7844,15 @@ Der Container sollte für eine ordnungsgemäße Entsorgung von Objekten sorgen.
 \end_layout
 
 \begin_layout Itemize
-Es 
+Andere Injection Methoden: Method Injection
 \end_layout
 
-\begin_layout Itemize
-MessagingSystem/Event Bus
-\end_layout
-
-\begin_layout Itemize
-Andere Injection Typen
-\end_layout
-
-\begin_layout Itemize
-Proof of Concept, es gibt ausgereiftere IoC Container für Unity
+\begin_layout Standard
+Aus diesen Gründen wird von dem Autor dieser Arbeit davon abgeraten, den
+ präsentierten Container zur Entwicklung eines Spiels zu verwenden.
+ In dem folgenden Abschnitt sollen ausgereiftere Dependency Injection Container
+ für Unity3D vorgestellt und auf ihre Tauglichkeit bei der Entwicklung von
+ Spielen untersucht werden.
 \end_layout
 
 \begin_layout Section
