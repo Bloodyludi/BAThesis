@@ -1137,6 +1137,22 @@ Aufbau der Arbeit
 \end_layout
 
 \begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+todo{Stichpunkte Entfernen!}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Teil 1
 \end_layout
 
@@ -1264,6 +1280,22 @@ Wie die Lösung (DI) in einer Konsolenanwendung umzusetzen ist
 
 \begin_layout Itemize
 Was lose Kopplung ermöglicht
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+todo{Stichpunkte Entfernen!}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -4684,6 +4716,22 @@ This forces Developers to Create “Manager” GameObjects
 Polymorphismus kann trotzdem genutzt werden
 \end_layout
 
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+todo{Stichpunkte Entfernen!}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Chapter
 Dependency Injection in Unity3D
 \end_layout
@@ -7533,6 +7581,26 @@ public class CoroutineRunnerBehaviour : MonoBehaviour, ICoroutineRunner
 
 \begin_layout Plain Layout
 
+	private void Awake()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		DontDestroyOnLoad(transform.gameObject);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
 }
 \end_layout
 
@@ -7698,28 +7766,89 @@ Sie kann nun in alle anderen Module injekziert und genutzt werden.
 Weitere Ansatzpunkte zur Erweiterung
 \end_layout
 
-\begin_layout Itemize
-Caching von Reflection Aufrufen und Performance
+\begin_layout Standard
+Bei dargestellten Implementierung des Inversion Of Control Containers handelt
+ es sich um einen Proof Of Concept.
+ Die Funktionsweise, sowie nötige Sprachfeatures sollten beschrieben und
+ eine Zusammenarbeit mit Unity gewährleistet werden.
+ Auf eine ausführliche Beschreibung aller Details wurde verzichtet.
+ So wird beispielsweise das eager- und lazy-loading von Singletons der tatsächli
+chen Implementierung 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Siehe Anhang!
+\end_layout
+
+\end_inset
+
+ unterstützt.
+\end_layout
+
+\begin_layout Standard
+Auch gibt es zahlreiche Ansatzpunkte zur Erweiterung des Frameworks:
 \end_layout
 
 \begin_layout Itemize
-Eager und Lazy loading von Singletons
+Die Verwendung von Reflection führt zu starken Performanceeinbußen.
+ Obwohl sich die Aufrufe der Reflection-Bibliotheken zum Großteil auf den
+ Programmstart beschränken, sollten diese reduziert werden.
+ Die Ergebnisse der Reflection eines Typs sollten gecached und vom Container
+ wiederverwendet werden.
 \end_layout
 
 \begin_layout Itemize
-Circular Dependencies
+Das Verhalten bei zirkulären Abhhängigkeiten ist nicht bestimmt.
+ Im besten Fall sollten diese gar nicht erst zugelassen werden.
+ Es sollte eine Laufzeitexception geworfen werden.
+\end_layout
+
+\begin_layout Itemize
+Die API zur Konfiguration/Registrierung des Containers kann verbessert und
+ erweitert werden.
+ Es können Fluent Interfaces zur Erstellung einer Domänenspezifischen Sprache
+ verwendet werden.
+ Eine weitere Konfigurationsmöglichkeit könnte über JSON oder XML geboten
+ werden.
+ Der Vorteil einer solchen externen Konfiguration ist, dass das Verhalten
+ der Anwendung ohne erneuter Kompilierung geändert werden kann.
+\end_layout
+
+\begin_layout Itemize
+Bis jetzt wurde die Verwendung des Containers auf eine einzige Szene beschränkt.
+ Auf das Verhalten bei der Arbeit mit mehreren Szenen wurde nicht eingegangen.
+ Jede Szene könnte einen eigenen Composition Root haben, welcher die nötigen
+ Abhängigkeiten der Szenen individuell auflöst.
+ Alternativ könnte ein einziger Container in der 
+\begin_inset Quotes gld
+\end_inset
+
+Haupt
+\begin_inset Quotes grd
+\end_inset
+
+-Szene die Abhängigkeiten in allen Szenen auflösen.
+ Dies ist sinnvoll, wenn alle Szenen gleiche Abhängigkeiten haben.
+ Werden Szenen additiv geladen, wäre auch die Erstellung einer Containerhierarch
+ie eine Möglichkeit.
+ Beim Root-Container werden Abhängigkeiten, die über mehrere Szenen hinweg
+ benötigt werden registriert, während Childcontainer spezifische Abhängigkeiten
+ der additiv geladenen Szene auflösen.
+\end_layout
+
+\begin_layout Itemize
+Der Container sollte für eine ordnungsgemäße Entsorgung von Objekten sorgen.
+ Im speziellen sollte sichergestellt werden, dass die Dispose-Methode von
+ Klassen die IDisposable implementieren aufgerufen wird.
+\end_layout
+
+\begin_layout Itemize
+Es 
 \end_layout
 
 \begin_layout Itemize
 MessagingSystem/Event Bus
-\end_layout
-
-\begin_layout Itemize
-Verschiedene Szenen/Nested Containers
-\end_layout
-
-\begin_layout Itemize
-IDisposable
 \end_layout
 
 \begin_layout Itemize
@@ -7753,7 +7882,7 @@ ADIC: https://github.com/intentor/adic
 \end_layout
 
 \begin_layout Itemize
-Suice: https://github.com/Disturbing/UnitySuice
+Suice: https://github.com/Disturbing/suice
 \end_layout
 
 \begin_layout Section
