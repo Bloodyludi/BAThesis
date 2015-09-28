@@ -7921,7 +7921,7 @@ Zenject ist ein Dependency Injection Container, der sich aus einem direkten
  Graphs der Anwendung zu generieren.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 adic
 \begin_inset Foot
 status open
@@ -7981,11 +7981,17 @@ StrangeIoC ist ein umfangreiches Inversion Of Control Framework, das weit
 \end_layout
 
 \begin_layout Section
-MVCS-Architektur in Unity mithilfe von StrangeIoC
+MVC(S)-Architektur in Unity mithilfe von StrangeIoC
 \end_layout
 
 \begin_layout Standard
-
+Model-View-Controller-Service, oder kurz MVCS, ist ein Architekturmuster,
+ welches die Struktur einer Anwendung in vier eigenständige Module unterteilt:
+ Model, View, Controller und Service.
+ Es erweitert die klassische MVC-Architektur mit einer Service-Schicht,
+ unter welche der Zugriff auf externe Daten und Dienste, wie Web-Server,
+ Datenbanksysteme oder Zugriffe auf das Dateisystem, fallen.
+ 
 \end_layout
 
 \begin_layout Chapter
