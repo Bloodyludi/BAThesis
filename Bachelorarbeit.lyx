@@ -7860,25 +7860,124 @@ Aus diesen Gründen wird von dem Autor dieser Arbeit davon abgeraten, den
 \end_layout
 
 \begin_layout Standard
-Es existieren bereits eine Reihe von Dependency Injection Containern für
- Unity.
+In den vorherigen Abschnitten dieser Arbeit wurden Prinzipien, Praktiken
+ und Funktionsweise von Dependency Injection und Inversion Of Control Containern
+ beschrieben.
+ Dieser Abschnitt soll eine Übersicht über die für Unity verfügbaren Inversion
+ Of Control Container geben.
+ Ihre Funktionsumfänge und Besonderheiten sollen beschrieben werden.
+ Oft bieten diese Frameworks Funktionalitäten die weit über Automated Dependency
+ Injection hinaus gehen.
+\end_layout
+
+\begin_layout Standard
+Die vorzustellenden Container wurden speziell für die Verwendung mit Unity
+ entwickelt.
+ Ein Grund hierfür ist, dass - wie im vorherigen Abschnitt ausführlich beschrieb
+en - einige Erweiterungen notwendig sind, um die Verwendung eines Containers
+ in Unity zu ermöglichen.
+ Ein weiterer Grund ist, dass Unity's Mono Laufzeitumgebung lediglich Kompabilit
+ät zum .NET Framework 3.5 aufweist.
+ Die meisten existierenden Inversion Of Control Container für .NET verwenden
+ .NET 4.0 oder höher.
  
 \end_layout
 
-\begin_layout Itemize
-StrangeIoC: http://strangeioc.github.io/strangeioc/
+\begin_layout Standard
+Das Grundkonzept für die Implementation eines Inversion Of Control Containers
+ für Unity lieferte Sebastiano Mandalà im September 2012 in einer Serie
+ von Blogeinträgen.
+ Auf dieser Basis haben sich mit der Zeit eine Reihe von Frameworks entwickelt.
+ Im Folgenden sollen die Frameworks Zenject, adic und StrangeIoC vorgestellt
+ werden.
 \end_layout
 
-\begin_layout Itemize
-Zenject: https://github.com/modesttree/Zenject
+\begin_layout Subsubsection
+Zenject
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+https://github.com/modesttree/Zenject
 \end_layout
 
-\begin_layout Itemize
-ADIC: https://github.com/intentor/adic
+\end_inset
+
+
 \end_layout
 
-\begin_layout Itemize
-Suice: https://github.com/Disturbing/suice
+\begin_layout Standard
+Zenject ist ein Dependency Injection Container, der sich aus einem direkten
+ Fork des Konzepts von Sebastiano Mandalà entwickelt hat.
+ Zusätzlich zu den grundlegenden Funktionalitäten eines DI-Containers bietet
+ das Framework eine Vielzahl von Registrierungsoptionen wie zum Beispiel
+ die Registrierung von Prefabs und GameObjects oder Injection in spezifische
+ Methoden und Getter.
+ Darüber hinaus bietet das Framework eine Möglichkeit zur Validierung und
+ Visualisierung des Object Graphs: Es kann überprüft werden, dass alle zu
+ injizierenden Typen im Object Graph einer Szene beim Container registriert
+ sind.
+ Es ist möglich eine an UML angelegte graphische Darstellung des Object
+ Graphs der Anwendung zu generieren.
+\end_layout
+
+\begin_layout Paragraph
+adic
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+https://github.com/intentor/adic
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Adic ist ein weiterer Dependency Injection Container für Unity der sich
+ vorallem durch seine Einfacheit in Umsetzung und Verwendung auszeichnet.
+ Dennoch bietet er die vollständige Funktionalität eines Dependency Injection
+ Containers und noch einige weitere Optionen.
+ Diese sind unter Anderem: Conditional Bindings, die es ermöglichen eine
+ Registrierung eines Typs unter bestimmten Bedingungen vorzunehmen.
+ Eine mögliche Bedingung ist beispielsweise, dass Injection eines Typs nur
+ über Konstruktoren oder in bestimmte Instanzen erfolgen soll.
+ Zudem implementiert adic ein Command- und Eventsystem, das sehr ähnlich
+ zu dem von StrangeIoC ist.
+ Diese werden im folgenden Abschnitt genauer erläutert.
+\end_layout
+
+\begin_layout Subsubsection
+StrangeIoC
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+http://strangeioc.github.io/strangeioc/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+StrangeIoC ist ein umfangreiches Inversion Of Control Framework, das weit
+ mehr als nur einen Dependency Injection Container bietet.
+ Das open-source Projekt verfügt über eine aktive Community, die bemüht
+ ist, das Framework kontinuierlich zu verbessern und zu erweitern.
+ StrangeIoC ist in großen Teilen von Robotlegs, einem Application Architecture
+ Framework für ActionScript, beeinflusst.
+ Aus diesem wurde auch das wohl augenscheinlichste Merkmal des Frameworks
+ übernommen: Eine MVC(S)-Architektur, mit der sich ein breites Spektrum
+ von Anwendungen umsetzen lassen soll.
+ Die Architektur vereint eine umfangreiche Anzahl von Konzepten, welche
+ in ihrer Gesamtheit eine saubere Trennung von Verantwortungen ermöglichen
+ sollen.
+ Diese Konzepte und ihr Zusammenwirken als MVC(S)-Architektur sollen im
+ folgenden Abschnitt erläutert werden.
 \end_layout
 
 \begin_layout Section
@@ -7886,18 +7985,6 @@ MVCS-Architektur in Unity mithilfe von StrangeIoC
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-todo{Elobarate example!}
-\end_layout
-
-\end_inset
-
 
 \end_layout
 
