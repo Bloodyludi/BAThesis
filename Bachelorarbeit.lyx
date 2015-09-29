@@ -8452,6 +8452,18 @@ Commands
 \end_layout
 
 \begin_layout Standard
+Commands sind zustandslose Controller-Objekte, die ein einzelnes Verhalten
+ kapseln.
+ Commands werden von Signals ausgelöst: Ein Aufruf der Execute-Methode erfolgt
+ automatisch.
+ Im Normalfall haben sie eine sehr kurze Lebenszeit: Ein Signal löst die
+ Instanziierung und Ausführung des Commands aus.
+ Direkt danach erfolgt die Entsorgung.
+ Commands bilden die Logik der Anwendung ab, indem sie Manipulationen an
+ Models vornehmen, Spielobjekte instanziieren oder mit Services kommunizieren.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -8479,12 +8491,26 @@ class ToggleSelectionCommand : Command
 
 \begin_layout Plain Layout
 
-	public int parameter { get; set; }
+	public int index { get; set; }
 \end_layout
 
 \begin_layout Plain Layout
 
 	
+\end_layout
+
+\begin_layout Plain Layout
+
+	[Inject]
+\end_layout
+
+\begin_layout Plain Layout
+
+	public IService service { get; set; } 
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -8499,7 +8525,27 @@ class ToggleSelectionCommand : Command
 
 \begin_layout Plain Layout
 
-		//...
+		Retain();
+\end_layout
+
+\begin_layout Plain Layout
+
+		service.SendRequestToServer(response => {
+\end_layout
+
+\begin_layout Plain Layout
+
+			//...
+\end_layout
+
+\begin_layout Plain Layout
+
+			Release();
+\end_layout
+
+\begin_layout Plain Layout
+
+		});
 \end_layout
 
 \begin_layout Plain Layout
@@ -8522,6 +8568,13 @@ class ToggleSelectionCommand : Command
 
 \begin_layout Plain Layout
 Beispiel für einen Command
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Beispiel-Command"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -8535,6 +8588,92 @@ Beispiel für einen Command
 \end_layout
 
 \begin_layout Standard
+In der Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beispiel-Command"
+
+\end_inset
+
+ wird der an das Signal aus dem vorigen Beispiel gebundene Command, dargestellt.
+ Der beim Auslösen des Signals übergebene Parameter wird bei Instanziierung
+ des Commands in das Property 
+\begin_inset Quotes gld
+\end_inset
+
+index
+\begin_inset Quotes grd
+\end_inset
+
+ injekziert.
+ Commands wird es durch Aufruf der Retain Methode ermöglicht, seine Zerstörung
+ zu verzögern.
+ Die Ausführung der Anwendung wird nicht eingeschränkt, da der Aufruf eines
+ Commands asynchron erfolgt.
+ Sehr nützlich ist Erhalten eines Commands beispielsweise bei der Client-Server-
+Kommunikation: In dem gezeigten Beispiel in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beispiel-Command"
+
+\end_inset
+
+ wird der Command solange am Leben erhalten bis dieser eine Antwort vom
+ Server erhält.
+ Dies geschieht durch den Aufruf der Release-Methode im Callback der Anfrage.
+\end_layout
+
+\begin_layout Standard
+Commands bieten eine sehr effiziente Möglichkeit Anwendungsschichten voneinander
+ zu entkoppeln.
+ Der Grund hierfür ist, dass sie sich nur durch Signale ausführen lassen:
+ Es gibt für Models, Services und Mediatoren keinen Grund überhaupt von
+ ihnen zu wissen.
+ Models und Mediatoren brauchen lediglich Signale auszulösen um die Ausführung
+ der Anwendung in Gang zu legen.
+\end_layout
+
+\begin_layout Subsubsection
+Mediation
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename images/strange_mediation.png
+	lyxscale 30
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Schaubild zur Verdeutlichung des Mediation-Prozesses
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
