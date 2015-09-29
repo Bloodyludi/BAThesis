@@ -7847,6 +7847,10 @@ Der Container sollte für eine ordnungsgemäße Entsorgung von Objekten sorgen.
 Andere Injection Methoden: Method Injection
 \end_layout
 
+\begin_layout Itemize
+Postconstruct
+\end_layout
+
 \begin_layout Standard
 Aus diesen Gründen wird von dem Autor dieser Arbeit davon abgeraten, den
  präsentierten Container zur Entwicklung eines Spiels zu verwenden.
@@ -7988,10 +7992,550 @@ MVC(S)-Architektur in Unity mithilfe von StrangeIoC
 Model-View-Controller-Service, oder kurz MVCS, ist ein Architekturmuster,
  welches die Struktur einer Anwendung in vier eigenständige Module unterteilt:
  Model, View, Controller und Service.
- Es erweitert die klassische MVC-Architektur mit einer Service-Schicht,
- unter welche der Zugriff auf externe Daten und Dienste, wie Web-Server,
- Datenbanksysteme oder Zugriffe auf das Dateisystem, fallen.
+ Es erweitert die klassische MVC-Architektur um eine Service-Schicht, unter
+ welche der Zugriff auf externe Daten und Dienste, wie Web-Server, Datenbanksyst
+eme oder Zugriffe auf das Dateisystem, fallen.
  
+\end_layout
+
+\begin_layout Standard
+MVCS soll einen konsistenten Ansatz zur Strukturierung einer Anwendung liefern.
+ Genauso wie bei der klassischen MVC-Architektur ist die Grundlage hierfür
+ Präsentations- von Anwendungslogik zu trennen.
+ Diese Trennung erfolgt durch die Definition folgender Schichten: Die Präsentati
+onsschicht (View-Layer) ist für die Darstellung der Benutzeroberfläche und
+ der Verarbeitung von Interaktionen mit dem Benutzer zuständig.
+ Die Modellschicht (Model-Layer) speichert den aktuellen Zustand der Anwendung,
+ der durch das Ausführen von Operationen durch den Nutzer und externer Quellen
+ resultiert.
+ Die Steuerungsschicht (Controller-Layer) stellt Mechanismen zur Interaktion
+ und Koordination zwischen den anderen Schichten zur Verfügung.
+ 
+\end_layout
+
+\begin_layout Standard
+Zusätzlich zu dem Vorteil der Strukturierung hilft die MVCS-Architektur
+ von StrangeIoC die Kopplung zwischen den einzelnen Schichten zu minimieren.
+ Damit sollen einzelne Programmabschnitte tesbar und die Austauschbarkeit
+ der Darstellungs- und Service-Schicht gewährleistet werden.
+ Abhängigkeiten zu externen APIs können in der Service-Schicht gekapselt
+ und somit Austauschbar gemacht werden.
+ Somit ist es beispielsweise ohne große Umstände möglich, den Zugriff auf
+ Daten aus dem lokalen Dateisystem mit dem Remote-Zugriff auf eine Datenbank
+ auszutauschen.
+\end_layout
+
+\begin_layout Standard
+Die Umsetzung der MVC(S)-Architektur weicht stark von der des klassischen
+ MVC-Entwurfsmusters ab.
+ StrangeIoC verwendet eine Reihe von eigenen Konzepten und Mustern um die
+ MVC(S)-Architektur umzusetzten.
+\end_layout
+
+\begin_layout Subsection
+Umsetzung von MVC(S) in StrangeIoC
+\end_layout
+
+\begin_layout Standard
+In diesem Abschnitt soll erklärt werden, wie die in StrangeIoC zur Verfügung
+ stehenden Konzepte in der MVC(S)-Architektur zusammenspielen.
+ Eine schlüssige Zusammenfassung der Architektur liefert ein Schaubild aus
+ der Dokumentation (siehe Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MVCS-Context"
+
+\end_inset
+
+).
+ Wie in der Grafik beschrieben, ist der Einstiegspunkt in die Anwendung
+ der ContextView.
+ Von ihm wird der eigentliche Context instanziiert.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename images/Strange_Flow_Chart.png
+	lyxscale 20
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Schaubild MVC(S) Context Architektur
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:MVCS-Context"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Context und ContextView
+\end_layout
+
+\begin_layout Standard
+Der Context ist ein von den restlichen Schichten der Architekur unabhängiges
+ Modul.
+ Grob gesagt handelt es sich um einen Composition Root wie in Abschnitt
+ 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Definieren-des-Composition"
+
+\end_inset
+
+ definiert.
+ Mit dem Unterschied, dass es möglich ist mehr als einen Context zu definieren.
+ Jeder Context wird an einen ContextView, ein MonoBehaviour in einer bestimmten
+ Scene, angehängt.
+ Im Context wird wie im Composition Root die Registrierung von Typen beim
+ Dependency Injection Container vorgenommen.
+ Der Context definiert den Sichtbarkeitsbereich aller bei ihm registrierten
+ Typen.
+ Es jedoch auch möglich Registrierungen über mehrere Contexte hinweg vorzunehmen.
+ StrangeIoC bezeichnet den Container als Binder und die Registrierung als
+ Binding.
+ Der Grund hierfür ist, dass nicht nur zu injekzierende Abhängigkeiten registrie
+rt werden können.
+ Es können auch, wie im später noch genauer erläutert wird, Commands an
+ Signals und Views an Mediators gebunden werden.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public class SampleContext : MVCSContext
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	//...
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	protected override void mapBindings()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		base.mapBindings();
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		injectionBinder.Bind<IBoardLayoutModel>()
+\end_layout
+
+\begin_layout Plain Layout
+
+			.To<BoardLayoutModel>().ToSingleton();
+\end_layout
+
+\begin_layout Plain Layout
+
+		injectionBinder.Bind<IMovementRules>().To<MovementRules>();
+\end_layout
+
+\begin_layout Plain Layout
+
+		injectionBinder.Bind<FieldClickedSignal>().ToSingleton();
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		commandBinder.Bind<StartSignal>().InSequence()
+\end_layout
+
+\begin_layout Plain Layout
+
+			.To<LoadBoardLayoutCommand>()
+\end_layout
+
+\begin_layout Plain Layout
+
+			.To<CreateBoardFieldViewsCommand>();
+\end_layout
+
+\begin_layout Plain Layout
+
+		commandBinder.Bind<FieldClickedSignal>()
+\end_layout
+
+\begin_layout Plain Layout
+
+			.To<ToggleSelectionCommand>();
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		mediationBinder.Bind<FieldView>().To<FieldMediator>();
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	public override IContext Start()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		base.Start();
+\end_layout
+
+\begin_layout Plain Layout
+
+		var startSignal = injectionBinder.GetInstance<StartSignal>();
+\end_layout
+
+\begin_layout Plain Layout
+
+		startSignal.Dispatch();
+\end_layout
+
+\begin_layout Plain Layout
+
+		return this;
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Beispiel eines Contexts für ein Brettspiel
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Beispiel-Context"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:Beispiel-Context"
+
+\end_inset
+
+ zeigt ein Beispiel eines Contexts: In der mapBindings-Methode erfolgen
+ die Typregistrierungen bei den jeweiligen Bindern.
+ Abhängigkeiten werden beim InjectionBinder registriert, Commands werden
+ über den CommandBinder an Signale gebunden und Views an Mediatoren durch
+ den MediationBinder.
+ Diese Registrierungen werden immer komplexer mit dem Wachstum der Anwendung.
+ Aus diesem Grund können Sie auch in einzelne Klassen ausgelagert werden.
+ Ist die Registrierung abgeschlossen, wird die Anwendung durch das Auslösen
+ eines Signals in der Start-Methode gestartet.
+ An dieses Startsignal wurden zuvor einige Commands gebunden, die nun ausgeführt
+ werden.
+\end_layout
+
+\begin_layout Subsubsection
+Signals
+\end_layout
+
+\begin_layout Standard
+Signals stellen ein typsicheres Mittel zur Kommunikation zwischen den einzelen
+ Architekturschichten dar.
+ Signals können Commands auslösen, aber auch wie herkömmliche Events abonniert
+ werden.
+ Es handelt sich um eine Umsetzung des Observer-Musters, das intern Action-Deleg
+aten anstatt Interfaces verwendet.
+ Das Auslösen eines Signals erfolgt über die Dispatch-Methode.
+ Wurde das Signal beim CommandBinder registriert, so fügt sich dieser als
+ Listener hinzu.
+ Beim Auslösen des Signals instanziiert der CommandBinder Instanzen der
+ hinzugefügten Commands und führt diese aus.
+ Damit sind Sender und Empfänger eines Signals komplett voneinander entkoppelt.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+//Deklaration
+\end_layout
+
+\begin_layout Plain Layout
+
+public class FieldClickedSignal : Signal<int>{};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+//Verwendung
+\end_layout
+
+\begin_layout Plain Layout
+
+[Inject]
+\end_layout
+
+\begin_layout Plain Layout
+
+public FieldClickedSignal clickSignal { get; set; }
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+clickSignal.Dispatch(12);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Beispiel der Deklaration und Verwendung eines Signals
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Signals-Definition"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Signals-Definition"
+
+\end_inset
+
+ zeigt die Deklaration und Verwendung eines Signals.
+ Signals können bis zu vier Parameter haben, dessen Typen als Generika bei
+ der Deklaration des Signals definiert werden.
+ Diese Parameter werden bei Aufruf in Properties des Commands injekziert.
+ Signals sind Typsicher: Fehlerhaftes Aufrufen oder Abonnieren führt zu
+ einer Ausnahme zur Laufzeit.
+\end_layout
+
+\begin_layout Subsubsection
+Commands
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+class ToggleSelectionCommand : Command
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	[Inject]
+\end_layout
+
+\begin_layout Plain Layout
+
+	public int parameter { get; set; }
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	public override void Execute()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		//...
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Beispiel für einen Command
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \begin_layout Chapter
