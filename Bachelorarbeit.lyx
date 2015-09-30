@@ -3052,7 +3052,7 @@ Erweiterbarkeit
 
 \begin_layout Standard
 Während der Entwicklung einer Anwendung werden neue Anforderungen bekannt
- und existierende beginnen sich zu verändern.
+ und existierende Anforderungen beginnen sich zu verändern.
  Trotzdem muss die Anwendung erweiterbar und wartbar bleiben.
  Erweiterbarkeit wird problematischer je größer die Anwendung ist.
  In sehr großen Softwaresystemen ist es schwer abzusehen welche Auswirkungen
@@ -3126,7 +3126,273 @@ status open
 
 
 \backslash
-todo{Hier Beispiel für Testbarkeit einfügen!}
+todo{Beispiel für Testbarkeit erläutern!}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public class GuessANumber
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	private IRandom random;
+\end_layout
+
+\begin_layout Plain Layout
+
+	private int result;
+\end_layout
+
+\begin_layout Plain Layout
+
+	private const int max = 6;
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	public GuessANumber(IRandom random)
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		this.random = random;
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	public GuessANumber Roll()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		result = random.Range(1, max);
+\end_layout
+
+\begin_layout Plain Layout
+
+		return this;
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	public bool MakeGuess(int guess)
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		return result == guess;
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Beispiel einer durch Dependency Injection testbaren Klasse
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+using NUnit.Framework;
+\end_layout
+
+\begin_layout Plain Layout
+
+using NSubstitute;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+[TestFixture]
+\end_layout
+
+\begin_layout Plain Layout
+
+public class GuessANumberTests
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	[Test]
+\end_layout
+
+\begin_layout Plain Layout
+
+	public void ShouldReturnTrueForRightGuess()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		var mockRandom = Substitute.For<IRandom>();
+\end_layout
+
+\begin_layout Plain Layout
+
+		var guessANumber = new GuessANumber(mockRandom);
+\end_layout
+
+\begin_layout Plain Layout
+
+		var expected = 6;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		mockRandom.Range(0, 0).ReturnsForAnyArgs(expected);
+\end_layout
+
+\begin_layout Plain Layout
+
+		guessANumber.Roll();
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		Assert.True(guessANumber.MakeGuess(expected));
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Testen der GuessANumber Klasse
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -8716,6 +8982,13 @@ status open
 
 \begin_layout Plain Layout
 Schaubild zur Verdeutlichung des Mediation-Prozesses
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Schaubild-Mediation"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -8729,9 +9002,16 @@ Schaubild zur Verdeutlichung des Mediation-Prozesses
 \end_layout
 
 \begin_layout Standard
-In Abbildung wird veranschaulicht wie der Mediation-Prozess in StrangeIoC
- vonstatten geht: Sobald ein View in eine Scene geladen wird, sendet dieser
- automatisch in der Awake-Methode eine Message an den ContextView.
+In Abbildung 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:Schaubild-Mediation"
+
+\end_inset
+
+ wird veranschaulicht wie der Mediation-Prozess in StrangeIoC vonstatten
+ geht: Sobald ein View in eine Scene geladen wird, sendet dieser automatisch
+ in der Awake-Methode eine Message an den ContextView.
  Dafür muss zwangsläufig jeder View ein Childobject des jeweiligen ContextViews
  sein.
  Über den Context des ContextViews wird der MediationBinder aufgerufen.
@@ -8996,8 +9276,48 @@ Models und Services
 \begin_layout Standard
 Die Aufgaben eines Models in StrangeIoC unterscheiden sich nicht von denen
  eines Models in einer klassischen MVC-Architektur.
- Models kapseln die Daten der Anwendung und ermöglichen den Zugriff auf
- dieses über wohldefinierte Schnittstellen.
+ Models kapseln Zustand und Daten der Anwendung und ermöglichen den Zugriff
+ auf diese über wohldefinierte Schnittstellen.
+ Andere Klassen können über diese Schnittstellen Anfragen an das Model senden.
+ Models selber senden keine Anfragen: Wird ein Model geändert, lässt es
+ dies den Rest der Anwendung wissen indem es einen Event auslöst.
+\end_layout
+
+\begin_layout Standard
+Services stehen eng mit Models in Verbindung.
+ Dennoch sollten sie getrennt voneinander existieren.
+ Ein Service beschafft - oft durch die Kommunikation zur Außenwelt - Daten.
+ Ein Model speichert diese Daten.
+ Services kommunizieren mit externen Ressourcen einer Applikation.
+ Beispiele für solche Resourcen sind unter anderem: Webserver und -Services,
+ das Dateisystem und Datenbanken.
+ Der Zugriff aus Services erfolgt über Commands, wie bereits in Abbildung
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:Beispiel-Command"
+
+\end_inset
+
+ gezeigt.
+ 
+\end_layout
+
+\begin_layout Subsection
+Beispielanwendung
+\end_layout
+
+\begin_layout Standard
+Die im letzten Abschnitt gezeigten Abbildungen wurden aus einer für diese
+ Arbeit programmierten Beispielanwendung übernommen.
+ Damit der Fokus auf die zu erläuternden Konzepte nicht verloren geht, wurden
+ die Klassen für die Beispiele teilweise gekürzt und abgeändert.
+ Die tatsächliche Implementation der Beispielanwendung ist auf der sich
+ im Anhang dieser Arbeit befindlichen CD zu finden.
+\end_layout
+
+\begin_layout Standard
+Es handelt sich um eine Implementation des Brettspiels Peg Solitaire.
  
 \end_layout
 
@@ -9006,7 +9326,19 @@ Kritische Betrachtung & Fazit
 \end_layout
 
 \begin_layout Section
-Alternative Architekturen/Aussicht
+Fazit zur Anwendbarkeit von Dependency Injection in Unity
+\end_layout
+
+\begin_layout Subsection
+Fazit zu StrangeIoC
+\end_layout
+
+\begin_layout Section
+Alternative Architekturen
+\end_layout
+
+\begin_layout Section
+Aussicht
 \end_layout
 
 \begin_layout Standard
