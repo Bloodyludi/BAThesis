@@ -8634,7 +8634,42 @@ Commands bieten eine sehr effiziente Möglichkeit Anwendungsschichten voneinande
 \end_layout
 
 \begin_layout Subsubsection
+Views
+\end_layout
+
+\begin_layout Standard
+Wie bereits erwähnt sind Views oder View-Komponenten für die Darstellung
+ der Benutzeroberfläche und der Verarbeitung von Interaktionen mit dem Benutzer
+ verantwortlich.
+ Dabei ist der Begriff 
+\begin_inset Quotes gld
+\end_inset
+
+View
+\begin_inset Quotes grd
+\end_inset
+
+ nicht unbedingt wörtlich zu nehmen: Sie übernehmen jegliche Ein- und Ausgabelog
+ik, wie Rendering, Darstellungslogik von User Interfaces, Audioausgabe und
+ eventuell Interaktion mit der Physikengine.
+ Es sind Aufgaben, für die die Interaktion mit Unity notwendig ist.
+ Aus diesem Grund sind Views MonoBehaviours.
+ Sie beinhalten jedoch keinerlei Anwendungslogik und kommunizieren lediglich
+ zu ihren Mediatoren über Events.
+ Ansonsten sind sie komplett autonome Komponenten, die ausschließlich ihren
+ eigenen Zustand manipulieren können.
+ Aus diesem Grund sollten auch keine Injections in MonoBehaviours vorgenommen
+ werden.
+ Die Absicht hierbei ist, das Unity-Framework soweit wie möglich aus der
+ Anwendungslogik rauszuhalten, um eine enge Kopplung zu diesem zu verhindern.
+\end_layout
+
+\begin_layout Subsubsection
 Mediation
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \begin_layout Standard
@@ -8665,10 +8700,6 @@ Schaubild zur Verdeutlichung des Mediation-Prozesses
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
