@@ -6918,8 +6918,12 @@ public static class MonoInjectionExtension
 
 \begin_layout Plain Layout
 
-		ExecuteEvents.ExecuteHierarchy<IMonoInjectionHandler>(script.gameObject,
- null, (target, data) => target.InjectDependencies(script));
+		ExecuteEvents.ExecuteHierarchy<IMonoInjectionHandler>
+\end_layout
+
+\begin_layout Plain Layout
+
+			(script.gameObject, null, (target, data) => target.InjectDependencies(script));
 \end_layout
 
 \begin_layout Plain Layout
@@ -8669,7 +8673,23 @@ Mediation
 \end_layout
 
 \begin_layout Standard
+Das Mediator-Muster beschreibt einen Weg der Interaktion zwischen Objekten
+ über einen Vermittler.
+\begin_inset CommandInset citation
+LatexCommand cite
+after "S. 273"
+key "Gamma1994"
 
+\end_inset
+
+ In StrangeIoC vermitteln Mediatoren zwischen View- und Anwendungslogik.
+ Mediatoren interagieren im Auftrag ihres Views mit dem Rest des Frameworks
+ und anders herum.
+ Dies geschieht, indem der Mediator die Events seines Views abbonniert und
+ daraufhin entsprechende Signals auslöst.
+ Umgekehrt abonniert der Mediator auch die Events von Services oder Models
+ und führt daraufin entsprechende Operationen an seinem View aus.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -8706,6 +8726,279 @@ Schaubild zur Verdeutlichung des Mediation-Prozesses
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+In Abbildung wird veranschaulicht wie der Mediation-Prozess in StrangeIoC
+ vonstatten geht: Sobald ein View in eine Scene geladen wird, sendet dieser
+ automatisch in der Awake-Methode eine Message an den ContextView.
+ Dafür muss zwangsläufig jeder View ein Childobject des jeweiligen ContextViews
+ sein.
+ Über den Context des ContextViews wird der MediationBinder aufgerufen.
+ Dieser instanziiert einen zuvor an den View gebundenen Mediator und versorgt
+ ihn mit seinen Abhängigkeiten mithilfe des Injectors.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public class SampleMediator : Mediator
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	[Inject]
+\end_layout
+
+\begin_layout Plain Layout
+
+	public SampleView view { get; set; }
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	[Inject]
+\end_layout
+
+\begin_layout Plain Layout
+
+	public IBoardLayoutModel layout { get; set; }
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	[Inject]
+\end_layout
+
+\begin_layout Plain Layout
+
+	public FieldClickedSignal clickSignal { get; set; }
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	public override void OnRegister()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		view.OnBoardClicked.AddListener(OnClick);
+\end_layout
+
+\begin_layout Plain Layout
+
+		layout.OnLayoutChanged.AddListener(OnLayoutChange);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	public override void OnRemove()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		view.OnBoardClicked.RemoveListener(OnClick);
+\end_layout
+
+\begin_layout Plain Layout
+
+		layout.OnLayoutChanged.RemoveListener(OnLayoutChange);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	private void OnClick(Vector2 clickPosition)
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		var index = ClickPositionToFieldIndex(clickPosition);
+\end_layout
+
+\begin_layout Plain Layout
+
+		clickSignal.Dispatch(index);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	private void OnLayoutChange()
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\end_layout
+
+\begin_layout Plain Layout
+
+		view.Refresh();
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	//...
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Beispiel der Implementation eines Mediators
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Implementation-Mediator"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Implementation-Mediator"
+
+\end_inset
+
+ wird ein Beispiel für eine mögliche Implementation eines Mediators gezeigt.
+ Der Mediator reagiert auf das OnBoardClicked-Event des Views indem er die
+ Klickposition in einen verwendbaren Index konvertiert und daraufhin ein
+ FieldClickedSignal mit dem Index als Parameter auslöst.
+ Weiter abonniert der Mediator das OnLayoutChanged-Event des IBoardLayoutModels.
+ In Reaktion auf dieses Event ruft der Mediator die Refresh-Methode des
+ von ihm vermittelten Views auf.
+ Das An- und Abmelden an die Events erfolgt in den OnRegister- und OnRemove-Call
+backs.
+ OnRegister wird direkt nach der Injection von Abhängigkeiten aufgerufen.
+ Der Aufruf von OnRemove erfolgt beim Zerstören des Views.
+\end_layout
+
+\begin_layout Standard
+Wie im Beispiel deutlich wird, agieren Mediators lediglich als Brücke zwischen
+ Darstellungs- und Anwendungslogik.
+ Sie sollten somit leichtgewichtig sein und möglichst keine eigene Logik
+ beinhalten.
+ Sie dienen einzig dazu Anwendungslogik aus den Views herauszuhalten.
+ Dafür gibt es zahlreiche Gründe: Darstellungslogik tendiert dazu mit der
+ Zeit unüberschaubar zu werden, da an ihr oft Änderungen in letzter Minute
+ vorgenommen werden.
+ Weiter verwendet die Darstellungslogik eines Views die API von Unity, die
+ durch statische Klassen und fehlendem Interfacesupport zu enger Kopplung
+ und damit zu eingeschränkter Testbarkeit führt.
+\end_layout
+
+\begin_layout Subsubsection
+Models und Services
+\end_layout
+
+\begin_layout Standard
+Die Aufgaben eines Models in StrangeIoC unterscheiden sich nicht von denen
+ eines Models in einer klassischen MVC-Architektur.
+ Models kapseln die Daten der Anwendung und ermöglichen den Zugriff auf
+ dieses über wohldefinierte Schnittstellen.
+ 
 \end_layout
 
 \begin_layout Chapter
