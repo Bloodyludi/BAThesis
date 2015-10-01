@@ -944,7 +944,8 @@ Motivation
 \end_layout
 
 \begin_layout Standard
-Unity hat sich in den letzten Jahren zur führenden Spieleengine entwickelt.
+Unity hat sich in den letzten Jahren zur einer der führenden Spieleengines
+ entwickelt.
  Mit über 45% des globalen Marktanteils unter Spieleengines
 \begin_inset Foot
 status open
@@ -966,8 +967,8 @@ http://unity3d.com/public-relations
  der Engine zunutze zu machen: Unity findet immer mehr Einzug in professionelle
  Spieleprojekte mit mittleren und großen Teams.
  Hier sind Tätigkeitsbereiche spezialisiert und klar definiert.
- Die Anforderungen an die Spieleengine beginnen sich zu wandeln.
- Parallele Entwicklung muss gewährleistet werden.
+ Die Anforderungen an die Spieleengine beginnen sich zu wandeln: Parallele
+ Entwicklung muss gewährleistet werden.
  Der Programmcode muss modular, skalierbar und wiederverwendbar sein.
  Es darf keinen Raum für Fehlkonfigurationen geben.
  Neue Geschäftsmodelle wie Free-to-Play bewirken, dass Spiele immer mehr
@@ -1032,7 +1033,7 @@ Oft sollen die Ursachen gerade die Dinge sein, die unerfahrenen Programmierern
  Zerbrechlichkeit bei Veränderung des Programmcodes.
  In der objektorientierten Programmierung ist dieses Problem seit langem
  bekannt.
- Es existieren zahlreiche Lösungen für die unteschiedlichsten Situationen
+ Es existieren zahlreiche Lösungen für die unterschiedlichsten Situationen
  und Entwicklungsumgebungen.
  Oft sind diese Lösungen Frameworks, die eng mit den Begriffen Inversion
  Of Control und Dependency Injection in Verbindung stehen.
@@ -1053,8 +1054,8 @@ Zielsetzung
 \begin_layout Standard
 In dieser Arbeit wird sich auf ein Problem beschränkt: Die Kopplung von
  Abhängigkeiten zwischen Modulen in Unity.
- Ziel dieser Arbeit ist die Umsetzung Spiels in Unity zu ermöglichen, dessen
- Module lose miteinander gekoppelt sind.
+ Ziel dieser Arbeit ist es die Umsetzung von Spielen in Unity zu ermöglichen,
+ ohne dessen Module eng miteinander zu koppeln.
 \end_layout
 
 \begin_layout Standard
@@ -1076,64 +1077,56 @@ Weiter soll anhand eines Beispiels erklärt werden, wie lose Kopplung mittels
 
 \begin_layout Standard
 Infolgedessen soll der Schritt zu Unity getätigt werden.
- Es soll untersucht werden inwiefern Unity von einer herrkömmlichten objektorien
-tierten Hierarchie abweicht und ob dies hinderlich dabei ist, lose Kopplung
+ Es soll untersucht werden inwiefern Unity von einer herkömmlichten objektorient
+ierten Hierarchie abweicht und ob dies hinderlich dabei ist, lose Kopplung
  umzusetzen.
  Es sollen häufig verwendete Praktiken wie das Singleton-Pattern und Managerobje
 kte untersucht werden.
  Wie später im Detail erklärt wird, entstehen Abhängigkeiten unter anderem
- aus dem Bedürfnis, dass Objekte miteinander kommunizieren müssen.
- Unity stellt dafür unterschiedliche Wege der Kommunikation bereit.
+ dadurch, dass Objekte miteinander kommunizieren müssen.
+ Unity stellt unterschiedliche Wege der Kommunikation bereit.
  Es soll untersucht werden, ob diese Wege es bereits ermöglichen lose Kopplung
  umzusetzen.
- Auf Basis dieser Erkenntnisse soll ein Zwischenfazit gezogen werden.
+ Auf Basis dieser Erkenntnisse soll ein Zwischenfazit gezogen werden, um
+ die Notwendigkeit eines Inversion Of Control Frameworks für Unity zu verdeutlic
+hen.
 \end_layout
 
 \begin_layout Standard
-Im nächsten Schritt soll Inversion Of Control in Unity implementiert werden.
- Das Resulat dieses Teils ist ein Dependency Injection Container der es
- eine lose gekoppelte Anwendung in Unity zu schreiben.
+Im nächsten Teil dieser Arbeit soll ein Inversion Of Control Container für
+ Unity implementiert werden.
+ Dieser Container soll Dependency Injection in MonoBehaviours automatisieren
+ und somit die lose Kopplung von Komponenten ermöglichen.
  Die technische Umsetzung soll erläutert werden.
  Mit Unity in Verbinung stehende Hürden bei der Umsetzung sollen überwunden
  und beschrieben werden.
+ Weiter soll ein Überblick über die vorhandenen Inversion Of Control Frameworks
+ für Unity geliefert werden.
+ Besonderheiten, Funktionsweise und -Umfang sollen beschrieben werden.
+ Besondere Betrachtung soll StrangeIoC finden: Die Frameworkeigene MVC(S)-Archit
+ektur und die damit verbundenen Muster und Praktiken sollen anhand von Beispiele
+n beschrieben werden.
 \end_layout
 
 \begin_layout Standard
-Der nächste Teil gibt einen Überblick über die vorhandenen Inversion Of
- Control Frameworks für Unity.
- Besonderheiten, Funktionsweise und -Umfang soll beschrieben werden.
- Besondere Betrachtung soll StrangeIoC finden.
-\end_layout
-
-\begin_layout Standard
-Im nächsten Teil sollen Entwicklungsaufwand, Wartbarkeit, Erweiterbarkeit,
- Testbarkeit, Wiederverwendbarkeit und Performance von einer Anwendung,
- die mithilfe von StrangeIoc umgesetzt wurde, untersucht werden.
- Dies soll anhand von Beispielen geschehen.
-\end_layout
-
-\begin_layout Itemize
-Untersuchen, ob und wie Inversion Of Control auch in der komponentenbasierten
- Architektur von Unity anwendbar ist
-\end_layout
-
-\begin_layout Itemize
-Inversion of Control Frameworks für Unity erläutern: Testbarkeit, Wartbarkeit,
- Aufwand, Performance, Erweiterbarkeit allgemein und im speziellen
-\end_layout
-
-\begin_layout Itemize
-Alternative Lösungsansätze für Decoupling und Architektur in Unity präsentieren
- und untersuchen
-\end_layout
-
-\begin_layout Itemize
-Entscheiden, für welche Anwendungsgebiete die Architekturen am besten geeignet
- sind/ob sie immer zu empfehlen sind
+Auf Basis dieser Analysen soll eine Aussage über die Tauglichkeit von Inversion
+ Of Control Frameworks in der komponentenbasierten Architektur von Unity
+ getroffen werden.
+ Im Speziellen soll ein Fazit über die MVC(S)-Architektur von StrangeIoC
+ zur Entwicklung von Spielen in Unity gezogen werden.
+ Es soll entschieden werden, für welche Anwendungsgebiete die Architektur
+ besonders geeignet ist und für welche nicht.
+ Für diese Anwendungsgebiete sollen alternative Architekturansätze in Aussicht
+ gestellt werden.
+ 
 \end_layout
 
 \begin_layout Section
 Aufbau der Arbeit
+\end_layout
+
+\begin_layout Standard
+Brauche ich das hier?
 \end_layout
 
 \begin_layout Standard
@@ -1144,7 +1137,7 @@ status open
 
 
 \backslash
-todo{Stichpunkte Entfernen!}
+todo{Stichpunkte Ausformulieren!}
 \end_layout
 
 \end_inset
@@ -1157,12 +1150,15 @@ Teil 1
 \end_layout
 
 \begin_layout Itemize
-Unity Architektur, Komponentensystem, Objektlebenszyklus: Beschreiben und
- Probleme aufzeigen
+Grundlagen: Abhängigkeiten, Kopplung, Kohäsion, Dependency Injection, SOLID
 \end_layout
 
 \begin_layout Itemize
-Auf das Problem der Auflösung von Abhängigkeiten tiefer eingehen
+Beispielhafte Umsetzung DI
+\end_layout
+
+\begin_layout Itemize
+Vorteile und Möglichkeiten
 \end_layout
 
 \begin_layout Standard
@@ -1170,24 +1166,15 @@ Teil 2
 \end_layout
 
 \begin_layout Itemize
-Inversion Of Control als Lösung und alle verbundenen Begriffe beschreiben,
- Beispielhaft erläutern
+Analyse von Unity
 \end_layout
 
 \begin_layout Itemize
-Herkunft von Inversion Of Control: OO, Enterprise Architecture
+Architektur und Kommunikationsmittel
 \end_layout
 
 \begin_layout Itemize
-Anwendung von Inversion Of Control in Unity beschreiben
-\end_layout
-
-\begin_layout Itemize
-Funktionalität auf Basis des eigenen DIContainers erläutern
-\end_layout
-
-\begin_layout Itemize
-Anwendbarkeit in der Komponentenbasierten Welt von Unity kritisch betrachten
+Wertung: Notwendigkeit von DI
 \end_layout
 
 \begin_layout Standard
@@ -1195,40 +1182,15 @@ Teil 3
 \end_layout
 
 \begin_layout Itemize
+Implementation Inversion Of Control Container für Unity
+\end_layout
+
+\begin_layout Itemize
 Existierende Inversion Of Control Frameworks in Unity
 \end_layout
 
 \begin_layout Itemize
-StrangeIoC
-\end_layout
-
-\begin_layout Itemize
-Zenject
-\end_layout
-
-\begin_layout Itemize
-ADIC
-\end_layout
-
-\begin_layout Itemize
-Suice
-\end_layout
-
-\begin_layout Itemize
-MinMVC
-\end_layout
-
-\begin_layout Standard
-Teil 4
-\end_layout
-
-\begin_layout Itemize
-Beispiel Anwendung
-\end_layout
-
-\begin_layout Itemize
-Entwicklungsaufwand, Wartbarkeit, Erweiterbarkeit, Testbarkeit, Wiederverwendbar
-keit, Performance
+MVC(S) in StrangeIoC
 \end_layout
 
 \begin_layout Standard
@@ -1236,24 +1198,19 @@ Teil 5
 \end_layout
 
 \begin_layout Itemize
+Kritische Betrachtung DI
+\end_layout
+
+\begin_layout Itemize
+Anwendungsgebiete MVC(S) von StrangeIoC
+\end_layout
+
+\begin_layout Itemize
 Alternative Architekturansätze
 \end_layout
 
 \begin_layout Itemize
-Entity Component System
-\end_layout
-
-\begin_layout Standard
-Teil 6
-\end_layout
-
-\begin_layout Itemize
 Fazit
-\end_layout
-
-\begin_layout Itemize
-Entscheiden, für welche Anwendungsgebiete die Architekturen am besten geeignet
- sind/ob sie immer zu empfehlen sind
 \end_layout
 
 \begin_layout Chapter
