@@ -1218,41 +1218,20 @@ Grundlagen
 \end_layout
 
 \begin_layout Standard
-Lose Kopplung zwischen Softwareentitäten (Modulen, Klassen, Methoden) wird
+Geringe Kopplung unter Softwareentitäten (Modulen, Klassen, Methoden) wird
  als Indiz für gute Softwarearchitektur angesehen.
- Inversion Of Control und genauer Dependency Injection werden als Werkzeuge
- angesehen um lose Kopplung umzusetzen.
- In diesem Teil der Arbeit soll erläutert werden was Kopplung zwischen Modulen
- ist und wie diese Zustande kommt.
- 
-\end_layout
-
-\begin_layout Itemize
-Das Problem soll verstanden werden
-\end_layout
-
-\begin_layout Itemize
-Wie die Lösung (DI) in einer Konsolenanwendung umzusetzen ist
-\end_layout
-
-\begin_layout Itemize
-Was lose Kopplung ermöglicht
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-todo{Stichpunkte Entfernen!}
-\end_layout
-
-\end_inset
-
-
+ Inversion Of Control und genauer Dependency Injection sind Werkzeuge, die
+ dabei helfen sollen, lose Kopplung umzusetzen.
+ In diesem Teil der Arbeit soll zunächst erläutert werden, was Kopplung
+ zwischen Entitäten ist und wie diese Zustande kommt.
+ Es soll klar werden, warum hohe Kohäsion unter minimaler Kopplung anzustreben
+ ist.
+ Die Vorteile loser Kopplung sollen deutlich gemacht werden.
+ Inversion Of Control, Dependency Injection und die eng mit diesen Begriffen
+ SOLID-Prinzipien sollen beschrieben werden.
+ Zum besseren Verständnis der vorgestellten Prinzipien, Muster und Praktiken
+ soll lose Kopplung anhand eines Beispiels in einer Konsolenanwendung umgesetzt
+ werden.
 \end_layout
 
 \begin_layout Section
@@ -1311,7 +1290,7 @@ Eine Abhänigigkeit zwischen Entitäten entsteht, sobald eine Entität von
 \begin_layout Standard
 Kopplung steht im Kontrast zu dem Begriff der Kohäsion.
  Kohäsion beschreibt ein Maß für den inneren Zusammenhalt einer Softwareentität.
- Hohe Kohäsion liegt dann vor, wenn eine Entität nur Funktionalitäten aufweist
+ Hohe Kohäsion liegt dann vor, wenn eine Entität nur Funktionalitäten aufweist,
  die einer einzelnen, wohldefinierten Aufgabe dienen.
  In anderen Worten: Eine Entität weist eine hohe Kohäsion auf, wenn ihre
  Elemente in einem engen Zusammenhang stehen.
@@ -3053,6 +3032,20 @@ ten gekoppelt sind.
  so kann sie einfach ausgetauscht werden.
 \end_layout
 
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+todo{Genauer erläutern!}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Parallelisierung
 \end_layout
@@ -3064,6 +3057,20 @@ Lose Kopplung ermöglicht die parallele Entwicklung einer Softwareanwendung
 llen geeinigt werden.
  Die konkreten Implementationen sind nicht mehr relevant und können unabhängig
  voneinander im Parallelen umgesetzt werden.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+todo{Genauer erläutern!}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -3664,6 +3671,20 @@ reference "sec:Inversion-of-Control"
 
 \begin_layout Section
 Kommunikation und Abhängigkeiten
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+todo{Abschnitt überarbeiten!}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -5114,6 +5135,20 @@ Die Kontrolle über die Komposition von Objekten soll an einen sogenannten
  Control Containers in Unity beschrieben.
  Dabei soll besonders darauf eingegangen werden, wo aufgrund von Unitys
  Architektur einschränkungen gemacht werden müssen.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+todo{Stichpunkte entfernen!}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -8164,6 +8199,20 @@ Postconstruct
 \end_layout
 
 \begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+todo{Ansatzpunkte genauer erläutern oder weglassen!}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Aus diesen Gründen wird von dem Autor dieser Arbeit davon abgeraten, den
  präsentierten Container zur Entwicklung eines Spiels zu verwenden.
  In dem folgenden Abschnitt sollen ausgereiftere Dependency Injection Container
@@ -9363,8 +9412,26 @@ Es handelt sich um eine Implementation des Brettspiels Peg Solitaire.
  
 \end_layout
 
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+todo{Genauer erläutern oder weglassen!}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Chapter
 Kritische Betrachtung & Fazit
+\end_layout
+
+\begin_layout Section
+Fazit zur Kopplung in Unity
 \end_layout
 
 \begin_layout Section
@@ -9488,6 +9555,20 @@ description "High-Level Klassen sollen nicht von Low-Level Klassen abhängig sei
 \begin_inset CommandInset nomencl_print
 LatexCommand printnomenclature
 set_width "auto"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+todo{Begriffe Einfügen: Stub, Mock, Fake, }
+\end_layout
 
 \end_inset
 
