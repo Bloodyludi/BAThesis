@@ -8191,25 +8191,23 @@ Der Container sollte für eine ordnungsgemäße Entsorgung von Objekten sorgen.
 \end_layout
 
 \begin_layout Itemize
-Andere Injection Methoden: Method Injection
-\end_layout
-
-\begin_layout Itemize
-Postconstruct
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-todo{Ansatzpunkte genauer erläutern oder weglassen!}
-\end_layout
+Es ist derzeit nicht möglich Logik unmittelbar nach der Injection auszuführen.
+ In Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Implementation-des-Coroutine"
 
 \end_inset
 
-
+ wird diese Beschränkung umgangen, weitere Logik im Konstruktor ausgeführt
+ wird.
+ Die Gefahr hierbei ist jedoch, dass Properties zu diesem Zeitpunkt noch
+ nicht injected wurden.
+ Desweiteren sollte das Single-Responcibility-Principle gewahrt werden indem
+ im Konstruktor lediglich Initialisierungs-Logik ausgeführt wird.
+ Aus diesem Grund sollte ein weiteres Attribut namens Postconstruct vorgestellt
+ werden: Methoden die mit dem PostConstruct-Attribut versehen wurden, sollen
+ unmittelbar nach dem Injection-Prozess vom Container aufgerufen werden.
 \end_layout
 
 \begin_layout Standard
