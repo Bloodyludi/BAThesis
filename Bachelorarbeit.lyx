@@ -3114,24 +3114,21 @@ Testbarkeit
 \end_layout
 
 \begin_layout Standard
-Lose Kopplung ermöglicht, dass Module in Isolation betrachtet werden können.
- Vorhandene Funktionalität kann durch andere ersetzt werden.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-todo{Beispiel für Testbarkeit erläutern!}
-\end_layout
+Wie lose Kopplung die Testbarkeit einer Anwendung drastisch erleichtert,
+ lässt sich am besten Anhand eines Beispiels erläutern.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beispiel-Testability"
 
 \end_inset
 
-
+ zeigt die Implementation eines sehr simplen Spiels: Der Spieler soll das
+ Resultat eines Würfelwurfs erraten.
+ Mit der Roll-Methode der gezeigten GuessANumber-Klasse soll der Würfelwurf
+ ausgeführt werden.
+ Darauf folgend kann der Spieler durch den Aufruf der MakeGuess-Methode
+ den Versuch vornehmen das Ergebnis zu erraten.
 \end_layout
 
 \begin_layout Standard
@@ -3253,6 +3250,30 @@ public class GuessANumber
 }
 \end_layout
 
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+public interface IRandom
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	int Range(int min, int max);
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
 \end_inset
 
 
@@ -3263,7 +3284,9 @@ public class GuessANumber
 
 \begin_layout Plain Layout
 Beispiel einer durch Dependency Injection testbaren Klasse
-\end_layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Beispiel-Testability"
 
 \end_inset
 
@@ -3273,6 +3296,47 @@ Beispiel einer durch Dependency Injection testbaren Klasse
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die GuessANumber-Klasse hat eine volatile Abhängigkeit zu IRandom.
+ Diese Entscheidung wurde bewusst getroffen, da das Generieren einer Zufallsnumm
+er nicht deterministisch ist.
+ Die Abhängigkeit zu IRandom wird über Constructor Injection aufgelöst.
+ Eine Klasse die das IRandom-Interface implementiert, könnte mithilfe von
+ UnityEngine.Random oder System.Random umgesetzt werden.
+\end_layout
+
+\begin_layout Standard
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:GuessANumber-UnitTest"
+
+\end_inset
+
+ zeigt einen Unit-Test der sicherstellen soll, dass die MakeGuess-Methode
+ korrekt feststellen kann, ob richtig geraten wurde.
+ Um die GuessANumber-Klasse durch einen Unit-Test auf korrekte Funktionalität
+ prüfen zu können, muss das Resultat deterministisch sein.
+ Hierzu wird anstatt einer echten Implementation einer Random-Klasse ein
+ Stub des IRandom-Interfaces erzeugt.
+ Das Erzeugen eines Stubs kann durch Verwendung des Isolation-Frameworks
+ NSubstitute automatisiert werden: Durch Aufruf der Methode For<T> der Klasse
+ Substitute wird ein dynamischer Stub für IRandom erzeugt.
+ Der Stub wird so konfiguriert, dass er für jeden Aufruf der Range-Methode
+ - unabhängig von beiden Parametern - einen vorgegebenen Wert zurückgibt.
+ Das Ergebnis eines Würfelwurfs durch die Roll-Methode wird somit diesem
+ vorgegebenen Wert entsprechen.
+ Damit zu erwarten, dass der Aufruf der MakeGuess-Methode mit dem vorgegebenen
+ Wert true zurückgibt.
+ Die tatsächliche Funktionalität kann nun durch ein Assert-Statement überprüft
+ werden.
 \end_layout
 
 \begin_layout Standard
@@ -3332,16 +3396,6 @@ public class GuessANumberTests
 
 \begin_layout Plain Layout
 
-		var mockRandom = Substitute.For<IRandom>();
-\end_layout
-
-\begin_layout Plain Layout
-
-		var guessANumber = new GuessANumber(mockRandom);
-\end_layout
-
-\begin_layout Plain Layout
-
 		var expected = 6;
 \end_layout
 
@@ -3351,7 +3405,21 @@ public class GuessANumberTests
 
 \begin_layout Plain Layout
 
-		mockRandom.Range(0, 0).ReturnsForAnyArgs(expected);
+		var randomStub = Substitute.For<IRandom>();
+\end_layout
+
+\begin_layout Plain Layout
+
+		randomStub.Range(Arg.Any<int>(), Arg.Any<int>()).Returns(expected);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		var guessANumber = new GuessANumber(randomStub);
 \end_layout
 
 \begin_layout Plain Layout
@@ -3388,7 +3456,9 @@ public class GuessANumberTests
 
 \begin_layout Plain Layout
 Testen der GuessANumber Klasse
-\end_layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:GuessANumber-UnitTest"
 
 \end_inset
 
@@ -3398,6 +3468,21 @@ Testen der GuessANumber Klasse
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Lose Kopplung ermöglicht, dass Module in Isolation betrachtet werden können.
+ Durch Dependency Injection können zugrundeliegende Implementationen einer
+ Abstraktion durch Fakes, Mocks und Stubs ausgetauscht werden.
+ Es muss mit Bedacht auf die Testbarkeit einer Anwendung entschieden werden,
+ ob eine Abhängigkeit volatile oder stable ist.
+ Der sicherste Weg Testbarkeit zu gewährleisten, ist Test Driven Development
+ in Kombination mit Dependency Injection zu praktizieren.
 \end_layout
 
 \begin_layout Chapter
