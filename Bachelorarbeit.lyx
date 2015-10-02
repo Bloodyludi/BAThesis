@@ -182,8 +182,8 @@ todonotes
 \use_package stackrel 1
 \use_package stmaryrd 1
 \use_package undertilde 1
-\cite_engine basic
-\cite_engine_type default
+\cite_engine natbib
+\cite_engine_type authoryear
 \biblio_style plain
 \use_bibtopic false
 \use_indices false
@@ -1228,7 +1228,7 @@ Geringe Kopplung unter Softwareentitäten (Modulen, Klassen, Methoden) wird
  ist.
  Die Vorteile loser Kopplung sollen deutlich gemacht werden.
  Inversion Of Control, Dependency Injection und die eng mit diesen Begriffen
- SOLID-Prinzipien sollen beschrieben werden.
+ zusammenhängenden SOLID-Prinzipien sollen beschrieben werden.
  Zum besseren Verständnis der vorgestellten Prinzipien, Muster und Praktiken
  soll lose Kopplung anhand eines Beispiels in einer Konsolenanwendung umgesetzt
  werden.
@@ -1240,29 +1240,32 @@ Kopplung und Kohäsion
 
 \begin_layout Standard
 Kopplung ist ein Maß, das die Anzahl und Stärke von Abhängigkeiten unter
- Softwareentitäten einer Anwendung beschreibt.
+ Softwareentitäten einer Anwendung beschreibt (vgl.
+ 
 \begin_inset CommandInset citation
-LatexCommand cite
+LatexCommand citealp
 after "S. 2-3"
 key "Society2014"
 
 \end_inset
 
+).
  Ist eine Softwareentität direkt von der Implementation einer anderen Entität
  abhängig, so sind diese eng miteinander gekoppelt.
  Ziel ist es, die Anzahl und Stärke von Abhängigkeiten zu minimieren und
  so lose Kopplung umzusetzen.
- Martin Fowler beschreibt in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Fowler2001"
+ Martin Fowler beschreibt in dem Artikel 
+\begin_inset Quotes gld
+\end_inset
 
+Reducing Coupling
+\begin_inset Quotes grd
 \end_inset
 
  Kopplung wie folgt:
 \end_layout
 
-\begin_layout Verse
+\begin_layout Quote
 \begin_inset Quotes gld
 \end_inset
 
@@ -1272,6 +1275,13 @@ If changing one module in a program requires changing another module, then
 \end_inset
 
 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Fowler2001"
+
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1285,6 +1295,9 @@ Eine Abhänigigkeit zwischen Entitäten entsteht, sobald eine Entität von
  Wird sich hingegen auf eine Schnittstelle zur Kommunikation geeinigt, existiert
  lediglich eine Abhängigkeit zu eben dieser Schnittstelle.
  Die Entitäten selbst sind lose miteinander gekoppelt.
+ Die tatsächliche Implementation einer Entität wird erst zur Laufzeit durch
+ späte Bindung bekannt.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1292,8 +1305,24 @@ Kopplung steht im Kontrast zu dem Begriff der Kohäsion.
  Kohäsion beschreibt ein Maß für den inneren Zusammenhalt einer Softwareentität.
  Hohe Kohäsion liegt dann vor, wenn eine Entität nur Funktionalitäten aufweist,
  die einer einzelnen, wohldefinierten Aufgabe dienen.
- In anderen Worten: Eine Entität weist eine hohe Kohäsion auf, wenn ihre
+ Mit anderen Worten: Eine Entität weist eine hohe Kohäsion auf, wenn ihre
  Elemente in einem engen Zusammenhang stehen.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+todo {Quelle fuer Kohasion}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1302,7 +1331,7 @@ Kohäsion beschreibt wie gut Entitäten aufgeteilt wurden.
  Ein qualitativ hochwertiges Softwaredesign weist also hohe Kohäsion unter
  minimaler Kopplung auf.
  Im nächsten Abschnitt soll Inversion Of Control als Maßnahme präsentiert
- werden um lose Kopplung umzusetzen.
+ werden um minimale Kopplung umzusetzen.
 \end_layout
 
 \begin_layout Section
@@ -1319,7 +1348,7 @@ name "sec:Inversion-of-Control"
 \begin_layout Standard
 Im ursprünglichen Sinne beschreibt Inversion Of Control nach 
 \begin_inset CommandInset citation
-LatexCommand cite
+LatexCommand citeauthor
 key "Johnson1988"
 
 \end_inset
@@ -1339,39 +1368,45 @@ key "Johnson1988"
 \begin_inset Quotes grd
 \end_inset
 
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Johnson1988"
 
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Standard
 Frameworks diktieren die Architektur und den Kontrollfluss einer Anwendung.
  Sie definieren einen wiederverwendbaren Teil eines Softwaredesigns.
  Der vom Nutzer des Frameworks geschriebene, anwendungsspeziefische Code
- wird vom Framework aufgerufen.
- (vgl.
+ wird vom Framework aufgerufen (vgl.
  
 \begin_inset CommandInset citation
-LatexCommand cite
+LatexCommand citealp
 after "S. 27"
 key "Gamma1994"
 
 \end_inset
 
-) Der Nutzer gibt also die Kontrolle über den Fluss der Anwendung an das
+).
+ Der Nutzer gibt also die Kontrolle über den Fluss der Anwendung an das
  Framework.
  Die Kontrolle über den Anwendungsfluss ist somit invertiert: Es ist nicht
  der Nutzer der das Framework aufruft sondern das Framework den Code des
  Nutzers.
- Diese Tatsache wird oft als Hollywood-Prinzip bezeichnet: "Don't call us,
- we'll call you".
- (vgl.
+ Diese Tatsache wird oft auch als Hollywood-Prinzip bezeichnet: "Don't call
+ us, we'll call you" (vgl.
  
 \begin_inset CommandInset citation
-LatexCommand cite
+LatexCommand citealp
 key "Fowler2005"
 
 \end_inset
 
-)
+).
 \end_layout
 
 \begin_layout Standard
@@ -1398,14 +1433,15 @@ Inversion of Control Containers and the Dependency Injection pattern
 \begin_inset Quotes grd
 \end_inset
 
-
+ den Begriff Dependency Injection 
 \begin_inset CommandInset citation
-LatexCommand cite
+LatexCommand citep
+before "vgl."
 key "Fowler2004"
 
 \end_inset
 
- den Begriff Dependency Injection.
+.
 \end_layout
 
 \begin_layout Section
@@ -1414,11 +1450,11 @@ Dependency Injection
 
 \begin_layout Standard
 Seemann gibt in 
-\begin_inset CommandInset citation
-LatexCommand cite
-after "S. 4"
-key "Seemann2011"
+\begin_inset Quotes gld
+\end_inset
 
+Dependency Injection in .NET
+\begin_inset Quotes grd
 \end_inset
 
  eine sehr vage Definitition des Begriffs Dependency Injection:
@@ -1433,20 +1469,21 @@ Dependency Injection is a set of software design principles and patterns
 \begin_inset Quotes grd
 \end_inset
 
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+after "S. 4"
+key "Seemann2011"
 
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Standard
 Wobei alles an dieser Aussage stimmt, lässt sich der Kern von Dependency
  Injection auf eine einzige Praktik reduzieren.
- James Shore beschreibt diese in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Shore2006"
-
-\end_inset
-
- wie folgt:
+ James Shore beschreibt diese in auf seiner Website wie folgt:
 \end_layout
 
 \begin_layout Quote
@@ -1457,12 +1494,19 @@ Dependency injection means giving an object its instance variables.
 \begin_inset Quotes grd
 \end_inset
 
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Shore2006"
+
+\end_inset
+
 
 \end_layout
 
 \begin_layout Standard
 Anstatt, dass sich das Objekt selbst um die Erstellung seiner Abhängigkeiten
- - seiner Intanzvariablen - kümmert, wird diese Aufgabe an einen Dritten
+ -- seiner Instanzvariablen -- kümmert, wird diese Aufgabe an einen Dritten
  übergeben.
  Die Verwendung des benötigten Objekts ist von der Konfiguration des Objekts
  getrennt.
@@ -1477,14 +1521,31 @@ Doch dies allein genügt noch nicht: Um lose Kopplung mittels Dependency
  Martin geprägt und sind im allgemeinen als SOLID-Prinzipien bekannt.
 \end_layout
 
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+todo {Quelle SOLID}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 SOLID
 \end_layout
 
 \begin_layout Standard
 SOLID ist ein Akronym, welches für die folgenden Prinzipien steht: Das Single-Re
-sponsibility Prinzip, das Open/Closed Prinzip, das Liskov Substitution Prinzip,
- das Interface Segregation Prinzip und das Dependency-Inversion Prinzip.
+sponsibility Principle, das Open/Closed Principle, das Liskov Substitution
+ Principle, das Interface Segregation Principle und das Dependency-Inversion
+ Principle.
  Es handelt sich um eine Sammlung von Richtlinien, die eine saubere Softwarearch
 itektur ermöglichen sollen.
  An dieser Stelle wird auf eine ausführliche Beschreibung aller Prinzipien
@@ -1494,11 +1555,11 @@ itektur ermöglichen sollen.
 \end_layout
 
 \begin_layout Subsection
-Single-Responsibility Prinzip
+Single-Responsibility Principle
 \end_layout
 
 \begin_layout Standard
-Das Single-Responsibility Prinzip besagt, dass es niemals mehr als einen
+Das Single-Responsibility Principle besagt, dass es niemals mehr als einen
  Grund geben sollte um eine Klasse zu ändern.
  Darauf Folgend wird eine Verantwortung in dem Zusammenhang als ein 
 \begin_inset Quotes gld
@@ -1523,36 +1584,35 @@ Grund zur Änderung
 \end_layout
 
 \begin_layout Standard
-Wird das Single-Responsibility Prinzip gewahrt, so ist davon auszugehen,
- dass Klassen hohe Kohäsion aufweisen.
- Hohe Kohäsion ist jedoch nicht immer auf das Single-Responsibility Prinzip
+Wird das Single-Responsibility Principle gewahrt, so ist in der Regel davon
+ auszugehen, dass Klassen hohe Kohäsion aufweisen.
+ Hohe Kohäsion ist jedoch nicht immer auf das Single-Responsibility Principle
  zurückzuführen.
  So kann eine Klasse hohe Kohäsion aufweisen, aber trotzdem mehrere Verantwortun
 gen haben.
 \end_layout
 
 \begin_layout Standard
-Dependency Injection wendet das Single-Responsibility Prinzip an, indem
- Klassen die Verantwortung über die Erstellung von Instanzen ihrer Abhängigkeite
-n entzieht.
- (vgl.
+Dependency Injection wendet das Single-Responsibility Principle an, indem
+ es Klassen die Verantwortung über die Erstellung von Instanzen ihrer Abhängigke
+iten entzieht (vgl.
  
 \begin_inset CommandInset citation
-LatexCommand cite
+LatexCommand citealp
 after "S. 24"
 key "Seemann2011"
 
 \end_inset
 
-)
+).
 \end_layout
 
 \begin_layout Subsection
-Open/Closed Prinzip
+Open/Closed Principle
 \end_layout
 
 \begin_layout Standard
-Software-Einheiten (Klassen, Methoden, Funktionen) sollen offen für Erweiterung
+Softwareentitäten (Klassen, Methoden, Funktionen) sollen offen für Erweiterung,
  aber geschlossen für Modifikation sein.
  
 \begin_inset Quotes gld
@@ -1562,7 +1622,7 @@ Offen für Erweiterung
 \begin_inset Quotes grd
 \end_inset
 
- meint, dass es möglich sein soll, das Modul in seinem Umfang und Verhalten
+ meint, dass es möglich sein soll, die Entität in ihrem Umfang und Verhalten
  zu erweitern.
  
 \begin_inset Quotes gld
@@ -1572,36 +1632,35 @@ Geschlossen für Modifikation
 \begin_inset Quotes grd
 \end_inset
 
- zum anderen bedeutet, dass zur Erweiterung keine Änderungen an dem Modul
- notwendig sind.
+ zum anderen bedeutet, dass zur Erweiterung keine Änderungen an der Entität
+ an sich notwendig sind.
 \end_layout
 
 \begin_layout Standard
-Abstraktion ermöglicht die Umsetzung des Open/Closed Prinzips.
+Abstraktion ermöglicht die Umsetzung des Open/Closed Principles.
  Wird von einer abstrakten Basisklasse geerbt, so ist es möglich das Verhalten
  der Abstraktion zu ändern, ohne die Abstraktion selbst zu manipulieren.
- Die Entwurfsmuster Strategy und Template Method sind Beispiele für das
- Open/Closed Prinzip.
+ Die Entwurfsmuster Strategy und Template-Method sind Beispiele für das
+ Open/Closed Principle.
 \end_layout
 
 \begin_layout Standard
-Auch Dependency Injection setzt das Open/Closed Prinzip um, indem Abhängigkeiten
- lediglich in Form von Abstraktionen existieren.
- Dieses Prinzip ist eine Grundlage für lose Kopplung.
- (vgl.
+Auch Dependency Injection setzt das Open/Closed Principle um, indem Abhängigkeit
+en lediglich in Form von Abstraktionen existieren.
+ Dieses Prinzip ist eine wichtige Grundlage für lose Kopplung (vgl.
  
 \begin_inset CommandInset citation
-LatexCommand cite
+LatexCommand citealp
 after "S. 106"
 key "Seemann2011"
 
 \end_inset
 
-)
+).
 \end_layout
 
 \begin_layout Subsection
-Liskov Substitution Prinzip
+Liskov Substitution Principle
 \end_layout
 
 \begin_layout Standard
@@ -1609,44 +1668,42 @@ Das Liskov Substitution Prinzip beschreibt einer grundlegende Anforderung
  beim Einsatz von Vererbung: Untertypen einer Basisklasse sollen untereinander
  ersetzbar sein, ohne dabei die Verhalten des Programms selbst zu verändern.
  Das Programm selbst darf zu keinem Zeitpunkt einen Untertyp anders als
- ein anderen behandelt.
+ einen anderen Untertyp behandeln.
 \end_layout
 
 \begin_layout Standard
 Dependency Injection ermöglicht es, dass Abhängigkeiten beliebig austauschbar
  sind, solange sie die nötige Abstraktion implementieren.
  Dies ist jedoch nur möglich, wenn das Liskov Substitution Prinzip gewahrt
- wird.
- (vgl.
+ wird (vgl.
  
 \begin_inset CommandInset citation
-LatexCommand cite
+LatexCommand citealp
 after "S. 9-10"
 key "Seemann2011"
 
 \end_inset
 
-)
+).
 \end_layout
 
 \begin_layout Standard
 Dieses Prinzip kommt besonders beim Unit-Testing zum Vorschein: Abhängigkeiten
- eines System Under Test können durch Test Doubles ersetzt werden, ohne
- das Verhalten des Systems selbst zu verändern.
- (vgl.
+ eines Systems Under Test können durch Test Doubles ersetzt werden, ohne
+ das Verhalten des Systems selbst zu verändern (vgl.
  
 \begin_inset CommandInset citation
-LatexCommand cite
+LatexCommand citealp
 after "S.19"
 key "Seemann2011"
 
 \end_inset
 
-)
+).
 \end_layout
 
 \begin_layout Subsection
-Interface Segregation Prinzip
+Interface Segregation Principle
 \end_layout
 
 \begin_layout Standard
@@ -1661,41 +1718,40 @@ fat
 ) Interfaces zu nutzen, sollten diese in mehrere schlanke Interfaces aufgeteilt
  werden.
  Die Aufteilung soll nach Methodengruppen erfolgen, entsprechend wie sie
- von Modulen, die das Interface nutzen gebraucht werden.
- So wird gewährleistet, dass andere Module nur von Abstraktionen mit hoher
- Interfacekohäsion abhängig sind.
- Auch wenn diese Abstraktionen von einem einzigen nicht-kohäsiven Modul
+ von anderen Entitäten, die das Interface nutzen, gebraucht werden.
+ So wird gewährleistet, dass andere Entitäten nur von Abstraktionen mit
+ hoher Interfacekohäsion abhängig sind.
+ Auch wenn diese Abstraktionen von einer einzigen nicht-kohäsiven Entität
  implementiert werden.
 \end_layout
 
 \begin_layout Standard
-Das Interface Segregation Prinzip scheint zunächst nicht mit Dependency
+Das Interface Segregation Principle scheint zunächst nicht mit Dependency
  Injection im Zusammenhang zu stehen.
  Es ist eher eine Richtlinie die bei der Anwendung von Dependency Injection
  gewahrt werden sollte.
  Wird eine Abhängigkeit von einem einzigen großen Interface repräsentiert,
  lenkt dieses Interface in die Richtung einer konkreten Implementation.
- Die Folge ist, dass Abhängigkeiten schwieriger auszutauschen sind und Interface
-methoden implementieren, die sie eigentlich gar nicht benötigen um die Abhängigk
-eit zu erfüllen.
- (vgl.
+ Die Folge ist, dass Enitäten schwieriger auszutauschen sind, weil sie Interface
+methoden implementieren, die sie eigentlich gar nicht benötigen um eine
+ Abhängigkeit zu erfüllen (vgl.
  
 \begin_inset CommandInset citation
-LatexCommand cite
+LatexCommand citealp
 after "S. 284"
 key "Seemann2011"
 
 \end_inset
 
-)
+).
 \end_layout
 
 \begin_layout Subsection
-Dependency-Inversion Prinzip
+Dependency-Inversion Principle
 \end_layout
 
 \begin_layout Standard
-Das Dependency-Inversion Prinzip besteht aus zwei Teilen:
+Das Dependency-Inversion Principle besteht aus zwei Teilen:
 \end_layout
 
 \begin_layout Itemize
@@ -1709,12 +1765,12 @@ Abstraktionen sollten nicht von Details abhängen.
 \end_layout
 
 \begin_layout Standard
-Zum einen beschreibt das Dependency-Inversion Prinzip, dass die Architektur
+Zum einen beschreibt das Dependency-Inversion Principle, dass die Architektur
  einer Anwendung in Schichten erfolgen sollte.
  Dabei soll die abstraktere, höher liegende Schicht ihre Abhängigkeiten
  in Form von Interfaces deklarieren.
  Die ihr untergeordnete Schicht wird basierend auf diesen Interfaces realisiert.
- Folglich sind die übergeordnete Schichten nicht von untergeordneten Schichten
+ Folglich sind die übergeordneten Schichten nicht von untergeordneten Schichten
  abhängig.
  Stattdessen sind untergeordnete Schichten von den abstrakten Interfaces
  in den übergeordneten Schichten abhängig.
@@ -1722,8 +1778,25 @@ Zum einen beschreibt das Dependency-Inversion Prinzip, dass die Architektur
 \end_layout
 
 \begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+todo{Quelle fehlt!, Hierfür evtl.
+ eine Grafik zur Veranschaulichung}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Zum anderen beschreibt Martin eine weitere, allgemeinere Interpretation
- des Dependency-Inversion Prinzips:
+ des Dependency-Inversion Principle:
 \end_layout
 
 \begin_layout Quote
@@ -1741,14 +1814,14 @@ Depend on abstractions.
 So sollen Klassen keine Referenzen zu anderen konkreten Klassen halten,
  von ihnen ableiten oder Methoden ihrer Basisklasse überschreiben.
  Diese Praxis wurde bereits von der Gang of Four in 
-\begin_inset CommandInset citation
-LatexCommand cite
-after "S. 17-18"
-key "Gamma1994"
-
+\begin_inset Quotes gld
 \end_inset
 
- mit folgenden Worten beschrieben:
+Design Patterns - Elements of Reusable Object-Oriented Software
+\begin_inset Quotes grd
+\end_inset
+
+ mit den folgenden Worten beschrieben:
 \end_layout
 
 \begin_layout Quote
@@ -1759,12 +1832,20 @@ Program to an interface, not an implementation.
 \begin_inset Quotes grd
 \end_inset
 
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+after "S. 17-18"
+key "Gamma1994"
 
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Standard
 Die Deklaration von Abhängigkeiten in Form von Abstraktionen ist die Grundlage
- um Inversion Of Control mittels Dependency Injection umzusetzen.
+ um lose Kopplung mittels Dependency Injection umzusetzen.
  Späte Bindung ermöglicht es, dass die konkrete Implementation auf diesem
  Wege erst zur Laufzeit bekannt sein muss.
 \end_layout
@@ -1774,7 +1855,7 @@ Umsetzung von Dependency Injection
 \end_layout
 
 \begin_layout Standard
-Um zu erläutern wie die in den vorherigen Abschnitten erklärten Prinzipien
+Um zu erläutern, wie die in den vorherigen Abschnitten erklärten Prinzipien
  bei der Umsetzung von Inversion of Control mittels Dependency Injection
  zusammenspielen, soll ein Beispiel herangezogen werden.
  Anhand dieses Beispiels sollen Patterns die im direkten Zusammenhang zu
@@ -1788,7 +1869,7 @@ Ausgangssituation
 \end_layout
 
 \begin_layout Standard
-Eine gewünschte Funktionalität eines zu entwickelnden Spiels ist auszugeben,
+Eine gewünschte Funktionalität eines zu entwickelnden Spiels ist, auszugeben,
  dass eine verwundbare Entität schaden genommen hat.
  Die in Abbildung 
 \begin_inset CommandInset ref
@@ -1798,9 +1879,10 @@ reference "fig:Ausgangssituation"
 \end_inset
 
  dargestellte Klasse DamageRenderer setzt diese Funktionalität um.
- Zunächst scheint alles zu stimmen: Die Klasse beschränkt ihre Verantwortung
- auf eine einzige Funktionalität, formatiert die Information in ein lesbares
- Format und gibt diese in der Konsole aus.
+ Zunächst scheint alles zu stimmen.
+ Die Klasse beschränkt ihre Verantwortung auf eine einzige Funktionalität:
+ Sie formatiert die Information in ein lesbares Format und gibt diese in
+ der Konsole aus.
 \end_layout
 
 \begin_layout Standard
@@ -1889,7 +1971,7 @@ n Sprachen veröffentlicht werden soll.
  Lokalisierung ist eine gängige Anforderung für jegliche Art von Software.
  Es wird mit dem Refactoring begonnen und die Klasse EnglishLocalization
  extrahiert.
- Abbildung
+ Die Abbildung
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "fig:Extraction"
@@ -1897,7 +1979,7 @@ reference "fig:Extraction"
 \end_inset
 
  zeigt das Resultat.
- Die Verantwortung für die Lokalisierung wurde in eine allein dafür vorgesehene
+ Die Verantwortung über die Lokalisierung wurde in eine allein dafür vorgesehene
  Klasse verschoben.
 \end_layout
 
@@ -2068,8 +2150,8 @@ reference "fig:Deutsche-Lokalisierung"
  auszutauchen? Das Problem hierbei ist, dass DamageRenderer eine konkrete
  Abhängigkeit zu EnglishLocalization hat.
  Mit anderen Worten, sie sind eng miteinander gekoppelt.
- Die Folge ist, dass EnglishLocalization nicht ohne DamageRenderer zu ändern
- durch GermanLocalization ausgetauscht werden kann.
+ Die Folge ist, dass EnglishLocalization nicht -- ohne DamageRenderer zu
+ ändern -- durch GermanLocalization ausgetauscht werden kann.
 \end_layout
 
 \begin_layout Standard
@@ -2167,10 +2249,10 @@ reference "fig:Depend-Abstractions"
  ILocalizationService implementieren.
  Dadurch, dass DamageRenderer nur noch eine Variable des Interfaces ILocalizatio
 nService hält, lässt sich die konkrete Implementation austauschen.
- Dies ist jedoch immernoch nur möglich wenn DamageRenderer geändert wird.
+ Dies ist jedoch immer noch nur möglich, indem DamageRenderer geändert wird.
  Der Grund dafür ist, dass EnglishLocalization im Konstruktor von DamageRenderer
  instanziiert wird.
- Somit ist DamageRenderer immernoch eng mit EnglishLocalization gekoppelt.
+ Somit ist DamageRenderer weiterhin eng mit EnglishLocalization gekoppelt.
 \end_layout
 
 \begin_layout Standard
@@ -2402,13 +2484,14 @@ Injecting Dependencies
 \end_layout
 
 \begin_layout Standard
-Anstatt, dass sich eine Klasse selbst um die Auflösung ihrer Abhängigkeiten
- kümmert, sollte sie von Aussen mit diesen versorgt werden.
+Um die Klassen lose miteinander zu koppeln kommt an dieser Stelle der Einsatz
+ von Dependency Injection ins Spiel: Anstatt, dass sich eine Klasse selbst
+ um die Auflösung ihrer Abhängigkeiten kümmert, sollte sie von Aussen mit
+ diesen versorgt werden.
  Die Verantwortung über die Auflösung der Abhängigkeiten wird abgegeben.
  Die Klasse selbst macht lediglich deutlich, dass Sie ein Objekt benötigt,
  welches die abstrakten Bedürfnisse eines Interfaces umsetzt.
- In diesem Fall, die eines ILocalizationService.
- Die Klassen sind durch Dependency Injection lose miteinander gekoppelt.
+ In diesem Fall, die eines ILocalizationServices.
  Dependency Injection lässt sich auf unterschiedlichen Wegen umsetzten.
  Die gebräuchlichsten sind Constructor Injection und Property Injection.
 \end_layout
@@ -2427,9 +2510,9 @@ reference "fig:Beispiel-von-Constructor"
 
 \end_inset
 
- wird Constructor Injection in der DamageRenderer angewandt.
+ wird Constructor Injection in der DamageRenderer-Klasse angewandt.
  Eine Instanz von ILocalizationService muss bei Aufruf des Konstruktors
- bereitgestellt werden.
+ übergeben werden.
 \end_layout
 
 \begin_layout Standard
@@ -2441,7 +2524,7 @@ ch verfügbar ist, indem eine Instanziierung des Objektes (ein Konstruktoraufruf
  Eine Guard Clause stellt sicher, dass nicht null als Argument übergeben
  wird.
  Constructor Injection sollte in den meisten Fällen angewand werden, denn
- in den meisten Fällen ist die benötigte Abhängigkeit zwingend notwendig.
+ in den meisten Fällen ist eine Abhängigkeit zwingend notwendig.
  
 \end_layout
 
@@ -2607,9 +2690,10 @@ reference "fig:Beispiel-von-Property"
 \end_layout
 
 \begin_layout Standard
-Mit Properties lässt sich so das Open-Closed Principle umsetzen: Sie bieten
- eine optionale Abhängigkeit zur Erweiterung der Funktionalität einer Klasse
- ohne dabei die Klasse selbst zu modifizieren.
+Das Open-Closed Principle lässt sich somit auch mit Properties umsetzen:
+ Properties bieten die Möglichkeit eine optionale Abhängigkeit zur Erweiterung
+ der Funktionalität einer Klasse preiszugeben, ohne dabei die Klasse selbst
+ zu modifizieren.
 \end_layout
 
 \begin_layout Standard
@@ -2620,10 +2704,29 @@ Ein Nachteil ist, dass andere Klassen zu jeder Zeit Veränderungen an dem
 \end_layout
 
 \begin_layout Standard
-Oft hindert auch die Verwendung eines Frameworks die Verwendung von Constructor
- Injection, zum Beispiel, wenn dieses Framework vorscheibt, dass Klassen
- einen Default Constructor haben.
- In diesem Fall kann auch auf Property Injection zurückgegriffen werden.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+todo {Quelle hierfuer!}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In einigen Fällen muss -- aufgrund von Beschränkungen durch die Verwendung
+ von Frameworks wie z.B.
+ ASP.NET -- auf Constructor Injection verzichtet werden.
+ Das Framework schreibt das vorhandensein eined Default Construktors vor,
+ der zur Initialisierung genutzt wird.
+ In diesem Fällen kann auch alternativ auf Property Injection zurückgegriffen
+ werden.
 \end_layout
 
 \begin_layout Standard
@@ -2763,22 +2866,21 @@ In den letzten Abschnitten wurde verdeutlicht, dass Dependency Injection
 unkt der Applikation geschehen.
  Soweit möglich sollte die Initialisierungslogik aller Objekte an diesem
  zentralen Ort umgesetzt werden.
- Dieser zentrale Ort wird als Composition Root bezeichnet.
- (vgl.
+ Dieser zentrale Ort wird als Composition Root bezeichnet (vgl.
  
 \begin_inset CommandInset citation
-LatexCommand cite
+LatexCommand citealp
 after "S. 76-77"
 key "Seemann2011"
 
 \end_inset
 
-)
+).
 \end_layout
 
 \begin_layout Standard
-In einer Konsolenapplikation, wie dem gezeigten Beispiel, erfüllt die Main-Metho
-de die Vorraussetzungen für einen Composition Root: Sie ist der Einstiegspunkt
+In einer Konsolenanwendung, wie dem gezeigten Beispiel, erfüllt die Main-Methode
+ die Vorraussetzungen für einen Composition Root: Sie ist der Einstiegspunkt
  in die Anwendung und zugleich der höchste Punkt in der Objekthierarchie.
  Abbildung 
 \begin_inset CommandInset ref
@@ -2911,8 +3013,8 @@ Die Klasse oder das Modul existiert bereits.
 \end_layout
 
 \begin_layout Itemize
-Es ist zu erwarten ist, dass neue Versionen keine Änderungen enthalten werden
- die Auswirkungen auf den Programmcode haben werden.
+Es ist zu erwarten, dass neue Versionen der Abhängigkeit keine Änderungen
+ enthalten werden die Auswirkungen auf den Programmcode haben werden.
 \end_layout
 
 \begin_layout Itemize
@@ -2920,7 +3022,7 @@ Das Modul lediglich deterministische Algorithmen beinhaltet.
 \end_layout
 
 \begin_layout Itemize
-Es nicht zu erwarten ist, dass das Modul jemals durch ein anderes ausgetauscht
+Es ist nicht zu erwarten, dass das Modul jemals durch ein anderes ausgetauscht
  wird.
 \end_layout
 
@@ -2943,22 +3045,21 @@ Die Abhängigkeit existiert noch nicht.
 \end_layout
 
 \begin_layout Itemize
-Die Abhängigkeit nutzt eine thrid-party Library, die nicht auf allen Systemen
+Die Abhängigkeit nutzt eine Thrid-Party Library, die nicht auf allen Systemen
  vorhanden ist.
 \end_layout
 
 \begin_layout Itemize
-Die Abhängigkeit nichtdeterministisches Verhalten aufweist.
- (vgl.
+Die Abhängigkeit weist nichtdeterministisches Verhalten auf (vgl.
  
 \begin_inset CommandInset citation
-LatexCommand cite
+LatexCommand citealp
 after "S. 23-24"
 key "Seemann2011"
 
 \end_inset
 
-)
+).
 \end_layout
 
 \begin_layout Standard
@@ -2973,12 +3074,12 @@ Resultierende Vorteile und Möglichkeiten
 \end_layout
 
 \begin_layout Standard
-In den vorherigen Abschnitten wurde ausführlich beschrieben wie lose Kopplung
- umzusetzen ist.
+In den vorherigen Abschnitten wurde ausführlich beschrieben wie und warum
+ lose Kopplung umzusetzen ist.
  Jedoch sind eventuell die Gründe für lose Kopplung aufgrund des einfachen
  Beispiels noch nicht ganz klar geworden.
- Lose Kopplung trägt maßgeblich zu der Qualität eines Softwareproduktes
- bei.
+ Besonders große und komplexe Softwareprojekte profitieren maßgeblich von
+ loser Kopplung.
  Welche Faktoren genau beeinflusst werden, soll im Folgenden erläutert werden.
 \end_layout
 
@@ -2991,9 +3092,9 @@ Während der Entwicklung einer Anwendung werden neue Anforderungen bekannt
  und existierende Anforderungen beginnen sich zu verändern.
  Trotzdem muss die Anwendung erweiterbar und wartbar bleiben.
  Erweiterbarkeit wird problematischer je größer die Anwendung ist.
- In sehr großen Softwaresystemen ist es schwer abzusehen welche Auswirkungen
+ In sehr großen Softwareprojekten ist es schwer abzusehen welche Auswirkungen
  auch nur die kleinste Änderung hat.
- Aus diesem Grund ist es notwendig Module so autonom wie möglich zu halten.
+ Aus diesem Grund ist es notwendig, Module so autonom wie möglich zu halten.
  Dadurch, dass die Abhängigkeiten eines Modules auf Interfaces reduziert
  werden, haben Änderungen der konkreten Implementation keinen Einfluss auf
  sie.
@@ -3013,7 +3114,7 @@ Lose Kopplung setzt das Open/Closed Principle in die Tat um: Module sind
 Dependency Injection hilft dabei, Verantwortungen klarer aufzuteilen und
  zu definieren.
  Durch das Einhalten des Single Responcibility Principles wird es deutlicher
- wo Änderungen gemacht werden müssen.
+ an welchen Stellen Änderungen gemacht werden müssen.
  Oft genügt es eine konkrete Implementation durch eine andere auszutauschen
  um ein gewünschtes Verhalten zu erzielen.
  Dependency Injection macht dies trivial.
@@ -3083,8 +3184,7 @@ Testbarkeit
 
 \begin_layout Standard
 Wie lose Kopplung die Testbarkeit einer Anwendung drastisch erleichtert,
- lässt sich am besten Anhand eines Beispiels erläutern.
- Abbildung 
+ lässt sich am besten Anhand eines Beispiels erläutern: Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Beispiel-Testability"
@@ -3283,7 +3383,7 @@ er nicht deterministisch ist.
 \begin_layout Standard
 Abbildung 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand vref
 reference "fig:GuessANumber-UnitTest"
 
 \end_inset
@@ -3298,13 +3398,14 @@ reference "fig:GuessANumber-UnitTest"
  NSubstitute automatisiert werden: Durch Aufruf der Methode For<T> der Klasse
  Substitute wird ein dynamischer Stub für IRandom erzeugt.
  Der Stub wird so konfiguriert, dass er für jeden Aufruf der Range-Methode
- - unabhängig von beiden Parametern - einen vorgegebenen Wert zurückgibt.
+ -- unabhängig von beiden Parametern -- einen vorgegebenen Wert zurückgibt.
  Das Ergebnis eines Würfelwurfs durch die Roll-Methode wird somit diesem
  vorgegebenen Wert entsprechen.
- Damit zu erwarten, dass der Aufruf der MakeGuess-Methode mit dem vorgegebenen
- Wert true zurückgibt.
- Die tatsächliche Funktionalität kann nun durch ein Assert-Statement überprüft
- werden.
+ Damit ist zu erwarten, dass der Aufruf der MakeGuess-Methode mit dem vorgegeben
+en Wert true zurückgibt.
+ Die tatsächliche Funktionalität der Methode kann nun durch ein Assert-Statement
+ überprüft werden..
+ 
 \end_layout
 
 \begin_layout Standard
@@ -3463,9 +3564,9 @@ In dem letzten Kapitel wurde beschrieben, was lose Kopplung ist und wie
  umzusetzen.
  Es wurde beschrieben, dass lose Kopplung maßgeblich zu der Qualität des
  Softwareproduktes beiträgt.
- Dependency Injection wurde beispielhaft in einer Konsolenapplikation angewendet.
+ Dependency Injection wurde beispielhaft in einer Konsolenanwendung angewendet.
  In diesem Kapitel sollen relevante Unterschiede zwischen der klassischen
- objektorientierten Programmierung bei der Entwicklung einer Konsolenapplikation
+ objektorientierten Programmierung bei der Entwicklung einer Konsolenanwendung
  und der komponentenbasierten Architektur von Unity beschrieben werden.
  Gute und schlechte Praktiken bei der Arbeit mit Unity sollen erläutert
  werden.
@@ -3482,28 +3583,30 @@ Komponentenbasierte Architektur von Unity3D
 \begin_layout Standard
 Jede Spieleengine implementiert eine Form eines Game Object Models.
  Ein Game Object Model beschreibt Hilfsmittel, die es ermöglichen Entitäten
- innerhalb der Spielwelt zu modellieren und zu simulieren.
- 
+ innerhalb der Spielwelt zu modellieren und zu simulieren 
 \begin_inset CommandInset citation
-LatexCommand cite
+LatexCommand citep
 after "S. 854"
+before "vgl."
 key "Gregory2014"
 
 \end_inset
 
+.
  Meistens bestehen diese Hilfsmittel aus zwei Teilen: Einer visuellen Repräsenta
 tion der Spielobjekte innerhalb des Editors der Engine und einer Laufzeitumgebun
 g, die die Entwicklung neuer Spielobjekte ermöglicht.
  In jedem Fall wird ein Framework bereitgestellt, das die Konstruktion neuer
- Spielobjekte erlaubt.
+ Spielobjekte erlaubt 
 \begin_inset CommandInset citation
-LatexCommand cite
+LatexCommand citep
 after "S. 869"
+before "vgl."
 key "Gregory2014"
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
@@ -3531,8 +3634,9 @@ Es kann nur ein Merkmal als Basis für eine Vererbungshierarchie gewählt
  müssen in der Hierarchie nach oben verschoben werden und bewirken so, dass
  sie eventuell in Klassen vorhanden sind in denen sie nicht gebraucht werden.
  Das Problem kann in einigen Sprachen auch durch multiple Vererbung gelöst
- werden, was aber zu einem Deadly Diamond führen kann.
- Klassen von denen geerbt wird haben die selbe Basisklasse.
+ werden, was aber zu einem Deadly Diamond führen kann: Ein Deadly Diamond
+ entstehtm indem eine Klasse von zwei Klassen erbt, die wiederum von der
+ selben Basisklasse erben.
 \end_layout
 
 \begin_layout Standard
@@ -3547,7 +3651,7 @@ is a
 \begin_inset Quotes grd
 \end_inset
 
- Verhältnisses zu erweiteren, erfolgt die Komposition eines Spielobjekts
+ Verhältnisses zu erweitern, erfolgt die Komposition eines Spielobjekts
  aus einzelnen Komponenten über das 
 \begin_inset Quotes gld
 \end_inset
@@ -3559,15 +3663,16 @@ has a
  Verhältnis.
  In Unity werden Spielobjekte von der Klasse GameObject abgebildet.
  Ein GameObject fungiert als Knotenpunkt für eine variable Anzahl von Komponente
-n und hat kaum bis gar keine weitere Funktionalität.
- 
+n und hat kaum bis gar keine weitere Funktionalität 
 \begin_inset CommandInset citation
-LatexCommand cite
+LatexCommand citep
 after "S. 887"
+before "vgl."
 key "Gregory2014"
 
 \end_inset
 
+.
  Funktionalität wird erst durch das Anfügen von Komponenten hinzugefügt.
  Komponenten werden in Unity von der Klasse MonoBehaviour abgeleitet.
  
@@ -3653,6 +3758,22 @@ name "fig:Unity-Editor"
 \end_layout
 
 \begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+todo{Quelle fuer Grafik einfuegen}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Betrachtet man die in Abschnitt 
 \begin_inset CommandInset ref
 LatexCommand vref
@@ -3698,15 +3819,16 @@ Jede Komponente soll eine einzige Funktionalität kapseln und sie wiederverwendb
 r machen.
  Mit anderen Worten: Komposition anstelle von Vererbung soll es ermöglichen
  Funktionalitäten aus unterscheidlichen Bereichen in wiederverwendbare Komponent
-en aufzuteilen ohne sie miteinander zu koppeln.
- 
+en aufzuteilen ohne sie miteinander zu koppeln 
 \begin_inset CommandInset citation
-LatexCommand cite
+LatexCommand citep
 after "S. 213"
+before "vgl."
 key "Nystrom2014"
 
 \end_inset
 
+.
  In der Realität ist dies jedoch nur begrenzt möglich: Komponenten sind
  Teile eines größeren Ganzen und müssen somit kommunizieren und interagieren.
  Komponenten haben folglich Abhängigkeiten zueinander.
@@ -9037,14 +9159,16 @@ Mediation
 
 \begin_layout Standard
 Das Mediator-Muster beschreibt einen Weg der Interaktion zwischen Objekten
- über einen Vermittler.
+ über einen Vermittler
 \begin_inset CommandInset citation
-LatexCommand cite
+LatexCommand citep
 after "S. 273"
+before "vgl."
 key "Gamma1994"
 
 \end_inset
 
+.
  In StrangeIoC vermitteln Mediatoren zwischen View- und Anwendungslogik.
  Mediatoren interagieren im Auftrag ihres Views mit dem Rest des Frameworks
  und anders herum.
@@ -9654,7 +9778,7 @@ JabRef
 LatexCommand bibtex
 btprint "btPrintAll"
 bibfiles "bibtex-daten/bachelorarbeit-info"
-options "bibtotoc,bibtex-daten/unsrtdin"
+options "bibtotoc,natdin"
 
 \end_inset
 
