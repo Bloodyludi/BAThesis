@@ -1878,7 +1878,11 @@ reference "fig:Ausgangssituation"
 
 \end_inset
 
- dargestellte Klasse DamageRenderer setzt diese Funktionalität um.
+ dargestellte Klasse 
+\shape italic
+DamageRenderer
+\shape default
+ setzt diese Funktionalität um.
  Zunächst scheint alles zu stimmen.
  Die Klasse beschränkt ihre Verantwortung auf eine einzige Funktionalität:
  Sie formatiert die Information in ein lesbares Format und gibt diese in
@@ -1969,7 +1973,10 @@ Neue Anforderungen
 Im Verlauf der Entwicklung des Spieles wird klar, dass das Spiel in verschiedene
 n Sprachen veröffentlicht werden soll.
  Lokalisierung ist eine gängige Anforderung für jegliche Art von Software.
- Es wird mit dem Refactoring begonnen und die Klasse EnglishLocalization
+ Es wird mit dem Refactoring begonnen und die Klasse 
+\shape italic
+EnglishLocalization
+\shape default
  extrahiert.
  Die Abbildung
 \begin_inset CommandInset ref
@@ -2136,9 +2143,20 @@ name "fig:Extraction"
 \end_layout
 
 \begin_layout Standard
-Die Klasse DamageRenderer funktioniert immernoch wie im vorherigen Beispiel.
- Der Unterschied ist, dass DamageRenderer nun eine Abhängigkeit zu EnglishLocali
-zation besitzt.
+Die Klasse 
+\shape italic
+DamageRenderer
+\shape default
+ funktioniert immernoch wie im vorherigen Beispiel.
+ Der Unterschied ist, dass 
+\shape italic
+DamageRenderer
+\shape default
+ nun eine Abhängigkeit zu 
+\shape italic
+EnglishLocalization
+\shape default
+ besitzt.
  Wie kann es nun ermöglicht werden, die englische Lokalisierung mit der
  Deutschen in Abbildung 
 \begin_inset CommandInset ref
@@ -2147,11 +2165,29 @@ reference "fig:Deutsche-Lokalisierung"
 
 \end_inset
 
- auszutauchen? Das Problem hierbei ist, dass DamageRenderer eine konkrete
- Abhängigkeit zu EnglishLocalization hat.
+ auszutauchen? Das Problem hierbei ist, dass 
+\shape italic
+DamageRenderer
+\shape default
+ eine konkrete Abhängigkeit zu 
+\shape italic
+EnglishLocalization
+\shape default
+ hat.
  Mit anderen Worten, sie sind eng miteinander gekoppelt.
- Die Folge ist, dass EnglishLocalization nicht -- ohne DamageRenderer zu
- ändern -- durch GermanLocalization ausgetauscht werden kann.
+ Die Folge ist, dass 
+\shape italic
+EnglishLocalization
+\shape default
+ nicht -- ohne 
+\shape italic
+DamageRenderer
+\shape default
+ zu ändern -- durch 
+\shape italic
+GermanLocalization
+\shape default
+ ausgetauscht werden kann.
 \end_layout
 
 \begin_layout Standard
@@ -3560,7 +3596,7 @@ Analyse der Architektur von Unity3D
 
 \begin_layout Standard
 In dem letzten Kapitel wurde beschrieben, was lose Kopplung ist und wie
- Inversion of Control und genauer Dependency Injection, dabei hilft diese
+ Inversion of Control und genauer Dependency Injection, dabei helfen diese
  umzusetzen.
  Es wurde beschrieben, dass lose Kopplung maßgeblich zu der Qualität des
  Softwareproduktes beiträgt.
@@ -3617,8 +3653,8 @@ In klassischen objektorientierten Implementationen eines Game Object Models
  Diese Basisklasse enthält Funktionalität, die für alle Klassen notwendig
  ist.
  Ein Beispiel hierfür ist Serialisierung.
- Mit dem Wachstum des Projektes wächst auch die Hierarchie immer tiefer
- und weiter.
+ Mit Wachstum des Projektes wächst auch die Hierarchie immer tiefer und
+ weiter.
  Es folgt eine Reihe von Problemen: Klassen die sich tief in der Vererbungshiera
 rchie befinden, sind schwierig zu verstehen und zu verändern, da hierfür
  auch alle Basisklassen bekannt sein müssen.
@@ -3633,9 +3669,9 @@ Es kann nur ein Merkmal als Basis für eine Vererbungshierarchie gewählt
  an die Grenzen einer solchen Architektur: Die benötigten Funktionalitäten
  müssen in der Hierarchie nach oben verschoben werden und bewirken so, dass
  sie eventuell in Klassen vorhanden sind in denen sie nicht gebraucht werden.
- Das Problem kann in einigen Sprachen auch durch multiple Vererbung gelöst
+ Das Problem kann in einigen Sprachen auch durch Mehrfachvererbung gelöst
  werden, was aber zu einem Deadly Diamond führen kann: Ein Deadly Diamond
- entstehtm indem eine Klasse von zwei Klassen erbt, die wiederum von der
+ entsteht indem eine Klasse von zwei Klassen erbt, die wiederum von der
  selben Basisklasse erben.
 \end_layout
 
@@ -3651,7 +3687,7 @@ is a
 \begin_inset Quotes grd
 \end_inset
 
- Verhältnisses zu erweitern, erfolgt die Komposition eines Spielobjekts
+-Verhältnisses zu erweitern, erfolgt die Komposition eines Spielobjekts
  aus einzelnen Komponenten über das 
 \begin_inset Quotes gld
 \end_inset
@@ -3660,7 +3696,7 @@ has a
 \begin_inset Quotes grd
 \end_inset
 
- Verhältnis.
+-Verhältnis.
  In Unity werden Spielobjekte von der Klasse GameObject abgebildet.
  Ein GameObject fungiert als Knotenpunkt für eine variable Anzahl von Komponente
 n und hat kaum bis gar keine weitere Funktionalität 
@@ -3685,9 +3721,9 @@ Programmierung und Konfiguration
 \begin_layout Standard
 MonoBehaviours sind die Schnittstelle, die es Programmierern ermöglicht
  die Engine mit individuellem Verhalten zu erweitern um ein Spiel umzusetzen.
- Unity verwendet die .NET-kompatible und Laufzeitumgebung Mono um die plattformun
-abhängige Entwicklung von Komponenten in C# und UnityScript zu ermöglichen.
- Dem Nutzer stehen folglich alle gängigen Sprachfeatures wie Polymorphismus
+ Unity verwendet die .NET-kompatible Laufzeitumgebung Mono um die plattformunabhä
+ngige Entwicklung von Komponenten in C# und UnityScript zu ermöglichen.
+ Dem Nutzer stehen folglich objektorientierte Sprachfeatures wie Polymorphismus
  und Vererbung innerhalb der Komponenten zur Verfügung.
  Komponenten können durch die Implementierung von einer Reihe von vordefinierten
  Eventfunktionen Einfluss auf das Spielgeschehen nehmen.
@@ -3784,13 +3820,13 @@ reference "sec:Inversion-of-Control"
  gegebene Definition von Inversion Of Control, stellt man fest, dass diese
  auch auf Unity zutrifft.
  Die Kontrolle über die Komposition und Lebenszeit von Objekten ist bereits
- invertiert, sie liegt in den Händen von Unity.
+ invertiert: Sie liegt in den Händen von Unity.
  Ein Indiz hierfür ist, dass Unity keine Konstruktoren in MonoBehaviours
  zulässt.
  Es ist also nicht möglich Komponenten über einen Konstruktor mit ihren
  Abhängigkeiten zu versorgen.
- Aus diesem Grund stellt Unity alternative Wege zur Kommunikation mit anderen
- Komponenten bereit.
+ Aus diesem Grund stellt Unity alternative Wege zur Referenzierung und Kommunika
+tion mit anderen Komponenten bereit.
  Diese sollen im folgenden Abschnitt erläutert werden.
 \end_layout
 
@@ -3815,8 +3851,8 @@ todo{Abschnitt überarbeiten!}
 \end_layout
 
 \begin_layout Standard
-Jede Komponente soll eine einzige Funktionalität kapseln und sie wiederverwendba
-r machen.
+In Unity soll jede Komponente eine einzige Funktionalität kapseln und sie
+ wiederverwendbar machen.
  Mit anderen Worten: Komposition anstelle von Vererbung soll es ermöglichen
  Funktionalitäten aus unterscheidlichen Bereichen in wiederverwendbare Komponent
 en aufzuteilen ohne sie miteinander zu koppeln 
@@ -3856,12 +3892,11 @@ cts die ansonsten in keiner Relation zueinander stehen.
 In beiden Fällen kann die Kommunikation direkt oder indirekt erfolgen.
  Bei direkter Kommunikation ist es notwendig, dass entweder Sender oder
  Empfänger einander kennen.
- Eines der Objekte muss also eine Referenz zu dem anderen halten.
- Kommunikation erfolgt indirekt, wenn Sie über ein drittes Objekt \SpecialChar \nobreakdash-
- einem
- Vermittler \SpecialChar \nobreakdash-
- stattfindet.
- In jedem Fall wird eine Referenz auf ein weiteres Objekt benötigt.
+ Eines der Objekte hat also eine Abhängigkeit zu dem anderen.
+ Kommunikation ist indirekt, wenn Sie über ein drittes Objekt -- einem Vermittle
+r -- erfolgt.
+ In den meisten Fällen jedoch wird eine Referenz auf ein weiteres Objekt
+ benötigt und es existiert somit eine Abhängigkeit zu diesem.
 \end_layout
 
 \begin_layout Standard
@@ -3882,12 +3917,14 @@ name "sub:Referenzieren"
 \end_layout
 
 \begin_layout Standard
-Unity bietet unterschiedliche Möglichkeiten um Zugriff auf unterschiedliche
- Objekte zu erlangen.
- So werden zahlreiche Game Object Queries für die Inter-Objekt-Kommunikation
+Unity bietet unterschiedliche Möglichkeiten um Zugriff auf Spielobjekte
+ und Komponenten zu erlangen.
+ Es werden zahlreiche Game Object Queries für die Inter-Objekt-Kommunikation
  bereit gestellt.
- Um andere Komponenten referenzieren zu können, gibt es Component Queries.
- Desweiteren gibt es auch komponentenunabhängige Kommunikation über Events.
+ Um andere Komponenten referenzieren zu können, existieren sogenannte Component
+ Queries.
+ Desweiteren ist auch eine Kommunikation über Events und Messages möglich.
+ 
 \end_layout
 
 \begin_layout Subsubsection
@@ -3915,15 +3952,20 @@ SerializeField ist ein Attribut, das ermöglicht private Member einer Komponente
  Setzbare Datentypen sind primitive Datentypen wie int, float, bool und
  in Unity eingebaute Datentypen wie Vector, Quaternion und Color, sowie
  Strings, Enums und Structs.
- Desweiteren ist es möglich Referenzen zu Klassen und Objekten durch drag-and-dr
+ Desweiteren ist es möglich Referenzen zu Klassen und Objekten durch Drag-and-Dr
 op im Editor zu setzen.
  Dabei ist zu beachten, dass diese Objekte vom Typ UnityEngine.Object ableiten
  müssen.
- Es ist also möglich andere Komponenten oder Spielobjekte zu referenzieren.
- Jedoch ist es aufgrund dieser Limitierung nicht möglich, Interfaces im
- Editor zugänglich zu machen.
- Neben Variablen mit dem SerializeField-Attribut werden Variablen, die mit
- dem Zugriffsmodifizierer public gekennzeichnet wurden im Editor zugänglich
+ Es ist also nur möglich andere Komponenten oder Spielobjekte zu referenzieren.
+ Aufgrund dieser Limitierung ist es nicht möglich, Interfaces im Editor
+ zugänglich zu machen.
+ Mit dem SerializeField-Attribut lässt sich somit keine lose Kopplung umsetzen.
+ 
+\end_layout
+
+\begin_layout Standard
+Neben Variablen mit dem SerializeField-Attribut werden auch Variablen, die
+ mit dem Zugriffsmodifizierer public gekennzeichnet wurden im Editor zugänglich
  gemacht.
  Dies ist jedoch ausdrücklich nicht zu empfehlen, da so die Datenkapselung
  des Objektes gebrochen wird.
@@ -4120,11 +4162,19 @@ public Component GetComponentInParent(Type t);
 
 \begin_layout Standard
 Alle GetComponent-Methoden spezifizieren einen Typparameter T als Suchkriterium.
- Da T nicht weiter \SpecialChar \nobreakdash-
- zum Beispiel auf UnityEngine.Object \SpecialChar \nobreakdash-
- eingeschränkt wird,
- ist es Möglich, anstatt konkreten Komponenten auch Komponenten anhand eines
- Interfaces zu finden.
+ Da T nicht weiter -- zum Beispiel auf UnityEngine.Object -- eingeschränkt
+ wird, ist es möglich, anstatt konkreten Komponenten auch Komponenten anhand
+ eines Interfaces zu finden.
+ Enge Kopplung zu einer konkreten Implementation einer Komponente entsteht
+ so nicht.
+ Dennoch ist GetComponent keine optimale Lösung: Die Komponente selbst kümmert
+ sich um die Auflösung ihrer Abhängigkeiten.
+ GetComponent funktioniert entegengesetzt zum Hollywood-Prinzip.
+ Es ist von Aussen nicht sichtbar, dass die Komponente Abhängigkeiten hat.
+ Ohne die Implementation der Komponente zu kennen, kann keine Aussage darüber
+ getroffen werden, welche Abhängigkeiten notwendig sind damit sie funktioniert.
+ Die Komponente kann nur in Verbindung mit anderen Komponenten als GameObject
+ getestet werden.
 \end_layout
 
 \begin_layout Standard
@@ -4235,7 +4285,7 @@ Singleton und Statics
 \begin_layout Standard
 Singletons stellen sicher, dass nur eine Instanz einer Klasse gibt, auf
  welche ein globaler Zugriffspunkt existiert.
- Hier mit aufgeführt, weil sie in Unitz alternativ zu FindObjectOfType genutzt
+ Hier mit aufgeführt, weil sie in Unity alternativ zu FindObjectOfType genutzt
  werden können, mit der Beschränkung, dass sie auf eine Instanz limitiert
  sind.
  Abb.
@@ -4389,12 +4439,11 @@ name "fig:Singleton"
 
 \begin_layout Standard
 Diese Form des Singletons erlaubt dem Objekt die Funktionalitäten eines
- MonoBehaviours - wie dem Update Loop - zu nutzen.
- Sollten diese Funktionalitäten nicht notwendig sein, oder soll der Singleton
- Lazy intitalisiert werden, kann auch ein klassischer Singleton nach GoF
- verwendet werden.
+ MonoBehaviours -- wie dem Update Loop -- zu nutzen.
+ Sollten diese Funktionalitäten nicht notwendig sein, kann auch ein klassischer
+ Singleton nach der Gang Of Four verwendet werden.
  Sollte gar keine Vererbung notwendig sein, gibt es oft jedoch gar keinen
- Grund ein Singleton zu implementierten.
+ Grund ein Singleton zu implementieren.
  Stattdessen kann eine statische Klasse verwendet werden.
 \end_layout
 
@@ -4689,7 +4738,7 @@ UnityEvents bieten somit eine Möglichkeit Sender von Empfänger komplett
  Andererseits gibt es auch hier viel Raum zur Fehlkonfiguration.
  Es ist nicht im Programmcode ersichtlich ob und wer die Subscriber eines
  Events sind.
- Genauso wenig ist ersichtlich ob eine als öffentlich gekennzeichnete Methode
+ Genauso wenig ist ersichtlich, ob eine als öffentlich gekennzeichnete Methode
  als Callback genutzt wird oder nicht.
  Oft werden Methoden und Events auf die keine Referenzen im Programmcode
  existieren einfach gelöscht.
@@ -5137,20 +5186,16 @@ Unitys Komponentenbasierte Architektur hilft dabei Klassen mit nur einer
  Verantwortung zu erstellen.
  Spielobjekte lassen sich durch Komposition aus Komponenten in der Szenehierarch
 ie arrangieren.
- Sobald Komponenten jedoch Kommunizieren müssen oder Abhängigkeiten zu anderen
- Objekten haben, muss sich für ein Kommunikationsmittel entschieden werden.
+ Um zu koordinieren müssen Komponenten untereinander kommunizieren.
  Unity stellt unterschiedliche Wege zur Kommunikation mit anderen Komponenten
  bereit.
+ Durch Verwendung dieser Kommunikationsmittel entstehen Abhängigkeiten und
+ auch Kopplung.
  Eine Sache haben jedoch alle Methoden miteinander gemeinsam: Das andere
  Objekt muss eine Komponente sein.
  Dies führt dazu, dass Objekte nur aus dem Grund der Kommunikation von MonoBehav
 iour ableiten.
- 
-\end_layout
-
-\begin_layout Itemize
-Scripts about never affect just one object.
- Sometimes they do not affect an object at all
+ Ein Beispiel hierfür sind sogenannte Manager: Komponenten, die an 
 \end_layout
 
 \begin_layout Itemize
