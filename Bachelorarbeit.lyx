@@ -5260,15 +5260,16 @@ Dependency Injection in Unity3D
 \end_layout
 
 \begin_layout Standard
-Aus dem Fazit des letzten Kapitels geht hervor, dass keine der in Unity
+Aus dem Fazit des letzten Kapitels geht hervor, dass keiner der in Unity
  zur Verfügung stehenden Kommunikationsmechanismen den gewünschten Ansprüchen
- entsprechen.
+ entspricht.
  Das Ziel lose Kopplung in Unity umzusetzen, besteht weiterhin.
- Weiter wurde im letzten Kapitel festgestellt, das Unity Programmierer in
- vieler Hinsicht einschränkt.
+ Weiter wurde im letzten Kapitel festgestellt, dass Unity Programmierer
+ in vieler Hinsicht einschränkt.
  Kommunikation ist auf die in der Szene existierenden Spielobjekte und deren
  Komponenten beschränkt.
- Zudem ist die Kontrolle über die Komposition von Objekten bereits invertiert.
+ Es wurde festgestellt, dass die Kontrolle über die Komposition von Objekten
+ bereits invertiert ist.
  In diesem Kapitel soll beschrieben werden, wie es dennoch ermöglich wurde
  Dependency Injection in Unity umzusetzen.
  
@@ -5313,7 +5314,7 @@ In Unity ist diese Automatisierung sogar notwendig.
  zu versorgen.
  Es existiert kein klarer Einstiegspunkt in die Anwendung der es ermöglichen
  würde Komponenten von aussen mit ihren Abhängigkeiten zu versorgen.
- Beim laden einer Szene werden alle sich in ihr befindlichen Spielobjekte
+ Beim Laden einer Szene werden alle sich in ihr befindlichen Spielobjekte
  instanziiert.
 \end_layout
 
@@ -5322,7 +5323,7 @@ Die Kontrolle über die Komposition von Objekten soll an einen sogenannten
  Inversion Of Control Container abgegeben werden.
  Im Composition Root wird vom Nutzer lediglich die Konfiguration des Containers
  vorgenommen.
- Die zu instanziierenden Typen werden registriert.
+ Die zu instanziierenden Typen werden an diesem Ort beim Container registriert.
  Der Container kümmert sich um alles weitere: Er versorgt alle Klassen mit
  ihren registrierten konkreten Abhängigkeiten und managt die Lebenszeit
  aller Objekte.
@@ -5330,56 +5331,6 @@ Die Kontrolle über die Komposition von Objekten soll an einen sogenannten
  Control Containers in Unity beschrieben.
  Dabei soll besonders darauf eingegangen werden, wo aufgrund von Unitys
  Architektur einschränkungen gemacht werden müssen.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-todo{Stichpunkte entfernen!}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-Die Kontrolle über die Komposition von Objekten ist bereits invertiert,
- Sie liegt in den Händen von Unity
-\end_layout
-
-\begin_layout Itemize
-Es gibt keine Konstruktoren
-\end_layout
-
-\begin_layout Itemize
-Die Instanziierung und Ausführung von Spielobjekten und Komponenten wird
- von Unity übernommen
-\end_layout
-
-\begin_layout Itemize
-Soweit nicht anders spezifiziert, erfolgt die Aufrufreihenfolge von Scripten
- zufällig nach der Reihenfolge in der sie geladen werden
-\end_layout
-
-\begin_layout Itemize
-Es ist möglich, eine Reihenfolge in den Script Execution Order settings
- anzugeben
-\end_layout
-
-\begin_layout Itemize
-Aufgrund der fehlender Main und Constructors ist es nicht möglich Scripte
- von aussen mit ihren Abhängigkeiten zu versorgen
-\end_layout
-
-\begin_layout Itemize
-Aus diesem Grund stellt unity wege bereit, wie das Script seine Abhängigkeiten
- auflösen kann
 \end_layout
 
 \begin_layout Section
