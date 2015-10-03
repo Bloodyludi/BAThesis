@@ -5186,52 +5186,73 @@ Unitys Komponentenbasierte Architektur hilft dabei Klassen mit nur einer
  Verantwortung zu erstellen.
  Spielobjekte lassen sich durch Komposition aus Komponenten in der Szenehierarch
 ie arrangieren.
- Um zu koordinieren müssen Komponenten untereinander kommunizieren.
- Unity stellt unterschiedliche Wege zur Kommunikation mit anderen Komponenten
- bereit.
+ Um koordinieren zu können, müssen Komponenten miteinander kommunizieren.
+ Unity stellt dafür unterschiedliche Wege zur Kommunikation mit anderen
+ Komponenten bereit.
  Durch Verwendung dieser Kommunikationsmittel entstehen Abhängigkeiten und
- auch Kopplung.
- Eine Sache haben jedoch alle Methoden miteinander gemeinsam: Das andere
- Objekt muss eine Komponente sein.
- Dies führt dazu, dass Objekte nur aus dem Grund der Kommunikation von MonoBehav
-iour ableiten.
- Ein Beispiel hierfür sind sogenannte Manager: Komponenten, die an 
-\end_layout
-
-\begin_layout Itemize
-other objects can only be created within components
-\end_layout
-
-\begin_layout Itemize
-unless they are a singleton
-\end_layout
-
-\begin_layout Itemize
-No way to keep state (data) independent of a game object
-\end_layout
-
-\begin_layout Itemize
-This forces Developers to Create “Manager” GameObjects
-\end_layout
-
-\begin_layout Itemize
-Polymorphismus kann trotzdem genutzt werden
+ damit eine Form von Kopplung.
+ Einige Methoden ermöglichen zwar lose Kopplung, aber nicht durch Inversion
+ Of Control.
+ Eine Sache haben jedoch haben alle Kommunikationsmittel gemeinsam: Objekte
+ müssen Komponenten oder Spielobjekte sein.
+ Dies führt dazu, dass Objekte, um überhaupt kommunizieren zu können, von
+ MonoBehaviour ableiten und an Spielobjekte angehängt werden.
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-todo{Stichpunkte Entfernen!}
+Der Architektur von Unity fehlt ein Mittel zum Umgang mit geteilter Logik,
+ die keinem einzelnen Spielobjekt zugeordnet werden kann.
+ Es wird sich in der Regel auf einem von zwei Wegen Abhilfe geschaffen:
+ 
 \end_layout
 
+\begin_layout Itemize
+Durch die Erstellung von sogenannten Manager- und Controllerobjekten, die
+ an ansonsten 
+\begin_inset Quotes gld
 \end_inset
 
+leere
+\begin_inset Quotes grd
+\end_inset
 
+ Spielobjekte angehängt werden.
+\end_layout
+
+\begin_layout Itemize
+Durch Singletons und statische Klassen, die globalen Zugriff ermöglichen.
+\end_layout
+
+\begin_layout Standard
+Solche Klassen haben oft keine klar definierten Aufgaben.
+ Sie wachsen mit der Zeit und werden somit zu Gottobjekten.
+ Managerobjekte verletzen das Single-Responcibility Principle somit gleich
+ auf mehreren Ebenen: Sie vermischen Darstellungs- mit Anwendungslogik indem
+ sie als Spielobjekte in der Szene existieren und sie haben oft mehr als
+ nur eine Aufgabe.
+ Singletons verletzen das Single-Responcibility Principle insbesondere,
+ indem sie ihre Erstellung mit anderer Anwendungslogik mischen.
+ 
+\end_layout
+
+\begin_layout Standard
+Durch die Referenzierung von Singletons, statischen Klassen oder Managern
+ mittels 
+\begin_inset Quotes gld
+\end_inset
+
+Find
+\begin_inset Quotes grd
+\end_inset
+
+-Methoden wird der Rest der Anwendung eng mit diesen gekoppelt.
+ Es wird unmöglich einzelne Komponenten zu testen und in anderen Projekten
+ wiederzuverwenden.
+ Es besteht folglich auch in Unity das Bedürfnis nach einer Alternative,
+ die es ermöglicht lose Kopplung umzusetzen ohne dabei die Kommunikation
+ auf Komponenten oder Spielobjekte zu beschränken.
+ Im nächsten Kapitel wird beschrieben wie Dependency Injection in Unity
+ umgesetzt werden kann, um diese Ansprüche zu erfüllen.
 \end_layout
 
 \begin_layout Chapter
@@ -5245,8 +5266,9 @@ Aus dem Fazit des letzten Kapitels geht hervor, dass keine der in Unity
  Das Ziel lose Kopplung in Unity umzusetzen, besteht weiterhin.
  Weiter wurde im letzten Kapitel festgestellt, das Unity Programmierer in
  vieler Hinsicht einschränkt.
- Unter Anderem ist die Kontrolle über die Komposition von Objekten bereits
- invertiert.
+ Kommunikation ist auf die in der Szene existierenden Spielobjekte und deren
+ Komponenten beschränkt.
+ Zudem ist die Kontrolle über die Komposition von Objekten bereits invertiert.
  In diesem Kapitel soll beschrieben werden, wie es dennoch ermöglich wurde
  Dependency Injection in Unity umzusetzen.
  
