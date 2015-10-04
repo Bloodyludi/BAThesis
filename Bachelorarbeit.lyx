@@ -944,9 +944,13 @@ Motivation
 \end_layout
 
 \begin_layout Standard
-Unity hat sich in den letzten Jahren zur einer der führenden Spieleengines
+Unity hat sich in den letzten Jahren zu einer der bedeutendsten Spieleengines
  entwickelt.
- Mit über 45% des globalen Marktanteils unter Spieleengines
+ Mit über 45
+\begin_inset space ~
+\end_inset
+
+% des globalen Marktanteils unter Spieleengines
 \begin_inset Foot
 status open
 
@@ -956,13 +960,13 @@ http://unity3d.com/public-relations
 
 \end_inset
 
- trägt Unity maßgeblich an dem Independent Videogame Boom der letzten Jahre
+ trägt Unity maßgeblich zu dem Independent Videogame Boom der letzten Jahre
  bei.
- Unity ermöglicht die plattformunabhägige Erstellung von 2D und 3D Spielen.
+ Unity ermöglicht die plattformunabhägige Erstellung von 2D- und 3D-Spielen.
  Dies hat besonders auf dem fragmentierten Markt der mobilen Spieleindustrie
  Anklang gefunden.
  Mit sich fortlaufend verbessernder Performance und Rendertechniken sind
- immer ambitioniertere Projekte möglich.
+ fortlaufend ambitioniertere Projekte möglich.
  Dies bewegt nicht nur Indieentwickler und kleine Teams dazu, sich die Vorteile
  der Engine zunutze zu machen: Unity findet immer mehr Einzug in professionelle
  Spieleprojekte mit mittleren und großen Teams.
@@ -978,8 +982,16 @@ http://unity3d.com/public-relations
 
 \begin_layout Standard
 Schaut man sich auf den zahlreichen Websites, Blogs und Foren über Unity
- um, scheinen diese Anforderungen Unity's Schwachstelle zu sein: Frustration
- und Beschwerden über entstehenden Spaghetti-Code
+ um, scheinen diese Anforderungen Unitys Schwachstelle zu sein: Frustration
+ und Beschwerden über entstehenden 
+\begin_inset Quotes gld
+\end_inset
+
+Spaghetti
+\begin_inset Quotes grd
+\end_inset
+
+-Code
 \begin_inset Foot
 status open
 
@@ -990,7 +1002,7 @@ ground_unitys/
 
 \end_inset
 
-, Kritik an der Komponentenbasierten Architektur
+, Kritik an der komponentenbasierten Architektur
 \begin_inset Foot
 status open
 
@@ -1026,9 +1038,9 @@ http://www.namekdev.net/2014/06/why-i-hate-unity3d-popularity/
 
 \begin_layout Standard
 Oft sollen die Ursachen gerade die Dinge sein, die unerfahrenen Programmierern
- den einfachen Umgang mit Unity ermöglichen.
- Unter diesen Ursachen ist eine Sache so gut wie immer vertreten: Die Auflösung
- von Abhängigkeiten und Kommunikation zwischen Objekten.
+ den einfachen Einstieg in Unity ermöglichen.
+ Eine Ursache ist so gut wie immer vertreten: Die Auflösung von Abhängigkeiten
+ und die Kommunikation zwischen Objekten.
  Enge Kopplung von Abhängigkeiten zwischen Objekten führt zu Starrheit und
  Zerbrechlichkeit bei Veränderung des Programmcodes.
  In der objektorientierten Programmierung ist dieses Problem seit langem
@@ -1042,7 +1054,7 @@ Oft sollen die Ursachen gerade die Dinge sein, die unerfahrenen Programmierern
 \begin_layout Standard
 Nun implementiert Unity keine klassische objektorientierte Hierarchie, sondern
  eine komponentenbasierte Architektur.
- Trotzdem haben auch für Unity eine Handvoll Inversion of Control Frameworks
+ Trotzdem haben auch für Unity eine Handvoll Inversion Of Control Frameworks
  das Licht der Welt erblickt.
  
 \end_layout
@@ -1053,39 +1065,39 @@ Zielsetzung
 
 \begin_layout Standard
 In dieser Arbeit wird sich auf ein Problem beschränkt: Die Kopplung von
- Abhängigkeiten zwischen Modulen in Unity.
+ Abhängigkeiten zwischen Entitäten in Unity.
  Ziel dieser Arbeit ist es die Umsetzung von Spielen in Unity zu ermöglichen,
- ohne dessen Module eng miteinander zu koppeln.
+ ohne dessen Entitäten eng miteinander zu koppeln.
 \end_layout
 
 \begin_layout Standard
 Zunächst soll die Problematik der Kopplung beschrieben werden.
- Vorraussetzung dafür ist, zu erläutern, was Abhängigkeiten sind und warum
- Sie entstehen.
- Weiter sollen auch die Folgen von enger Kopplung erläutert werden.
- Dabei soll klar werden, dass Kopplung direkten Einfluss auf die Erweiterbarkeit
- des Programmcodes hat.
+ Voraussetzung dafür ist, zu erläutern, was Abhängigkeiten sind und warum
+ sie entstehen.
+ Weiter sollen die Folgen von enger Kopplung erläutert werden.
+ Dem Leser soll verdeutlicht werden, dass Kopplung direkten Einfluss auf
+ die Testbarkeit und Erweiterbarkeit des Programmcodes hat.
  
 \end_layout
 
 \begin_layout Standard
-Weiter soll anhand eines Beispiels erklärt werden, wie lose Kopplung mittels
- Dependency Injection umzusetzen ist.
+Nachfolgend soll anhand eines Beispiels erklärt werden, wie lose Kopplung
+ mittels Dependency Injection umzusetzen ist.
  In diesem Zusammenhang sollen auch zugrunde liegende Prinzipien erläutert
  werden.
 \end_layout
 
 \begin_layout Standard
 Infolgedessen soll der Schritt zu Unity getätigt werden.
- Es soll untersucht werden inwiefern Unity von einer herkömmlichten objektorient
+ Es soll untersucht werden, inwiefern Unity von einer herkömmlichen objektorient
 ierten Hierarchie abweicht und ob dies hinderlich dabei ist, lose Kopplung
  umzusetzen.
- Es sollen häufig verwendete Praktiken wie das Singleton-Pattern und Managerobje
-kte untersucht werden.
- Wie später im Detail erklärt wird, entstehen Abhängigkeiten unter anderem
- dadurch, dass Objekte miteinander kommunizieren müssen.
+ Es sollen häufig verwendete Praktiken wie das Singletonpattern und Managerobjek
+te untersucht werden.
+ Wie im Verlauf der Arbeit im Detail erklärt wird, entstehen Abhängigkeiten
+ unter anderem dadurch, dass Objekte miteinander kommunizieren müssen.
  Unity stellt unterschiedliche Wege der Kommunikation bereit.
- Es soll untersucht werden, ob diese Wege es bereits ermöglichen lose Kopplung
+ Es soll nachgeprüft werden, ob diese Wege es bereits ermöglichen lose Kopplung
  umzusetzen.
  Auf Basis dieser Erkenntnisse soll ein Zwischenfazit gezogen werden, um
  die Notwendigkeit eines Inversion Of Control Frameworks für Unity zu verdeutlic
@@ -1096,22 +1108,22 @@ hen.
 Im nächsten Teil dieser Arbeit soll ein Inversion Of Control Container für
  Unity implementiert werden.
  Dieser Container soll Dependency Injection in MonoBehaviours automatisieren
- und somit die lose Kopplung von Komponenten ermöglichen.
+ und somit die lose Kopplung unter MonoBehaviours ermöglichen.
  Die technische Umsetzung soll erläutert werden.
- Mit Unity in Verbinung stehende Hürden bei der Umsetzung sollen überwunden
- und beschrieben werden.
- Weiter soll ein Überblick über die vorhandenen Inversion Of Control Frameworks
- für Unity geliefert werden.
+ Die mit Unity in Verbindung stehenden Hürden bei der Umsetzung sollen überwunde
+n und beschrieben werden.
+ Im Anschluss soll ein Überblick über die vorhandenen Inversion Of Control
+ Frameworks für Unity geliefert werden.
  Besonderheiten, Funktionsweise und -Umfang sollen beschrieben werden.
- Besondere Betrachtung soll StrangeIoC finden: Die Frameworkeigene MVC(S)-Archit
+ Besondere Betrachtung soll StrangeIoC finden: Die frameworkeigene MVC(S)-Archit
 ektur und die damit verbundenen Muster und Praktiken sollen anhand von Beispiele
 n beschrieben werden.
 \end_layout
 
 \begin_layout Standard
 Auf Basis dieser Analysen soll eine Aussage über die Tauglichkeit von Inversion
- Of Control Frameworks in der komponentenbasierten Architektur von Unity
- getroffen werden.
+ Of Control Frameworks in der komponentenbasierten Architektur Unitys getroffen
+ werden.
  Im Speziellen soll ein Fazit über die MVC(S)-Architektur von StrangeIoC
  zur Entwicklung von Spielen in Unity gezogen werden.
  Es soll entschieden werden, für welche Anwendungsgebiete die Architektur
@@ -1137,7 +1149,7 @@ status open
 
 
 \backslash
-todo{Stichpunkte Ausformulieren!}
+todo{Stichpunkte ausformulieren!}
 \end_layout
 
 \end_inset
@@ -1224,14 +1236,13 @@ Geringe Kopplung unter Softwareentitäten (Modulen, Klassen, Methoden) wird
  dabei helfen sollen, lose Kopplung umzusetzen.
  In diesem Teil der Arbeit soll zunächst erläutert werden, was Kopplung
  zwischen Entitäten ist und wie diese Zustande kommt.
- Es soll klar werden, warum hohe Kohäsion unter minimaler Kopplung anzustreben
+ Es wird verdeutlicht, warum hohe Kohäsion unter minimaler Kopplung anzustreben
  ist.
  Die Vorteile loser Kopplung sollen deutlich gemacht werden.
  Inversion Of Control, Dependency Injection und die eng mit diesen Begriffen
  zusammenhängenden SOLID-Prinzipien sollen beschrieben werden.
  Zum besseren Verständnis der vorgestellten Prinzipien, Muster und Praktiken
- soll lose Kopplung anhand eines Beispiels in einer Konsolenanwendung umgesetzt
- werden.
+ wird lose Kopplung anhand eines Beispiels in einer Konsolenanwendung umgesetzt.
 \end_layout
 
 \begin_layout Section
@@ -1274,7 +1285,7 @@ If changing one module in a program requires changing another module, then
 \begin_inset Quotes grd
 \end_inset
 
-
+ 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Fowler2001"
@@ -1285,8 +1296,8 @@ key "Fowler2001"
 \end_layout
 
 \begin_layout Standard
-Eine Abhänigigkeit zwischen Entitäten entsteht, sobald eine Entität von
- der anderen wissen muss um zu funktionieren.
+Eine Abhängigkeit zwischen Entitäten entsteht, sobald eine Entität von der
+ anderen wissen muss, um zu funktionieren.
  Abhängigkeiten können unterschiedliche Stärken und Ausprägungen haben.
  Je größer das Wissen über eine andere Entität ist, desto stärker ist die
  Abhängigkeit zu ihr.
@@ -1328,10 +1339,10 @@ todo {Quelle fuer Kohasion}
 \begin_layout Standard
 Kohäsion beschreibt wie gut Entitäten aufgeteilt wurden.
  Kopplung beschreibt wie gut die Verbindungen zwischen Entitäten sind.
- Ein qualitativ hochwertiges Softwaredesign weist also hohe Kohäsion unter
- minimaler Kopplung auf.
+ Ein qualitativ hochwertiges Softwaredesign weist demzufolge hohe Kohäsion
+ unter minimaler Kopplung auf.
  Im nächsten Abschnitt soll Inversion Of Control als Maßnahme präsentiert
- werden um minimale Kopplung umzusetzen.
+ werden, um Kopplung zu minimieren.
 \end_layout
 
 \begin_layout Section
@@ -1392,11 +1403,9 @@ key "Gamma1994"
 \end_inset
 
 ).
- Der Nutzer gibt also die Kontrolle über den Fluss der Anwendung an das
- Framework.
- Die Kontrolle über den Anwendungsfluss ist somit invertiert: Es ist nicht
- der Nutzer der das Framework aufruft sondern das Framework den Code des
- Nutzers.
+ Der Nutzer gibt also die Kontrolle über den Anwendungsfluss an das Framework.
+ Die Kontrolle ist somit invertiert: Es ist nicht der Nutzer, der das Framework
+ aufruft, sondern das Framework den Code des Nutzers.
  Diese Tatsache wird oft auch als Hollywood-Prinzip bezeichnet: "Don't call
  us, we'll call you" (vgl.
  
@@ -1410,10 +1419,11 @@ key "Fowler2005"
 \end_layout
 
 \begin_layout Standard
-Inversion Of Control ist eines der zentralen Merkmale welches Frameworks
+Inversion Of Control ist eines der zentralen Merkmale, welches Frameworks
  von Bibliotheken unterscheidet.
  Allein Inversion Of Control ermöglicht die Definition einer wiederverwendbaren
- Softwarearchitektur ohne die konkrete Implementation zu kennen.
+ Softwarearchitektur, ohne dabei die konkrete Implementation einer Anwendung
+ zu kennen.
  Das Framework ist lose mit der Implementation der eigentlichen Anwendung
  gekoppelt.
  
@@ -1422,8 +1432,8 @@ Inversion Of Control ist eines der zentralen Merkmale welches Frameworks
 \begin_layout Standard
 Es gibt zahlreiche Wege und Entwurfsmuster um Inversion Of Control in unterschie
 dlichen Aspekten einer Anwendung umzusetzen.
- In dieser Arbeit soll der Fokus auf der Umkehr der Kontrolle über Abhängikeiten
- liegen, mit dem Ziel lose Kopplung zu ermöglichen.
+ In dieser Arbeit soll der Fokus auf die Umkehr der Kontrolle über die Auflösung
+ von Abhängigkeiten liegen, mit dem Ziel lose Kopplung zu ermöglichen.
  Um diese spezielle Art von Inversion Of Control besser abzugrenzen, verwendet
  Fowler in seinem Artikel 
 \begin_inset Quotes gld
@@ -1457,7 +1467,7 @@ Dependency Injection in .NET
 \begin_inset Quotes grd
 \end_inset
 
- eine sehr vage Definitition des Begriffs Dependency Injection:
+ eine sehr vage Definition des Begriffs Dependency Injection:
 \end_layout
 
 \begin_layout Quote
@@ -1481,9 +1491,11 @@ key "Seemann2011"
 \end_layout
 
 \begin_layout Standard
-Wobei alles an dieser Aussage stimmt, lässt sich der Kern von Dependency
- Injection auf eine einzige Praktik reduzieren.
- James Shore beschreibt diese in auf seiner Website wie folgt:
+Dependency Injection umfasst eine Reihe von Praktiken, die es ermöglichen
+ lose Kopplung umzusetzen.
+ Dabei lässt sich der Kern von Dependency Injection jedoch auf eine einzige
+ Praktik reduzieren.
+ James Shore beschreibt diese auf seiner Webseite wie folgt:
 \end_layout
 
 \begin_layout Quote
@@ -1514,11 +1526,11 @@ Anstatt, dass sich das Objekt selbst um die Erstellung seiner Abhängigkeiten
 \end_layout
 
 \begin_layout Standard
-Doch dies allein genügt noch nicht: Um lose Kopplung mittels Dependency
- Injection zu ermöglichen, müssen zudem eine Reihe von Prinzipien gewahrt
- werden.
+Doch diese Praxis allein ist unzureichend, um lose Kopplung mittels Dependency
+ Injection zu ermöglichen.
+ Es müssen zudem eine Reihe von Prinzipien gewahrt werden.
  Diese wurden von Robert C.
- Martin geprägt und sind im allgemeinen als SOLID-Prinzipien bekannt.
+ Martin geprägt und sind im Allgemeinen als SOLID-Prinzipien bekannt.
 \end_layout
 
 \begin_layout Standard
@@ -1870,7 +1882,7 @@ Ausgangssituation
 
 \begin_layout Standard
 Eine gewünschte Funktionalität eines zu entwickelnden Spiels ist, auszugeben,
- dass eine verwundbare Entität schaden genommen hat.
+ dass eine verwundbares Objekt Schaden genommen hat.
  Die in Abbildung 
 \begin_inset CommandInset ref
 LatexCommand vref
@@ -2158,7 +2170,7 @@ EnglishLocalization
 \shape default
  besitzt.
  Wie kann es nun ermöglicht werden, die englische Lokalisierung mit der
- Deutschen in Abbildung 
+ Deutschen aus Abbildung 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "fig:Deutsche-Lokalisierung"
