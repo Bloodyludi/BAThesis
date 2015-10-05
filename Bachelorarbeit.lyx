@@ -962,7 +962,7 @@ http://unity3d.com/public-relations
 
  trägt Unity maßgeblich zu dem Independent Videogame Boom der letzten Jahre
  bei.
- Unity ermöglicht die plattformunabhägige Erstellung von 2D- und 3D-Spielen.
+ Unity ermöglicht die plattformunabhängige Erstellung von 2D- und 3D-Spielen.
  Dies hat besonders auf dem fragmentierten Markt der mobilen Spieleindustrie
  Anklang gefunden.
  Mit sich fortlaufend verbessernder Performance und Rendertechniken sind
@@ -1012,7 +1012,7 @@ http://www.unityninjas.com/code-architecture/unity3d-game-code-architecture/
 
 \end_inset
 
-, Fehlende Testbarkeit
+, fehlende Testbarkeit
 \begin_inset Foot
 status open
 
@@ -1039,11 +1039,11 @@ http://www.namekdev.net/2014/06/why-i-hate-unity3d-popularity/
 \begin_layout Standard
 Oft sollen die Ursachen gerade die Dinge sein, die unerfahrenen Programmierern
  den einfachen Einstieg in Unity ermöglichen.
- Eine Ursache ist so gut wie immer vertreten: Die Auflösung von Abhängigkeiten
+ Eine Ursache ist so gut wie immer vertreten: die Auflösung von Abhängigkeiten
  und die Kommunikation zwischen Objekten.
  Enge Kopplung von Abhängigkeiten zwischen Objekten führt zu Starrheit und
  Zerbrechlichkeit bei Veränderung des Programmcodes.
- In der objektorientierten Programmierung ist dieses Problem seit langem
+ In der objektorientierten Programmierung ist dieses Problem seit Langem
  bekannt.
  Es existieren zahlreiche Lösungen für die unterschiedlichsten Situationen
  und Entwicklungsumgebungen.
@@ -1064,7 +1064,7 @@ Zielsetzung
 \end_layout
 
 \begin_layout Standard
-In dieser Arbeit wird sich auf ein Problem beschränkt: Die Kopplung von
+In dieser Arbeit wird sich auf ein Problem beschränkt: die Kopplung von
  Abhängigkeiten zwischen Entitäten in Unity.
  Ziel dieser Arbeit ist es die Umsetzung von Spielen in Unity zu ermöglichen,
  ohne dessen Entitäten eng miteinander zu koppeln.
@@ -1073,7 +1073,7 @@ In dieser Arbeit wird sich auf ein Problem beschränkt: Die Kopplung von
 \begin_layout Standard
 Zunächst soll die Problematik der Kopplung beschrieben werden.
  Voraussetzung dafür ist, zu erläutern, was Abhängigkeiten sind und warum
- sie entstehen.
+ diese entstehen.
  Weiter sollen die Folgen von enger Kopplung erläutert werden.
  Dem Leser soll verdeutlicht werden, dass Kopplung direkten Einfluss auf
  die Testbarkeit und Erweiterbarkeit des Programmcodes hat.
@@ -1235,7 +1235,7 @@ Geringe Kopplung unter Softwareentitäten (Modulen, Klassen, Methoden) wird
  Inversion Of Control und genauer Dependency Injection sind Werkzeuge, die
  dabei helfen sollen, lose Kopplung umzusetzen.
  In diesem Teil der Arbeit soll zunächst erläutert werden, was Kopplung
- zwischen Entitäten ist und wie diese Zustande kommt.
+ zwischen Entitäten ist und wie diese zustande kommt.
  Es wird verdeutlicht, warum hohe Kohäsion unter minimaler Kopplung anzustreben
  ist.
  Die Vorteile loser Kopplung sollen deutlich gemacht werden.
@@ -1392,7 +1392,7 @@ key "Johnson1988"
 \begin_layout Standard
 Frameworks diktieren die Architektur und den Kontrollfluss einer Anwendung.
  Sie definieren einen wiederverwendbaren Teil eines Softwaredesigns.
- Der vom Nutzer des Frameworks geschriebene, anwendungsspeziefische Code
+ Der vom Nutzer des Frameworks geschriebene, anwendungsspezifische Code
  wird vom Framework aufgerufen (vgl.
  
 \begin_inset CommandInset citation
@@ -1554,7 +1554,7 @@ SOLID
 \end_layout
 
 \begin_layout Standard
-SOLID ist ein Akronym, welches für die folgenden Prinzipien steht: Das Single-Re
+SOLID ist ein Akronym, welches für die folgenden Prinzipien steht: das Single-Re
 sponsibility Principle, das Open/Closed Principle, das Liskov Substitution
  Principle, das Interface Segregation Principle und das Dependency-Inversion
  Principle.
@@ -1572,8 +1572,8 @@ Single-Responsibility Principle
 
 \begin_layout Standard
 Das Single-Responsibility Principle besagt, dass es niemals mehr als einen
- Grund geben sollte um eine Klasse zu ändern.
- Darauf Folgend wird eine Verantwortung in dem Zusammenhang als ein 
+ Grund geben sollte, um eine Klasse zu ändern.
+ Darauf Folgend wird ein 
 \begin_inset Quotes gld
 \end_inset
 
@@ -1581,7 +1581,7 @@ Grund zur Änderung
 \begin_inset Quotes grd
 \end_inset
 
- definiert.
+ in dem Zusammenhang als eine Verantwortung definiert.
  Jedoch wurde 
 \begin_inset Quotes gld
 \end_inset
@@ -1626,7 +1626,7 @@ Open/Closed Principle
 \begin_layout Standard
 Softwareentitäten (Klassen, Methoden, Funktionen) sollen offen für Erweiterung,
  aber geschlossen für Modifikation sein.
- 
+ Mit 
 \begin_inset Quotes gld
 \end_inset
 
@@ -1634,8 +1634,8 @@ Offen für Erweiterung
 \begin_inset Quotes grd
 \end_inset
 
- meint, dass es möglich sein soll, die Entität in ihrem Umfang und Verhalten
- zu erweitern.
+ ist gemeint, dass es möglich sein soll, die Entität in ihrem Umfang und
+ Verhalten zu erweitern.
  
 \begin_inset Quotes gld
 \end_inset
@@ -1659,7 +1659,8 @@ Abstraktion ermöglicht die Umsetzung des Open/Closed Principles.
 \begin_layout Standard
 Auch Dependency Injection setzt das Open/Closed Principle um, indem Abhängigkeit
 en lediglich in Form von Abstraktionen existieren.
- Dieses Prinzip ist eine wichtige Grundlage für lose Kopplung (vgl.
+ Damit ist dieses Prinzip ist eine wichtige Grundlage für lose Kopplung
+ (vgl.
  
 \begin_inset CommandInset citation
 LatexCommand citealp
@@ -1676,11 +1677,11 @@ Liskov Substitution Principle
 \end_layout
 
 \begin_layout Standard
-Das Liskov Substitution Prinzip beschreibt einer grundlegende Anforderung
+Das Liskov Substitution Principle beschreibt einer grundlegende Anforderung
  beim Einsatz von Vererbung: Untertypen einer Basisklasse sollen untereinander
- ersetzbar sein, ohne dabei die Verhalten des Programms selbst zu verändern.
+ ersetzbar sein, ohne dabei das Verhalten des Programms selbst zu verändern.
  Das Programm selbst darf zu keinem Zeitpunkt einen Untertyp anders als
- einen anderen Untertyp behandeln.
+ einen anderen Untertypen behandeln.
 \end_layout
 
 \begin_layout Standard
@@ -1740,13 +1741,13 @@ fat
 \begin_layout Standard
 Das Interface Segregation Principle scheint zunächst nicht mit Dependency
  Injection im Zusammenhang zu stehen.
- Es ist eher eine Richtlinie die bei der Anwendung von Dependency Injection
+ Es ist eher eine Richtlinie, die bei der Anwendung von Dependency Injection
  gewahrt werden sollte.
  Wird eine Abhängigkeit von einem einzigen großen Interface repräsentiert,
  lenkt dieses Interface in die Richtung einer konkreten Implementation.
- Die Folge ist, dass Enitäten schwieriger auszutauschen sind, weil sie Interface
-methoden implementieren, die sie eigentlich gar nicht benötigen um eine
- Abhängigkeit zu erfüllen (vgl.
+ Die Folge ist, dass Entitäten schwieriger auszutauschen sind, weil sie
+ Interfacemethoden implementieren, die sie eigentlich gar nicht benötigen,
+ um eine Abhängigkeit zu erfüllen (vgl.
  
 \begin_inset CommandInset citation
 LatexCommand citealp
@@ -1808,7 +1809,7 @@ todo{Quelle fehlt!, Hierfür evtl.
 
 \begin_layout Standard
 Zum anderen beschreibt Martin eine weitere, allgemeinere Interpretation
- des Dependency-Inversion Principle:
+ des Dependency-Inversion Principles:
 \end_layout
 
 \begin_layout Quote
@@ -1856,7 +1857,7 @@ key "Gamma1994"
 \end_layout
 
 \begin_layout Standard
-Die Deklaration von Abhängigkeiten in Form von Abstraktionen ist die Grundlage
+Die Deklaration von Abhängigkeiten in Form von Abstraktionen ist eine Grundlage,
  um lose Kopplung mittels Dependency Injection umzusetzen.
  Späte Bindung ermöglicht es, dass die konkrete Implementation auf diesem
  Wege erst zur Laufzeit bekannt sein muss.
@@ -1868,12 +1869,12 @@ Umsetzung von Dependency Injection
 
 \begin_layout Standard
 Um zu erläutern, wie die in den vorherigen Abschnitten erklärten Prinzipien
- bei der Umsetzung von Inversion of Control mittels Dependency Injection
+ bei der Umsetzung von Inversion Of Control mittels Dependency Injection
  zusammenspielen, soll ein Beispiel herangezogen werden.
  Anhand dieses Beispiels sollen Patterns die im direkten Zusammenhang zu
  Dependency Injection stehen, beschrieben werden.
- Um das Beispiel so einfach wie möglich zu halten, wird hierfür eine Konsolenanw
-endung in C# gewählt.
+ Um das Beispiel so einfach wie möglich zu halten, wurde hierfür eine Konsolenan
+wendung in C# gewählt.
 \end_layout
 
 \begin_layout Subsection
@@ -1882,7 +1883,7 @@ Ausgangssituation
 
 \begin_layout Standard
 Eine gewünschte Funktionalität eines zu entwickelnden Spiels ist, auszugeben,
- dass eine verwundbares Objekt Schaden genommen hat.
+ dass ein verwundbares Objekt Schaden genommen hat.
  Die in Abbildung 
 \begin_inset CommandInset ref
 LatexCommand vref
@@ -1984,20 +1985,21 @@ Neue Anforderungen
 \begin_layout Standard
 Im Verlauf der Entwicklung des Spieles wird klar, dass das Spiel in verschiedene
 n Sprachen veröffentlicht werden soll.
- Lokalisierung ist eine gängige Anforderung für jegliche Art von Software.
+ Diese auch als Lokalisierung bekannte Anforderung ist eine gängige Anforderung
+ für jegliche Art von Software.
  Es wird mit dem Refactoring begonnen und die Klasse 
 \shape italic
 EnglishLocalization
 \shape default
  extrahiert.
- Die Abbildung
+ In Abbildung 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "fig:Extraction"
 
 \end_inset
 
- zeigt das Resultat.
+ wird das Resultat des Refactorings gezeigt.
  Die Verantwortung über die Lokalisierung wurde in eine allein dafür vorgesehene
  Klasse verschoben.
 \end_layout
@@ -2159,7 +2161,7 @@ Die Klasse
 \shape italic
 DamageRenderer
 \shape default
- funktioniert immernoch wie im vorherigen Beispiel.
+ funktioniert weiterhin wie im vorherigen Beispiel.
  Der Unterschied ist, dass 
 \shape italic
 DamageRenderer
@@ -2185,7 +2187,7 @@ DamageRenderer
 \shape italic
 EnglishLocalization
 \shape default
- hat.
+ besitzt.
  Mit anderen Worten, sie sind eng miteinander gekoppelt.
  Die Folge ist, dass 
 \shape italic
@@ -2282,8 +2284,8 @@ Programming to an Interface
 \end_layout
 
 \begin_layout Standard
-Um lose Kopplung umzusetzen darf keine Abhängigkeit zu einer konkreten Implement
-ation existieren.
+Um lose Kopplung umzusetzen, darf keine Abhängigkeit zu einer konkreten
+ Implementation existieren.
  Stattdessen muss sich auf eine Abstraktion als Abhängigkeit verlassen werden.
  In dem Beispiel in Abb.
  
@@ -2293,14 +2295,51 @@ reference "fig:Depend-Abstractions"
 
 \end_inset
 
- wird dies umgesetzt indem English- und GermanLocalization das Interface
- ILocalizationService implementieren.
- Dadurch, dass DamageRenderer nur noch eine Variable des Interfaces ILocalizatio
-nService hält, lässt sich die konkrete Implementation austauschen.
- Dies ist jedoch immer noch nur möglich, indem DamageRenderer geändert wird.
- Der Grund dafür ist, dass EnglishLocalization im Konstruktor von DamageRenderer
+ wird dies umgesetzt indem 
+\shape italic
+English-
+\shape default
+ und 
+\shape italic
+GermanLocalization
+\shape default
+ das Interface 
+\shape italic
+ILocalizationService
+\shape default
+ implementieren.
+ Dadurch, dass 
+\shape italic
+DamageRenderer
+\shape default
+ nur noch eine Variable des Interfaces 
+\shape italic
+ILocalizationService
+\shape default
+ hält, lässt sich die konkrete Implementation austauschen.
+ Dies ist jedoch immer noch nur möglich, indem 
+\shape italic
+DamageRenderer
+\shape default
+ geändert wird.
+ Der Grund dafür ist, dass 
+\shape italic
+EnglishLocalization
+\shape default
+ im Konstruktor von 
+\shape italic
+DamageRenderer
+\shape default
  instanziiert wird.
- Somit ist DamageRenderer weiterhin eng mit EnglishLocalization gekoppelt.
+ Somit ist 
+\shape italic
+DamageRenderer
+\shape default
+ weiterhin eng mit 
+\shape italic
+EnglishLocalization
+\shape default
+ gekoppelt.
 \end_layout
 
 \begin_layout Standard
@@ -2532,15 +2571,19 @@ Injecting Dependencies
 \end_layout
 
 \begin_layout Standard
-Um die Klassen lose miteinander zu koppeln kommt an dieser Stelle der Einsatz
+Um die Klassen lose miteinander zu koppeln, kommt an dieser Stelle der Einsatz
  von Dependency Injection ins Spiel: Anstatt, dass sich eine Klasse selbst
- um die Auflösung ihrer Abhängigkeiten kümmert, sollte sie von Aussen mit
+ um die Auflösung ihrer Abhängigkeiten kümmert, sollte sie von außen mit
  diesen versorgt werden.
  Die Verantwortung über die Auflösung der Abhängigkeiten wird abgegeben.
  Die Klasse selbst macht lediglich deutlich, dass Sie ein Objekt benötigt,
  welches die abstrakten Bedürfnisse eines Interfaces umsetzt.
- In diesem Fall, die eines ILocalizationServices.
- Dependency Injection lässt sich auf unterschiedlichen Wegen umsetzten.
+ In diesem Fall, die eines 
+\shape italic
+ILocalizationServices
+\shape default
+.
+ Dependency Injection lässt sich auf unterschiedlichen Wegen umsetzen.
  Die gebräuchlichsten sind Constructor Injection und Property Injection.
 \end_layout
 
@@ -2558,20 +2601,27 @@ reference "fig:Beispiel-von-Constructor"
 
 \end_inset
 
- wird Constructor Injection in der DamageRenderer-Klasse angewandt.
- Eine Instanz von ILocalizationService muss bei Aufruf des Konstruktors
- übergeben werden.
+ wird Constructor Injection in der 
+\shape italic
+DamageRenderer
+\shape default
+-Klasse angewandt.
+ Eine Instanz von 
+\shape italic
+ILocalizationService
+\shape default
+ muss bei Aufruf des Konstruktors übergeben werden.
 \end_layout
 
 \begin_layout Standard
 Constructor Injection stellt sicher, dass die nötige Abhängigkeit auch tatsächli
 ch verfügbar ist, indem eine Instanziierung des Objektes (ein Konstruktoraufruf)
- ohne sie nicht möglich ist.
+ ohne diese nicht möglich ist.
  Damit wird erzwungen, dass der gesamte Abhängigkeitsgraph aufgebaut wird,
  bevor die Klasse genutzt werden kann.
  Eine Guard Clause stellt sicher, dass nicht null als Argument übergeben
  wird.
- Constructor Injection sollte in den meisten Fällen angewand werden, denn
+ Constructor Injection sollte in den meisten Fällen angewandt werden, denn
  in den meisten Fällen ist eine Abhängigkeit zwingend notwendig.
  
 \end_layout
@@ -2732,13 +2782,19 @@ reference "fig:Beispiel-von-Property"
  bereit.
  In dem gezeigten Beispiel ist Property Injection wenig angebracht, da die
  Abhängigkeit notwendig ist.
- Man könnte jedoch, falls kein LocalizationService bereitgestellt wird,
- beispielsweise im Getter eine Instanz von EnglishLocalization erstellen
- und diese so als Local Default verwenden.
+ Man könnte jedoch, falls kein 
+\shape italic
+LocalizationService
+\shape default
+ bereitgestellt wird, beispielsweise im Getter eine Instanz von 
+\shape italic
+EnglishLocalization
+\shape default
+ erstellen und diese so als Local Default verwenden.
 \end_layout
 
 \begin_layout Standard
-Das Open-Closed Principle lässt sich somit auch mit Properties umsetzen:
+Das Open/Closed Principle lässt sich somit auch mit Properties umsetzen:
  Properties bieten die Möglichkeit eine optionale Abhängigkeit zur Erweiterung
  der Funktionalität einer Klasse preiszugeben, ohne dabei die Klasse selbst
  zu modifizieren.
@@ -2769,9 +2825,13 @@ todo {Quelle hierfuer!}
 
 \begin_layout Standard
 In einigen Fällen muss -- aufgrund von Beschränkungen durch die Verwendung
- von Frameworks wie z.B.
+ von Frameworks wie z.
+\begin_inset space ~
+\end_inset
+
+B.
  ASP.NET -- auf Constructor Injection verzichtet werden.
- Das Framework schreibt das vorhandensein eined Default Construktors vor,
+ Das Framework schreibt das Vorhandensein eines Default Constructors vor,
  der zur Initialisierung genutzt wird.
  In diesem Fällen kann auch alternativ auf Property Injection zurückgegriffen
  werden.
@@ -2927,9 +2987,10 @@ key "Seemann2011"
 \end_layout
 
 \begin_layout Standard
-In einer Konsolenanwendung, wie dem gezeigten Beispiel, erfüllt die Main-Methode
- die Vorraussetzungen für einen Composition Root: Sie ist der Einstiegspunkt
- in die Anwendung und zugleich der höchste Punkt in der Objekthierarchie.
+In einer Konsolenanwendung -- wie dem gezeigten Beispiel -- erfüllt die
+ Main-Methode die Voraussetzungen für einen Composition Root: Sie ist der
+ Einstiegspunkt in die Anwendung und zugleich der höchste Punkt in der Objekthie
+rarchie.
  Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2937,7 +2998,7 @@ reference "fig:CompositionRoot"
 
 \end_inset
 
- zeigt den Composition Root des gewählten Beispiels.
+ zeigt den Composition Root der Beispielanwendung.
 \end_layout
 
 \begin_layout Standard
@@ -3028,10 +3089,10 @@ name "fig:CompositionRoot"
 
 \begin_layout Standard
 Im Composition Root wird die Konfiguration der Anwendung vorgenommen.
- Es ist der einzige Ort an dem die konkreten Instanzen von Objekten bekannt
+ Es ist der einzige Ort, an dem die konkreten Instanzen von Objekten bekannt
  sein müssen.
  Er sollte unabhängig von dem Rest der Anwendung kompilierbar sein und sich
- deswegen in einem seperaten Assembly befinden.
+ deswegen in einem separaten Assembly befinden.
 \end_layout
 
 \begin_layout Subsection
@@ -3042,13 +3103,29 @@ Stable and volatile Dependencies
 Nicht jede Abhängigkeit muss lose mit der Anwendung gekoppelt werden.
  Tatsächlich ist dies für bestimmte, feste Abhängigkeiten unnötig.
  Wichtig ist jedoch unterscheiden zu können, wann eine Abhängigkeit als
- fest (stable) und wann als unbeständig (volatile) angesehen werden sollte.
+ fest (
+\begin_inset Quotes gld
+\end_inset
+
+stable
+\begin_inset Quotes grd
+\end_inset
+
+) und wann als unbeständig (
+\begin_inset Quotes gld
+\end_inset
+
+volatile
+\begin_inset Quotes grd
+\end_inset
+
+) angesehen werden sollte.
  
 \end_layout
 
 \begin_layout Standard
 Kann davon ausgegangen werden, dass ein bereits existierendes Modul niemals
- ausgetauscht oder verändert wird, so kann es als eine feste Abängigkeit
+ ausgetauscht oder verändert wird, so kann es als eine feste Abhängigkeit
  angesehen werden.
  Ein Beispiel hierfür sind die meisten Module der Base Class Library, da
  sie fester Bestandteil des .NET Frameworks sind.
@@ -3062,7 +3139,7 @@ Die Klasse oder das Modul existiert bereits.
 
 \begin_layout Itemize
 Es ist zu erwarten, dass neue Versionen der Abhängigkeit keine Änderungen
- enthalten werden die Auswirkungen auf den Programmcode haben werden.
+ enthalten werden, die Auswirkungen auf den Programmcode haben werden.
 \end_layout
 
 \begin_layout Itemize
@@ -3075,7 +3152,7 @@ Es ist nicht zu erwarten, dass das Modul jemals durch ein anderes ausgetauscht
 \end_layout
 
 \begin_layout Standard
-Den Gegensatz zu festen Abhängigkeiten bilden Klassen und Module bei denen
+Den Gegensatz zu festen Abhängigkeiten bilden Klassen und Module, bei denen
  es absehbar ist, dass sie sich verändern werden.
  Ist eine Abhängigkeit unbeständig, sollte sie lose mit dem Rest der Anwendung
  gekoppelt werden, um ihre Austauschbarkeit zu ermöglichen.
@@ -3084,7 +3161,7 @@ Den Gegensatz zu festen Abhängigkeiten bilden Klassen und Module bei denen
 \end_layout
 
 \begin_layout Itemize
-Durch die Abhängigkeit wird eine bestimmte Laufzeitumgebung vorrausgesetzt.
+Durch die Abhängigkeit wird eine bestimmte Laufzeitumgebung vorausgesetzt.
  
 \end_layout
 
@@ -3111,8 +3188,12 @@ key "Seemann2011"
 \end_layout
 
 \begin_layout Standard
-Ein Beispiel für eine in der Base Class Library vorhandene Klasse die als
- unbeständige Abhängigkeit behandelt werden sollte, ist System.Random.
+Ein Beispiel für eine in der Base Class Library vorhandene Klasse, die als
+ unbeständige Abhängigkeit behandelt werden sollte, ist 
+\shape italic
+System.Random
+\shape default
+.
  Die Klasse weist nichtdeterministisches Verhalten auf, was sich besonders
  auf die Testbarkeit der Anwendung auswirkt.
 \end_layout
@@ -3122,10 +3203,10 @@ Resultierende Vorteile und Möglichkeiten
 \end_layout
 
 \begin_layout Standard
-In den vorherigen Abschnitten wurde ausführlich beschrieben wie und warum
+In den vorherigen Abschnitten wurde ausführlich beschrieben, wie und warum
  lose Kopplung umzusetzen ist.
- Jedoch sind eventuell die Gründe für lose Kopplung aufgrund des einfachen
- Beispiels noch nicht ganz klar geworden.
+ Jedoch sind eventuell die Gründe für lose Kopplung, aufgrund des einfachen
+ Beispiels, noch nicht ganz klar geworden.
  Besonders große und komplexe Softwareprojekte profitieren maßgeblich von
  loser Kopplung.
  Welche Faktoren genau beeinflusst werden, soll im Folgenden erläutert werden.
@@ -3139,11 +3220,12 @@ Erweiterbarkeit
 Während der Entwicklung einer Anwendung werden neue Anforderungen bekannt
  und existierende Anforderungen beginnen sich zu verändern.
  Trotzdem muss die Anwendung erweiterbar und wartbar bleiben.
- Erweiterbarkeit wird problematischer je größer die Anwendung ist.
- In sehr großen Softwareprojekten ist es schwer abzusehen welche Auswirkungen
+ Erweiterbarkeit wird problematischer, je größer die Anwendung ist.
+ In sehr großen Softwareprojekten ist es schwer abzusehen, welche Auswirkungen
  auch nur die kleinste Änderung hat.
- Aus diesem Grund ist es notwendig, Module so autonom wie möglich zu halten.
- Dadurch, dass die Abhängigkeiten eines Modules auf Interfaces reduziert
+ Aus diesem Grund ist es notwendig, Entitäten so autonom wie möglich zu
+ halten.
+ Dadurch, dass die Abhängigkeiten einer Entität auf Interfaces reduziert
  werden, haben Änderungen der konkreten Implementation keinen Einfluss auf
  sie.
 \end_layout
@@ -3152,7 +3234,15 @@ Während der Entwicklung einer Anwendung werden neue Anforderungen bekannt
 Lose Kopplung setzt das Open/Closed Principle in die Tat um: Module sind
  offen für Erweiterung und geschlossen für Veränderung.
  Maßgeblich verantwortlich hierfür ist das Konzept der späten Bindung, welches
- durch programming to an interface konsequent umgesetzt wird.
+ durch 
+\begin_inset Quotes gld
+\end_inset
+
+programming to an interface
+\begin_inset Quotes grd
+\end_inset
+
+ konsequent umgesetzt wird.
  Die konkrete Implementation ist austauschbar und wird erst zur Laufzeit
  bekannt.
  Sie ist unabhängig vom Rest der Anwendung veränderbar.
@@ -3163,7 +3253,7 @@ Dependency Injection hilft dabei, Verantwortungen klarer aufzuteilen und
  zu definieren.
  Durch das Einhalten des Single Responcibility Principles wird es deutlicher
  an welchen Stellen Änderungen gemacht werden müssen.
- Oft genügt es eine konkrete Implementation durch eine andere auszutauschen
+ Oft genügt es eine konkrete Implementation durch eine andere auszutauschen,
  um ein gewünschtes Verhalten zu erzielen.
  Dependency Injection macht dies trivial.
 \end_layout
@@ -3173,11 +3263,11 @@ Wiederverwendbarkeit
 \end_layout
 
 \begin_layout Standard
-Einzelne Softwaremodule sind wiederverwendbar, da sie lose mit ihren Abhängigkei
-ten gekoppelt sind.
+Einzelne Softwaremodule sind wiederverwendbar, da diese lose zu ihren Abhängigke
+iten gekoppelt sind.
  Die eigentliche Implementation dieser Abhängigkeiten ist für das Modul
  nicht relevant.
- Ist in einer anderen Umgebung eine andere konkrete Implementation notwendig
+ Ist in einer anderen Umgebung eine andere konkrete Implementation notwendig,
  so kann sie einfach ausgetauscht werden.
 \end_layout
 
@@ -3202,7 +3292,7 @@ Parallelisierung
 \end_layout
 
 \begin_layout Standard
-Lose Kopplung ermöglicht die parallele Entwicklung einer Softwareanwendung
+Lose Kopplung ermöglicht die parallele Entwicklung einer Softwareanwendung,
  indem klare Schnittstellen zur Kommunikation definiert werden.
  Unter den kollaborierenden Entwicklern muss sich lediglich auf diese Schnittste
 llen geeinigt werden.
@@ -3232,7 +3322,7 @@ Testbarkeit
 
 \begin_layout Standard
 Wie lose Kopplung die Testbarkeit einer Anwendung drastisch erleichtert,
- lässt sich am besten Anhand eines Beispiels erläutern: Abbildung 
+ lässt sich am besten anhand eines Beispiels erläutern: Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Beispiel-Testability"
@@ -3241,10 +3331,20 @@ reference "fig:Beispiel-Testability"
 
  zeigt die Implementation eines sehr simplen Spiels: Der Spieler soll das
  Resultat eines Würfelwurfs erraten.
- Mit der Roll-Methode der gezeigten GuessANumber-Klasse soll der Würfelwurf
- ausgeführt werden.
- Darauf folgend kann der Spieler durch den Aufruf der MakeGuess-Methode
- den Versuch vornehmen das Ergebnis zu erraten.
+ Mit der 
+\shape italic
+Roll
+\shape default
+-Methode der gezeigten 
+\shape italic
+GuessANumber
+\shape default
+-Klasse soll der Würfelwurf ausgeführt werden.
+ Darauf folgend kann der Spieler -- durch den Aufruf der 
+\shape italic
+MakeGuess
+\shape default
+-Methode -- den Versuch vornehmen, das Ergebnis zu erraten.
 \end_layout
 
 \begin_layout Standard
@@ -3420,12 +3520,43 @@ name "fig:Beispiel-Testability"
 \end_layout
 
 \begin_layout Standard
-Die GuessANumber-Klasse hat eine volatile Abhängigkeit zu IRandom.
+Die 
+\shape italic
+GuessANumber
+\shape default
+-Klasse hat eine unbeständige (
+\begin_inset Quotes gld
+\end_inset
+
+volatile
+\begin_inset Quotes grd
+\end_inset
+
+) Abhängigkeit zu 
+\shape italic
+IRandom
+\shape default
+.
  Diese Entscheidung wurde bewusst getroffen, da das Generieren einer Zufallsnumm
 er nicht deterministisch ist.
- Die Abhängigkeit zu IRandom wird über Constructor Injection aufgelöst.
- Eine Klasse die das IRandom-Interface implementiert, könnte mithilfe von
- UnityEngine.Random oder System.Random umgesetzt werden.
+ Die Abhängigkeit zu 
+\shape italic
+IRandom
+\shape default
+ wird über Constructor Injection aufgelöst.
+ Eine Klasse, die das 
+\shape italic
+IRandom
+\shape default
+-Interface implementiert, könnte mithilfe von 
+\shape italic
+UnityEngine.Random 
+\shape default
+oder 
+\shape italic
+System.Random
+\shape default
+ umgesetzt werden.
 \end_layout
 
 \begin_layout Standard
@@ -3436,24 +3567,66 @@ reference "fig:GuessANumber-UnitTest"
 
 \end_inset
 
- zeigt einen Unit-Test der sicherstellen soll, dass die MakeGuess-Methode
- korrekt feststellen kann, ob richtig geraten wurde.
- Um die GuessANumber-Klasse durch einen Unit-Test auf korrekte Funktionalität
- prüfen zu können, muss das Resultat deterministisch sein.
- Hierzu wird anstatt einer echten Implementation einer Random-Klasse ein
- Stub des IRandom-Interfaces erzeugt.
+ zeigt einen Unit-Test, der sicherstellen soll, dass die 
+\shape italic
+MakeGuess
+\shape default
+-Methode korrekt feststellen kann, ob richtig geraten wurde.
+ Um die 
+\shape italic
+GuessANumber
+\shape default
+-Klasse durch einen Unit-Test auf korrekte Funktionalität prüfen zu können,
+ muss das Resultat deterministisch sein.
+ Hierzu wird anstatt einer echten Implementation einer 
+\shape italic
+Random
+\shape default
+-Klasse ein Stub des 
+\shape italic
+IRandom
+\shape default
+-Interfaces erzeugt.
  Das Erzeugen eines Stubs kann durch Verwendung des Isolation-Frameworks
- NSubstitute automatisiert werden: Durch Aufruf der Methode For<T> der Klasse
- Substitute wird ein dynamischer Stub für IRandom erzeugt.
- Der Stub wird so konfiguriert, dass er für jeden Aufruf der Range-Methode
- -- unabhängig von beiden Parametern -- einen vorgegebenen Wert zurückgibt.
- Das Ergebnis eines Würfelwurfs durch die Roll-Methode wird somit diesem
- vorgegebenen Wert entsprechen.
- Damit ist zu erwarten, dass der Aufruf der MakeGuess-Methode mit dem vorgegeben
-en Wert true zurückgibt.
+ NSubstitute automatisiert werden: Durch Aufruf der Methode 
+\shape italic
+For<T>
+\shape default
+ der Klasse 
+\shape italic
+Substitute
+\shape default
+ wird ein dynamischer Stub für 
+\shape italic
+IRandom
+\shape default
+ erzeugt.
+ Der Stub wird so konfiguriert, dass er für jeden Aufruf der 
+\shape italic
+Range
+\shape default
+-Methode -- unabhängig von beiden Parametern -- einen vorgegebenen Wert
+ zurückgibt.
+ Das Ergebnis eines Würfelwurfs durch die 
+\shape italic
+Roll
+\shape default
+-Methode wird somit diesem vorgegebenen Wert entsprechen.
+ Damit ist zu erwarten, dass der Aufruf der 
+\shape italic
+MakeGuess
+\shape default
+-Methode mit dem vorgegebenen Wert 
+\begin_inset Quotes gld
+\end_inset
+
+true
+\begin_inset Quotes grd
+\end_inset
+
+ zurückgibt.
  Die tatsächliche Funktionalität der Methode kann nun durch ein Assert-Statement
- überprüft werden..
- 
+ überprüft werden.
 \end_layout
 
 \begin_layout Standard
@@ -3594,10 +3767,10 @@ name "fig:GuessANumber-UnitTest"
 
 \begin_layout Standard
 Lose Kopplung ermöglicht, dass Module in Isolation betrachtet werden können.
- Durch Dependency Injection können zugrundeliegende Implementationen einer
+ Durch Dependency Injection können zugrunde liegende Implementationen einer
  Abstraktion durch Fakes, Mocks und Stubs ausgetauscht werden.
  Es muss mit Bedacht auf die Testbarkeit einer Anwendung entschieden werden,
- ob eine Abhängigkeit volatile oder stable ist.
+ ob eine Abhängigkeit fest oder unbeständig ist.
  Der sicherste Weg Testbarkeit zu gewährleisten, ist Test Driven Development
  in Kombination mit Dependency Injection zu praktizieren.
 \end_layout
@@ -3608,7 +3781,7 @@ Analyse der Architektur von Unity3D
 
 \begin_layout Standard
 In dem letzten Kapitel wurde beschrieben, was lose Kopplung ist und wie
- Inversion of Control und genauer Dependency Injection, dabei helfen diese
+ Inversion Of Control, und genauer Dependency Injection, dabei helfen, diese
  umzusetzen.
  Es wurde beschrieben, dass lose Kopplung maßgeblich zu der Qualität des
  Softwareproduktes beiträgt.
@@ -3618,8 +3791,8 @@ In dem letzten Kapitel wurde beschrieben, was lose Kopplung ist und wie
  und der komponentenbasierten Architektur von Unity beschrieben werden.
  Gute und schlechte Praktiken bei der Arbeit mit Unity sollen erläutert
  werden.
- Unity stellt von sich aus Wege bereit um die Kommunikation zwischen Klassen
- zu ermöglichen.
+ Unity stellt von sich aus Mittel bereit, um die Kommunikation zwischen
+ Klassen zu ermöglichen.
  Es soll untersucht werden, ob diese es bereits ermöglichen lose Kopplung
  umzusetzen.
 \end_layout
@@ -3641,7 +3814,7 @@ key "Gregory2014"
 \end_inset
 
 .
- Meistens bestehen diese Hilfsmittel aus zwei Teilen: Einer visuellen Repräsenta
+ Meistens bestehen diese Hilfsmittel aus zwei Teilen: einer visuellen Repräsenta
 tion der Spielobjekte innerhalb des Editors der Engine und einer Laufzeitumgebun
 g, die die Entwicklung neuer Spielobjekte ermöglicht.
  In jedem Fall wird ein Framework bereitgestellt, das die Konstruktion neuer
@@ -3660,16 +3833,36 @@ key "Gregory2014"
 \begin_layout Standard
 In klassischen objektorientierten Implementationen eines Game Object Models
  werden Spielobjekte von einer Vererbungshierarchie abgeleitet.
- Es handelt sich um eine monolitische Klassenhierarchie: Alle Objekte werden
- von einer gemeinsamen Basisklasse namens GameObject abgeleitet.
+ Es handelt sich um eine monolithische Klassenhierarchie: Alle Objekte werden
+ von einer gemeinsamen Basisklasse namens 
+\shape italic
+GameObject
+\shape default
+ abgeleitet.
  Diese Basisklasse enthält Funktionalität, die für alle Klassen notwendig
  ist.
  Ein Beispiel hierfür ist Serialisierung.
  Mit Wachstum des Projektes wächst auch die Hierarchie immer tiefer und
  weiter.
- Es folgt eine Reihe von Problemen: Klassen die sich tief in der Vererbungshiera
-rchie befinden, sind schwierig zu verstehen und zu verändern, da hierfür
+ Es folgt eine Reihe von Problemen: Klassen, die sich tief in der Vererbungshier
+archie befinden, sind schwierig zu verstehen und zu verändern, da hierfür
  auch alle Basisklassen bekannt sein müssen.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+todo{Grafik monolithische Klassenhierarchie vs komponentenbasierte Architektur}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3688,7 +3881,7 @@ Es kann nur ein Merkmal als Basis für eine Vererbungshierarchie gewählt
 \end_layout
 
 \begin_layout Standard
-Um diesen Problemen vorzubeugen implementiert Unity ein komponentenbasiertes
+Um diesen Problemen vorzubeugen, implementiert Unity ein komponentenbasiertes
  Game Object Model.
  Das Grundprinzip dieses Models ist Komposition der Vererbung vorzuziehen.
  Anstatt Objekte mittels Vererbung und des 
@@ -3709,9 +3902,17 @@ has a
 \end_inset
 
 -Verhältnis.
- In Unity werden Spielobjekte von der Klasse GameObject abgebildet.
- Ein GameObject fungiert als Knotenpunkt für eine variable Anzahl von Komponente
-n und hat kaum bis gar keine weitere Funktionalität 
+ In Unity werden Spielobjekte von der Klasse 
+\shape italic
+GameObject
+\shape default
+ abgebildet.
+ Ein 
+\shape italic
+GameObject
+\shape default
+ fungiert als Knotenpunkt für eine variable Anzahl von Komponenten und hat
+ kaum bis gar keine weitere Funktionalität 
 \begin_inset CommandInset citation
 LatexCommand citep
 after "S. 887"
@@ -3722,7 +3923,11 @@ key "Gregory2014"
 
 .
  Funktionalität wird erst durch das Anfügen von Komponenten hinzugefügt.
- Komponenten werden in Unity von der Klasse MonoBehaviour abgeleitet.
+ Komponenten werden in Unity von der Klasse 
+\shape italic
+MonoBehaviour
+\shape default
+ abgeleitet.
  
 \end_layout
 
@@ -3731,8 +3936,12 @@ Programmierung und Konfiguration
 \end_layout
 
 \begin_layout Standard
-MonoBehaviours sind die Schnittstelle, die es Programmierern ermöglicht
- die Engine mit individuellem Verhalten zu erweitern um ein Spiel umzusetzen.
+
+\shape italic
+MonoBehaviours
+\shape default
+ sind die Schnittstelle, die es Programmierern ermöglicht die Engine mit
+ individuellem Verhalten zu erweitern, um ein Spiel umsetzen zu können.
  Unity verwendet die .NET-kompatible Laufzeitumgebung Mono um die plattformunabhä
 ngige Entwicklung von Komponenten in C# und UnityScript zu ermöglichen.
  Dem Nutzer stehen folglich objektorientierte Sprachfeatures wie Polymorphismus
@@ -3742,7 +3951,7 @@ ngige Entwicklung von Komponenten in C# und UnityScript zu ermöglichen.
 \end_layout
 
 \begin_layout Standard
-Der Rest, also die Konfiguration und Komposition von Komponenten erfolgt
+Der Rest -- also die Konfiguration und Komposition von Komponenten -- erfolgt
  in einem visuellen Editor.
  Abbildung 
 \begin_inset CommandInset ref
@@ -3755,11 +3964,11 @@ reference "fig:Unity-Editor"
  Der Editor erlaubt das Anlegen von Szenen, die den Lebensraum für Spielobjekte
  darstellen.
  Spielobjekte werden im sogenannten Hierarchiefenster erstellt und in einem
- Szenegraph angeordnert.
+ Szenegraph angeordnet.
  Per Drag-and-Drop können Spielobjekten Komponenten hinzugefügt werden.
  Öffentliche Member einer Komponente können im Inspector konfiguriert werden.
- Wird eine Szene geladen, kümmert sich Unity um die Instanziierung aller
- sich in ihr befindlichen Spielobjekte und deren Komponenten.
+ Wird eine Szene geladen, kümmert sich Unity, um die Instanziierung aller
+ sich in der Szene befindlichen Spielobjekte und deren Komponenten.
  
 \end_layout
 
@@ -3833,9 +4042,12 @@ reference "sec:Inversion-of-Control"
  auch auf Unity zutrifft.
  Die Kontrolle über die Komposition und Lebenszeit von Objekten ist bereits
  invertiert: Sie liegt in den Händen von Unity.
- Ein Indiz hierfür ist, dass Unity keine Konstruktoren in MonoBehaviours
+ Ein Indiz hierfür ist, dass Unity keine Konstruktoren in 
+\shape italic
+MonoBehaviours
+\shape default
  zulässt.
- Es ist also nicht möglich Komponenten über einen Konstruktor mit ihren
+ Es ist also nicht möglich, Komponenten über einen Konstruktor mit ihren
  Abhängigkeiten zu versorgen.
  Aus diesem Grund stellt Unity alternative Wege zur Referenzierung und Kommunika
 tion mit anderen Komponenten bereit.
@@ -3847,27 +4059,11 @@ Kommunikation und Abhängigkeiten
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-todo{Abschnitt überarbeiten!}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 In Unity soll jede Komponente eine einzige Funktionalität kapseln und sie
  wiederverwendbar machen.
  Mit anderen Worten: Komposition anstelle von Vererbung soll es ermöglichen
- Funktionalitäten aus unterscheidlichen Bereichen in wiederverwendbare Komponent
-en aufzuteilen ohne sie miteinander zu koppeln 
+ Funktionalitäten aus unterschiedlichen Bereichen in wiederverwendbare Komponent
+en aufzuteilen, ohne sie dabei miteinander zu koppeln 
 \begin_inset CommandInset citation
 LatexCommand citep
 after "S. 213"
@@ -3884,20 +4080,20 @@ key "Nystrom2014"
 \end_layout
 
 \begin_layout Standard
-Oft beschränkt sich diese Kommunikation auf Komponenten des selben GameObjects.
+Oft beschränkt sich diese Kommunikation auf Komponenten desselben GameObjects.
  Es kommt jedoch auch vor, dass ein MonoBehaviour mit einem MonoBehaviour
  eines anderen GameObjects kommunizieren muss.
  Folglich wird zwischen zwei Arten der Kommunikation unterschieden:
 \end_layout
 
 \begin_layout Itemize
-Die Intra-Objekt-Kommunikation erfolgt unter MonoBehaviours des selben GameObjec
-ts oder Kindern von diesem.
+Die Intra-Objekt-Kommunikation erfolgt unter MonoBehaviours desselben GameObject
+s oder Kindern von diesem.
 \end_layout
 
 \begin_layout Itemize
 Die Inter-Objekt-Kommunikation beschreibt die Kommunikation zu anderen GameObjet
-cts die ansonsten in keiner Relation zueinander stehen.
+cts, die ansonsten in keiner Relation zueinanderstehen.
 \end_layout
 
 \begin_layout Standard
@@ -3905,15 +4101,15 @@ In beiden Fällen kann die Kommunikation direkt oder indirekt erfolgen.
  Bei direkter Kommunikation ist es notwendig, dass entweder Sender oder
  Empfänger einander kennen.
  Eines der Objekte hat also eine Abhängigkeit zu dem anderen.
- Kommunikation ist indirekt, wenn Sie über ein drittes Objekt -- einem Vermittle
+ Kommunikation ist indirekt, wenn sie über ein drittes Objekt -- einem Vermittle
 r -- erfolgt.
  In den meisten Fällen jedoch wird eine Referenz auf ein weiteres Objekt
  benötigt und es existiert somit eine Abhängigkeit zu diesem.
 \end_layout
 
 \begin_layout Standard
-Im folgenden Abschnitt soll untersucht werden, ob Unity's integrierte Möglichkei
-ten Abhängigkeiten aufzulösen es ermöglichen lose Kopplung zwischen Komponenten
+Im folgenden Abschnitt soll untersucht werden, ob Unitys integrierte Möglichkeit
+en Abhängigkeiten aufzulösen es ermöglichen, lose Kopplung zwischen Komponenten
  umzusetzen.
 \end_layout
 
@@ -3929,13 +4125,13 @@ name "sub:Referenzieren"
 \end_layout
 
 \begin_layout Standard
-Unity bietet unterschiedliche Möglichkeiten um Zugriff auf Spielobjekte
+Unity bietet unterschiedliche Möglichkeiten, um Zugriff auf Spielobjekte
  und Komponenten zu erlangen.
  Es werden zahlreiche Game Object Queries für die Inter-Objekt-Kommunikation
- bereit gestellt.
+ bereitgestellt.
  Um andere Komponenten referenzieren zu können, existieren sogenannte Component
  Queries.
- Desweiteren ist auch eine Kommunikation über Events und Messages möglich.
+ Des Weiteren ist auch eine Kommunikation über Events und Messages möglich.
  
 \end_layout
 
@@ -3959,35 +4155,82 @@ status open
 \end_layout
 
 \begin_layout Standard
-SerializeField ist ein Attribut, das ermöglicht private Member einer Komponente
- zu serialisieren und somit im Inspektor zu setzen.
- Setzbare Datentypen sind primitive Datentypen wie int, float, bool und
- in Unity eingebaute Datentypen wie Vector, Quaternion und Color, sowie
- Strings, Enums und Structs.
- Desweiteren ist es möglich Referenzen zu Klassen und Objekten durch Drag-and-Dr
-op im Editor zu setzen.
- Dabei ist zu beachten, dass diese Objekte vom Typ UnityEngine.Object ableiten
- müssen.
+
+\shape italic
+SerializeField
+\shape default
+ ist ein Attribut, das ermöglicht private Member einer Komponente zu serialisier
+en und somit im Inspektor zu setzen.
+ Setzbare Datentypen sind primitive Datentypen wie 
+\shape italic
+int
+\shape default
+, 
+\shape italic
+float
+\shape default
+, 
+\shape italic
+bool
+\shape default
+ und in Unity eingebaute Datentypen wie 
+\shape italic
+Vector
+\shape default
+, 
+\shape italic
+Quaternion
+\shape default
+ und 
+\shape italic
+Color
+\shape default
+, sowie Strings, Enums und Structs.
+ Des Weiteren ist es möglich, Referenzen zu Klassen und Objekten durch Drag-and-
+Drop im Editor zu setzen.
+ Dabei ist zu beachten, dass diese Objekte vom Typ 
+\shape italic
+UnityEngine.Object
+\shape default
+ ableiten müssen.
  Es ist also nur möglich andere Komponenten oder Spielobjekte zu referenzieren.
  Aufgrund dieser Limitierung ist es nicht möglich, Interfaces im Editor
  zugänglich zu machen.
- Mit dem SerializeField-Attribut lässt sich somit keine lose Kopplung umsetzen.
+ Mit dem 
+\shape italic
+SerializeField
+\shape default
+-Attribut lässt sich somit keine lose Kopplung umsetzen.
  
 \end_layout
 
 \begin_layout Standard
-Neben Variablen mit dem SerializeField-Attribut werden auch Variablen, die
- mit dem Zugriffsmodifizierer public gekennzeichnet wurden im Editor zugänglich
- gemacht.
+Neben Variablen mit dem 
+\shape italic
+SerializeField
+\shape default
+-Attribut werden auch Variablen, die mit dem Zugriffsmodifizierer 
+\shape italic
+public
+\shape default
+ gekennzeichnet wurden im Editor zugänglich gemacht.
  Dies ist jedoch ausdrücklich nicht zu empfehlen, da so die Datenkapselung
  des Objektes gebrochen wird.
 \end_layout
 
 \begin_layout Standard
-Ist bereits vor Ausführung des Spiels bekannt welche Referenzen benötigt
- werden, sollten diese wenn möglich über ein SerializeField aufgelöst werden.
- Um sicherzugehen, dass die Referenz im Editor aufgelöst wurde, ist es ratsam
- einen Guard Clause in die OnValidate-Funktion der Komponente hinzuzufügen.
+Ist bereits vor Ausführung des Spiels bekannt, welche Referenzen benötigt
+ werden, sollten diese wenn möglich über 
+\shape italic
+SerializeField
+\shape default
+ aufgelöst werden.
+ Um sicherzugehen, dass die Referenz im Editor aufgelöst wurde, ist es ratsam,
+ einen Guard Clause in die 
+\shape italic
+OnValidate
+\shape default
+-Funktion der Komponente hinzuzufügen.
  Abb.
 \begin_inset CommandInset ref
 LatexCommand vref
@@ -4109,10 +4352,10 @@ name "fig:SerializeField"
 \end_layout
 
 \begin_layout Standard
-Wenn erst zur Laufzeit bestimmt werden kann welches das benötigte Objekt
- ist, zum Beispiel wenn sich die Abhängigkeit ausserhalb eines instanziierten
- Prefab befindet, so muss auf eine andere Methode der Referenzierung zurückgegri
-ffen werden.
+Wenn erst zur Laufzeit bestimmt werden kann, welches das benötigte Objekt
+ ist, zum Beispiel, wenn sich die Abhängigkeit außerhalb eines instanziierten
+ Prefabs befindet, so muss auf eine andere Methode der Referenzierung zurückgegr
+iffen werden.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -4140,16 +4383,30 @@ public T GetComponent();
 \end_layout
 
 \begin_layout Standard
-GetComponent ermöglicht es, auf andere Komponenten des selben GameObjects
- zuzugreifen.
- Ist keine Komponente des gewünschten Typs vorhanden, wird null zurückgegeben.
- Dies kann verhindert werden, indem man dem Script das Attribut RequireComponent
+
+\shape italic
+GetComponent
+\shape default
+ ermöglicht es, auf andere Komponenten desselben GameObjects zuzugreifen.
+ Ist keine Komponente des gewünschten Typs vorhanden, wird 
+\shape italic
+null
+\shape default
+ zurückgegeben.
+ Dies kann verhindert werden, indem man dem Script das Attribut 
+\shape italic
+RequireComponent
+\shape default
  hinzufügt.
- RequireComponent bewirkt, dass die benötigte Komponente automatisch an
- das GameObject angefügt wird.
+ 
+\shape italic
+RequireComponent
+\shape default
+ bewirkt, dass die benötigte Komponente automatisch an das GameObject angefügt
+ wird.
  Um auf Komponenten von anderen GameObjects in der über- und untergeordneten
  Hierarchieebene zugreifen zu können, werden zusätzlich folgende Methoden
- bereit gestellt:
+ bereitgestellt:
 \end_layout
 
 \begin_layout Standard
@@ -4173,29 +4430,55 @@ public Component GetComponentInParent(Type t);
 \end_layout
 
 \begin_layout Standard
-Alle GetComponent-Methoden spezifizieren einen Typparameter T als Suchkriterium.
- Da T nicht weiter -- zum Beispiel auf UnityEngine.Object -- eingeschränkt
- wird, ist es möglich, anstatt konkreten Komponenten auch Komponenten anhand
- eines Interfaces zu finden.
+Alle 
+\shape italic
+GetComponent
+\shape default
+-Methoden spezifizieren einen Typparameter 
+\shape italic
+T
+\shape default
+ als Suchkriterium.
+ Da 
+\shape italic
+T
+\shape default
+ nicht weiter -- zum Beispiel auf 
+\shape italic
+UnityEngine.Object
+\shape default
+ -- eingeschränkt wird, ist es möglich, anstatt konkreten Komponenten, auch
+ Komponenten anhand eines Interfaces zu finden.
  Enge Kopplung zu einer konkreten Implementation einer Komponente entsteht
  so nicht.
- Dennoch ist GetComponent keine optimale Lösung: Die Komponente selbst kümmert
- sich um die Auflösung ihrer Abhängigkeiten.
- GetComponent funktioniert entegengesetzt zum Hollywood-Prinzip.
- Es ist von Aussen nicht sichtbar, dass die Komponente Abhängigkeiten hat.
+ Dennoch ist 
+\shape italic
+GetComponent
+\shape default
+ keine optimale Lösung: Die Komponente selbst kümmert sich um die Auflösung
+ ihrer Abhängigkeiten.
+ 
+\shape italic
+GetComponent
+\shape default
+ funktioniert entgegengesetzt zum Hollywood-Prinzip.
+ Es ist von außen nicht sichtbar, dass die Komponente Abhängigkeiten hat.
  Ohne die Implementation der Komponente zu kennen, kann keine Aussage darüber
- getroffen werden, welche Abhängigkeiten notwendig sind damit sie funktioniert.
+ getroffen werden, welche Abhängigkeiten notwendig sind, damit sie funktioniert.
  Die Komponente kann nur in Verbindung mit anderen Komponenten als GameObject
  getestet werden.
 \end_layout
 
 \begin_layout Standard
-Beim Verwenden von GetComponent wird implizit eine Anordnung in der Objekthierar
-chie festgelegt.
+Beim Verwenden von 
+\shape italic
+GetComponent
+\shape default
+ wird implizit eine Anordnung in der Objekthierarchie festgelegt.
  Wird zum Beispiel eine benötigte Komponente in ein Child-GameObject verschoben,
  ist das Spiel ohne Änderung im Programmcode nicht mehr lauffähig.
- Aus diesem Grund sollte GetComponent nur in Ausnahmefällen, wenn Beispielsweise
- eine Komponete zur Laufzeit hinzugefügt wird, verwendet werden.
+ Aus diesem Grund sollte GetComponent nur in Ausnahmefällen, wenn beispielsweise
+ eine Komponente zur Laufzeit hinzugefügt wird, verwendet werden.
  
 \end_layout
 
@@ -4224,25 +4507,48 @@ public static GameObject FindWithTag(string tag);
 \end_layout
 
 \begin_layout Standard
-Unity's Find Functions sind klassische Game Object Queries zur Inter-Objekt
- Kommunikation.
+Unitys 
+\shape italic
+Find
+\shape default
+-Funktionen sind klassische Game Object Queries zur Inter-Objekt Kommunikation.
  Das gewünschte Spielobjekt wird auf Basis eines Strings als Suchkriterium
  zurückgegeben.
  Dieser String kann entweder der Name oder ein Tag sein.
+ Nachdem das gesuchte Objekt gefunden wurde, muss die gewünschte Komponente
+ mittels 
+\shape italic
+GetComponent
+\shape default
+ ausfindig gemacht werden.
  Die Funktionen unterscheiden sich im Verhalten, falls kein GameObject mit
  dem passenden Namen gefunden wird: Wird kein Objekt mit dem passenden Namen
- gefunden, gibt Find null zurück.
- Wird kein Objekt mit dem passenden Tag gefunden, wirft FindWithTag eine
- UnityException.
- Nachdem das gesuchte Objekt gefunden wurde, muss die gewünschte Komponente
- mittels GetComponent ausfindig gemacht werden.
+ gefunden, gibt 
+\shape italic
+Find
+\shape default
+ 
+\shape italic
+null
+\shape default
+ zurück.
+ Wird kein Objekt mit dem passenden Tag gefunden, wirft 
+\shape italic
+FindWithTag
+\shape default
+ eine 
+\shape italic
+UnityException
+\shape default
+.
 \end_layout
 
 \begin_layout Standard
-Generell ist von der Nutzung beider Funktionen abzuraten, da sie nicht gewährlei
-sten, dass das gesuchte GameObject tatsächlich auffindbar ist.
- Es wird sich darauf verlassen, dass ein GameObject mit bestimmten Namen/Tag
- in der Szene existiert und bestimmte Komponenten an diesem vorhanden sind.
+Generell ist von der Nutzung beider Funktionen abzuraten, da diese nicht
+ gewährleisten, dass das gesuchte GameObject tatsächlich auffindbar ist.
+ Es wird sich darauf verlassen, dass ein GameObject mit bestimmtem Namen
+ oder Tag in der Szene existiert und bestimmte Komponenten an diesem vorhanden
+ sind.
  Es gibt somit viel Raum für Fehlkonfiguration.
 \end_layout
 
@@ -4271,23 +4577,72 @@ public static T FindObjectOfType<T>() where T : Object;
 \end_layout
 
 \begin_layout Standard
-Im Gegensatz zu den anderen Find Functions ist FindObjectOfType typsicher.
+Im Gegensatz zu den anderen 
+\shape italic
+Find
+\shape default
+ Functions ist 
+\shape italic
+FindObjectOfType
+\shape default
+ typsicher.
  Es wird gewährt, dass eine in der Szene aktive Instanz eines bestimmten
  Typs erhalten wird.
- Anzumerken ist, dass der gewünschte Typ von UnityEngine.Object abgeleitet
- sein muss.
- Somit funktioniert auch FindObjectOfType nicht mit Interfaces.
- Die generische Variante von FindObjectOfType ist anderen Find Funktionen
- vorzuziehen, da sie direkt die Instanz der gesuchten Komponente vom Typ
- T als Rückgabewert liefert.
- Es ist also nicht nötig GetComponent zu nutzen.
+ Anzumerken ist, dass der gewünschte Typ von 
+\shape italic
+UnityEngine.Object
+\shape default
+ abgeleitet sein muss.
+ Somit funktioniert auch 
+\shape italic
+FindObjectOfType
+\shape default
+ nicht mit Interfaces.
+ Die generische Variante von 
+\shape italic
+FindObjectOfType
+\shape default
+ ist anderen 
+\shape italic
+Find
+\shape default
+-Funktionen vorzuziehen, da sie direkt die Instanz der gesuchten Komponente
+ vom Typ 
+\shape italic
+T
+\shape default
+ als Rückgabewert liefert.
+ Es ist also nicht nötig 
+\shape italic
+GetComponent
+\shape default
+ zu nutzen.
 \end_layout
 
 \begin_layout Standard
-In der Dokumentation der Funktion wird angemerkt, dass FindObjectOfType
+In der Dokumentation der Funktion wird angemerkt, dass 
+\shape italic
+FindObjectOfType
+\shape default
  sehr langsam ist.
  Sie sollte daher nicht jeden Frame genutzt werden.
  Als Alternative wird das Singleton Pattern vorgeschlagen.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+todo{Quelle einfügen!}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection*
@@ -4295,11 +4650,15 @@ Singleton und Statics
 \end_layout
 
 \begin_layout Standard
-Singletons stellen sicher, dass nur eine Instanz einer Klasse gibt, auf
+Singletons stellen sicher, dass es nur eine Instanz einer Klasse gibt, auf
  welche ein globaler Zugriffspunkt existiert.
- Hier mit aufgeführt, weil sie in Unity alternativ zu FindObjectOfType genutzt
- werden können, mit der Beschränkung, dass sie auf eine Instanz limitiert
- sind.
+ Singletons werden hier mit aufgeführt, weil sie in Unity alternativ zu
+ 
+\shape italic
+FindObjectOfType
+\shape default
+ genutzt werden können, mit der Beschränkung, dass sie auf eine Instanz
+ limitiert sind.
  Abb.
  
 \begin_inset CommandInset ref
@@ -4308,12 +4667,19 @@ reference "fig:Singleton"
 
 \end_inset
 
- zeigt eine mögliche Implementation eines Singletons welches von MonoBehaviour
+ zeigt eine mögliche Implementation eines Singletons, welches von 
+\shape italic
+MonoBehaviour
+\shape default
  ableitet.
  Die Singletonkomponente muss lediglich einem Spielobjekt in der Szene hinzugefü
-gt werden um es global verfügbar zu machen.
- Der Zugriff auf die Singleton-Komponente erfolgt über die statische Variable
- Instance.
+gt werden, um es global verfügbar zu machen.
+ Der Zugriff auf die Singletonkomponente erfolgt über die statische Variable
+ 
+\shape italic
+Instance
+\shape default
+.
 \end_layout
 
 \begin_layout Standard
@@ -4450,8 +4816,8 @@ name "fig:Singleton"
 \end_layout
 
 \begin_layout Standard
-Diese Form des Singletons erlaubt dem Objekt die Funktionalitäten eines
- MonoBehaviours -- wie dem Update Loop -- zu nutzen.
+Die abgebildete Implementation des Singletons erlaubt es, Funktionalitäten
+ eines MonoBehaviours, wie dem Update Loop, zu nutzen.
  Sollten diese Funktionalitäten nicht notwendig sein, kann auch ein klassischer
  Singleton nach der Gang Of Four verwendet werden.
  Sollte gar keine Vererbung notwendig sein, gibt es oft jedoch gar keinen
@@ -4460,10 +4826,26 @@ Diese Form des Singletons erlaubt dem Objekt die Funktionalitäten eines
 \end_layout
 
 \begin_layout Standard
-An dieser Stelle sei bereits anzumerken, dass Singletons aus vielen Gründen
- als Anti-Pattern angesehen werden.
- Eine der Ursachen dafür ist, dass sie einen Globalen Zustand einführen.
+An dieser Stelle sei anzumerken, dass Singletons aus vielen Gründen als
+ Anti-Pattern angesehen werden.
+ Eine der Ursachen dafür ist, dass sie einen globalen Zustand einführen.
  Gleiches gilt für statische Klassen.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+todo{Singleton als Anti-Pattern erläutern und Quellen angeben}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -4475,8 +4857,8 @@ Alternativ kann die Kommunikation zwischen Objekten auch über Events erfolgen.
  Events können im Unterschied zu Methodenaufrufen keinen oder mehrere Empfänger
  haben.
  Events sind eine Umsetzung des Observer Patterns.
- Die Klasse die den Event auslöst wird als Publisher und die Klassen, die
- das Ereignis behandeln als Subscriber bezeichnet.
+ Die Klasse, die das Event auslöst, wird als Publisher und die Klassen,
+ die das Ereignis behandeln als Subscriber, bezeichnet.
  Ein typischer Anwendungsfall für Events sind UI-Elemente wie Buttons, Slider
  und Toggles.
  Mit Events kann nichtsdestotrotz das gleiche Ergebnis wie mit Referenzierung
@@ -4484,12 +4866,12 @@ Alternativ kann die Kommunikation zwischen Objekten auch über Events erfolgen.
  Unity und C# bieten mehrere Möglichkeiten um die Kommunikation mittels
  Events umzusetzen.
  In dieser Arbeit wird davon abgesehen, darzustellen wie C# Events implementiert
- werden, da Sie ohne Mediation oder Statics nicht das Problem der Referenzierung
+ werden, da sie ohne Mediation oder Statics nicht das Problem der Referenzierung
  lösen.
- Wird ein gewöhnlicher C# Event als Kommunikationskanal gewählt, so muss
+ Wird ein gewöhnliches C# Event als Kommunikationskanal gewählt, so muss
  der Empfänger über einen der im letzten Abschnitt beschriebenen Wege Zugriff
  auf den Sender erhalten.
- Um diese Limitierung zu umgehen bietet Unity ab der Version 4.6 eine eigene
+ Um diese Limitierung zu umgehen, bietet Unity ab der Version 4.6 eine eigene
  Implementierung von Events.
 \end_layout
 
@@ -4515,8 +4897,8 @@ public abstract class UnityEvent<T,...,Tn>
 \begin_layout Standard
 UnityEvents ermöglichen das Setzen von Callbacks über das Editorfenster.
  Auf diese Weise sind Sender und Empfänger komplett voneinander entkoppelt.
- Zudem bieten sie zusätzlich nahezu identische Funktionalität wie klassische
- C# Events.
+ Zudem bieten UnityEvents zusätzlich nahezu identische Funktionalität wie
+ klassische C# Events.
 \end_layout
 
 \begin_layout Standard
@@ -4528,7 +4910,11 @@ reference "fig:UnityEventCode"
 \end_inset
 
  zeigt die Verwendung eines nicht generischen UnityEvents ohne Parameter.
- Die Publisher Komponente löst den Event in der Start-Methode aus.
+ Die Publisher Komponente löst das Event in der 
+\shape italic
+Start
+\shape default
+-Methode aus.
  Ein Subscriber benötigt lediglich eine öffentliche Methode mit der passenden
  Signatur.
  
@@ -4698,8 +5084,8 @@ reference "fig:UnityEvent"
 \end_inset
 
 ).
- Somit wird es ohne weiteren Programmcode möglich zu bestimmen wer auf ein
- Event reagieren soll.
+ Somit wird es ohne weiteren Programmcode möglich, zu bestimmen wer auf
+ ein Event reagieren soll.
 \end_layout
 
 \begin_layout Standard
@@ -4745,19 +5131,19 @@ name "fig:UnityEvent"
 \end_layout
 
 \begin_layout Standard
-UnityEvents bieten somit eine Möglichkeit Sender von Empfänger komplett
+UnityEvents bieten eine Möglichkeit, Sender von Empfänger komplett voneinander
  zu entkoppeln.
  Andererseits gibt es auch hier viel Raum zur Fehlkonfiguration.
- Es ist nicht im Programmcode ersichtlich ob und wer die Subscriber eines
+ Es ist nicht im Programmcode ersichtlich, ob und wer die Subscriber eines
  Events sind.
  Genauso wenig ist ersichtlich, ob eine als öffentlich gekennzeichnete Methode
  als Callback genutzt wird oder nicht.
- Oft werden Methoden und Events auf die keine Referenzen im Programmcode
- existieren einfach gelöscht.
+ Oft werden Methoden und Events, auf die keine Referenzen im Programmcode
+ existieren, einfach gelöscht.
 \end_layout
 
 \begin_layout Standard
-Events sind ein geeignetes Mittel um optionale Abhängigkeiten aufzulösen.
+Events sind ein geeignetes Mittel, um optionale Abhängigkeiten aufzulösen.
  Ist eine Abhängigkeit jedoch zwingend erforderlich, sollte zu einer anderen
  Möglichkeit gegriffen werden.
 \end_layout
@@ -4810,14 +5196,24 @@ geOptions options = SendMessageOptions.RequireReceiver);
 \end_layout
 
 \begin_layout Standard
-MonoBehaviours bieten die Funktionalität untereinander mittels Messages
+MonoBehaviours bieten die Funktionalität, untereinander mittels Messages
  zu kommunizieren.
- SendMessage ermöglicht die Kommunikation zwischen Komponenten innerhalb
- eines Spielobjekts.
- BroadcastMessage sendet eine Message an das gewählte Spielobjekt und dessen
- Children.
- SendMessageUpwards sendet die Nachricht an alle Spielobjekte die sich dem
- gewählten Spielobjekt übergeordnet in der Szene-Hierarchie befinden.
+ 
+\shape italic
+SendMessage
+\shape default
+ ermöglicht die Kommunikation zwischen Komponenten innerhalb eines Spielobjekts.
+ 
+\shape italic
+BroadcastMessage
+\shape default
+ sendet eine Message an das aufrufende Spielobjekt und dessen Children.
+ 
+\shape italic
+SendMessageUpwards
+\shape default
+ sendet die Nachricht an alle Spielobjekte, die sich dem Spielobjekt übergeordne
+t in der Szene-Hierarchie befinden.
 \end_layout
 
 \begin_layout Standard
@@ -4828,17 +5224,32 @@ reference "fig:SendMessage"
 
 \end_inset
 
- zeigt die Verwendung von SendMessage anhand von zwei Komponenten, die sich
- am gleichen Spielobjekt befinden.
- Der Publisher eines Events spezifiziert die Callback-Methode mittels eines
- Strings.
- Dieser String repräsentiert den Namen der gesuchten Callback-Methode.
- Der Zugriffsmodifizierer der Callback-Methode ist dabei nicht relevant.
- Sie kann wie im Beispiel auch als private deklariert werden.
- Durch den Aufzählungstyp SendMessageOptions ist es möglich zu spezifizeren,
- ob ein Empfänger zwingend erforderlich ist.
+ zeigt die Verwendung von 
+\shape italic
+SendMessage
+\shape default
+ anhand von zwei Komponenten, die sich am gleichen Spielobjekt befinden.
+ Der Publisher eines Events spezifiziert die Callbackmethode mittels eines
+ Stringparameters.
+ Dieser String repräsentiert den Namen der gesuchten Callbackmethode.
+ Der Zugriffsmodifizierer der Callbackmethode ist dabei nicht relevant.
+ Sie kann wie im Beispiel auch als 
+\shape italic
+private
+\shape default
+ deklariert werden.
+ Durch den Aufzählungstyp 
+\shape italic
+SendMessageOptions
+\shape default
+ ist es möglich zu spezifizieren, ob ein Empfänger zwingend erforderlich
+ ist.
  Wenn dieser als erforderlich gekennzeichnet wurde und dennoch kein Empfänger
- gefunden wird, wirft SendMessage eine Exception zur Laufzeit.
+ gefunden wird, wirft 
+\shape italic
+SendMessage
+\shape default
+ eine Ausnahme zur Laufzeit.
 \end_layout
 
 \begin_layout Standard
@@ -4965,26 +5376,35 @@ name "fig:SendMessage"
 \end_layout
 
 \begin_layout Standard
-SendMessage verwendet 
+
+\shape italic
+SendMessage
+\shape default
+ verwendet 
 \begin_inset Quotes gld
 \end_inset
 
-Magic Strings
+magic strings
 \begin_inset Quotes grd
 \end_inset
 
- zur Identifikation der Callback-Methode.
- Refactorings der Methodennamen haben keinen Einfluss.
- Auch hier ist es nicht ersichtlich, dass die private Methode als Callback
- genutzt wird.
- Nach dem YAGNI Prinzip werden nicht verwendete private Methode einfach
+ zur Identifikation der Callbackmethode.
+ Refactorings der Methodennamen gefährden die Funktionalität der Anwendung.
+ Auch hier ist es nicht ersichtlich, ob eine ansonsten nicht verwendete
+ private Methode als Callback genutzt wird.
+ Nach dem YAGNI-Prinzip werden nicht verwendete private Methoden einfach
  gelöscht.
- SendMessage legt implitzit eine Anordnung in der Hierarchie fest.
+ 
+\shape italic
+SendMessage
+\shape default
+ legt implizit eine Anordnung in der Hierarchie fest, indem Aufrufe spezifisch
+ an Parent- oder Childelemente erfolgen müssen.
 \end_layout
 
 \begin_layout Standard
 Aus diesen Gründen ist der Nutzung von SendMessage generell abzuraten.
- Besonders, da mit der Unity Version 4.6 ein neues Messaging System als Ersatz
+ Besonders, da mit Unity Version 4.6 ein neues Messaging System als Ersatz
  für SendMessage vorgestellt wurde.
 \begin_inset Foot
 status open
@@ -5025,14 +5445,52 @@ Data eventData, EventFunction<T> callbackFunction);
 \end_layout
 
 \begin_layout Standard
-Das Event System wurde in Verbindung mit uGUI in Unity 4.6 eingeführt.
- Es wird dazu verwendet um Events bei Nutzereingaben zu senden.
+Das Eventsystem wurde in Verbindung mit uGUI in Unity 4.6 eingeführt.
+ Es wird dazu verwendet, um Events bei Nutzereingaben zu senden.
  Man kann es jedoch auch für benutzerdefinierte Events verwenden.
- Anstelle eines Strings wird ein Interface verwendet um eine Komponente
+ Anstelle eines Strings wird ein Interface verwendet, um eine Komponente
  zu kennzeichnen, die eine Callback-Funktion für ein bestimmtes Event implementi
 eren.
- Events können mittels ExecuteHierarchy in der Objekthierarchie nach oben,
- jedoch nicht nach unten, gesendet werden.
+ Events können mittels 
+\shape italic
+ExecuteHierarchy
+\shape default
+ in der Objekthierarchie nach oben, jedoch nicht nach unten, gesendet werden.
+\end_layout
+
+\begin_layout Standard
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:EventSystems"
+
+\end_inset
+
+ zeigt ein Beispiel zur Verwendung des Eventsystems.
+ Der Publisher löst ein Event durch den Aufruf der 
+\shape italic
+Execute
+\shape default
+-Methode der Klasse 
+\shape italic
+ExecuteEvents
+\shape default
+ in der 
+\shape italic
+Start
+\shape default
+-Methode aus.
+ Die Angabe Callbackmethode erfolgt als Parameter in Form einer Lambdafunktion.
+  Es wird die 
+\shape italic
+Recieve
+\shape default
+-Methode des Subscribers aufgerufen.
+ Hierzu muss der Subscriber das 
+\shape italic
+IEventTarget
+\shape default
+-Interface implementieren.
 \end_layout
 
 \begin_layout Standard
@@ -5173,7 +5631,9 @@ public class EventSubscriber : MonoBehaviour, IEventTarget
 
 \begin_layout Plain Layout
 Verwenden von UnityEngine.EventSystems
-\end_layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:EventSystems"
 
 \end_inset
 
@@ -5182,10 +5642,19 @@ Verwenden von UnityEngine.EventSystems
 
 \end_inset
 
-Das neue EventSystem ist ein typsicherer Ansatz Events an Komponenten in
+
+\end_layout
+
+\end_inset
+
+Das neue Eventsystem ist ein typsicherer Ansatz Events an Komponenten in
  der Szenehierarchie zu senden.
+ Publisher und Subscriber sind lose miteinander gekoppelt.
+ Bei der Verwendung entsteht jedoch eine Abhängigkeit zu der statischen
+ ExecuteEvents-Klasse.
+ Testbarkeit ist somit nur innerhalb von Unity gewährleistet.
  Ohne das Spielobjekt der Empfängerkomponente zu kennen, kann jedoch nur
- an das eigene oder direkte parent Spielobjekte gesendet werden.
+ an das eigene oder direkte Parent-Spielobjekte gesendet werden.
  
 \end_layout
 
