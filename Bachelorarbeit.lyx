@@ -5449,8 +5449,8 @@ Das Eventsystem wurde in Verbindung mit uGUI in Unity 4.6 eingeführt.
  Es wird dazu verwendet, um Events bei Nutzereingaben zu senden.
  Man kann es jedoch auch für benutzerdefinierte Events verwenden.
  Anstelle eines Strings wird ein Interface verwendet, um eine Komponente
- zu kennzeichnen, die eine Callback-Funktion für ein bestimmtes Event implementi
-eren.
+ zu kennzeichnen, die eine Callbackfunktion für ein bestimmtes Event implementie
+ren.
  Events können mittels 
 \shape italic
 ExecuteHierarchy
@@ -5480,7 +5480,8 @@ ExecuteEvents
 Start
 \shape default
 -Methode aus.
- Die Angabe Callbackmethode erfolgt als Parameter in Form einer Lambdafunktion.
+ Die Angabe der Callbackmethode erfolgt als Parameter in Form einer Lambdafunkti
+on.
   Es wird die 
 \shape italic
 Recieve
@@ -5663,8 +5664,8 @@ Wertung und Konsequenzen
 \end_layout
 
 \begin_layout Standard
-Unitys Komponentenbasierte Architektur hilft dabei Klassen mit nur einer
- Verantwortung zu erstellen.
+Unitys komponentenbasierte Architektur hilft dabei, Klassen mit lediglich
+ einer Verantwortung zu erstellen.
  Spielobjekte lassen sich durch Komposition aus Komponenten in der Szenehierarch
 ie arrangieren.
  Um koordinieren zu können, müssen Komponenten miteinander kommunizieren.
@@ -5674,10 +5675,14 @@ ie arrangieren.
  damit eine Form von Kopplung.
  Einige Methoden ermöglichen zwar lose Kopplung, aber nicht durch Inversion
  Of Control.
- Eine Sache haben jedoch haben alle Kommunikationsmittel gemeinsam: Objekte
- müssen Komponenten oder Spielobjekte sein.
+ Eine Sache haben jedoch alle Kommunikationsmittel gemeinsam: Objekte müssen
+ Komponenten oder Spielobjekte sein.
  Dies führt dazu, dass Objekte, um überhaupt kommunizieren zu können, von
- MonoBehaviour ableiten und an Spielobjekte angehängt werden.
+ 
+\shape italic
+MonoBehaviour
+\shape default
+ ableiten und an Spielobjekte angehängt werden.
 \end_layout
 
 \begin_layout Standard
@@ -5708,11 +5713,11 @@ Durch Singletons und statische Klassen, die globalen Zugriff ermöglichen.
 Solche Klassen haben oft keine klar definierten Aufgaben.
  Sie wachsen mit der Zeit und werden somit zu Gottobjekten.
  Managerobjekte verletzen das Single-Responcibility Principle somit gleich
- auf mehreren Ebenen: Sie vermischen Darstellungs- mit Anwendungslogik indem
- sie als Spielobjekte in der Szene existieren und sie haben oft mehr als
- nur eine Aufgabe.
- Singletons verletzen das Single-Responcibility Principle insbesondere,
- indem sie ihre Erstellung mit anderer Anwendungslogik mischen.
+ auf mehreren Ebenen: Sie haben oft mehr als nur eine Aufgabe.
+ Sie vermischen Darstellungs- mit Anwendungslogik, indem sie als Spielobjekte
+ in der Szene existieren.
+ Des Weiteren verletzen insbesondere Singletons das Single-Responcibility
+ Principle, indem sie ihre Erstellung mit anderer Anwendungslogik mischen.
  
 \end_layout
 
@@ -5730,9 +5735,9 @@ Find
  Es wird unmöglich einzelne Komponenten zu testen und in anderen Projekten
  wiederzuverwenden.
  Es besteht folglich auch in Unity das Bedürfnis nach einer Alternative,
- die es ermöglicht lose Kopplung umzusetzen ohne dabei die Kommunikation
+ die es ermöglicht lose Kopplung umzusetzen, ohne dabei die Kommunikation
  auf Komponenten oder Spielobjekte zu beschränken.
- Im nächsten Kapitel wird beschrieben wie Dependency Injection in Unity
+ Im nächsten Kapitel wird beschrieben, wie Dependency Injection in Unity
  umgesetzt werden kann, um diese Ansprüche zu erfüllen.
 \end_layout
 
@@ -5751,7 +5756,7 @@ Aus dem Fazit des letzten Kapitels geht hervor, dass keiner der in Unity
  Komponenten beschränkt.
  Es wurde festgestellt, dass die Kontrolle über die Komposition von Objekten
  bereits invertiert ist.
- In diesem Kapitel soll beschrieben werden, wie es dennoch ermöglich wurde
+ In diesem Kapitel soll beschrieben werden, wie es dennoch ermöglicht wurde,
  Dependency Injection in Unity umzusetzen.
  
 \end_layout
@@ -5768,7 +5773,7 @@ reference "sub:Composition-Root"
 
 \end_inset
 
- wurde verdeutlicht, wie Dependency Injection 
+ wurde veranschaulicht, wie Dependency Injection 
 \begin_inset Quotes gld
 \end_inset
 
@@ -5780,7 +5785,7 @@ per Hand
  Benötigte Instanzen werden manuell im Composition Root instanziiert.
  In dem gezeigten Beispiel war dies noch sehr überschaubar.
  In einer echten Anwendung entstehen jedoch schnell komplexe Abhängigkeitshierar
-chien, die eine Dependency Injection von Hand unübersichtlich und fehleranfällig
+chien, die eine manuelle Dependency Injection unübersichtlich und fehleranfällig
  machen.
  Aus diesem Grund wird sich oft dazu entschlossen, die Auflösung von Abhängigkei
 ten zu automatisieren.
@@ -5788,13 +5793,13 @@ ten zu automatisieren.
 \end_layout
 
 \begin_layout Standard
-In Unity ist diese Automatisierung sogar notwendig.
+In Unity ist diese Automatisierung zwangsläufig erforderlich.
  Die Kontrolle über die Erstellung von Komponenten liegt in den Händen von
  Unity.
- Es ist nicht möglich Komponenten über den Konstruktor mit ihren Abhängigkeiten
+ Es ist nicht möglich, Komponenten über den Konstruktor mit ihren Abhängigkeiten
  zu versorgen.
- Es existiert kein klarer Einstiegspunkt in die Anwendung der es ermöglichen
- würde Komponenten von aussen mit ihren Abhängigkeiten zu versorgen.
+ Es existiert kein klarer Einstiegspunkt in die Anwendung, der es ermöglichen
+ würde, Komponenten von außen mit ihren Abhängigkeiten zu versorgen.
  Beim Laden einer Szene werden alle sich in ihr befindlichen Spielobjekte
  instanziiert.
 \end_layout
@@ -5805,13 +5810,13 @@ Die Kontrolle über die Komposition von Objekten soll an einen sogenannten
  Im Composition Root wird vom Nutzer lediglich die Konfiguration des Containers
  vorgenommen.
  Die zu instanziierenden Typen werden an diesem Ort beim Container registriert.
- Der Container kümmert sich um alles weitere: Er versorgt alle Klassen mit
+ Der Container kümmert sich um alles Weitere: Er versorgt alle Klassen mit
  ihren registrierten konkreten Abhängigkeiten und managt die Lebenszeit
  aller Objekte.
  Im Folgenden wird eine Möglichkeit der Implementation eines Inversion Of
  Control Containers in Unity beschrieben.
  Dabei soll besonders darauf eingegangen werden, wo aufgrund von Unitys
- Architektur einschränkungen gemacht werden müssen.
+ Architektur Einschränkungen gemacht werden müssen.
 \end_layout
 
 \begin_layout Section
@@ -5830,11 +5835,11 @@ Container
 \end_inset
 
  gewählt.
- Anhand der Implementierung des Frameworks sollen die mit Inversion Of Control
- Containern verbundenen Konzepte erläutert werden.
- Weiter sollen Hürden und Einschränkungen, die aus Unity‘s Architektur hervorgeh
-en, beschrieben werden.
- Es sollen Lösungen für diese präsentiert werden.
+ Anhand der Implementation des Frameworks werden die mit Inversion Of Control
+ Containern verbundenen Konzepte erläutert.
+ Weiter sollen Hürden und Einschränkungen, die aus Unitys Architektur hervorgehe
+n, beschrieben werden.
+ Es werden Lösungen und Abhilfemaßnahmen für diese präsentiert.
  
 \end_layout
 
@@ -5851,14 +5856,29 @@ name "sub:Definieren-des-Composition"
 
 \begin_layout Standard
 In Unity steht kein klarer Einstiegspunkt in die Anwendung zur Verfügung.
- Es existiert kein Zugriff auf eine Main-Methode in der der Kontrollfluss
- der Anwendung beginnt.
- Der frühste Zeitpunkt an dem der Nutzer Einfluss auf den Kontrollfluss
- der Anwendung nehmen kann, ist die Awake-Methode einer Komponente.
- Zu diesem Zeitpunkt wurden die alle in der Szene plazierten Spielobjekte
+ Es existiert kein Zugriff auf eine 
+\shape italic
+Main
+\shape default
+-Methode, in der der Kontrollfluss der Anwendung beginnt.
+ Der frühste Zeitpunkt, an dem der Nutzer Einfluss auf den Kontrollfluss
+ der Anwendung nehmen kann, ist die 
+\shape italic
+Awake
+\shape default
+-Methode eines 
+\shape italic
+MonoBehaviours
+\shape default
+.
+ Zu diesem Zeitpunkt wurden die alle in der Szene platzierten Spielobjekte
  mitsamt ihren Komponenten bereits instanziiert.
- Soweit nicht anders spezifiziert erfolg die Aufrufreihenfolge der Awake-Methode
-n der Komponenten zufällig nach der Reihenfolge in der sie geladen werden.
+ Soweit nicht anders spezifiziert, erfolgt die Aufrufreihenfolge der 
+\shape italic
+Awake
+\shape default
+-Methoden der Komponenten zufällig, nach der Reihenfolge, in der sie geladen
+ werden.
  Es ist jedoch möglich in den Script Execution Order Settings anzugeben,
  dass ein bestimmtes Script früher oder später geladen werden soll.
 \begin_inset Foot
@@ -5919,7 +5939,7 @@ name "fig:Script-Execution-Order"
 \begin_layout Standard
 Zur Definition des Composition Roots wird also zunächst ein einfaches MonoBehavi
 our erstellt und einem leeren GameObject in der Szene hinzugefügt.
- Um sicherzustellen, dass dieses MonoBehaviour auch das erste Script ist
+ Um sicherzustellen, dass dieses MonoBehaviour auch das erste Script ist,
  welches bei Anwendungsstart ausgeführt wird, sollte es in den Execution
  Order Settings an oberster Stelle stehen.
  Abbildung 
@@ -5929,12 +5949,13 @@ reference "fig:Script-Execution-Order"
 
 \end_inset
 
- zeigt die korrekte Konfiguration eines CompositionRoots in den Script Execution
- Order Settings.
+ zeigt die korrekte Konfiguration eines Composition Roots in den Script
+ Execution Order Settings.
  Damit ist gewährleistet, dass der Composition Root Zugriff auf alle sich
  in der Szene befindlichen Komponenten hat, bevor diese ausgeführt werden.
- Im Composition Root kann nun die Konfiguration des IoC Containers vorgenommen
- werden und Komponenten mit ihren Abhängigkeiten versorgt werden.
+ Im Composition Root kann nun die Konfiguration des Inversion Of Control
+ Containers vorgenommen werden und Komponenten mit ihren Abhängigkeiten
+ versorgt werden.
 \end_layout
 
 \begin_layout Standard
@@ -5954,8 +5975,16 @@ Containter
 \end_inset
 
 -Framework der Composition Root als abstrakte Klasse definiert.
- Die Aufgabe der Klasse ist zunächst eine Instanz eines Binders zu erstellen.
- Der Binder bildet das Herzstück des Frameworks.
+ Die Aufgabe der Klasse ist zunächst eine Instanz eines 
+\shape italic
+Containers
+\shape default
+ zu erstellen.
+ Der 
+\shape italic
+Container
+\shape default
+ bildet das Herzstück des Frameworks.
  Durch ihn können abstrakte Basisklassen an ihre konkreten Instanzen 
 \begin_inset Quotes gld
 \end_inset
@@ -5965,8 +5994,16 @@ gebunden
 \end_inset
 
  werden.
- Diese Typregistrierung soll in der Methode SetupBindings vorgenommen werden.
- Umgehend danach wird die Init-Methode aufgerufen.
+ Diese Typregistrierung soll in der Methode 
+\shape italic
+SetupBindings
+\shape default
+ vorgenommen werden.
+ Umgehend danach wird die 
+\shape italic
+Init
+\shape default
+-Methode aufgerufen.
  In ihr kann weitere Initialisierungslogik vorgenommen werden.
  Beide Methoden sind abstrakt, da die Typregistrierung für jede Applikation
  individuell erfolgen muss.
@@ -6005,7 +6042,7 @@ namespace Container.Framework
 
 \begin_layout Plain Layout
 
-		protected IBinder container;
+		protected IContainer container;
 \end_layout
 
 \begin_layout Plain Layout
@@ -6024,7 +6061,7 @@ namespace Container.Framework
 
 \begin_layout Plain Layout
 
-			container = new Binder();
+			container = new Container();
 \end_layout
 
 \begin_layout Plain Layout
@@ -6103,7 +6140,7 @@ name "fig:CompositionRoot-Klasse"
 
 \begin_layout Standard
 Damit ist die Umsetzung des Composition Roots abgeschlossen.
- Es fehlt jedoch noch die Implementation des Binders/Containers an sich.
+ Es fehlt jedoch noch die Implementation des Containers an sich.
  Im Folgenden soll beschrieben werden, wie dieser im 
 \begin_inset Quotes gld
 \end_inset
@@ -6120,26 +6157,45 @@ Aufgaben eines Dependency Injection Containers
 \end_layout
 
 \begin_layout Standard
-Bevor mit der Implementierung des Binders begonnen werden kann, müssen zunächst
- dessen grundlegenden Aufgaben erläutert werden.
+Bevor mit der Implementierung des Containers begonnen werden kann, müssen
+ zunächst dessen grundlegende Aufgaben erläutert werden.
  Die Hauptaufgabe eines Dependency Injection Containers ist die Erstellung
  von Objekten.
  Hierfür muss dem Container bekannt sein, wie der Objekt Graph der Anwendung
  aufzulösen ist.
- Dem Nutzer des Containers muss es folglich ermöglicht werden, ihn zu Konfigurie
+ Dem Nutzer des Containers muss es folglich ermöglicht werden, ihn zu konfigurie
 ren: Er muss auswählen können, welche konkreten Implementationen einer Abstrakti
-on injektziert werden sollen.
- Die Register-Methoden bilden diese Funktionalität ab.
+on 
+\begin_inset Quotes gld
+\end_inset
+
+injiziert
+\begin_inset Quotes grd
+\end_inset
+
+ werden sollen.
+ Die 
+\shape italic
+Register
+\shape default
+-Methoden bilden diese Funktionalität ab.
 \end_layout
 
 \begin_layout Standard
-Mit der Aufgabe der Erstellung von Objekten, geht eine weitere Aufgabe einher:
- Die Kontrolle über die Lebensdauer der Objekte.
- Der Container muss bestimmen wann eine Instanz eines Objektes erstellt
+Mit der Aufgabe der Erstellung von Objekten geht eine weitere Aufgabe einher:
+ die Kontrolle über die Lebensdauer der Objekte.
+ Der Container muss bestimmen, wann eine Instanz eines Objektes erstellt
  werden soll und wann diese nicht mehr gebraucht wird.
- Hierfür ist es für den Container wichtig den Sichtbarkeitsbereich (Scope)
- eines Objektes zu kennen.
- Der Sichtbarkeitsbereich beschreibt Im 
+ Hierfür ist es für den Container wichtig den Sichtbarkeitsbereich (
+\begin_inset Quotes gld
+\end_inset
+
+scope
+\begin_inset Quotes grd
+\end_inset
+
+) eines Objektes zu kennen.
+ Im 
 \begin_inset Quotes gld
 \end_inset
 
@@ -6147,8 +6203,8 @@ Container
 \begin_inset Quotes grd
 \end_inset
 
--Framework soll sich auf zwei Arten des Sichtbarkeitsbereiches beschränkt
- werden: Transient und Singleton.
+-Framework wird zwischen zwei unterschiedlichen Sichtbarkeitsbereichen unterschi
+eden: Transient und Singleton.
 \end_layout
 
 \begin_layout Subsubsection
@@ -6156,15 +6212,19 @@ Register Transient (Default-Scope)
 \end_layout
 
 \begin_layout Standard
-Wird eine Klasse beim Container mit der Lebensdauer Transient registriert,
- so wird dieser bei jeder Anfrage zur Auflösung eine neue Instanz des Typs
- liefern.
- Instanzen können unabhängig voneinander Zustand halten.
+Wird eine Klasse beim Container mit dem Sichtbarkeitsbereich Transient registrie
+rt, so wird dieser bei jeder Anfrage zur Auflösung eine neue Instanz des
+ Typs liefern.
+ Instanzen können somit unabhängig voneinander Zustand halten.
  Aus diesem Grund ist Transient die sicherste Variante der Sichtbarkeitsbereiche.
  Sollte es beispielsweise Zweifel an der Threadsicherheit einer Klasse geben,
- sollte diese als Transient registriert werden.
+ kann diese als Transient registriert werden.
  Die Möglichkeit Klassen als Transient zu registrieren, soll vom Container
- in der Methode RegisterTransient implementiert werden.
+ durch die Methode 
+\shape italic
+RegisterTransient
+\shape default
+ implementiert werden.
 \end_layout
 
 \begin_layout Subsubsection
@@ -6173,12 +6233,47 @@ Register Singleton
 
 \begin_layout Standard
 Im Gegensatz zu Transient wird bei der Singleton Lebensdauer bei jeder Anfrage
- zur Auflösung eines Typs die selbe Instanz geliefert.
+ zur Auflösung eines Typs dieselbe Instanz geliefert.
  Zur Registrierung eines Objektes mit Singleton Lebensdauer soll die Methode
- RegisterInstance dienen.
- Genauso wie beim Singleton Entwurfsmuster kann die Instanz entweder Eager
- oder Lazy instanziiert werden.
  
+\shape italic
+RegisterSingleton
+\shape default
+ dienen.
+ Genauso wie beim Singleton Entwurfsmuster kann die Instanz entweder 
+\begin_inset Quotes gld
+\end_inset
+
+eager
+\begin_inset Quotes grd
+\end_inset
+
+ oder 
+\begin_inset Quotes gld
+\end_inset
+
+lazy
+\begin_inset Quotes grd
+\end_inset
+
+ instanziiert werden.
+ Erfolgt die Instanziierung direkt bei der Registrierung, ist diese 
+\begin_inset Quotes gld
+\end_inset
+
+eager
+\begin_inset Quotes grd
+\end_inset
+
+, erfolgt sie erst bei Injektion, ist sie 
+\begin_inset Quotes gld
+\end_inset
+
+lazy
+\begin_inset Quotes grd
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -6199,12 +6294,23 @@ Resolve
 \end_layout
 
 \begin_layout Standard
-Analog zu den Register-Methoden liefert die Methode Resolve eine zuvor registrie
-rte Instanz eines Typs.
+Analog zu den 
+\shape italic
+Register
+\shape default
+-Methoden liefert die Methode 
+\shape italic
+Resolve
+\shape default
+ eine zuvor registrierte Instanz eines Typs.
  Mit dieser Instanz soll auch ihr gesamter Abhängigkeitsgraph instanziiert
  werden.
- In den meisen Fällen genügt ein einmaliger Aufruf der Resolve-Methode für
- das Root-Objekt des Object Graphs.
+ In den meisten Fällen genügt ein einmaliger Aufruf der 
+\shape italic
+Resolve
+\shape default
+-Methode für das Root-Objekt des Object Graphs, um die komplette Anwendung
+ zu initialisieren.
  
 \end_layout
 
@@ -6213,13 +6319,18 @@ Release
 \end_layout
 
 \begin_layout Standard
-Üblicherweise gehört zu dem Management der Lebensdauer eines Objektes, zu
- bestimmen was mit Objekten geschieht die sich ausserhalb des Sichtbarkeitsberei
-ches befinden.
- Mit dem Aufruf einer Release-Methode soll der Speicherbereich eines nicht
- mehr benötigten Objekts korrekt freigegeben werden.
- In .NET ist dies jedoch in den meisten Fällen nicht nötig da ein Objekt,
- welches nicht mehr referenziert wird, vom Garbage-Collector entfernt wird.
+Üblicherweise gehört zu dem Management der Lebensdauer eines Objekts zu
+ bestimmen, was mit Objekten geschieht, die sich außerhalb des Sichtbarkeitsbere
+iches befinden.
+ Mit dem Aufruf einer 
+\shape italic
+Release
+\shape default
+-Methode soll der Speicherbereich eines nicht mehr benötigten Objekts korrekt
+ freigegeben werden.
+ In .NET ist dies jedoch in den meisten Fällen nicht nötig, da ein Objekt,
+ welches nicht mehr referenziert wird, vom Garbage-Collector aus dem Speicher
+ entfernt wird.
  Aus diesem Grund wurde beim 
 \begin_inset Quotes gld
 \end_inset
@@ -6228,7 +6339,11 @@ Container
 \begin_inset Quotes grd
 \end_inset
 
--Framework wurde auf die Implementierung einer Release-Methode verzichtet.
+-Framework auf die Implementierung einer 
+\shape italic
+Release
+\shape default
+-Methode verzichtet.
  
 \end_layout
 
@@ -6249,7 +6364,7 @@ status open
 
 \begin_layout Plain Layout
 
-public interface IBinder
+public interface IContainer
 \end_layout
 
 \begin_layout Plain Layout
@@ -6264,7 +6379,7 @@ public interface IBinder
 
 \begin_layout Plain Layout
 
-	void RegisterInstance<TInter, TClass>(TClass instance = null) where TClass
+	void RegisterSingleton<TInter, TClass>(TClass instance = null) where TClass
  : class, TInter;
 \end_layout
 
@@ -6287,7 +6402,7 @@ public interface IBinder
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Minimales IBinder Interface
+Minimales IContainer Interface
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Minimales-IBinder-Interface"
@@ -6315,8 +6430,11 @@ reference "fig:Minimales-IBinder-Interface"
 
 \end_inset
 
- gezeigte Interface des zu implementierenden DI Containers.
- Im nächsten Abschnitt wird die konkrete Implementation der Klasse Binder
+ gezeigte Interface des zu implementierenden Dependency Injection Containers.
+ Im nächsten Abschnitt wird die konkrete Implementation der Klasse 
+\shape italic
+Container
+\shape default
  beschrieben.
 \end_layout
 
@@ -6325,10 +6443,13 @@ Implementation des Dependency Injection Containers
 \end_layout
 
 \begin_layout Standard
-Die Implementation beginnt mit der Erstellung der Klasse Binder, die das
- IBinder Interface implementiert.
- Um eine grundlegende Typregistrierung vornehmen zukönnen, müssen die Zuordnunge
-n abgespeichert werden.
+Die Implementation beginnt mit der Erstellung der Klasse 
+\shape italic
+Container
+\shape default
+, die das IContainer Interface implementiert.
+ Um eine grundlegende Typregistrierung vornehmen zu können, müssen die Zuordnung
+en abgespeichert werden.
 \end_layout
 
 \begin_layout Subsubsection
@@ -6348,7 +6469,7 @@ status open
 
 \begin_layout Plain Layout
 
-public class Binder : IBinder
+public class Container : IContainer
 \end_layout
 
 \begin_layout Plain Layout
@@ -6398,7 +6519,7 @@ public class Binder : IBinder
 
 \begin_layout Plain Layout
 
-	public void RegisterInstance<TInter, TClass>(TClass instance = null) where
+	public void RegisterSingleton<TInter, TClass>(TClass instance = null) where
  TClass : class, TInter
 \end_layout
 
@@ -6409,7 +6530,7 @@ public class Binder : IBinder
 
 \begin_layout Plain Layout
 
-		//Eager instantiation of Singleton Objects
+		//Eager instantiation of singleton objects
 \end_layout
 
 \begin_layout Plain Layout
@@ -6493,7 +6614,7 @@ public class Binder : IBinder
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-RegisterMappings in Binder.cs
+Implementation der Register-Methoden in Container.cs
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:RegisterMappings"
@@ -6521,21 +6642,44 @@ reference "fig:RegisterMappings"
 
 \end_inset
 
- zeigt die Implementation der beiden Register-Methoden in Binder.cs.
- Um die Registrierung abzuspeichern werden zwei Dictionaries als Datenstruktur
+ zeigt die Implementation der beiden 
+\shape italic
+Register
+\shape default
+-Methoden in 
+\shape italic
+Container.cs
+\shape default
+.
+ Um die Registrierung abzuspeichern, werden zwei Dictionaries als Datenstrukture
+n verwendet.
+ Hierzu werden in beiden Methoden die Typen einer Abstraktion als Schlüssel
  verwendet.
- Dabei werden in beiden Methoden die Abstraktionen als Schlüssel verwendet.
  Der Unterschied zwischen Transient und Singleton besteht in der Speicherung
  der Datenwerte: Bei der Registrierung als Transient wird der Typ der konkreten
- Klasse als Wert in der transientMap abgespeichert.
+ Klasse als Wert in der 
+\shape italic
+transientMap
+\shape default
+ abgespeichert.
  Bei der Registrierung eines Singletons wird eine konkrete Instanz der Klasse
  gespeichert.
  Diese Instanz kann als Parameter übergeben werden.
- Wie man sehen kann ist es nicht zwingend notwendig eine Instanz bereitzustellen.
- Für diesen Fall wurde sich dazu entschieden, direkt eine eager Intantiation
+ Wie zu sehen ist, ist es nicht zwingend notwendig eine Instanz bereitzustellen.
+ Für diesen Fall wurde sich dazu entschieden, direkt eine 
+\begin_inset Quotes gld
+\end_inset
+
+eager Instantiation
+\begin_inset Quotes grd
+\end_inset
+
  vorzunehmen.
- Die Implementation der Instantiate-Methode wird zu einem späteren Zeitpunkt
- in dieser Arbeit erklärt.
+ Die Implementation der 
+\shape italic
+Instantiate
+\shape default
+-Methode wird zu einem späteren Zeitpunkt in dieser Arbeit erklärt.
 \end_layout
 
 \begin_layout Subsubsection
@@ -6550,12 +6694,16 @@ reference "fig:Implementation-Resolve"
 
 \end_inset
 
- zu sehen ist, delegiert die generische Resolve-Methode ihren Aufruf an
- eine nicht-generische Version.
- Diese prüft zunächst ob eine Instanz in der Singleton-Registrierung vorliegt
- und gibt diese zurück.
- Ist der Typ jedoch als Transient registriert, so soll eine Instanz des
- in der transientMap registrierten konkreten Typs erstellt werden.
+ zu sehen ist, delegiert die generische 
+\shape italic
+Resolve
+\shape default
+-Methode ihren Aufruf an eine nicht-generische Version.
+ Diese prüft zunächst, ob eine Instanz in der Singleton-Registrierung vorliegt.
+ Bei Vorhandensein wird diese zurückgegeben.
+ Ist der Typ jedoch als Transient registriert, soll eine neue Instanz des
+ in der transientMap registrierten, konkreten Typs erstellt und zurückgegeben
+ werden.
 \end_layout
 
 \begin_layout Standard
@@ -6725,28 +6873,47 @@ Instanziieren von Klassen basierend auf Typinformationen
 \end_layout
 
 \begin_layout Standard
-Die tatsächliche Erstellung von Objekten übernimmt die Instantiate-Methode
- in Abbildung 
+Die tatsächliche Erstellung von Objekten übernimmt die in Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Instantiate-Methode"
 
 \end_inset
 
- der Klasse Binder.
- Unter Vorgabe eines konkreten Typs eine Instanz dieses Typs gelierfert
+ gezeigte 
+\shape italic
+Instantiate
+\shape default
+-Methode der Klasse 
+\shape italic
+Container
+\shape default
+.
+ Unter Vorgabe eines konkreten Typs soll eine Instanz dieses Typs geliefert
  werden.
- Die Methode nutzt eine Methode namens CreateInstance der Systemklasse Activator.
- Es sind jedoch noch weitere Informationen über die Klasse notwendig.
+ Die Methode delegiert diese Verantwortung an eine Methode namens 
+\shape italic
+CreateInstance
+\shape default
+ der Klasse 
+\shape italic
+Activator
+\shape default
+.
+ Es sind hierfür jedoch noch weitere Informationen über die Klasse notwendig.
  Dies ist zum einen der zu verwendende Konstruktor der Klasse mitsamt seinen
- Parametern und zum Anderen Porperties in die Abhängigkeiten injektziert
+ Parametern und zum Anderen Porperties, in die Abhängigkeiten injiziert
  werden sollen.
- Über die GetConstructor-Methode erhält der Containter Informationen über
- den Konstruktor den er zur Erstellung des Objektes nutzen soll.
- Dieser kann vom Nutzer des Containers spezifiziert werden.
- Um zu beschreiben, wie dies genau von statten geht, müssen zunächst die
- zwei Sprachfeatures von C# die diese Funkionalität ermöglichen, vorgestellt
- werden: Attributes und Reflection.
+ Über die 
+\shape italic
+GetConstructor
+\shape default
+-Methode erhält der Containter Informationen über den Konstruktor, den er
+ zur Erstellung des Objektes nutzen soll.
+ Dieser kann vom Nutzer des Frameworks spezifiziert werden.
+ Um zu beschreiben, wie genau dies abläuft, müssen zunächst die zwei Sprachfeatu
+res von C# die diese Funktionalität ermöglichen, vorgestellt werden: Attributes
+ und Reflection.
 \end_layout
 
 \begin_layout Standard
@@ -6892,17 +7059,17 @@ name "fig:Instantiate-Methode"
 \end_layout
 
 \begin_layout Subsubsection
-Attribute
+Attributes
 \end_layout
 
 \begin_layout Standard
-Mittels Attributen lassen sich Metadaten für Programmcodeelemente definieren.
+Mittels Attributes lassen sich Metadaten für Programmcodeelemente definieren.
  Diese Metadaten sind Informationen, die von der Anwendung zur Laufzeit
  ausgewertet werden können.
  Es können praktisch alle Elemente des Programmcodes mit Metadaten versehen
  werden: Assemblys, Klassen, Methoden, Eigenschaften usw.
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 https://msdn.microsoft.com/de-de/library/z0w1kczw.aspx
@@ -6910,14 +7077,18 @@ https://msdn.microsoft.com/de-de/library/z0w1kczw.aspx
 
 \end_inset
 
- Ein Beispiel ist das bereits in Abschnitt 
+ Ein Beispiel hierfür ist das bereits in Abschnitt 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand vref
 reference "sub:Referenzieren"
 
 \end_inset
 
- gezeigte SerializeField-Attribut.
+ gezeigte 
+\shape italic
+SerializeField
+\shape default
+-Attribut.
  Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -6925,7 +7096,11 @@ reference "fig:Verwendung-Attribute"
 
 \end_inset
 
- zeigt eine Membervariable, der das SerializeField-Attribut zugewiesen wurde.
+ zeigt eine Membervariable, der das 
+\shape italic
+SerializeField
+\shape default
+-Attribut zugewiesen wurde.
 \end_layout
 
 \begin_layout Standard
@@ -6979,15 +7154,14 @@ name "fig:Verwendung-Attribute"
 \end_layout
 
 \begin_layout Standard
-Für den DI Container sind im Grunde zwei Metadaten einer Klasse relevant:
- Ihm muss bekannt sein welcher Konstruktor zur Instanziierung eines Objektes
- verwendet werden soll und in welche Properties Abhängigkeiten injektziert
- werden sollen.
+Für den Dependency Injection Container sind im Grunde zwei Metadaten einer
+ Klasse relevant: Ihm muss bekannt sein, welcher Konstruktor zur Instanziierung
+ eines Objektes verwendet werden soll und in welche Properties Abhängigkeiten
+ injiziert werden sollen.
  Es ist ausreichend ein einziges benutzerdefiniertes Attribut zu definieren,
- um beide Funktionalitäten abzubilden.
- Bei der späteren Auswertung des Attributes kann geprüft werden, ob sich
- dieses an einem Konstruktor oder einem Property befindet und dementsprechend
- gehandelt werden.
+ um beide Funktionalitäten abzubilden: Bei der späteren Auswertung des Attribute
+s kann geprüft werden, ob sich dieses an einem Konstruktor oder einem Property
+ befindet und dementsprechend gehandelt werden.
  Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -6995,7 +7169,11 @@ reference "fig:Definition-des-Inject-Attributs"
 
 \end_inset
 
- zeigt die Erstellung des InjectAttribute-Attributes.
+ zeigt die Erstellung des hierfür vorgesehenen 
+\shape italic
+InjectAttribute
+\shape default
+-Attributes.
 \end_layout
 
 \begin_layout Standard
@@ -7059,12 +7237,23 @@ name "fig:Definition-des-Inject-Attributs"
 \end_layout
 
 \begin_layout Standard
-Es wird zunächst eine Klasse definiert, die von der Klasse Attribute ableitet.
+Es wird zunächst eine Klasse definiert, die von der Klasse 
+\shape italic
+Attribute
+\shape default
+ ableitet.
  Um die Gültigkeit des Attributes festzulegen, wird die Klasse selbst mit
- einem AttributeUsage-Attribut gekennzeichnet.
- Im Fall des Inject-Attributs wird die Gültigigkeit auf Properties und Konstrukt
-oren beschränkt.
- Bei der Verwenung entspricht der Attributname dem Klassennamen des Attributs.
+ einem 
+\shape italic
+AttributeUsage
+\shape default
+-Attribut gekennzeichnet.
+ Im Fall des 
+\shape italic
+Inject
+\shape default
+-Attributs wird die Gültigkeit auf Properties und Konstruktoren beschränkt.
+ Bei der Verwendung entspricht der Attributname dem Klassennamen des Attributs.
  Die Endung Attribute kann weggelassen werden.
  Abbildung 
 \begin_inset CommandInset ref
@@ -7073,7 +7262,11 @@ reference "fig:Verwendungmöglichkeiten"
 
 \end_inset
 
- zeigt die gültigen Verwendungmöglichkeiten des Inject-Attributes.
+ zeigt die gültigen Verwendungsmöglichkeiten des 
+\shape italic
+InjectAttribute
+\shape default
+-Attributes.
 \end_layout
 
 \begin_layout Standard
@@ -7156,7 +7349,7 @@ public class SampleClass
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Verwendungmöglichkeiten des Inject-Attributes
+Verwendungsmöglichkeiten des Inject-Attributes
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Verwendungmöglichkeiten"
@@ -7177,34 +7370,42 @@ name "fig:Verwendungmöglichkeiten"
 \end_layout
 
 \begin_layout Subsubsection
-Reflektion
+Reflection
 \end_layout
 
 \begin_layout Standard
 Der Zugriff auf die mit dem Inject-Attribut gekennzeichneten Attribute erfolgt
- mittels Reflektion.
- Reflektion ermöglicht das Auslesen und Auswerten von Metadaten eines Assemblys
+ mittels Reflection.
+ Reflection ermöglicht das Auslesen und Auswerten von Metadaten eines Assemblys
  oder Typs zur Laufzeit.
- Metadaten werden über die System.Type-Klasse abgebildet.
+ Metadaten werden über die 
+\shape italic
+System.Type
+\shape default
+-Klasse abgebildet.
  Diese wurde bereits an einigen Stellen zur Implementation des Containers
  verwendet.
- Es wurde also genaugenommen bereits Reflektion eingesetzt.
+ Es wurde also genau genommen bereits Reflection eingesetzt.
  
 \end_layout
 
 \begin_layout Standard
 Bei der Implementation des Containers wird an zwei Stellen intensiver Zugriff
- auf die Typinformationen des zu instanziierenden Objekts benötigt.
- Als erstes muss mittels Reflektion herausgefunden werden, welcher Konstruktor
+ auf die Typinformationen des zu instanziierenden Objekts benötigt: Als
+ Erstes muss mittels Reflection herausgefunden werden, welcher Konstruktor
  zur Instanziierung genutzt werden soll.
- Diese Funktionalität wird von der Methode GetConstructor in Abbildung 
+ Diese Funktionalität wird von der Methode 
+\shape italic
+GetConstructor
+\shape default
+ in Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Zugriff-auf-Typinformationen"
 
 \end_inset
 
- implmentiert.
+ implementiert.
 \end_layout
 
 \begin_layout Standard
