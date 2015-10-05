@@ -7530,19 +7530,45 @@ name "fig:Zugriff-auf-Typinformationen"
 \end_layout
 
 \begin_layout Standard
-Die Methode GetConstructors der Klasse Type liefert Informationen zu allen
- definierten Konstruktoren einer Klasse.
- Um den gewünschten, mit dem Inject-Attribut gekennzeichneten Konstruktor
- zu erhalten, wird über die vorhandenen Konstruktoren iteriert und der gewünscht
-e Konstruktor mithilfe der statischen Methode IsDefined der Klasse Attribute
+Die Methode 
+\shape italic
+GetConstructors
+\shape default
+ der Klasse 
+\shape italic
+Type
+\shape default
+ liefert Informationen zu allen definierten Konstruktoren einer Klasse.
+ Um den gewünschten, mit dem 
+\shape italic
+Inject
+\shape default
+-Attribut gekennzeichneten Konstruktor zu erhalten, wird über die vorhandenen
+ Konstruktoren iteriert und der gewünschte Konstruktor mithilfe der statischen
+ Methode 
+\shape italic
+IsDefined
+\shape default
+ der Klasse 
+\shape italic
+Attribute
+\shape default
  identifiziert.
  Existiert nur ein einziger Konstruktor für einen Typ, muss dieser nicht
- explizit mit dem Inject-Attribut gekennzeichnet werden, um vom Container
- zu Instanziierung genutzt zu werden.
+ explizit mit dem 
+\shape italic
+Inject
+\shape default
+-Attribut gekennzeichnet werden, um vom Container zu Instanziierung genutzt
+ zu werden.
 \end_layout
 
 \begin_layout Standard
-Betrachtet man die Instantitate-Methode in Abbildung 
+Betrachtet man die 
+\shape italic
+Instantiate
+\shape default
+-Methode in Abbildung 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "fig:Instantiate-Methode"
@@ -7552,7 +7578,11 @@ reference "fig:Instantiate-Methode"
  ein weiteres Mal, stellt man fest, dass bevor die tatsächliche Instanziierung
  über den Konstruktor vorgenommen wird, zunächst alle Parameter instanziiert
  werden müssen.
- Diese Aufgabe übernimmt die Methode ResolveParameters aus Abbildung 
+ Diese Aufgabe übernimmt die Methode 
+\shape italic
+ResolveParameters
+\shape default
+ aus Abbildung 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "fig:Auflösen-Konstruktorparameter"
@@ -7560,10 +7590,14 @@ reference "fig:Auflösen-Konstruktorparameter"
 \end_inset
 
 .
- Es wird über die Parameterinformationen des Konstruktors iterriert und
- alle Parameter der Reihe nach instanziiert.
- Dies geschieht über einen rekursiven Aufruf der Resolve-Methode.
- Somit ist es Vorraussetzung, dass alle Typen der Konstruktorparameter zuvor
+ Es wird über die Parameterinformationen des Konstruktors iteriert und alle
+ Parameter der Reihe nach instanziiert.
+ Dies geschieht über einen rekursiven Aufruf der 
+\shape italic
+Resolve
+\shape default
+-Methode.
+ Somit ist es Voraussetzung, dass alle Typen der Konstruktorparameter zuvor
  bei dem Container registriert wurden.
  
 \end_layout
@@ -7672,9 +7706,13 @@ name "fig:Auflösen-Konstruktorparameter"
 \end_layout
 
 \begin_layout Standard
-Nach der Instanziierung eines Typs, ist es notwendig die Klasse mit Abhängigkeit
-en die in Form von Properties vorliegen zu versorgen.
- Die Methode InjectProperties, gezeigt in der Abbildung 
+Nach der Instanziierung eines Typs ist es notwendig, die Klasse mit Abhängigkeit
+en, die in Form von Properties vorliegen, zu versorgen.
+ Die Methode 
+\shape italic
+InjectProperties
+\shape default
+, gezeigt in der Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Auflösen-von-Properties"
@@ -7682,12 +7720,29 @@ reference "fig:Auflösen-von-Properties"
 \end_inset
 
 , bildet diese Funktionalität des Containers ab.
- In diesem Fall werden Informationen zu Properties mit dem Inject-Attribut
- über die Methode GetProperties der Klasse Type geliefert.
- Im nächsten Schritt wird über die PropertyInfos iteriert und mittels Aufruf
- der Resolve-Methode eine Instanz des Properties geholt.
- Diese Instanz wird danach dem Property des Objektes mittels SetValue-Methode
- zugewiesen.
+ In diesem Fall werden Informationen zu Properties mit dem 
+\shape italic
+Inject
+\shape default
+-Attribut über die Methode 
+\shape italic
+GetProperties
+\shape default
+ der Klasse Type geliefert.
+ Im nächsten Schritt wird über die 
+\shape italic
+PropertyInfos
+\shape default
+ iteriert und mittels Aufruf der 
+\shape italic
+Resolve
+\shape default
+-Methode eine Instanz des Properties geholt.
+ Diese Instanz wird danach dem Property des Objektes mithilfe 
+\shape italic
+SetValue
+\shape default
+-Methode zugewiesen.
 \end_layout
 
 \begin_layout Standard
@@ -7806,7 +7861,7 @@ Erweiterungen des Containers für die Zusammenarbeit mit Unity
 Damit bessere Zusammenarbeit des Containers mit Unity gewährleistet werden
  kann, sollten noch ein paar Erweiterungen an diesem vorgenommen werden.
  Es gibt beispielsweise derzeit keine Möglichkeit Abhängigkeiten in MonoBehaviou
-rs zu injekzieren.
+rs zu injizieren.
 \end_layout
 
 \begin_layout Subsubsection
