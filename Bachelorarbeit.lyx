@@ -7859,9 +7859,12 @@ Erweiterungen des Containers für die Zusammenarbeit mit Unity
 
 \begin_layout Standard
 Damit bessere Zusammenarbeit des Containers mit Unity gewährleistet werden
- kann, sollten noch ein paar Erweiterungen an diesem vorgenommen werden.
+ kann, sollten noch einige Erweiterungen an diesem vorgenommen werden.
  Es gibt beispielsweise derzeit keine Möglichkeit Abhängigkeiten in MonoBehaviou
 rs zu injizieren.
+ Die Umsetzungen dieser Erweiterungen werden in diesem Abschnitt präsentiert.
+ Es wird verdeutlicht, wo Hürden und Einschränkungen bei der Umsetzung von
+ Dependency Injection in Unity vorhanden sind.
 \end_layout
 
 \begin_layout Subsubsection
@@ -7871,16 +7874,20 @@ Injecting into MonoBehaviours
 \begin_layout Standard
 Wie bereits in den vorigen Abschnitten festgestellt, übernimmt Unity selbst
  die Verantwortung über die Erstellung von MonoBehaviours.
- Es folglich keinen Konstruktor über den Abhängigkeiten aufgelöst werden
- können.
- Es muss sich auf Property-Injection beschränkt werden.
+ Es existiert folglich kein Konstruktor über den Abhängigkeiten aufgelöst
+ werden können.
+ Es muss sich auf Property Injection beschränkt werden.
  Dabei ist zu berücksichtigen, dass MonoBehaviours bereits in der Szene
- existieren, bevor die Awake-Methode des Composition Roots aufgerufen wird.
- Desweiteren können Spielobjekte und MonoBehaviours auch zur Laufzeit instanziie
+ existieren, bevor die 
+\shape italic
+Awake
+\shape default
+-Methode des Composition Roots aufgerufen wird.
+ Des Weiteren können GameObjects und MonoBehaviours auch zur Laufzeit instanziie
 rt werden.
  In beiden Fällen muss es ermöglicht werden, dass diese ihre Abhängigkeiten
  erhalten.
- Im Folgenden sollen drei Ansätze hierfür erläutert werden: Das Verwenden
+ Im Folgenden sollen drei Ansätze hierfür erläutert werden: das Verwenden
  des Containers als Service Locator, Factories und ExecuteEvents als MonoBehavio
 ur-Extension.
 \end_layout
@@ -7892,7 +7899,7 @@ Service Locator
 \begin_layout Standard
 Eine mögliche Lösung für das Problem ist die Verwendung des Containers als
  Service Locator.
- Bei einem ServiceLocator handelt es sich um einen statischen Wrapper für
+ Bei einem Service Locator handelt es sich um einen statischen Wrapper für
  den Container.
  Abbildung 
 \begin_inset CommandInset ref
@@ -7902,7 +7909,11 @@ reference "fig:Implementation-Service-Locator"
 \end_inset
 
  zeigt eine mögliche Implementation des Service Locator Patterns unter Verwendun
-g der Binder-Klasse.
+g der 
+\shape italic
+Container
+\shape default
+-Klasse.
 \end_layout
 
 \begin_layout Standard
@@ -7928,7 +7939,7 @@ public static class ServiceLocator
 
 \begin_layout Plain Layout
 
-	private static readonly IBinder binder = new Binder();
+	private static readonly IContainer container = new Container();
 \end_layout
 
 \begin_layout Plain Layout
@@ -7949,7 +7960,7 @@ public static class ServiceLocator
 
 \begin_layout Plain Layout
 
-		binder.RegisterTransient<TInter, TClass>();
+		container.RegisterTransient<TInter, TClass>();
 \end_layout
 
 \begin_layout Plain Layout
@@ -7964,8 +7975,8 @@ public static class ServiceLocator
 
 \begin_layout Plain Layout
 
-	public static void RegisterInstance<TInter, TClass>(TClass instance = null)
- where TClass : class, TInter
+	public static void RegisterSingleton<TInter, TClass>(TClass instance =
+ null) where TClass : class, TInter
 \end_layout
 
 \begin_layout Plain Layout
@@ -7975,7 +7986,7 @@ public static class ServiceLocator
 
 \begin_layout Plain Layout
 
-		binder.RegisterInstance<TInter, TClass>(instance);
+		container.RegisterSingleton<TInter, TClass>(instance);
 \end_layout
 
 \begin_layout Plain Layout
@@ -8000,7 +8011,7 @@ public static class ServiceLocator
 
 \begin_layout Plain Layout
 
-		return binder.Resolve<T>();
+		return container.Resolve<T>();
 \end_layout
 
 \begin_layout Plain Layout
@@ -8043,30 +8054,45 @@ name "fig:Implementation-Service-Locator"
 \end_layout
 
 \begin_layout Standard
-Die Konfiguration des ServiceLocators würde, wie die des Containers, in
- der zuvor definierten CompositionRoot-Klasse stattfinden.
- Der Unterschied zwischen einem ServiceLocator und einem DI Container liegt
- nicht in der Implemenation sondern in der Verwendung.
- Die Verwendung der Resolve Methode des DI Containers beschränkt sich üblicherwe
-ise auf einen einzigen Aufruf im Composition Root und setzt somit die rekursive
- Auflösung des gesamten Objektgraphs in Gang.
+Die Konfiguration des Service Locators würde, wie die des Containers, in
+ der zuvor definierten 
+\shape italic
+CompositionRoot
+\shape default
+-Klasse stattfinden.
+ Der Unterschied zwischen einem Service Locator und einem Inversion Of Control
+ Frameworks liegt nicht in der Implementation, sondern in der Verwendung.
+ Die Verwendung der 
+\shape italic
+Resolve
+\shape default
+-Methode des Containers beschränkt sich üblicherweise auf einen einzigen
+ Aufruf im Composition Root und setzt somit die rekursive Auflösung des
+ gesamten Object Graphs in Gang.
  Wird ein Service Locator verwendet, können Abhängigkeiten von überall im
- Programm durch Aufruf der Resolve-Methode angefordert werden.
- MonoBehaviours würden also in der Awake-Methode durch Anfrage beim ServiceLocat
-or ihre Abhängigkeiten erhalten.
+ Programm durch Aufruf der 
+\shape italic
+Resolve
+\shape default
+-Methode angefordert werden.
+ MonoBehaviours würden also in der 
+\shape italic
+Awake
+\shape default
+-Methode durch Anfrage beim Service Locator ihre Abhängigkeiten erhalten.
  
 \end_layout
 
 \begin_layout Standard
 Auf den ersten Blick scheinen keine Vorteile bei der Verwendung des Service
  Locators verloren zu gehen: Abhängigkeiten sind lose gekoppelt, die Programmier
-ung im parallelen ist gewährleistet und Testbarkeit ist durch Konfiguration
+ung im Parallelen ist gewährleistet und Testbarkeit ist durch Konfiguration
  des Service Locators in der Testumgebung möglich.
  Trotzdem wird der Service Locator oft als Anti-Pattern angesehen.
  Klassen haben eine unnötige konkrete Abhängigkeit an den Service Locator.
  Die Klasse wird explizit für eine Verwendung mit dem Service Locator implementi
 ert.
- Von Aussen ist es nicht sichtbar, dass die Klasse andere Abhängigkeiten
+ Von außen ist es nicht sichtbar, dass die Klasse andere Abhängigkeiten
  hat.
  Es kann keine Aussage darüber getroffen werden, welche Abhängigkeiten notwendig
  sind, damit eine Klasse funktioniert.
@@ -8076,13 +8102,13 @@ ert.
 \begin_layout Standard
 Jedoch ermöglicht der Service Locator die Auflösung von Abhängigkeiten eines
  MonoBehaviours.
- Die Verwendung des ServiceLocators kann auf MonoBehaviours reduziert werden
+ Die Verwendung des Service Locators kann auf MonoBehaviours reduziert werden
  und in diesem Fall als notwendig angesehen werden.
  Das Problem ist jedoch, dass der Service Locator, aufgrund der globalen
  Sichtbarkeit als statische Klasse, von unwissenden Programmierern auch
  in anderen Bereichen genutzt werden kann.
- Im folgenden sollen zwei weitere Möglichkeiten vergestellt werden, mit
- denen sich Abhängigkeiten eines MonoBehaviours lassen.
+ Im folgenden sollen zwei weitere Möglichkeiten vorgestellt werden, mit
+ denen sich Abhängigkeiten eines MonoBehaviours auflösen lassen.
  Alle haben ihre Vor- und Nachteile.
  Der Service Locator ist die einfachste, aber zugleich auch die am wenigsten
  elegante Lösung des Problems.
@@ -8100,7 +8126,7 @@ Inject
 \end_layout
 
 \begin_layout Standard
-Die Grundidee dieser Methode ist, dem Container über einen Event bescheid
+Die Grundidee einer anderen Methode ist, dem Container über ein Event bescheid
  zu geben, dass ein MonoBehaviour in der Szene erstellt wurde und dessen
  Abhängigkeiten aufgelöst werden müssen.
  Hierzu wird die Klasse MonoBehaviour mit der in Abbildung 
@@ -8194,12 +8220,26 @@ name "fig:Erweiterungsmethode"
 \end_layout
 
 \begin_layout Standard
-Mittels der ExecuteHierarchy-Methode der Klasse ExecuteEvents wird ein Event
- in der Hierarchie nach oben gesendet.
- Das Event soll vom Composition Root entegengenommen werden, damit dieser
- die Aufllösung der Abhängigkeiten an den Container delegieren kann.
- Dazu muss CompositionRoot das für diesen Fall erstellte IMonoInjectionHandler-I
-nterface implementieren.
+Mittels der 
+\shape italic
+ExecuteHierarchy
+\shape default
+-Methode der Klasse 
+\shape italic
+ExecuteEvents
+\shape default
+ wird ein Event in der Hierarchie nach oben gesendet.
+ Das Event soll vom Composition Root entgegengenommen werden, damit dieser
+ die Auflösung der Abhängigkeiten an den Container delegieren kann.
+ Dazu muss 
+\shape italic
+CompositionRoot
+\shape default
+ das für diesen Fall erstellte 
+\shape italic
+IMonoInjectionHandler-
+\shape default
+Interface implementieren.
  Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -8207,8 +8247,11 @@ reference "fig:IMonoInjectionHandler"
 
 \end_inset
 
- zeigt das Interface IMonoInjectionHandler und dessen Implementation vom
- Composition Root.
+ zeigt das Interface 
+\shape italic
+IMonoInjectionHandler
+\shape default
+ und dessen Implementation vom Composition Root.
 \end_layout
 
 \begin_layout Standard
@@ -8320,35 +8363,66 @@ name "fig:IMonoInjectionHandler"
 \end_layout
 
 \begin_layout Standard
-Bei dieser Methode is zu Beachten, dass alle Spielobjekte im Szenengraph
- Kindknoten des Composition Roots sein müssen.
- Jedes MonoBehaviour muss im Start-Event explizit die Inject-Erweiterungsmethode
- aufrufen, damit die Abhängigkeiten vom Container aufgelöst werden.
- Dies könnte bereits im Awake-Event geschehen, da durch das Festlegen der
- Script Execution Order in Abschnitt 
+Bei dieser Methode ist zu beachten, dass alle Spielobjekte im Szenengraph
+ Children des Composition Roots sein müssen.
+ Jedes MonoBehaviour muss im 
+\shape italic
+Start
+\shape default
+-Event explizit die 
+\shape italic
+Inject
+\shape default
+-Erweiterungsmethode aufrufen, damit die Abhängigkeiten vom Container aufgelöst
+ werden.
+ Dies könnte bereits im 
+\shape italic
+Awake
+\shape default
+-Event geschehen, da durch das Festlegen der Script Execution Order in Abschnitt
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Definieren-des-Composition"
 
 \end_inset
 
- gewährleistet wurde, dass der Composition-Root den Container bereits initialisi
-ert hat.
+ gewährleistet wird, dass der Composition Root den Container bereits initialisie
+rt hat.
  Instanziiert man jedoch ein Spielobjekt zur Laufzeit, so muss der Composition
- Root unmittelbar darauf als Elternelement festgelegt werden.
- Es ist nicht möglich ein Spielobjekt direkt als Kindelement eines anderen
- Spielobjekts zu instanziieren.
- Zum Aurufzeitpunkt der Awake-Methode hat noch kein Parenting stattgefunden,
- auch wenn dies unmittelbar nach Instanziierung geschieht.
- Demzufolge sollte die Inject-Methode im Start-Event des MonoBehaviours
- aufgerufen werden.
+ Root unmittelbar darauf als Parentelement festgelegt werden.
+ Es ist nicht möglich ein Spielobjekt direkt als Child eines anderen Spielobjekt
+s zu instanziieren.
+ Zum Zeitpunkt des Aufrufs der 
+\shape italic
+Awake
+\shape default
+-Methode hat noch kein parenting stattgefunden, auch wenn dies unmittelbar
+ nach Instanziierung geschieht.
+ Demzufolge sollte die 
+\shape italic
+Inject
+\shape default
+-Methode im 
+\shape italic
+Start-
+\shape default
+Event des MonoBehaviours aufgerufen werden.
 \end_layout
 
 \begin_layout Standard
 Bei Verwendung der beschriebenen Methode ist es nötig, dass der Nutzer des
  Containers sich strikt an die beschriebenen Anweisungen hält.
- Ein Aufruf der Inject-Methode muss im Start-Event erfolgen.
- Alle Spielobjekte müssen Kindobjekte des Composition Roots sein.
+ Ein Aufruf der 
+\shape italic
+Inject
+\shape default
+-Methode muss im 
+\shape italic
+Start
+\shape default
+-Event erfolgen, da ansonsten keine Abhängigkeiten injiziert werden.
+ Alle Spielobjekte müssen Children des Composition Roots sein.
  Nachfolgend soll eine letzte Möglichkeit vorgestellt werden, die dem Nutzer
  weniger Verantwortung abverlangt.
 \end_layout
@@ -8362,10 +8436,16 @@ Bei dieser Methode wird die Auflösung von Abhängigkeiten von MonoBehaviours
  in zwei Teile unterteilt.
  Durch den ersten Teil werden bereits in der Szene existierende MonoBehaviours
  mit ihren Abhängigkeiten versorgt.
- Dies wird bewerkstelligt indem dem CompositionRoot die ResolveScene-Methode
- hinzugefügt wird.
- Diese Methode wird im Awake-Event unmittelbar nach der Konfiguration des
- Containers aufgerufen.
+ Dies wird bewerkstelligt indem dem Composition Root die 
+\shape italic
+ResolveScene
+\shape default
+-Methode hinzugefügt wird.
+ Diese Methode wird im 
+\shape italic
+Awake
+\shape default
+-Event unmittelbar nach der Konfiguration des Containers aufgerufen.
  Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -8373,7 +8453,11 @@ reference "fig:ResolveScene"
 
 \end_inset
 
- zeigt die Änderungen an der CompositionRoot-Klasse.
+ zeigt die Änderungen an der 
+\shape italic
+CompositionRoot
+\shape default
+-Klasse.
 \end_layout
 
 \begin_layout Standard
@@ -8531,7 +8615,11 @@ reference "sub:Definieren-des-Composition"
 \end_inset
 
 , wird gewährleistet, dass alle sich in der Szene befindenden MonoBehaviours
- ihre Abhängigkeiten bereits vor dem Aufruf der Awake-Methode erhalten haben.
+ ihre Abhängigkeiten bereits vor dem Aufruf der 
+\shape italic
+Awake
+\shape default
+-Methode erhalten haben.
 \end_layout
 
 \begin_layout Standard
@@ -8539,13 +8627,27 @@ Weiter muss der Fall berücksichtigt werden, dass Spielobjekte dynamisch
  zur Laufzeit instanziiert werden können.
  Unmittelbar nach der Instanziierung müssen die Abhängigkeiten aller MonoBehavio
 urs des Spielobjektes vom Container aufgelöst werden.
- Damit dies sichergestellt wird und an einem zentralen Ort geschieht, soll
+ Damit dies sichergestellt ist und an einem zentralen Ort geschieht, soll
  hierfür eine Factory implementiert werden.
  Über diese Factory sollen alle Spielobjekte zur Laufzeit erstellt werden.
- Das heißt, dass es im Programmcode keine weiteren Aufrufe der Instantiate-Metho
-de der Klasse Object geben darf.
- Der einzige Aufruf der Instantiate-Methode findet in der Create-Methode
- der GameObjectFactory-Klasse wie in Abbildung 
+ Das heißt, dass es im Programmcode keine weiteren Aufrufe der 
+\shape italic
+Instantiate
+\shape default
+-Methode der Klasse 
+\shape italic
+Object
+\shape default
+ geben darf.
+ Der einzige Aufruf der Instantiate-Methode findet in der 
+\shape italic
+Create
+\shape default
+-Methode der 
+\shape italic
+GameObjectFactory
+\shape default
+-Klasse wie in Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:GameObjectFactory"
@@ -8686,25 +8788,36 @@ Direkt nach dem Instanziieren werden die Properties aller MonoBehaviours
  vom Container instanziiert.
  Es ist sichergestellt, dass MonoBehaviours zum Start-Event über alle Abhängigke
 iten verfügen.
- Die GameObjectFactory bietet eine weitere Überladung der Create Methode.
+ Die 
+\shape italic
+GameObjectFactory-Klasse
+\shape default
+ bietet eine weitere Überladung der 
+\shape italic
+Create
+\shape default
+-Methode.
  Aus Platzgründen wurde diese hier ausgelassen.
  Mit ihr lassen sich Prefabs anhand ihres Namens im Resource-Ordner instanziiere
 n.
- Spielobjekte die aus dem Resource-Ordner geladen wurden, werden in einem
+ Spielobjekte, die aus dem Resource-Ordner geladen wurden, werden in einem
  Cache zwischengespeichert.
  
 \end_layout
 
 \begin_layout Standard
-Bei Verwendung dieser Methode muss der Nutzer des Container Frameworks keine
- frameworkspezifischen Operationen innerhalb einer MonoBehaviour-Komponente
+Bei Verwendung dieser Methode muss der Nutzer des Containers Frameworks
+ keine frameworkspezifischen Operationen innerhalb eines MonoBehaviours
  vornehmen.
- Dem Nutzer muss lediglich bewusst sein, dass er die Klasse GameObjectFactory
- zur Instanziierung von Spielobjekten zu Laufzeit verwenden muss.
- Es ist nicht nötig, dass Spielobjekte Kindobjekte des Composition Roots
- sind, um ihre Abhängigkeiten zu erhalten.
- Aus diesem Grund ist aus Sicht des Autors, diese Methode den anderen vorzuziehe
-n.
+ Dem Nutzer muss lediglich bewusst sein, dass er die Klasse 
+\shape italic
+GameObjectFactory
+\shape default
+ zur Instanziierung von Spielobjekten zur Laufzeit verwenden muss.
+ Es ist nicht nötig, dass Spielobjekte Children des Composition Roots sind,
+ um ihre Abhängigkeiten zu erhalten.
+ Aus diesem Grund ist aus Sicht des Autors der vorliegenden Arbeit diese
+ Methode den anderen vorzuziehen.
 \end_layout
 
 \begin_layout Subsubsection
@@ -8712,28 +8825,53 @@ Injecting MonoBehaviours
 \end_layout
 
 \begin_layout Standard
-Alle bis jetzt gezeigten Methoden beschreiben wie Abhängigkeiten in MonoBehaviou
-rs injektziert werden können.
+Alle bis jetzt gezeigten Methoden beschreiben, wie Abhängigkeiten in MonoBehavio
+urs injiziert werden können.
  An dieser Stelle soll beschrieben werden, wie mit Abhängigkeiten zu anderen
  MonoBehaviours umgegangen werden soll.
  Zunächst sollte überprüft werden, ob es tatsächlich notwendig ist, dass
- die benötigte Klasse von MonoBehaviour erbt.
- Durch strike Trennung der Belange (Seperation Of Concerns) kann dies meist
- auf die Darstellungslogik reduziert werden.
- Die benötigten Komponenten sind meist Unity-eigene Klassen wie Button,
- Label oder RigidBody am selben Spielobjekt.
- In diesen Fällen können sie mithilfe des SerializeField-Attributs im Editor
- gesetzt werden.
+ die benötigte Abhängigkeit von MonoBehaviour erbt.
+ Durch strikte Trennung der Belange (
+\begin_inset Quotes gld
+\end_inset
+
+Seperation Of Concerns
+\begin_inset Quotes grd
+\end_inset
+
+) kann dies meist auf die Darstellungslogik reduziert werden.
+ Die benötigten Komponenten sind meist Unity-Eigene Klassen wie 
+\shape italic
+Button
+\shape default
+, 
+\shape italic
+Label
+\shape default
+ oder 
+\shape italic
+RigidBody
+\shape default
+ am selben Spielobjekt.
+ In diesen Fällen können sie mithilfe des
+\shape italic
+ SerializeField
+\shape default
+-Attributs im Editor gesetzt werden.
  
 \end_layout
 
 \begin_layout Standard
 Liegen dennoch Gründe vor, dass eine Abhängigkeit zu einem MonoBehaviour
  benötigt wird, könnte dieses theoretisch beim Container registriert werden.
- Vorrausgesetzt es implementiert ein Interface welches die benötigte Funktionali
+ Vorausgesetzt es implementiert ein Interface, welches die benötigte Funktionali
 tät abbildet.
- Das Spielobjekt des MonoBehaviours kann mittels Find-Methode vom Composition
- Root ausfindig gemacht und im Anschluss beim Container registriert werden.
+ Das Spielobjekt des MonoBehaviours kann mittels 
+\shape italic
+Find
+\shape default
+-Methode vom Composition Root aus ausfindig gemacht und im Anschluss beim
+ Container registriert werden.
  Die Registration ist somit jedoch auf eine einzige Instanz eines Typs beschränk
 t.
  Hiervon wird jedoch ausdrücklich abgeraten.
@@ -8744,8 +8882,8 @@ t.
 \begin_layout Standard
 Die Idee dieses Ansatzes ist, nicht ein MonoBehaviour, sondern einen Wrapper
  für dieses beim Container zu registrieren.
- Ein Feature eines MonoBehaviours welches auch ausserhalb von diesem benötigt
- werden könnte, ist das Ausführen von Coroutines.
+ Eine Funktionalität eines MonoBehaviours, welche auch ausserhalb von diesem
+ benötigt werden könnte, ist das Ausführen von Coroutines.
 \begin_inset Foot
 status open
 
@@ -8762,15 +8900,15 @@ reference "fig:Implementation-des-Coroutine"
 
 \end_inset
 
- zeigt die Verwendung dieses Ansatzes bei der Umsetzung der beschriebenen
- Funktionalität.
+ zeigt die Verwendung dieses Ansatzes bei der Umsetzung der gewünschten
+ Funktionalität, Coroutines auszuführen.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -8957,17 +9095,52 @@ name "fig:Implementation-des-Coroutine"
 \end_layout
 
 \begin_layout Standard
-Die gewünschte Funktionalität wird zunächst durch die ICoroutineRunner-Schnittst
-elle definiert.
- Die Implementation erfolgt von der Klasse CoroutineRunnerBehaviour indem
- sie von MonoBehaviour erbt.
- Weiter wird die Schnittstelle auch von der Klasse CoroutineRunner implementiert.
- Im Konstruktor erstellt sie, durch den Aufruf der Create-Methode der GameObject
-Factory ein Prefab, welches die CoroutineRunnerBehaviour-Komponente besitzt.
- Den Aufruf der StartCoroutine-Methode delegiert die Klasse an diese CoroutineRu
-nnerBehaviour-Komponente.
- Die Klasse CoroutineRunner kann ohne Weiteres im Composition Root beim
- Container registriert werden:
+Die benötigte Funktionalität wird zunächst durch die 
+\shape italic
+ICoroutineRunner-
+\shape default
+Schnittstelle definiert.
+ Die Implementation erfolgt von der Klasse 
+\shape italic
+CoroutineRunnerBehaviour,
+\shape default
+ indem sie von 
+\shape italic
+MonoBehaviour
+\shape default
+ erbt.
+ Weiter wird die Schnittstelle auch von der Klasse 
+\shape italic
+CoroutineRunner
+\shape default
+ implementiert.
+ Im Konstruktor erstellt sie, durch den Aufruf der 
+\shape italic
+Create
+\shape default
+-Methode der 
+\shape italic
+GameObjectFactory
+\shape default
+ ein Prefab, welches die 
+\shape italic
+CoroutineRunnerBehaviour
+\shape default
+-Komponente besitzt.
+ Den Aufruf der 
+\shape italic
+StartCoroutine
+\shape default
+-Methode delegiert die Klasse an diese 
+\shape italic
+CoroutineRunnerBehaviour
+\shape default
+-Komponente.
+ Die Klasse 
+\shape italic
+CoroutineRunner
+\shape default
+ kann ohne Weiteres im Composition Root beim Container registriert werden:
 \end_layout
 
 \begin_layout Standard
@@ -8986,9 +9159,9 @@ container.RegisterTransient<ICoroutineRunner, CoroutineRunner>();
 \end_layout
 
 \begin_layout Standard
-Sie kann nun in alle anderen Module injekziert und genutzt werden.
+Sie kann nun in alle anderen Module injiziert und genutzt werden.
  Damit ist eine grundlegende Zusammenarbeit zwischen Unity und dem Inversion
- Of Control-Container gewährleistet.
+ Of Control Container gewährleistet.
  Um die gezeigten Beispiele auf das Wesentliche zu reduzieren, wurde auf
  die Darstellung und Implementierung einiger Funktionalitäten verzichtet.
  Diese sollen jedoch im folgenden Abschnitt kurz Erwähnung finden.
@@ -8999,13 +9172,36 @@ Weitere Ansatzpunkte zur Erweiterung
 \end_layout
 
 \begin_layout Standard
-Bei dargestellten Implementierung des Inversion Of Control Containers handelt
- es sich um einen Proof Of Concept.
+Bei der dargestellten Implementierung des Inversion Of Control Containers
+ handelt es sich um ein 
+\begin_inset Quotes gld
+\end_inset
+
+Proof Of Concept
+\begin_inset Quotes grd
+\end_inset
+
+.
  Die Funktionsweise, sowie nötige Sprachfeatures sollten beschrieben und
  eine Zusammenarbeit mit Unity gewährleistet werden.
  Auf eine ausführliche Beschreibung aller Details wurde verzichtet.
- So wird beispielsweise das eager- und lazy-loading von Singletons der tatsächli
-chen Implementierung 
+ So wird beispielsweise das 
+\begin_inset Quotes gld
+\end_inset
+
+eager
+\begin_inset Quotes grd
+\end_inset
+
+- und 
+\begin_inset Quotes gld
+\end_inset
+
+lazy-loading
+\begin_inset Quotes grd
+\end_inset
+
+ von Singletons der tatsächlichen Implementierung 
 \begin_inset Foot
 status open
 
@@ -9019,7 +9215,7 @@ Siehe Anhang!
 \end_layout
 
 \begin_layout Standard
-Auch gibt es zahlreiche Ansatzpunkte zur Erweiterung des Frameworks:
+Überdies gibt es zahlreiche Ansatzpunkte zur Erweiterung des Frameworks:
 \end_layout
 
 \begin_layout Itemize
@@ -9031,16 +9227,23 @@ Die Verwendung von Reflection führt zu starken Performanceeinbußen.
 \end_layout
 
 \begin_layout Itemize
-Das Verhalten bei zirkulären Abhhängigkeiten ist nicht bestimmt.
+Das Verhalten bei zirkulären Abhängigkeiten ist nicht bestimmt.
  Im besten Fall sollten diese gar nicht erst zugelassen werden.
- Es sollte eine Laufzeitexception geworfen werden.
+ Es sollte eine Ausnahme zur Laufzeit geworfen werden.
 \end_layout
 
 \begin_layout Itemize
 Die API zur Konfiguration/Registrierung des Containers kann verbessert und
  erweitert werden.
- Es können Fluent Interfaces zur Erstellung einer Domänenspezifischen Sprache
- verwendet werden.
+ Es können 
+\begin_inset Quotes gld
+\end_inset
+
+fluent interfaces
+\begin_inset Quotes grd
+\end_inset
+
+ zur Erstellung einer domänenspezifischen Sprache verwendet werden.
  Eine weitere Konfigurationsmöglichkeit könnte über JSON oder XML geboten
  werden.
  Der Vorteil einer solchen externen Konfiguration ist, dass das Verhalten
@@ -9065,18 +9268,25 @@ Haupt
  Werden Szenen additiv geladen, wäre auch die Erstellung einer Containerhierarch
 ie eine Möglichkeit.
  Beim Root-Container werden Abhängigkeiten, die über mehrere Szenen hinweg
- benötigt werden registriert, während Childcontainer spezifische Abhängigkeiten
+ benötigt werden registriert, während Child-Container spezifische Abhängigkeiten
  der additiv geladenen Szene auflösen.
 \end_layout
 
 \begin_layout Itemize
 Der Container sollte für eine ordnungsgemäße Entsorgung von Objekten sorgen.
- Im speziellen sollte sichergestellt werden, dass die Dispose-Methode von
- Klassen die IDisposable implementieren aufgerufen wird.
+ Im Speziellen sollte sichergestellt werden, dass die 
+\shape italic
+Dispose
+\shape default
+-Methode von Klassen die 
+\shape italic
+IDisposable
+\shape default
+ implementieren aufgerufen wird.
 \end_layout
 
 \begin_layout Itemize
-Es ist derzeit nicht möglich Logik unmittelbar nach der Injection auszuführen.
+Es ist derzeit nicht möglich, Logik unmittelbar nach der Injection auszuführen.
  In Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -9084,27 +9294,34 @@ reference "fig:Implementation-des-Coroutine"
 
 \end_inset
 
- wird diese Beschränkung umgangen, weitere Logik im Konstruktor ausgeführt
+ wird diese Beschränkung umgangen, indem weitere Logik im Konstruktor ausgeführt
  wird.
  Die Gefahr hierbei ist jedoch, dass Properties zu diesem Zeitpunkt noch
- nicht injected wurden.
- Desweiteren sollte das Single-Responcibility-Principle gewahrt werden indem
- im Konstruktor lediglich Initialisierungs-Logik ausgeführt wird.
- Aus diesem Grund sollte ein weiteres Attribut namens Postconstruct vorgestellt
- werden: Methoden die mit dem PostConstruct-Attribut versehen wurden, sollen
- unmittelbar nach dem Injection-Prozess vom Container aufgerufen werden.
+ nicht inijziert wurden.
+ Desweiteren sollte das Single-Responcibility-Principle gewahrt werden,
+ indem im Konstruktor lediglich Initialisierungslogik ausgeführt wird.
+ Aus diesem Grund sollte ein weiteres Attribut namens 
+\shape italic
+PostConstruct
+\shape default
+ vorgestellt werden: Methoden, die mit dem 
+\shape italic
+PostConstruct
+\shape default
+-Attribut versehen wurden, sollen unmittelbar nach dem Injection-Prozess
+ vom Container aufgerufen werden.
 \end_layout
 
 \begin_layout Standard
 Aus diesen Gründen wird von dem Autor dieser Arbeit davon abgeraten, den
  präsentierten Container zur Entwicklung eines Spiels zu verwenden.
- In dem folgenden Abschnitt sollen ausgereiftere Dependency Injection Container
+ In dem folgenden Abschnitt sollen ausgereiftere Inversion Of Control Frameworks
  für Unity3D vorgestellt und auf ihre Tauglichkeit bei der Entwicklung von
  Spielen untersucht werden.
 \end_layout
 
 \begin_layout Section
-Übersicht Dependency Injection Container für Unity3D
+Übersicht Inversion Of Control Frameworks für Unity3D
 \end_layout
 
 \begin_layout Standard
@@ -9114,8 +9331,8 @@ In den vorherigen Abschnitten dieser Arbeit wurden Prinzipien, Praktiken
  Dieser Abschnitt soll eine Übersicht über die für Unity verfügbaren Inversion
  Of Control Container geben.
  Ihre Funktionsumfänge und Besonderheiten sollen beschrieben werden.
- Oft bieten diese Frameworks Funktionalitäten die weit über Automated Dependency
- Injection hinaus gehen.
+ Oft bieten diese Frameworks Funktionalitäten, die weit über automated Dependenc
+y Injection hinausgehen.
 \end_layout
 
 \begin_layout Standard
@@ -9124,8 +9341,8 @@ Die vorzustellenden Container wurden speziell für die Verwendung mit Unity
  Ein Grund hierfür ist, dass - wie im vorherigen Abschnitt ausführlich beschrieb
 en - einige Erweiterungen notwendig sind, um die Verwendung eines Containers
  in Unity zu ermöglichen.
- Ein weiterer Grund ist, dass Unity's Mono Laufzeitumgebung lediglich Kompabilit
-ät zum .NET Framework 3.5 aufweist.
+ Ein weiterer Grund ist, dass Unitys Mono Laufzeitumgebung lediglich Kompatibili
+tät zum .NET Framework 3.5 aufweist.
  Die meisten existierenden Inversion Of Control Container für .NET verwenden
  .NET 4.0 oder höher.
  
@@ -9138,6 +9355,22 @@ Das Grundkonzept für die Implementation eines Inversion Of Control Containers
  Auf dieser Basis haben sich mit der Zeit eine Reihe von Frameworks entwickelt.
  Im Folgenden sollen die Frameworks Zenject, adic und StrangeIoC vorgestellt
  werden.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+todo{Quelle!}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection
@@ -9157,15 +9390,15 @@ https://github.com/modesttree/Zenject
 \begin_layout Standard
 Zenject ist ein Dependency Injection Container, der sich aus einem direkten
  Fork des Konzepts von Sebastiano Mandalà entwickelt hat.
- Zusätzlich zu den grundlegenden Funktionalitäten eines DI-Containers bietet
- das Framework eine Vielzahl von Registrierungsoptionen wie zum Beispiel
- die Registrierung von Prefabs und GameObjects oder Injection in spezifische
- Methoden und Getter.
+ Zusätzlich zu den grundlegenden Funktionalitäten eines Dependency Injection
+ Containers bietet das Framework eine Vielzahl von Registrierungsoptionen,
+ wie zum Beispiel die Registrierung von Prefabs und GameObjects oder Injection
+ in spezifische Methoden und Getter.
  Darüber hinaus bietet das Framework eine Möglichkeit zur Validierung und
  Visualisierung des Object Graphs: Es kann überprüft werden, dass alle zu
  injizierenden Typen im Object Graph einer Szene beim Container registriert
  sind.
- Es ist möglich eine an UML angelegte graphische Darstellung des Object
+ Es ist möglich, eine an UML angelegte graphische Darstellung des Object
  Graphs der Anwendung zu generieren.
 \end_layout
 
@@ -9184,15 +9417,15 @@ https://github.com/intentor/adic
 \end_layout
 
 \begin_layout Standard
-Adic ist ein weiterer Dependency Injection Container für Unity der sich
- vorallem durch seine Einfacheit in Umsetzung und Verwendung auszeichnet.
+Adic ist ein weiterer Dependency Injection Container für Unity, der sich
+ vor allem durch seine Einfachheit in Umsetzung und Verwendung auszeichnet.
  Dennoch bietet er die vollständige Funktionalität eines Dependency Injection
  Containers und noch einige weitere Optionen.
- Diese sind unter Anderem: Conditional Bindings, die es ermöglichen eine
+ Diese sind unter anderem: Conditional Bindings, die es ermöglichen eine
  Registrierung eines Typs unter bestimmten Bedingungen vorzunehmen.
  Eine mögliche Bedingung ist beispielsweise, dass Injection eines Typs nur
  über Konstruktoren oder in bestimmte Instanzen erfolgen soll.
- Zudem implementiert adic ein Command- und Eventsystem, das sehr ähnlich
+ Zudem implementiert Adic ein Command- und Eventsystem, das sehr ähnlich
  zu dem von StrangeIoC ist.
  Diese werden im folgenden Abschnitt genauer erläutert.
 \end_layout
@@ -9214,7 +9447,7 @@ http://strangeioc.github.io/strangeioc/
 \begin_layout Standard
 StrangeIoC ist ein umfangreiches Inversion Of Control Framework, das weit
  mehr als nur einen Dependency Injection Container bietet.
- Das open-source Projekt verfügt über eine aktive Community, die bemüht
+ Das Open-Source Projekt verfügt über eine aktive Community, die bemüht
  ist, das Framework kontinuierlich zu verbessern und zu erweitern.
  StrangeIoC ist in großen Teilen von Robotlegs, einem Application Architecture
  Framework für ActionScript, beeinflusst.
@@ -9236,14 +9469,15 @@ MVC(S)-Architektur in Unity mithilfe von StrangeIoC
 Model-View-Controller-Service, oder kurz MVCS, ist ein Architekturmuster,
  welches die Struktur einer Anwendung in vier eigenständige Module unterteilt:
  Model, View, Controller und Service.
- Es erweitert die klassische MVC-Architektur um eine Service-Schicht, unter
- welche der Zugriff auf externe Daten und Dienste, wie Web-Server, Datenbanksyst
-eme oder Zugriffe auf das Dateisystem, fallen.
+ Es erweitert die klassische MVC-Architektur um eine Serviceschicht, unter
+ welche der Zugriff auf externe Daten und Dienste, wie Webserver, Datenbanksyste
+me oder Zugriffe auf das Dateisystem, fallen.
  
 \end_layout
 
 \begin_layout Standard
-MVCS soll einen konsistenten Ansatz zur Strukturierung einer Anwendung liefern.
+MVC(S) soll einen konsistenten Ansatz zur Strukturierung einer Anwendung
+ liefern.
  Genauso wie bei der klassischen MVC-Architektur ist die Grundlage hierfür
  Präsentations- von Anwendungslogik zu trennen.
  Diese Trennung erfolgt durch die Definition folgender Schichten: Die Präsentati
@@ -9258,22 +9492,22 @@ onsschicht (View-Layer) ist für die Darstellung der Benutzeroberfläche und
 \end_layout
 
 \begin_layout Standard
-Zusätzlich zu dem Vorteil der Strukturierung hilft die MVCS-Architektur
+Zusätzlich zu dem Vorteil der Strukturierung, hilft die MVC(S)-Architektur
  von StrangeIoC die Kopplung zwischen den einzelnen Schichten zu minimieren.
- Damit sollen einzelne Programmabschnitte tesbar und die Austauschbarkeit
- der Darstellungs- und Service-Schicht gewährleistet werden.
- Abhängigkeiten zu externen APIs können in der Service-Schicht gekapselt
- und somit Austauschbar gemacht werden.
+ Damit sollen einzelne Programmabschnitte testbar und die Austauschbarkeit
+ der Darstellungs- und Serviceschicht gewährleistet werden.
+ Abhängigkeiten zu externen APIs können in der Serviceschicht gekapselt
+ und somit austauschbar gemacht werden.
  Somit ist es beispielsweise ohne große Umstände möglich, den Zugriff auf
- Daten aus dem lokalen Dateisystem mit dem Remote-Zugriff auf eine Datenbank
+ Daten aus dem lokalen Dateisystem mit dem Remotezugriff auf eine Datenbank
  auszutauschen.
 \end_layout
 
 \begin_layout Standard
 Die Umsetzung der MVC(S)-Architektur weicht stark von der des klassischen
- MVC-Entwurfsmusters ab.
+ MVC Entwurfsmusters ab.
  StrangeIoC verwendet eine Reihe von eigenen Konzepten und Mustern um die
- MVC(S)-Architektur umzusetzten.
+ MVC(S)-Architektur umzusetzen.
 \end_layout
 
 \begin_layout Subsection
@@ -9345,7 +9579,7 @@ Context und ContextView
 \end_layout
 
 \begin_layout Standard
-Der Context ist ein von den restlichen Schichten der Architekur unabhängiges
+Der Context ist ein von den restlichen Schichten der Architektur unabhängiges
  Modul.
  Grob gesagt handelt es sich um einen Composition Root wie in Abschnitt
  
@@ -9356,20 +9590,21 @@ reference "sub:Definieren-des-Composition"
 \end_inset
 
  definiert.
- Mit dem Unterschied, dass es möglich ist mehr als einen Context zu definieren.
+ Mit dem Unterschied, dass es möglich ist, mehr als einen Context zu definieren.
  Jeder Context wird an einen ContextView, ein MonoBehaviour in einer bestimmten
  Scene, angehängt.
  Im Context wird wie im Composition Root die Registrierung von Typen beim
  Dependency Injection Container vorgenommen.
  Der Context definiert den Sichtbarkeitsbereich aller bei ihm registrierten
  Typen.
- Es jedoch auch möglich Registrierungen über mehrere Contexte hinweg vorzunehmen.
+ Es ist jedoch auch möglich Registrierungen über mehrere Contexte hinweg
+ vorzunehmen.
  StrangeIoC bezeichnet den Container als Binder und die Registrierung als
  Binding.
- Der Grund hierfür ist, dass nicht nur zu injekzierende Abhängigkeiten registrie
-rt werden können.
- Es können auch, wie im später noch genauer erläutert wird, Commands an
- Signals und Views an Mediators gebunden werden.
+ Der Grund hierfür ist, dass nicht nur zu injizierende Abhängigkeiten registrier
+t werden können.
+ Es können auch -- wie im später noch genauer erläutert wird -- Commands
+ an Signals und Views an Mediators gebunden werden.
 \end_layout
 
 \begin_layout Standard
@@ -9565,15 +9800,22 @@ reference "fig:Beispiel-Context"
 
 \end_inset
 
- zeigt ein Beispiel eines Contexts: In der mapBindings-Methode erfolgen
- die Typregistrierungen bei den jeweiligen Bindern.
+ zeigt ein Beispiel eines Contexts: In der 
+\shape italic
+mapBindings
+\shape default
+-Methode erfolgen die Typregistrierungen bei den jeweiligen Bindern.
  Abhängigkeiten werden beim InjectionBinder registriert, Commands werden
  über den CommandBinder an Signale gebunden und Views an Mediatoren durch
  den MediationBinder.
  Diese Registrierungen werden immer komplexer mit dem Wachstum der Anwendung.
- Aus diesem Grund können Sie auch in einzelne Klassen ausgelagert werden.
+ Aus diesem Grund können sie auch in einzelne Klassen ausgelagert werden.
  Ist die Registrierung abgeschlossen, wird die Anwendung durch das Auslösen
- eines Signals in der Start-Methode gestartet.
+ eines Signals in der 
+\shape italic
+Start
+\shape default
+-Methode gestartet.
  An dieses Startsignal wurden zuvor einige Commands gebunden, die nun ausgeführt
  werden.
 \end_layout
@@ -9583,13 +9825,17 @@ Signals
 \end_layout
 
 \begin_layout Standard
-Signals stellen ein typsicheres Mittel zur Kommunikation zwischen den einzelen
+Signals stellen einen typsicheren Weg zur Kommunikation zwischen den einzelnen
  Architekturschichten dar.
  Signals können Commands auslösen, aber auch wie herkömmliche Events abonniert
  werden.
  Es handelt sich um eine Umsetzung des Observer-Musters, das intern Action-Deleg
 aten anstatt Interfaces verwendet.
- Das Auslösen eines Signals erfolgt über die Dispatch-Methode.
+ Das Auslösen eines Signals erfolgt über die 
+\shape italic
+Dispatch-
+\shape default
+Methode.
  Wurde das Signal beim CommandBinder registriert, so fügt sich dieser als
  Listener hinzu.
  Beim Auslösen des Signals instanziiert der CommandBinder Instanzen der
@@ -9686,8 +9932,8 @@ reference "fig:Signals-Definition"
  zeigt die Deklaration und Verwendung eines Signals.
  Signals können bis zu vier Parameter haben, dessen Typen als Generika bei
  der Deklaration des Signals definiert werden.
- Diese Parameter werden bei Aufruf in Properties des Commands injekziert.
- Signals sind Typsicher: Fehlerhaftes Aufrufen oder Abonnieren führt zu
+ Diese Parameter werden bei Aufruf in Properties des Commands injiziert.
+ Signals sind typsicher: Fehlerhaftes Aufrufen oder Abonnieren führt zu
  einer Ausnahme zur Laufzeit.
 \end_layout
 
@@ -9698,8 +9944,11 @@ Commands
 \begin_layout Standard
 Commands sind zustandslose Controller-Objekte, die ein einzelnes Verhalten
  kapseln.
- Commands werden von Signals ausgelöst: Ein Aufruf der Execute-Methode erfolgt
- automatisch.
+ Commands werden von Signals ausgelöst: Ein Aufruf der 
+\shape italic
+Execute
+\shape default
+-Methode erfolgt automatisch.
  Im Normalfall haben sie eine sehr kurze Lebenszeit: Ein Signal löst die
  Instanziierung und Ausführung des Commands aus.
  Direkt danach erfolgt die Entsorgung.
@@ -9849,9 +10098,12 @@ index
 \begin_inset Quotes grd
 \end_inset
 
- injekziert.
- Commands wird es durch Aufruf der Retain Methode ermöglicht, seine Zerstörung
- zu verzögern.
+ injiziert.
+ Commands wird es durch Aufruf der 
+\shape italic
+Retain
+\shape default
+-Methode ermöglicht, seine Zerstörung zu verzögern.
  Die Ausführung der Anwendung wird nicht eingeschränkt, da der Aufruf eines
  Commands asynchron erfolgt.
  Sehr nützlich ist Erhalten eines Commands beispielsweise bei der Client-Server-
@@ -9862,7 +10114,7 @@ reference "fig:Beispiel-Command"
 
 \end_inset
 
- wird der Command solange am Leben erhalten bis dieser eine Antwort vom
+ wird der Command so lange am Leben erhalten, bis dieser eine Antwort vom
  Server erhält.
  Dies geschieht durch den Aufruf der Release-Methode im Callback der Anfrage.
 \end_layout
@@ -9873,8 +10125,8 @@ Commands bieten eine sehr effiziente Möglichkeit Anwendungsschichten voneinande
  Der Grund hierfür ist, dass sie sich nur durch Signale ausführen lassen:
  Es gibt für Models, Services und Mediatoren keinen Grund überhaupt von
  ihnen zu wissen.
- Models und Mediatoren brauchen lediglich Signale auszulösen um die Ausführung
- der Anwendung in Gang zu legen.
+ Models und Mediatoren brauchen lediglich Signale auszulösen, um die Ausführung
+ der Anwendung in Gang zu setzen.
 \end_layout
 
 \begin_layout Subsubsection
@@ -9914,7 +10166,7 @@ Mediation
 
 \begin_layout Standard
 Das Mediator-Muster beschreibt einen Weg der Interaktion zwischen Objekten
- über einen Vermittler
+ über einen Vermittler 
 \begin_inset CommandInset citation
 LatexCommand citep
 after "S. 273"
@@ -9930,7 +10182,7 @@ key "Gamma1994"
  Dies geschieht, indem der Mediator die Events seines Views abbonniert und
  daraufhin entsprechende Signals auslöst.
  Umgekehrt abonniert der Mediator auch die Events von Services oder Models
- und führt daraufin entsprechende Operationen an seinem View aus.
+ und führt daraufin Operationen an seinem View aus.
  
 \end_layout
 
@@ -9985,9 +10237,9 @@ reference "fig:Schaubild-Mediation"
 
 \end_inset
 
- wird veranschaulicht wie der Mediation-Prozess in StrangeIoC vonstatten
- geht: Sobald ein View in eine Scene geladen wird, sendet dieser automatisch
- in der Awake-Methode eine Message an den ContextView.
+ wird veranschaulicht, wie der Mediations-Prozess in StrangeIoC vonstattengeht:
+ Sobald ein View in eine Scene geladen wird, sendet dieser automatisch in
+ der Awake-Methode eine Message an den ContextView.
  Dafür muss zwangsläufig jeder View ein Childobject des jeweiligen ContextViews
  sein.
  Über den Context des ContextViews wird der MediationBinder aufgerufen.
@@ -10219,24 +10471,57 @@ reference "fig:Implementation-Mediator"
 \end_inset
 
  wird ein Beispiel für eine mögliche Implementation eines Mediators gezeigt.
- Der Mediator reagiert auf das OnBoardClicked-Event des Views indem er die
- Klickposition in einen verwendbaren Index konvertiert und daraufhin ein
- FieldClickedSignal mit dem Index als Parameter auslöst.
- Weiter abonniert der Mediator das OnLayoutChanged-Event des IBoardLayoutModels.
- In Reaktion auf dieses Event ruft der Mediator die Refresh-Methode des
- von ihm vermittelten Views auf.
- Das An- und Abmelden an die Events erfolgt in den OnRegister- und OnRemove-Call
-backs.
- OnRegister wird direkt nach der Injection von Abhängigkeiten aufgerufen.
- Der Aufruf von OnRemove erfolgt beim Zerstören des Views.
+ Der Mediator reagiert auf das 
+\shape italic
+OnBoardClicked
+\shape default
+-Event des Views, indem er die Klickposition in einen verwendbaren Index
+ konvertiert und daraufhin ein 
+\shape italic
+FieldClickedSignal
+\shape default
+ mit dem Index als Parameter auslöst.
+ Weiter abonniert der Mediator das 
+\shape italic
+OnLayoutChanged
+\shape default
+-Event des 
+\shape italic
+IBoardLayoutModels
+\shape default
+.
+ In Reaktion auf dieses Event ruft der Mediator die 
+\shape italic
+Refresh
+\shape default
+-Methode des von ihm vermittelten Views auf.
+ Das An- und Abmelden an die Events erfolgt in den 
+\shape italic
+OnRegister
+\shape default
+- und 
+\shape italic
+OnRemove
+\shape default
+-Callbacks.
+ 
+\shape italic
+OnRegister
+\shape default
+ wird direkt nach der Injektion von Abhängigkeiten aufgerufen.
+ Der Aufruf von 
+\shape italic
+OnRemove
+\shape default
+ erfolgt beim Zerstören des Views.
 \end_layout
 
 \begin_layout Standard
-Wie im Beispiel deutlich wird, agieren Mediators lediglich als Brücke zwischen
+Wie im Beispiel deutlich wird, agieren Mediatoren lediglich als Brücke zwischen
  Darstellungs- und Anwendungslogik.
  Sie sollten somit leichtgewichtig sein und möglichst keine eigene Logik
  beinhalten.
- Sie dienen einzig dazu Anwendungslogik aus den Views herauszuhalten.
+ Sie dienen einzig dazu, Anwendungslogik aus den Views herauszuhalten.
  Dafür gibt es zahlreiche Gründe: Darstellungslogik tendiert dazu mit der
  Zeit unüberschaubar zu werden, da an ihr oft Änderungen in letzter Minute
  vorgenommen werden.
@@ -10256,16 +10541,16 @@ Die Aufgaben eines Models in StrangeIoC unterscheiden sich nicht von denen
  auf diese über wohldefinierte Schnittstellen.
  Andere Klassen können über diese Schnittstellen Anfragen an das Model senden.
  Models selber senden keine Anfragen: Wird ein Model geändert, lässt es
- dies den Rest der Anwendung wissen indem es einen Event auslöst.
+ dies den Rest der Anwendung wissen, indem es ein Event auslöst.
 \end_layout
 
 \begin_layout Standard
 Services stehen eng mit Models in Verbindung.
  Dennoch sollten sie getrennt voneinander existieren.
- Ein Service beschafft - oft durch die Kommunikation zur Außenwelt - Daten.
+ Ein Service beschafft -- oft durch die Kommunikation zur Außenwelt -- Daten.
  Ein Model speichert diese Daten.
  Services kommunizieren mit externen Ressourcen einer Applikation.
- Beispiele für solche Resourcen sind unter anderem: Webserver und -Services,
+ Beispiele für solche Ressourcen sind unter anderem: Webserver und -Services,
  das Dateisystem und Datenbanken.
  Der Zugriff aus Services erfolgt über Commands, wie bereits in Abbildung
  
@@ -10284,8 +10569,8 @@ Beispielanwendung
 \end_layout
 
 \begin_layout Standard
-Die im letzten Abschnitt gezeigten Abbildungen wurden aus einer für diese
- Arbeit programmierten Beispielanwendung übernommen.
+Die im letzten Abschnitt gezeigten Programmcode-Ausschnitte wurden aus einer
+ für diese Arbeit programmierten Beispielanwendung übernommen.
  Damit der Fokus auf die zu erläuternden Konzepte nicht verloren geht, wurden
  die Klassen für die Beispiele teilweise gekürzt und abgeändert.
  Die tatsächliche Implementation der Beispielanwendung ist auf der sich
