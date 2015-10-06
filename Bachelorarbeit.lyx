@@ -4523,7 +4523,7 @@ reference "fig:SerializeField"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -4904,23 +4904,15 @@ FindObjectOfType
 \shape default
  sehr langsam ist.
  Sie sollte daher nicht jeden Frame genutzt werden.
- Als Alternative wird das Singleton Pattern vorgeschlagen.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-todo{Quelle einfügen!}
-\end_layout
+ Als Alternative wird das Singleton Pattern vorgeschlagen 
+\begin_inset CommandInset citation
+LatexCommand citep
+before "vgl."
+key "Unity2015:FindObjectOfType"
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -5534,7 +5526,7 @@ SendMessage
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -5683,17 +5675,15 @@ SendMessage
 \begin_layout Standard
 Aus diesen Gründen ist der Nutzung von SendMessage generell abzuraten.
  Besonders, da mit Unity Version 4.6 ein neues Messaging System als Ersatz
- für SendMessage vorgestellt wurde.
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-http://docs.unity3d.com/Manual/MessagingSystem.html
-\end_layout
+ für SendMessage vorgestellt wurde 
+\begin_inset CommandInset citation
+LatexCommand citep
+before "vgl."
+key "Unity2015:MessagingSystem"
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -6158,17 +6148,15 @@ Awake
 -Methoden der Komponenten zufällig, nach der Reihenfolge, in der sie geladen
  werden.
  Es ist jedoch möglich in den Script Execution Order Settings anzugeben,
- dass ein bestimmtes Script früher oder später geladen werden soll.
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-http://docs.unity3d.com/Manual/class-ScriptExecution.html
-\end_layout
+ dass ein bestimmtes Script früher oder später geladen werden soll 
+\begin_inset CommandInset citation
+LatexCommand citep
+before "vgl."
+key "Unity2015:ScriptExecution"
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
@@ -9632,23 +9620,15 @@ Das Grundkonzept für die Implementation eines Inversion Of Control Containers
  von Blogeinträgen.
  Auf dieser Basis haben sich mit der Zeit eine Reihe von Frameworks entwickelt.
  Im Folgenden sollen die Frameworks Zenject, adic und StrangeIoC vorgestellt
- werden.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-todo{Quelle!}
-\end_layout
+ werden 
+\begin_inset CommandInset citation
+LatexCommand citep
+before "siehe"
+key "Mandala2012"
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Subsubsection
@@ -9744,7 +9724,7 @@ MVC(S)-Architektur in Unity mithilfe von StrangeIoC
 \end_layout
 
 \begin_layout Standard
-Model-View-Controller-Service, oder kurz MVCS, ist ein Architekturmuster,
+Model-View-Controller-Service, oder kurz MVC(S), ist ein Architekturmuster,
  welches die Struktur einer Anwendung in vier eigenständige Module unterteilt:
  Model, View, Controller und Service.
  Es erweitert die klassische MVC-Architektur um eine Serviceschicht, unter
@@ -9785,7 +9765,15 @@ Zusätzlich zu dem Vorteil der Strukturierung, hilft die MVC(S)-Architektur
 Die Umsetzung der MVC(S)-Architektur weicht stark von der des klassischen
  MVC Entwurfsmusters ab.
  StrangeIoC verwendet eine Reihe von eigenen Konzepten und Mustern um die
- MVC(S)-Architektur umzusetzen.
+ MVC(S)-Architektur umzusetzen 
+\begin_inset CommandInset citation
+LatexCommand citep
+before "vgl."
+key "StrangeIoC2015:Howto"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
@@ -9832,7 +9820,15 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Schaubild MVC(S) Context Architektur
+Schaubild MVC(S) Context Architektur 
+\begin_inset CommandInset citation
+LatexCommand citealp
+before "Quelle:"
+key "StrangeIoC2015:Main"
+
+\end_inset
+
+
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:MVCS-Context"
