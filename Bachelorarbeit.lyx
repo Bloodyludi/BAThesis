@@ -1530,23 +1530,16 @@ Doch diese Praxis allein ist unzureichend, um lose Kopplung mittels Dependency
  Injection zu ermöglichen.
  Es müssen zudem eine Reihe von Prinzipien gewahrt werden.
  Diese wurden von Robert C.
- Martin geprägt und sind im Allgemeinen als SOLID-Prinzipien bekannt.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-todo {Quelle SOLID}
-\end_layout
+ Martin geprägt und sind im Allgemeinen als SOLID-Prinzipien bekannt 
+\begin_inset CommandInset citation
+LatexCommand citep
+after "S. 49"
+before "vgl."
+key "Bender2011"
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Section
@@ -1558,8 +1551,17 @@ SOLID ist ein Akronym, welches für die folgenden Prinzipien steht: das Single-R
 sponsibility Principle, das Open/Closed Principle, das Liskov Substitution
  Principle, das Interface Segregation Principle und das Dependency-Inversion
  Principle.
- Es handelt sich um eine Sammlung von Richtlinien, die eine saubere Softwarearch
-itektur ermöglichen sollen.
+ Es handelt sich um eine Sammlung von Richtlinien im Umgang mit Abhängigkeiten,
+ die eine saubere Softwarearchitektur ermöglichen sollen 
+\begin_inset CommandInset citation
+LatexCommand citep
+after "9:10 Min."
+before "vgl."
+key "Metz2009"
+
+\end_inset
+
+.
  An dieser Stelle wird auf eine ausführliche Beschreibung aller Prinzipien
  verzichtet.
  Es soll jedoch eine kurze Vorstellung der Prinzipien stattfinden und auf
@@ -1592,7 +1594,16 @@ Grund zur Änderung
 
  bewusst gewählt, da es auch legitim ist mehrere Verantwortlichkeiten in
  einer Klasse unterzubringen, wenn diese sich mit hoher Wahrscheinlichkeit
- gemeinsam ändern.
+ gemeinsam ändern 
+\begin_inset CommandInset citation
+LatexCommand citep
+after "S. 95-98"
+before "vgl."
+key "Martin2003"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -1645,7 +1656,16 @@ Geschlossen für Modifikation
 \end_inset
 
  zum anderen bedeutet, dass zur Erweiterung keine Änderungen an der Entität
- an sich notwendig sind.
+ an sich notwendig sind 
+\begin_inset CommandInset citation
+LatexCommand citep
+after "S.99-100"
+before "vgl."
+key "Martin2003"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -1681,7 +1701,16 @@ Das Liskov Substitution Principle beschreibt einer grundlegende Anforderung
  beim Einsatz von Vererbung: Untertypen einer Basisklasse sollen untereinander
  ersetzbar sein, ohne dabei das Verhalten des Programms selbst zu verändern.
  Das Programm selbst darf zu keinem Zeitpunkt einen Untertyp anders als
- einen anderen Untertypen behandeln.
+ einen anderen Untertypen behandeln 
+\begin_inset CommandInset citation
+LatexCommand citep
+after "S. 111-112"
+before "vgl."
+key "Martin2003"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -1735,7 +1764,16 @@ fat
  So wird gewährleistet, dass andere Entitäten nur von Abstraktionen mit
  hoher Interfacekohäsion abhängig sind.
  Auch wenn diese Abstraktionen von einer einzigen nicht-kohäsiven Entität
- implementiert werden.
+ implementiert werden 
+\begin_inset CommandInset citation
+LatexCommand citep
+after "S. 135"
+before "vgl."
+key "Martin2003"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -1774,7 +1812,16 @@ High-Level Module sollen nicht von Low-Level Modulen abhängig sein.
 
 \begin_layout Itemize
 Abstraktionen sollten nicht von Details abhängen.
- Details sollten von Abstraktionen abhängen.
+ Details sollten von Abstraktionen abhängen 
+\begin_inset CommandInset citation
+LatexCommand citep
+after "S. 127"
+before "vgl."
+key "Martin2003"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -1786,20 +1833,118 @@ Zum einen beschreibt das Dependency-Inversion Principle, dass die Architektur
  Folglich sind die übergeordneten Schichten nicht von untergeordneten Schichten
  abhängig.
  Stattdessen sind untergeordnete Schichten von den abstrakten Interfaces
- in den übergeordneten Schichten abhängig.
- 
+ in den übergeordneten Schichten abhängig 
+\begin_inset CommandInset citation
+LatexCommand citep
+after "S. 128-129"
+before "vgl."
+key "Martin2003"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:DIP"
+
+\end_inset
+
+ verdeutlicht diese Invertierung der Abhängigkeiten: Anstatt, dass das 
+\shape italic
+Policy
+\shape default
+-Modul -- wie in der linken Bildhälfte gezeigt -- von der Implementation
+ des 
+\shape italic
+Mechanism
+\shape default
+-Moduls abhängt, besteht lediglich eine Abhängigkeit an ein 
+\shape italic
+Mechanism
+\shape default
+-Interface.
+ Dieses Interface befindet sich innerhalb des höherliegenden 
+\shape italic
+Policy
+\shape default
+-Moduls.
+ Die tatsächliche Implementation erfolgt innerhalb des untergeordneten Mechanism
+-Moduls, wodurch eine Abhängigkeit an das 
+\shape italic
+Policy
+\shape default
+-Modul entsteht.
+ Folglich haben Änderungen des 
+\shape italic
+Mechanism-
+\shape default
+Moduls keinen Einfluss auf das 
+\shape italic
+Policy
+\shape default
+-Modul.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename images/DIP.png
+	lyxscale 40
+	width 100text%
+
+\end_inset
 
 
-\backslash
-todo{Quelle fehlt!, Hierfür evtl.
- eine Grafik zur Veranschaulichung}
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Invertierung der Abhängigkeiten zwischen Schichten.
+ 
+\begin_inset CommandInset citation
+LatexCommand citealp
+after "S.129"
+before "Quelle: modifiziert übernommen aus"
+key "Martin2003"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Dependency-Inversion Principle
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:DIP"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1818,6 +1963,14 @@ Zum anderen beschreibt Martin eine weitere, allgemeinere Interpretation
 
 Depend on abstractions.
 \begin_inset Quotes grd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+after "S. 129"
+key "Martin2003"
+
 \end_inset
 
 
@@ -1994,7 +2147,7 @@ EnglishLocalization
  extrahiert.
  In Abbildung 
 \begin_inset CommandInset ref
-LatexCommand vref
+LatexCommand ref
 reference "fig:Extraction"
 
 \end_inset
@@ -2805,17 +2958,11 @@ Ein Nachteil ist, dass andere Klassen zu jeder Zeit Veränderungen an dem
  Property vornehmen können.
  Aus diesem Grund wird Property Injection in manchen Kreisen kritisiert,
  da es die Datenkapselung bricht.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
+\begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-
-
-\backslash
-todo {Quelle hierfuer!}
+https://r.je/constructor-injection-vs-setter-injection.html
 \end_layout
 
 \end_inset
@@ -3772,7 +3919,16 @@ Lose Kopplung ermöglicht, dass Module in Isolation betrachtet werden können.
  Es muss mit Bedacht auf die Testbarkeit einer Anwendung entschieden werden,
  ob eine Abhängigkeit fest oder unbeständig ist.
  Der sicherste Weg Testbarkeit zu gewährleisten, ist Test Driven Development
- in Kombination mit Dependency Injection zu praktizieren.
+ in Kombination mit Dependency Injection zu praktizieren 
+\begin_inset CommandInset citation
+LatexCommand citep
+after "S. 10"
+before "vgl."
+key "Bender2011"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Chapter
@@ -3850,22 +4006,6 @@ archie befinden, sind schwierig zu verstehen und zu verändern, da hierfür
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-todo{Grafik monolithische Klassenhierarchie vs komponentenbasierte Architektur}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 Es kann nur ein Merkmal als Basis für eine Vererbungshierarchie gewählt
  werden.
  Ein Merkmal kann beispielsweise die Beweglichkeit eines Objekts sein.
@@ -3874,10 +4014,80 @@ Es kann nur ein Merkmal als Basis für eine Vererbungshierarchie gewählt
  an die Grenzen einer solchen Architektur: Die benötigten Funktionalitäten
  müssen in der Hierarchie nach oben verschoben werden und bewirken so, dass
  sie eventuell in Klassen vorhanden sind in denen sie nicht gebraucht werden.
+ In Abbildung 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:monolitic"
+
+\end_inset
+
+ wird das Problem veranschaulicht.
  Das Problem kann in einigen Sprachen auch durch Mehrfachvererbung gelöst
  werden, was aber zu einem Deadly Diamond führen kann: Ein Deadly Diamond
  entsteht indem eine Klasse von zwei Klassen erbt, die wiederum von der
  selben Basisklasse erben.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename images/problem.png
+	scale 66
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Doppelte Logik aufgrund einer monolithischen Vererbungshierarchie.
+ 
+\begin_inset CommandInset citation
+LatexCommand citealp
+after "S. 215"
+before "Quelle: modifiziert übernommen aus"
+key "Nystrom2014"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Monolithsche Vererbungshierarchie
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:monolitic"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3928,7 +4138,83 @@ key "Gregory2014"
 MonoBehaviour
 \shape default
  abgeleitet.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:ComponentBasedArchitecture"
+
+\end_inset
+
+ zeigt eine vereinfachte Darstellung der komponentenbasierten Architektur
+ Unitys.
+ Die tatsächliche Implementation ist jedoch nicht bekannt, da es sich bei
+ Unity um proprietäre Software handelt.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename images/CBA.png
+	scale 66
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Vereinfachte Darstellung der komponentenbasierten Architektur Unitys.
  
+\begin_inset CommandInset citation
+LatexCommand citealp
+after "S. 886"
+before "Quelle: modifiziert übernommen aus"
+key "Gregory2014"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Komponentenbasierte Architektur Unitys
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ComponentBasedArchitecture"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -3994,7 +4280,15 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Das Benutzerinterface vom Unity Editor
+Das Benutzerinterface vom Unity Editor.
+ Quelle: 
+\begin_inset CommandInset citation
+LatexCommand citealp
+key "Unity2015:Interface"
+
+\end_inset
+
+
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Unity-Editor"
@@ -4007,22 +4301,6 @@ name "fig:Unity-Editor"
 \end_inset
 
 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-todo{Quelle fuer Grafik einfuegen}
 \end_layout
 
 \end_inset
