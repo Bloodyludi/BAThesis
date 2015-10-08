@@ -10957,14 +10957,18 @@ rt.
  betrachtet werden können.
 \end_layout
 
+\begin_layout Section
+Kopplung in Unity
+\end_layout
+
 \begin_layout Standard
 Nachdem die Vorteile und eine mögliche Umsetzung von loser Kopplung durch
  Inversion Of Control deutlich gemacht wurden, wurde Unity auf die Anwendung
  des Paradigmas untersucht.
- Es wurde untersucht, inwieweit sich Unitys komponentenbasierte Architektur
- von der einer klassischen objektorientierten Vererbungshierarchie unterscheidet.
- Dabei wurde festgestellt, dass in Unity bereits Inversion Of Control stattfinde
-t.
+ Es wurde zunächst untersucht, inwieweit sich Unitys komponentenbasierte
+ Architektur von der einer klassischen objektorientierten Vererbungshierarchie
+ unterscheidet.
+ Es wurde festgestellt, dass in Unity bereits Inversion Of Control stattfindet.
  Die Kontrolle über die Komposition und Lebenszeit von Objekten ist bereits
  invertiert.
  Aus diesem Grund können Abhängigkeiten nicht auf herkömmlichen Wegen aufgelöst
@@ -10973,7 +10977,7 @@ t.
  bereit.
  Diese wurden auf ihre Fähigkeit lose Kopplung umzusetzen untersucht.
  Es wurde festgestellt, dass diese Kommunikationsmechanismen bestimmten
- Beschränkungen unterliegen und einige Probleme mitsichbringen.
+ Beschränkungen unterliegen und einige Probleme mit sich bringen.
  Somit ist es zwar mit einigen Mechanismen, wie z.
  B.
  
@@ -10991,95 +10995,47 @@ möglich lose Kopplung umzusetzen, jedoch ist die Kommunikation auf Objekte
  ohne dabei die Kommunikation auf Komponenten oder Spielobjekte zu beschränken.
 \end_layout
 
-\begin_layout Itemize
-Anforderungen stehen in direkter Verbindung mit Kopplung und Kohäsion
+\begin_layout Subsection
+Dependency Injection
 \end_layout
 
-\begin_layout Itemize
-Lose Kopplung trägt maßgeblich zur Qualität eines Softwareproduktes bei.
+\begin_layout Standard
+Aufgrund der bereits beschriebenen Einschränkungen durch Unitys Architektur,
+ ist es nicht möglich Dependency Injection manuell durchzuführen.
+ Aus diesem Grund wurde sich dazu entschieden Dependency Injection durch
+ Implementation eines Inversion Of Control Frameworks zu automatisieren.
+ Dabei gab es einige Hürden zu überwinden: Es musste zunächst ein 
+\begin_inset Quotes gld
+\end_inset
+
+künstlicher
+\begin_inset Quotes grd
+\end_inset
+
+ Composition Root in Form eines MonoBehaviours definiert werden.
+ Weiter wurden Möglichkeiten zu Injektion in MonoBehaviours beschrieben.
+ Da alle Varianten mit Nachteilen behaftet sind, wurde sich nicht explizit
+ für eine entschieden.
+ Anzumerken ist, dass bei allen Methoden Property Injection verwendet werden
+ muss.
+ Bei der Implementation des Frameworks wurde deutlich, dass ein Dependency
+ Injection Container von Attributes und Reflection gebrauch macht.
+ Da Reflection sehr performanceintensiv ist, sollte in zeitkritischen Momenten
+ auf Dependency Injection verzichtet werden.
+ Eine Funktionalität die deswegen noch zum Framework hinzugefügt werden
+ sollte, ist das Caching von Reflectionaufrufen.
+ Für eine tatsächliche Verwendung bei der Entwicklung eines Videospiels
+ sollte somit ein ausgereifteres Framework verwendet werden.
 \end_layout
 
-\begin_layout Itemize
-Kopplung steht in direkter Verbindung mit Erweiterbarkeit, Wiederverwendbarkeit,
- Paralleler Entwicklung und Testbarkeit der Anwendung
-\end_layout
-
-\begin_layout Itemize
-Somit ist das Ziel hohe Kohäsion unter minimaler Kopplung.
-\end_layout
-
-\begin_layout Itemize
-Die Grundlage, um dieses Ziel zu erreichen ist Inversion Of Control.
-\end_layout
-
-\begin_layout Itemize
-Ein Weg zur tatsächlichen Umsetzung von Inversion Of Control ist Dependency
- Injection, unter Wahrung der SOLID-Prinzipien.
-\end_layout
-
-\begin_layout Itemize
-Um lose Kopplung zu erzielen, muss Inversion Of Controll kosequent innerhalb
- der Anwendung angewendet werden.
-\end_layout
-
-\begin_layout Itemize
-An einem Beispiel in einer Konsolenanwendung wurde diese umgesetzt.
-\end_layout
-
-\begin_layout Itemize
-Kopplung entsteht durch Kommunikation 
-\end_layout
-
-\begin_layout Itemize
-Zusammenfassend 
-\end_layout
-
-\begin_layout Itemize
-Jede Spieleengine implementiert eine Form eines Game Object Models
-\end_layout
-
-\begin_layout Itemize
-Unity verwendet eine komponentenbasiertes Game Object Model
-\end_layout
-
-\begin_layout Itemize
-Archtektur hilft dabei das Single Responcibilty Principle zu wahren.
-\end_layout
-
-\begin_layout Itemize
-Kommunikationsmittel in Unity unzureichend, um Inversion Of Control zu erzielen
-\end_layout
-
-\begin_layout Itemize
-Kommunikation ist auf MonoBehaviours und GameObjects reduziert
-\end_layout
-
-\begin_layout Itemize
-Resultate sind oft Anti-Patterns wie Singleton- und Managerobjekte
-\end_layout
-
-\begin_layout Itemize
-Unitys Architektur ist bei der Umsetzung hinderlich
-\end_layout
-
-\begin_layout Itemize
-Kontrolle über die Komposition von Objekten ist bereits invertiert
-\end_layout
-
-\begin_layout Itemize
-Es 
+\begin_layout Standard
+In dieser Arbeit wurde ein überblick über die für Unity entwickelten Inversion
+ Of Control Frameworks geliefert.
+ 
 \end_layout
 
 \begin_layout Section
-Fazit zur Anwendbarkeit von Dependency Injection in Unity
-\end_layout
-
-\begin_layout Section
-Alternative Architekturen
-\end_layout
-
-\begin_layout Section
-Ausblick
+Ausblick und Alternativen
 \end_layout
 
 \begin_layout Standard
