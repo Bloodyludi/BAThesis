@@ -3435,7 +3435,7 @@ todo{Genauer erläutern!}
 \end_layout
 
 \begin_layout Subsection
-Parallelisierung
+Parallele Entwicklung
 \end_layout
 
 \begin_layout Standard
@@ -10914,17 +10914,94 @@ Die komponentenbasierte Architektur von Unity berücksichtigt StrangeIoC
 Kritische Betrachtung & Fazit
 \end_layout
 
-\begin_layout Itemize
-Anforderungen an die Qualität eines Videospiels sind die gleichen, wie die
- eines anderen Softwareprodukts
+\begin_layout Standard
+Die Spieleengine Unity erfreut sich immer größerer Beliebtheit unter Spieleentwi
+cklern.
+ Gründe dafür sind Plattformunabhängigkeit, ausgereifte Rendertechniken,
+ Benutzerfreundlichkeit und der einfache Einstieg.
+ Mit Wachstum eines Softwareprojektes und Teams werden weitere, nichtfunktionale
+ Anforderungen wie Wartbarkeit, Erweiterbarkeit, Wiederverwendbarkeit, Testbarke
+it und die Möglichkeit zur parallelen Entwicklung deutlich.
+ In Kapitel 2 wurde beschrieben, dass sich Kopplung zwischen Entitäten maßgeblic
+h auf diese Anforderungen auswirkt.
+ Kopplung beschreibt die Anzahl und Stärke von Abhängigkeiten unter Softwareenti
+täten.
+ Eine Abhängigkeit entsteht, sobald eine Entität mit einer anderen kommunizieren
+ muss, um zu funktionieren.
+ Damit wurde das Ziel dieser Arbeit deutlich: Es soll untersucht werden,
+ wie Kopplung zwischen Entitäten bei der Entwicklung von Videospielen in
+ Unity minimiert werden kann.
+ 
 \end_layout
 
-\begin_layout Itemize
-Sie werden umso deutlicher, je größer das Projekt und Team ist.
+\begin_layout Standard
+Hierzu wurde zunächst Inversion Of Control als grundlegendes Paradigma präsentie
+rt.
+ Allein Inversion Of Control ermöglicht die Kommunikation zwischen Entitäten,
+ ohne sie dabei eng miteinander zu koppeln.
+ Mit Dependency Injection wurde eine konkrete Umsetzung von Inversion Of
+ Control durch die Umkehr der Kontrolle über die Auflösung von Abhängigkeiten
+ präsentiert.
+ Es handelt sich um eine Reihe von Praktiken und Mustern, die es unter Wahrung
+ der SOLID-Prinzipien ermöglichen, lose Kopplung umzusetzen.
+ Die Vorteile loser Kopplung wurden durch die Umsetzung von Dependency Injection
+ anhand eines Beispiels innerhalb einer Konsolenanwendung deutlich gemacht:
+ Dadurch, dass Abhängigkeiten lediglich in Form von Interfaces vorliegen,
+ ist es nicht notwedig, dass die eigentliche Implementierung überhaupt bekannt
+ sein muss.
+ Wie diese Implementierung tatsächlich aussieht ergibt sich erst zur Laufzeit
+ durch späte Bindung.
+ Entitäten sind somit unabhängig voneinander Austauschbar und Erweiterbar.
+ Durch diese Unabhängigkeit ist eine parallele Entwicklung gewährleistet.
+ Austauschbarkeit macht einzelne Entitäten testbar, indem sie in Isolation
+ betrachtet werden können.
+\end_layout
+
+\begin_layout Standard
+Nachdem die Vorteile und eine mögliche Umsetzung von loser Kopplung durch
+ Inversion Of Control deutlich gemacht wurden, wurde Unity auf die Anwendung
+ des Paradigmas untersucht.
+ Es wurde untersucht, inwieweit sich Unitys komponentenbasierte Architektur
+ von der einer klassischen objektorientierten Vererbungshierarchie unterscheidet.
+ Dabei wurde festgestellt, dass in Unity bereits Inversion Of Control stattfinde
+t.
+ Die Kontrolle über die Komposition und Lebenszeit von Objekten ist bereits
+ invertiert.
+ Aus diesem Grund können Abhängigkeiten nicht auf herkömmlichen Wegen aufgelöst
+ werden.
+ Als Alternative stellt Unity eine Vielzahl von Kommunikationsmechanismen
+ bereit.
+ Diese wurden auf ihre Fähigkeit lose Kopplung umzusetzen untersucht.
+ Es wurde festgestellt, dass diese Kommunikationsmechanismen bestimmten
+ Beschränkungen unterliegen und einige Probleme mitsichbringen.
+ Somit ist es zwar mit einigen Mechanismen, wie z.
+ B.
+ 
+\shape italic
+GetComponent, 
+\shape default
+möglich lose Kopplung umzusetzen, jedoch ist die Kommunikation auf Objekte
+ innerhalb der Szenehierarchie eingeschränkt.
+ Der Architektur von Unity fehlt ein Mittel zum Umgang mit geteilter Logik,
+ die keinem einzelnen Spielobjekt zugeordnet werden kann.
+ Das Resultat ist die häufige Verwendung von Anti-Patterns wie Managern,
+ God Objects und Singletons, die zu enger Kopplung führen.
+ Aus diesem Grund wurde die Entscheidung getroffen, Dependency Injection
+ auch in Unity umzusetzen, um es so zu ermöglichen lose Kopplung umzusetzen,
+ ohne dabei die Kommunikation auf Komponenten oder Spielobjekte zu beschränken.
 \end_layout
 
 \begin_layout Itemize
 Anforderungen stehen in direkter Verbindung mit Kopplung und Kohäsion
+\end_layout
+
+\begin_layout Itemize
+Lose Kopplung trägt maßgeblich zur Qualität eines Softwareproduktes bei.
+\end_layout
+
+\begin_layout Itemize
+Kopplung steht in direkter Verbindung mit Erweiterbarkeit, Wiederverwendbarkeit,
+ Paralleler Entwicklung und Testbarkeit der Anwendung
 \end_layout
 
 \begin_layout Itemize
@@ -10941,23 +11018,60 @@ Ein Weg zur tatsächlichen Umsetzung von Inversion Of Control ist Dependency
 \end_layout
 
 \begin_layout Itemize
+Um lose Kopplung zu erzielen, muss Inversion Of Controll kosequent innerhalb
+ der Anwendung angewendet werden.
+\end_layout
+
+\begin_layout Itemize
+An einem Beispiel in einer Konsolenanwendung wurde diese umgesetzt.
+\end_layout
+
+\begin_layout Itemize
 Kopplung entsteht durch Kommunikation 
 \end_layout
 
 \begin_layout Itemize
-Zusammenfassend
+Zusammenfassend 
 \end_layout
 
-\begin_layout Section
-Fazit zur Kopplung in Unity
+\begin_layout Itemize
+Jede Spieleengine implementiert eine Form eines Game Object Models
+\end_layout
+
+\begin_layout Itemize
+Unity verwendet eine komponentenbasiertes Game Object Model
+\end_layout
+
+\begin_layout Itemize
+Archtektur hilft dabei das Single Responcibilty Principle zu wahren.
+\end_layout
+
+\begin_layout Itemize
+Kommunikationsmittel in Unity unzureichend, um Inversion Of Control zu erzielen
+\end_layout
+
+\begin_layout Itemize
+Kommunikation ist auf MonoBehaviours und GameObjects reduziert
+\end_layout
+
+\begin_layout Itemize
+Resultate sind oft Anti-Patterns wie Singleton- und Managerobjekte
+\end_layout
+
+\begin_layout Itemize
+Unitys Architektur ist bei der Umsetzung hinderlich
+\end_layout
+
+\begin_layout Itemize
+Kontrolle über die Komposition von Objekten ist bereits invertiert
+\end_layout
+
+\begin_layout Itemize
+Es 
 \end_layout
 
 \begin_layout Section
 Fazit zur Anwendbarkeit von Dependency Injection in Unity
-\end_layout
-
-\begin_layout Subsection
-Fazit zu StrangeIoC
 \end_layout
 
 \begin_layout Section
@@ -10965,7 +11079,7 @@ Alternative Architekturen
 \end_layout
 
 \begin_layout Section
-Aussicht
+Ausblick
 \end_layout
 
 \begin_layout Standard
