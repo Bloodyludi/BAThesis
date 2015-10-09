@@ -4,6 +4,7 @@
 \begin_header
 \textclass scrreprt
 \begin_preamble
+\usepackage[titletoc]{appendix}
 % verschieden Symbole, Zeichen wie (c), €
 \usepackage{textcomp,units}
 
@@ -950,18 +951,16 @@ Unity hat sich in den letzten Jahren zu einer der bedeutendsten Spieleengines
 \begin_inset space ~
 \end_inset
 
-% des globalen Marktanteils unter Spieleengines
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-http://unity3d.com/public-relations
-\end_layout
+% des globalen Marktanteils unter Spieleengines trägt Unity maßgeblich zu
+ dem Independent Videogame Boom der letzten Jahre bei 
+\begin_inset CommandInset citation
+LatexCommand citep
+before "vgl."
+key "Unity2015:CompanyFacts"
 
 \end_inset
 
- trägt Unity maßgeblich zu dem Independent Videogame Boom der letzten Jahre
- bei.
+.
  Unity ermöglicht die plattformunabhängige Erstellung von 2D- und 3D-Spielen.
  Dies hat besonders auf dem fragmentierten Markt der mobilen Spieleindustrie
  Anklang gefunden.
@@ -991,49 +990,17 @@ Spaghetti
 \begin_inset Quotes grd
 \end_inset
 
--Code
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-https://np.reddit.com/r/gamedev/comments/3hr8al/coming_from_a_net_programming_back
-ground_unitys/
-\end_layout
-
-\end_inset
-
-, Kritik an der komponentenbasierten Architektur
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-http://www.unityninjas.com/code-architecture/unity3d-game-code-architecture/
-\end_layout
-
-\end_inset
-
-, fehlende Testbarkeit
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-http://www.mikecann.co.uk/games/taming-unity/
-\end_layout
-
-\end_inset
-
+-Code, Kritik an der komponentenbasierten Architektur, fehlende Testbarkeit
  und Aussagen, dass Unity nur als Rapid Prototyping Tool tauglich ist und
- Kollaboration in großen Teams kaum möglich ist.
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-http://www.namekdev.net/2014/06/why-i-hate-unity3d-popularity/
-\end_layout
+ Kollaboration in großen Teams kaum möglich ist 
+\begin_inset CommandInset citation
+LatexCommand citep
+before "vgl. "
+key "Reddit2015,Suzdalnitski2015,Cann2014,Dabrowski2014"
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
@@ -2957,17 +2924,15 @@ Das Open/Closed Principle lässt sich somit auch mit Properties umsetzen:
 Ein Nachteil ist, dass andere Klassen zu jeder Zeit Veränderungen an dem
  Property vornehmen können.
  Aus diesem Grund wird Property Injection in manchen Kreisen kritisiert,
- da es die Datenkapselung bricht.
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-https://r.je/constructor-injection-vs-setter-injection.html
-\end_layout
+ da es die Datenkapselung bricht 
+\begin_inset CommandInset citation
+LatexCommand citep
+before "vgl."
+key "Butler2013"
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
@@ -7334,15 +7299,15 @@ Mittels Attributes lassen sich Metadaten für Programmcodeelemente definieren.
  ausgewertet werden können.
  Es können praktisch alle Elemente des Programmcodes mit Metadaten versehen
  werden: Assemblys, Klassen, Methoden, Eigenschaften usw.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-https://msdn.microsoft.com/de-de/library/z0w1kczw.aspx
-\end_layout
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+before "vgl."
+key "Msdn2015:Attributes"
 
 \end_inset
 
+.
  Ein Beispiel hierfür ist das bereits in Abschnitt 
 \begin_inset CommandInset ref
 LatexCommand vref
@@ -7519,7 +7484,16 @@ AttributeUsage
 Inject
 \shape default
 -Attributs wird die Gültigkeit auf Properties und Konstruktoren beschränkt.
- Bei der Verwendung entspricht der Attributname dem Klassennamen des Attributs.
+ Bei der Verwendung entspricht der Attributname dem Klassennamen des Attributs
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+before "vgl."
+key "Msdn2015:Type"
+
+\end_inset
+
+.
  Die Endung Attribute kann weggelassen werden.
  Abbildung 
 \begin_inset CommandInset ref
@@ -7648,7 +7622,15 @@ Der Zugriff auf die mit dem Inject-Attribut gekennzeichneten Attribute erfolgt
 \shape italic
 System.Type
 \shape default
--Klasse abgebildet.
+-Klasse abgebildet 
+\begin_inset CommandInset citation
+LatexCommand citep
+before "vgl."
+key "Msdn2015:Reflection"
+
+\end_inset
+
+.
  Diese wurde bereits an einigen Stellen zur Implementation des Containers
  verwendet.
  Es wurde also genau genommen bereits Reflection eingesetzt.
@@ -9149,16 +9131,15 @@ t.
 Die Idee dieses Ansatzes ist, nicht ein MonoBehaviour, sondern einen Wrapper
  für dieses beim Container zu registrieren.
  Eine Funktionalität eines MonoBehaviours, welche auch ausserhalb von diesem
- benötigt werden könnte, ist das Ausführen von Coroutines.
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-http://docs.unity3d.com/ScriptReference/MonoBehaviour.StartCoroutine.html
-\end_layout
+ benötigt werden könnte, ist das Ausführen von Coroutines 
+\begin_inset CommandInset citation
+LatexCommand citep
+before "vgl."
+key "Unity2015:StartCoroutine"
 
 \end_inset
 
+.
  Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -9633,16 +9614,6 @@ key "Mandala2012"
 
 \begin_layout Subsubsection
 Zenject
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-https://github.com/modesttree/Zenject
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -9657,21 +9628,19 @@ Zenject ist ein Dependency Injection Container, der sich aus einem direkten
  injizierenden Typen im Object Graph einer Szene beim Container registriert
  sind.
  Es ist möglich, eine an UML angelegte graphische Darstellung des Object
- Graphs der Anwendung zu generieren.
+ Graphs der Anwendung zu generieren 
+\begin_inset CommandInset citation
+LatexCommand citep
+before "vgl."
+key "Zenject2015"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsubsection
 adic
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-https://github.com/intentor/adic
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -9685,21 +9654,19 @@ Adic ist ein weiterer Dependency Injection Container für Unity, der sich
  über Konstruktoren oder in bestimmte Instanzen erfolgen soll.
  Zudem implementiert Adic ein Command- und Eventsystem, das sehr ähnlich
  zu dem von StrangeIoC ist.
- Diese werden im folgenden Abschnitt genauer erläutert.
+ Diese werden im folgenden Abschnitt genauer erläutert 
+\begin_inset CommandInset citation
+LatexCommand citep
+before "vgl."
+key "Adic2015"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsubsection
 StrangeIoC
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-http://strangeioc.github.io/strangeioc/
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -9716,7 +9683,15 @@ StrangeIoC ist ein umfangreiches Inversion Of Control Framework, das weit
  in ihrer Gesamtheit eine saubere Trennung von Verantwortungen ermöglichen
  sollen.
  Diese Konzepte und ihr Zusammenwirken als MVC(S)-Architektur sollen im
- folgenden Abschnitt erläutert werden.
+ folgenden Abschnitt erläutert werden 
+\begin_inset CommandInset citation
+LatexCommand citep
+before "vgl."
+key "StrangeIoC2015:Main"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
@@ -9795,57 +9770,6 @@ reference "fig:MVCS-Context"
  Wie in der Grafik beschrieben, ist der Einstiegspunkt in die Anwendung
  der ContextView.
  Von ihm wird der eigentliche Context instanziiert.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename images/Strange_Flow_Chart.png
-	lyxscale 20
-	width 100text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Schaubild MVC(S) Context Architektur 
-\begin_inset CommandInset citation
-LatexCommand citealp
-before "Quelle:"
-key "StrangeIoC2015:Main"
-
-\end_inset
-
-
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:MVCS-Context"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsubsection
@@ -10461,52 +10385,9 @@ key "Gamma1994"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename images/strange_mediation.png
-	lyxscale 30
-	width 100text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Schaubild zur Verdeutlichung des Mediation-Prozesses
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Schaubild-Mediation"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 In Abbildung 
 \begin_inset CommandInset ref
-LatexCommand vpageref
+LatexCommand vref
 reference "fig:Schaubild-Mediation"
 
 \end_inset
@@ -11026,12 +10907,33 @@ künstlicher
  sollte, ist das Caching von Reflectionaufrufen.
  Für eine tatsächliche Verwendung bei der Entwicklung eines Videospiels
  sollte somit ein ausgereifteres Framework verwendet werden.
+ In dieser Arbeit wurde ein überblick über die für Unity entwickelten Inversion
+ Of Control Frameworks geliefert, um diese Entscheidung zu erleichtern.
+ 
+\end_layout
+
+\begin_layout Subsection
+StrangeIoC
 \end_layout
 
 \begin_layout Standard
-In dieser Arbeit wurde ein überblick über die für Unity entwickelten Inversion
- Of Control Frameworks geliefert.
- 
+Dependency Injection allein führt noch nicht zu einer guten Softwarearchitektur.
+ Um Kopplung weiter zu reduzieren, muss Inversion Of Control konsequent
+ umgesetzt werden.
+ StrangeIoC, eines der vorgestellten Inversion Of Control Frameworks, bietet
+ hierzu zusätzlich eine individuelle MVC(S)-Architektur.
+ Unterschiedliche Belange einer Anwendung werden in die Architekturschichten
+ Model, View, Controler und Service eingeteilt.
+ Durch die Vereinheitlichung der Kommunikation mittels Signals wird lose
+ Kopplung zwischen den Architekturschichten ermöglicht.
+ StrangeIoC liefert mit der MVC(S)-Architektur einen konsistenten Ansatz
+ zur Strukturierung einer Anwendung.
+ Mit diesem gernerellen Architekturansatz lässt sich ein breites Spektrum
+ von Anwendungen umsetzen.
+ Es gibt jedoch auch Fälle, für die die MVC(S)-Architektur weniger gut geeignet
+ sind.
+ Dies sind unter anderem Videospiele, die viel zeitkritische Logik beinhalten
+ oder stark von der komponentenbasierten Architektur Unitys gebrauch machen.
 \end_layout
 
 \begin_layout Section
@@ -11039,8 +10941,54 @@ Ausblick und Alternativen
 \end_layout
 
 \begin_layout Standard
+Zusammenfassend kann gesagt werden, dass Dependency Injection auch in Unitys
+ komponentenbasierter Architektur seine Existenzberechtigung hat.
+ Im Gegensatz zu integrierten Kommunikationsmechanismen ist die Kommunikation
+ nicht auf Spielobjekte und Komponenten in der Szene beschränkt.
+ Durch Dependency Injection wird es ermöglicht, lose Kopplung in Unity umzusetze
+n.
+ Inversion Of Control Container und dessen Integration in Unity geht jedoch
+ nicht nur mit Vorteilen einher: Injections können einen negativen Einfluss
+ auf Performance haben.
+ Da der Composition Root selbst ein Spielobjekt in der Szene sein muss,
+ kann er streng genommen mit dem Manager Anti-Pattern in Verbindung gebracht
+ werden.
+ Es handelt sich um eine Einschränkung, die direkt auf die komponentenbasierte
+ Architektur von Unity zurückzuführen ist.
+\end_layout
+
+\begin_layout Standard
+Ferner ist es jedoch die Verantwortung der Engine, ein Kommunikationsmittel
+ bereitzustellen, das lose Kopplung zwischen Entitäten ermöglicht.
+ Ein Ansatz hierfür wäre, dass Unity von sich aus einen Composition Root
+ oder sogar eine integrierte Form von Dependency Injection zur Verfügung
+ stellt.
+ Eine weitere Alternative wäre der Schritt zu einer Entity Component System
+ Architektur.
+ In einer solchen Architektur beinhalten Komponenten lediglich simple Daten
+ und müssen somit nicht miteinander kommunizieren.
+ Jegliches Verhalten wird von Systemen abgebildet.
+ Die Engine sorgt dafür, dass das System Referenzen zu relevanten Komponenten
+ aller Entities erhält.
+ Somit machen auch Entity Component Systems gebrauch von Inversion Of Control.
+ Indem der Zustand einer Anwendung ausschließlich in Komponenten gehalten
+ wird, gibt es keinen Grund für Systeme untereinander zu kommunizieren.
+ In einer Entity Component System Architektur existiert Kopplung somit lediglich
+ in Form von Daten und Events von Komponenten, die von mehreren Systemen
+ genutzt werden.
+\end_layout
+
+\begin_layout Standard
+Die Ansätze schließen sich nicht gegenseitig aus: Dependency Injection kann
+ auch in einer Entity Component System Architektur angewendet werden, um
+ Abhängigkeiten von Systemen lose mit diesen zu koppeln.
+ Es könnte sogar ein Dependency Injection Container zur Implementation einer
+ Entity Component System Architektur genutzt werden.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Ab hier folgt nun der Glossar.
@@ -11155,22 +11103,6 @@ status open
 
 \begin_layout Plain Layout
 
-
-\backslash
-todo{Begriffe Einfügen: Stub, Mock, Fake, }
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
 % Dieser Code ist noetig, da sonst die falsche Seitenzahl im Inhaltsverzeichnis
  angezeigt wird
 \end_layout
@@ -11196,7 +11128,7 @@ phantomsection
 
 \begin_layout Standard
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Hier folgt nun das Literaturverzeichnis.
@@ -11235,6 +11167,203 @@ LatexCommand bibtex
 btprint "btPrintAll"
 bibfiles "bibtex-daten/bachelorarbeit-info"
 options "bibtotoc,natdin"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+clearpage
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+phantomsection
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\start_of_appendix
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{appendices}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+MVC(S) Architekturübersicht
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename images/Strange_Flow_Chart.png
+	lyxscale 40
+	height 78text%
+	scaleBeforeRotation
+	rotateAngle 90
+	rotateOrigin centerBaseline
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Schaubild MVC(S) Context Architektur.
+ 
+\begin_inset CommandInset citation
+LatexCommand citealp
+before "Quelle:"
+key "StrangeIoC2015:Main"
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:MVCS-Context"
+
+\end_inset
+
+ 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Schaubild MVC(S) Context Architektur in StrangeIoC
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Mediation in StrangeIoC
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename images/strange_mediation.png
+	lyxscale 60
+	height 78text%
+	scaleBeforeRotation
+	rotateAngle 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Schaubild zur Verdeutlichung des Mediation-Prozesses.
+ 
+\begin_inset CommandInset citation
+LatexCommand citealp
+before "Quelle:"
+key "StrangeIoC2015:Mediation"
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Schaubild-Mediation"
+
+\end_inset
+
+ 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Schaubild Mediation-Prozess in StrangeIoC
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{appendices}
+\end_layout
 
 \end_inset
 
