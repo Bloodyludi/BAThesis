@@ -574,6 +574,182 @@ today
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace 17.1mm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing other 0.75
+\noindent
+Hochschule Harz
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing other 0.75
+\noindent
+Fachbereich Automatisierung und Informatik
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+\noindent
+\align center
+
+\shape smallcaps
+\size large
+Thema und Aufgabenstellung der Bachelorarbeit
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+\noindent
+\align center
+
+\shape smallcaps
+\size large
+BA AI 27/2015 
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+\noindent
+\align center
+
+\shape smallcaps
+\size large
+Ludwig Lauer
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+
+\shape smallcaps
+\size larger
+Inversion Of Control in Unity3D
+\end_layout
+
+\begin_layout Standard
+Unity3D hat sich in den letzten Jahren als Spieleengine etabliert.
+ Immer größere und ambitioniertere Projekte werden mit der Engine umgesetzt.
+ Da Unity3D als Rapid Prototyping Tool für unabhängige Spieleentwickler
+ konzipiert wurde, fällt die parallele Entwicklung in mittleren bis großen
+ Teams schwer.
+ Eine der Ursachen dieses Problems ist die enge Kopplung von Abhängigkeiten
+ zwischen Objekten.
+ Die Folgen sind Starrheit und Zerbrechlichkeit bei Veränderung des Programmcode
+s.
+\end_layout
+
+\begin_layout Standard
+In der objektorientierten Programmierung gilt Inversion Of Control als Maßnahme
+ um lose Kopplung zu erzielen.
+ In dieser Arbeit soll untersucht werden, ob sich das Paradigma auch in
+ der komponentenbasierten Architektur von Unity3D anwenden lässt.
+ Dafür soll das Framework StrangeIoC herangezogen und genauer betrachtet
+ werden.
+ Mit Features wie Automated Dependency Injection, eigenem Eventsystem und
+ einer MVC(S) Architektur sollen die Qualität, Testbarkeit, Skalierbarkeit
+ und Wartbarkeit der Anwendung erhöht werden.
+\end_layout
+
+\begin_layout Standard
+Ziel der Bachelorarbeit ist folglich das Erstellen einer lose gekoppelten
+ Beispielanwendung in Unity3D unter Verwendung von StrangeIoC.
+ Zudem soll untersucht werden, welche Praktiken die Ursache von enger Kopplung
+ in Unity3D sind, welche Folgen diese haben und wie diese mit Inversion
+ Of Control, Dependency Injection und StrangeIoC im speziellen, vermeidbar
+ sind.
+\end_layout
+
+\begin_layout Standard
+Die Bachelorarbeit beinhaltet folgende Teilaufgaben:
+\end_layout
+
+\begin_layout Itemize
+Analyse von Ursachen und Folgen enger Kopplung zwischen Objekten in Unity3D
+\end_layout
+
+\begin_layout Itemize
+Auseinandersetzung mit den Paradigmen Inversion Of Control und Dependency
+ Injection
+\end_layout
+
+\begin_layout Itemize
+Entwicklung einer Beispielanwendung mit StrangeIoC mit dem Ziel lose Kopplung
+ unter Objekten umzusetzen
+\end_layout
+
+\begin_layout Itemize
+Kritische Betrachtung von Entwicklungsaufwand, Qualität, Testbarkeit, Skalierbar
+keit und Wartbarkeit im Vergleich mit anderen Architekturansätzen 
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace 1cm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \hspace{}
+\length 1cm
+\end_inset
+
+Prof.
+ Daniel Ackermann
+\begin_inset space \hfill{}
+\end_inset
+
+Prof.
+ Ph.
+ D.
+ Jürgen K.
+ Singer
+\begin_inset space \hspace{}
+\length 1cm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \hspace{}
+\length 2cm
+\end_inset
+
+1.
+ Prüfer
+\begin_inset space \hfill{}
+\end_inset
+
+2.
+ Prüfer
+\begin_inset space \hspace{}
+\length 2.5cm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \noindent
 \align left
 \begin_inset Newpage newpage
@@ -702,181 +878,6 @@ Ludwig Lauer
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset VSpace 17.1mm
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing other 0.75
-\noindent
-Hochschule Harz
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing other 0.75
-\noindent
-Fachbereich Automatisierung und Informatik
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing single
-\noindent
-\align center
-
-\shape smallcaps
-\size large
-Thema und Aufgabenstellung der Bachelorarbeit
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing single
-\noindent
-\align center
-
-\shape smallcaps
-\size large
-BA AI 27/2015 
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing single
-\noindent
-\align center
-
-\shape smallcaps
-\size large
-Ludwig Lauer
-\end_layout
-
-\begin_layout Standard
-\noindent
-\align center
-
-\shape smallcaps
-\size larger
-Inversion Of Control in Unity3D
-\end_layout
-
-\begin_layout Standard
-Unity3D hat sich in den letzten Jahren als Spieleengine etabliert.
- Immer größere und ambitioniertere Projekte werden mit der Engine umgesetzt.
- Da Unity als Rapid Prototyping Tool für unabhängige Spieleentwickler konzipiert
- wurde, fällt die parallele Entwicklung in mittleren bis großen Teams schwer.
- Eine der Ursachen dieses Problems ist die enge Kopplung von Abhängigkeiten
- zwischen Objekten.
- Die Folgen sind Starrheit und Zerbrechlichkeit bei Veränderung des Programmcode
-s.
-\end_layout
-
-\begin_layout Standard
-In der objektorientierten Programmierung gilt Inversion Of Control als Maßnahme
- um lose Kopplung zu erzielen.
- In dieser Arbeit soll untersucht werden, ob sich das Paradigma auch in
- der komponentenbasierten Architektur von Unity3D anwenden lässt.
- Dafür soll das Framework StrangeIoC herangezogen und genauer betrachtet
- werden.
- Mit Features wie Automated Dependency Injection, eigenem Eventsystem und
- einer MVC(S) Architektur sollen die Qualität, Testbarkeit, Skalierbarkeit
- und Wartbarkeit der Anwendung erhöht werden.
-\end_layout
-
-\begin_layout Standard
-Ziel der Bachelorarbeit ist folglich das Erstellen einer lose gekoppelten
- Beispielanwendung in Unity3D unter Verwendung von StrangeIoC.
- Zudem soll untersucht werden, welche Praktiken die Ursache von enger Kopplung
- in Unity3D sind, welche Folgen diese haben und wie diese mit Inversion
- Of Control, Dependency Injection und StrangeIoC im speziellen, vermeidbar
- sind.
-\end_layout
-
-\begin_layout Standard
-Die Bachelorarbeit beinhaltet folgende Teilaufgaben:
-\end_layout
-
-\begin_layout Itemize
-Analyse von Ursachen und Folgen enger Kopplung zwischen Objekten in Unity3D
-\end_layout
-
-\begin_layout Itemize
-Auseinandersetzung mit den Paradigmen Inversion Of Control und Dependency
- Injection
-\end_layout
-
-\begin_layout Itemize
-Entwicklung einer Beispielanwendung mit StrangeIoC mit dem Ziel lose Kopplung
- unter Objekten umzusetzen
-\end_layout
-
-\begin_layout Itemize
-Kritische Betrachtung von Entwicklungsaufwand, Qualität, Testbarkeit, Skalierbar
-keit und Wartbarkeit im Vergleich mit anderen Architekturansätzen 
-\end_layout
-
-\begin_layout Standard
-\begin_inset VSpace 1cm
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \hspace{}
-\length 1cm
-\end_inset
-
-Prof.
- Daniel Ackermann
-\begin_inset space \hfill{}
-\end_inset
-
-Prof.
- Ph.
- D.
- Jürgen K.
- Singer
-\begin_inset space \hspace{}
-\length 1cm
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset space \hspace{}
-\length 2cm
-\end_inset
-
-1.
- Prüfer
-\begin_inset space \hfill{}
-\end_inset
-
-2.
- Prüfer
-\begin_inset space \hspace{}
-\length 2.5cm
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 \begin_inset CommandInset toc
 LatexCommand tableofcontents
 
@@ -925,7 +926,7 @@ pagenumbering{roman}
 
 
 \backslash
-setcounter{page}{6}
+setcounter{page}{7}
 \end_layout
 
 \end_inset
@@ -965,7 +966,7 @@ pagenumbering{arabic}
 \end_layout
 
 \begin_layout Chapter
-Einführung
+Einleitung
 \end_layout
 
 \begin_layout Section
@@ -973,7 +974,7 @@ Motivation
 \end_layout
 
 \begin_layout Standard
-Unity hat sich in den letzten Jahren zu einer der bedeutendsten Spieleengines
+Unity3D hat sich in den letzten Jahren zu einer der bedeutendsten Spieleengines
  entwickelt.
  Mit über 45
 \begin_inset space ~
@@ -989,14 +990,14 @@ key "Unity2015:CompanyFacts"
 \end_inset
 
 .
- Unity ermöglicht die plattformunabhängige Erstellung von 2D- und 3D-Spielen.
+ Unity3D ermöglicht die plattformunabhängige Erstellung von 2D- und 3D-Spielen.
  Dies hat besonders auf dem fragmentierten Markt der mobilen Spieleindustrie
  Anklang gefunden.
  Mit sich fortlaufend verbessernder Performance und Rendertechniken sind
  fortlaufend ambitioniertere Projekte möglich.
  Dies bewegt nicht nur Indieentwickler und kleine Teams dazu, sich die Vorteile
- der Engine zunutze zu machen: Unity findet immer mehr Einzug in professionelle
- Spieleprojekte mit mittleren und großen Teams.
+ der Engine zunutze zu machen: Unity3D findet immer mehr Einzug in professionell
+e Spieleprojekte mit mittleren und großen Teams.
  Hier sind Tätigkeitsbereiche spezialisiert und klar definiert.
  Die Anforderungen an die Spieleengine beginnen sich zu wandeln: Parallele
  Entwicklung muss gewährleistet werden.
@@ -1008,7 +1009,7 @@ key "Unity2015:CompanyFacts"
 \end_layout
 
 \begin_layout Standard
-Schaut man sich auf den zahlreichen Websites, Blogs und Foren über Unity
+Schaut man sich auf den zahlreichen Websites, Blogs und Foren über Unity3D
  um, scheinen diese Anforderungen Unitys Schwachstelle zu sein: Frustration
  und Beschwerden über entstehenden 
 \begin_inset Quotes gld
@@ -1019,8 +1020,8 @@ Spaghetti
 \end_inset
 
 -Code, Kritik an der komponentenbasierten Architektur, fehlende Testbarkeit
- und Aussagen, dass Unity nur als Rapid Prototyping Tool tauglich ist und
- Kollaboration in großen Teams kaum möglich ist 
+ und Aussagen, dass Unity3D nur als Rapid Prototyping Tool tauglich ist
+ und Kollaboration in großen Teams kaum möglich ist 
 \begin_inset CommandInset citation
 LatexCommand citep
 before "vgl. "
@@ -1033,7 +1034,7 @@ key "Reddit2015,Suzdalnitski2015,Cann2014,Dabrowski2014"
 
 \begin_layout Standard
 Oft sollen die Ursachen gerade die Dinge sein, die unerfahrenen Programmierern
- den einfachen Einstieg in Unity ermöglichen.
+ den einfachen Einstieg in Unity3D ermöglichen.
  Eine Ursache ist so gut wie immer vertreten: die Auflösung von Abhängigkeiten
  und die Kommunikation zwischen Objekten.
  Enge Kopplung von Abhängigkeiten zwischen Objekten führt zu Starrheit und
@@ -1047,8 +1048,8 @@ Oft sollen die Ursachen gerade die Dinge sein, die unerfahrenen Programmierern
 \end_layout
 
 \begin_layout Standard
-Nun implementiert Unity keine klassische objektorientierte Hierarchie, sondern
- eine komponentenbasierte Architektur.
+Nun implementiert Unity3D keine klassische objektorientierte Hierarchie,
+ sondern eine komponentenbasierte Architektur.
  Trotzdem haben auch für Unity eine Handvoll Inversion Of Control Frameworks
  das Licht der Welt erblickt.
  
@@ -1060,8 +1061,8 @@ Zielsetzung und Aufbau
 
 \begin_layout Standard
 In dieser Arbeit wird sich auf ein Problem beschränkt: die Kopplung von
- Abhängigkeiten zwischen Entitäten in Unity.
- Ziel ist es die Umsetzung von Spielen in Unity zu ermöglichen, ohne dessen
+ Abhängigkeiten zwischen Entitäten in Unity3D.
+ Ziel ist es die Umsetzung von Spielen in Unity3D zu ermöglichen, ohne dessen
  Entitäten eng miteinander zu koppeln.
 \end_layout
 
@@ -1097,32 +1098,32 @@ reference "chap:Analyse-der-Architektur"
 
 \end_inset
 
- der Schritt zu Unity getätigt werden.
- Es soll untersucht werden, inwiefern Unity von einer herkömmlichen objektorient
-ierten Hierarchie abweicht und ob dies hinderlich dabei ist, lose Kopplung
+ der Schritt zu Unity3D getätigt werden.
+ Es soll untersucht werden, inwiefern Unity3D von einer herkömmlichen objektorie
+ntierten Hierarchie abweicht und ob dies hinderlich dabei ist, lose Kopplung
  umzusetzen.
  Es sollen häufig verwendete Praktiken wie das Singletonpattern und Managerobjek
 te untersucht werden.
  Wie im Verlauf der Arbeit im Detail erklärt wird, entstehen Abhängigkeiten
  unter anderem dadurch, dass Objekte miteinander kommunizieren müssen.
- Unity stellt unterschiedliche Wege der Kommunikation bereit.
+ Unity3D stellt unterschiedliche Wege der Kommunikation bereit.
  Es soll nachgeprüft werden, ob diese Wege es bereits ermöglichen lose Kopplung
  umzusetzen.
  Auf Basis dieser Erkenntnisse soll ein Zwischenfazit gezogen werden, um
- die Notwendigkeit eines Inversion Of Control Frameworks für Unity zu verdeutlic
-hen.
+ die Notwendigkeit eines Inversion Of Control Frameworks für Unity3D zu
+ verdeutlichen.
 \end_layout
 
 \begin_layout Standard
 Im vierten Kapitel dieser Arbeit soll ein Inversion Of Control Container
- für Unity implementiert werden.
+ für Unity3D implementiert werden.
  Dieser Container soll Dependency Injection in MonoBehaviours automatisieren
  und somit die lose Kopplung unter MonoBehaviours ermöglichen.
  Die technische Umsetzung soll erläutert werden.
- Die mit Unity in Verbindung stehenden Hürden bei der Umsetzung sollen überwunde
-n und beschrieben werden.
+ Die mit Unity3D in Verbindung stehenden Hürden bei der Umsetzung sollen
+ überwunden und beschrieben werden.
  Im Anschluss soll ein Überblick über die vorhandenen Inversion Of Control
- Frameworks für Unity geliefert werden.
+ Frameworks für Unity3D geliefert werden.
  Besonderheiten, Funktionsweise und -Umfang sollen beschrieben werden.
  Besondere Betrachtung soll StrangeIoC finden: Die frameworkeigene MVC(S)-Archit
 ektur und die damit verbundenen Muster und Praktiken sollen anhand von Beispiele
@@ -1140,7 +1141,7 @@ reference "chap:Fazit"
  eine Aussage über die Tauglichkeit von Inversion Of Control Frameworks
  in der komponentenbasierten Architektur Unitys getroffen werden.
  Im Speziellen soll ein Fazit über die MVC(S)-Architektur von StrangeIoC
- zur Entwicklung von Spielen in Unity gezogen werden.
+ zur Entwicklung von Spielen in Unity3D gezogen werden.
  Es soll entschieden werden, für welche Anwendungsgebiete die Architektur
  besonders geeignet ist und für welche nicht.
  Für diese Anwendungsgebiete sollen alternative Architekturansätze in Aussicht
@@ -1826,7 +1827,7 @@ Policy
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
@@ -2002,7 +2003,7 @@ DamageRenderer
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -2115,7 +2116,7 @@ reference "fig:Extraction"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -2326,7 +2327,7 @@ GermanLocalization
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -2475,7 +2476,7 @@ EnglishLocalization
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -2778,7 +2779,7 @@ ch verfügbar ist, indem eine Instanziierung des Objektes (ein Konstruktoraufruf
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -2992,7 +2993,7 @@ B.
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -3167,7 +3168,7 @@ reference "fig:CompositionRoot"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -3492,7 +3493,7 @@ MakeGuess
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -3785,7 +3786,7 @@ true
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -3971,8 +3972,8 @@ In dem letzten Kapitel wurde beschrieben, was lose Kopplung ist und wie
  Dependency Injection wurde beispielhaft in einer Konsolenanwendung angewendet.
  In diesem Kapitel sollen relevante Unterschiede zwischen der klassischen
  objektorientierten Programmierung bei der Entwicklung einer Konsolenanwendung
- und der komponentenbasierten Architektur von Unity beschrieben werden.
- Gute und schlechte Praktiken bei der Arbeit mit Unity sollen erläutert
+ und der komponentenbasierten Architektur von Unity3D beschrieben werden.
+ Gute und schlechte Praktiken bei der Arbeit mit Unity3D sollen erläutert
  werden.
  Unity stellt von sich aus Mittel bereit, um die Kommunikation zwischen
  Klassen zu ermöglichen.
@@ -4059,7 +4060,7 @@ reference "fig:monolitic"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
@@ -4118,7 +4119,7 @@ name "fig:monolitic"
 \end_layout
 
 \begin_layout Standard
-Um diesen Problemen vorzubeugen, implementiert Unity ein komponentenbasiertes
+Um diesen Problemen vorzubeugen, implementiert Unity3D ein komponentenbasiertes
  Game Object Model.
  Das Grundprinzip dieses Models ist Komposition der Vererbung vorzuziehen.
  Anstatt Objekte mittels Vererbung und des 
@@ -4160,7 +4161,7 @@ key "Gregory2014"
 
 .
  Funktionalität wird erst durch das Anfügen von Komponenten hinzugefügt.
- Komponenten werden in Unity von der Klasse 
+ Komponenten werden in Unity3D von der Klasse 
 \shape italic
 MonoBehaviour
 \shape default
@@ -4175,14 +4176,14 @@ reference "fig:ComponentBasedArchitecture"
  zeigt eine vereinfachte Darstellung der komponentenbasierten Architektur
  Unitys.
  Die tatsächliche Implementation ist jedoch nicht bekannt, da es sich bei
- Unity um proprietäre Software handelt.
+ Unity3D um proprietäre Software handelt.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
@@ -4255,8 +4256,8 @@ MonoBehaviours
 \shape default
  sind die Schnittstelle, die es Programmierern ermöglicht die Engine mit
  individuellem Verhalten zu erweitern, um ein Spiel umsetzen zu können.
- Unity verwendet die .NET-kompatible Laufzeitumgebung Mono um die plattformunabhä
-ngige Entwicklung von Komponenten in C# und UnityScript zu ermöglichen.
+ Unity3D verwendet die .NET-kompatible Laufzeitumgebung Mono um die plattformunab
+hängige Entwicklung von Komponenten in C# und UnityScript zu ermöglichen.
  Dem Nutzer stehen folglich objektorientierte Sprachfeatures wie Polymorphismus
  und Vererbung innerhalb der Komponenten zur Verfügung.
  Komponenten können durch die Implementierung von einer Reihe von vordefinierten
@@ -4280,7 +4281,7 @@ reference "fig:Unity-Editor"
  Szenegraph angeordnet.
  Per Drag-and-Drop können Spielobjekten Komponenten hinzugefügt werden.
  Öffentliche Member einer Komponente können im Inspector konfiguriert werden.
- Wird eine Szene geladen, kümmert sich Unity, um die Instanziierung aller
+ Wird eine Szene geladen, kümmert sich Unity3D, um die Instanziierung aller
  sich in der Szene befindlichen Spielobjekte und deren Komponenten.
  
 \end_layout
@@ -4289,7 +4290,7 @@ reference "fig:Unity-Editor"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
@@ -4354,18 +4355,18 @@ reference "sec:Inversion-of-Control"
 \end_inset
 
  gegebene Definition von Inversion Of Control, stellt man fest, dass diese
- auch auf Unity zutrifft.
+ auch auf Unity3D zutrifft.
  Die Kontrolle über die Komposition und Lebenszeit von Objekten ist bereits
- invertiert: Sie liegt in den Händen von Unity.
- Ein Indiz hierfür ist, dass Unity keine Konstruktoren in 
+ invertiert: Sie liegt in den Händen von Unity3D.
+ Ein Indiz hierfür ist, dass Unity3D keine Konstruktoren in 
 \shape italic
 MonoBehaviours
 \shape default
  zulässt.
  Es ist also nicht möglich, Komponenten über einen Konstruktor mit ihren
  Abhängigkeiten zu versorgen.
- Aus diesem Grund stellt Unity alternative Wege zur Referenzierung und Kommunika
-tion mit anderen Komponenten bereit.
+ Aus diesem Grund stellt Unity3D alternative Wege zur Referenzierung und
+ Kommunikation mit anderen Komponenten bereit.
  Diese sollen im folgenden Abschnitt erläutert werden.
 \end_layout
 
@@ -4374,8 +4375,8 @@ Kommunikation und Abhängigkeiten
 \end_layout
 
 \begin_layout Standard
-In Unity soll jede Komponente eine einzige Funktionalität kapseln und sie
- wiederverwendbar machen.
+In Unity3D soll jede Komponente eine einzige Funktionalität kapseln und
+ sie wiederverwendbar machen.
  Mit anderen Worten: Komposition anstelle von Vererbung soll es ermöglichen
  Funktionalitäten aus unterschiedlichen Bereichen in wiederverwendbare Komponent
 en aufzuteilen, ohne sie dabei miteinander zu koppeln 
@@ -4440,7 +4441,7 @@ name "sub:Referenzieren"
 \end_layout
 
 \begin_layout Standard
-Unity bietet unterschiedliche Möglichkeiten, um Zugriff auf Spielobjekte
+Unity3D bietet unterschiedliche Möglichkeiten, um Zugriff auf Spielobjekte
  und Komponenten zu erlangen.
  Es werden zahlreiche Game Object Queries für die Inter-Objekt-Kommunikation
  bereitgestellt.
@@ -4452,21 +4453,6 @@ Unity bietet unterschiedliche Möglichkeiten, um Zugriff auf Spielobjekte
 
 \begin_layout Subsubsection
 SerializeField
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-
-[SerializeField]
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -4488,7 +4474,7 @@ float
 \shape italic
 bool
 \shape default
- und in Unity eingebaute Datentypen wie 
+ und in Unity3D eingebaute Datentypen wie 
 \shape italic
 Vector
 \shape default
@@ -4560,7 +4546,7 @@ reference "fig:SerializeField"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -4689,6 +4675,12 @@ GetComponent
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset listings
 inline false
 status open
@@ -4708,12 +4700,56 @@ public T GetComponent();
 
 \end_layout
 
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Signaturen der GetComponent-Methoden.
+ Quelle: Eigene Abbildung
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Signaturen der GetComponent-Methoden
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:Signaturen-der-GetComponent"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 
 \shape italic
 GetComponent
 \shape default
  ermöglicht es, auf andere Komponenten desselben GameObjects zuzugreifen.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:Signaturen-der-GetComponent"
+
+\end_inset
+
+ zeigt die Signaturen, der in der Klasse MonoBehavior zur Verfügung stehenden
+ GetComponent-Methoden.
  Ist keine Komponente des gewünschten Typs vorhanden, wird 
 \shape italic
 null
@@ -4736,6 +4772,12 @@ RequireComponent
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset listings
 inline false
 status open
@@ -4755,6 +4797,45 @@ public Component GetComponentInParent(Type t);
 
 \end_layout
 
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Signaturen der GetComponentInChildren-Methoden.
+ Quelle: Eigene Abbildung
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Signaturen der GetComponentInChildren-Methoden
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:GetComponentInChildren"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 Alle 
 \shape italic
@@ -4764,7 +4845,15 @@ GetComponent
 \shape italic
 T
 \shape default
- als Suchkriterium.
+ als Suchkriterium (siehe Abb.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:GetComponentInChildren"
+
+\end_inset
+
+).
  Da 
 \shape italic
 T
@@ -4809,10 +4898,16 @@ GetComponent
 \end_layout
 
 \begin_layout Subsubsection*
-String-Based Find Functions
+Stringbasierte Find-Funktionen
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset listings
 inline false
 status open
@@ -4832,6 +4927,45 @@ public static GameObject FindWithTag(string tag);
 
 \end_layout
 
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Signaturen der stringbasierten Find-Funktionen.
+ Quelle: Eigene Abbildung
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Signaturen der stringbasierten Find-Funktionen
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Find-stringbasierten"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 Unitys 
 \shape italic
@@ -4839,7 +4973,15 @@ Find
 \shape default
 -Funktionen sind klassische Game Object Queries zur Inter-Objekt Kommunikation.
  Das gewünschte Spielobjekt wird auf Basis eines Strings als Suchkriterium
- zurückgegeben.
+ zurückgegeben (siehe Abb.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Find-stringbasierten"
+
+\end_inset
+
+).
  Dieser String kann entweder der Name oder ein Tag sein.
  Nachdem das gesuchte Objekt gefunden wurde, muss die gewünschte Komponente
  mittels 
@@ -4883,6 +5025,12 @@ FindObjectOfType
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset listings
 inline false
 status open
@@ -4902,6 +5050,41 @@ public static T FindObjectOfType<T>() where T : Object;
 
 \end_layout
 
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Signaturen der FindObjectOfType-Methoden.
+ Quelle: Eigene Abbildung
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Signaturen der FindObjectOfType-Methoden
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:FindObjectOfType"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 Im Gegensatz zu den anderen 
 \shape italic
@@ -4911,7 +5094,15 @@ Find
 \shape italic
 FindObjectOfType
 \shape default
- typsicher.
+ typsicher (siehe Abb.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:FindObjectOfType"
+
+\end_inset
+
+).
  Es wird gewährt, dass eine in der Szene aktive Instanz eines bestimmten
  Typs erhalten wird.
  Anzumerken ist, dass der gewünschte Typ von 
@@ -4970,7 +5161,7 @@ Singleton und Statics
 \begin_layout Standard
 Singletons stellen sicher, dass es nur eine Instanz einer Klasse gibt, auf
  welche ein globaler Zugriffspunkt existiert.
- Singletons werden hier mit aufgeführt, weil sie in Unity alternativ zu
+ Singletons werden hier mit aufgeführt, weil sie in Unity3D alternativ zu
  
 \shape italic
 FindObjectOfType
@@ -5004,7 +5195,7 @@ Instance
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -5192,7 +5383,7 @@ Alternativ kann die Kommunikation zwischen Objekten auch über Events erfolgen.
  und Toggles.
  Mit Events kann nichtsdestotrotz das gleiche Ergebnis wie mit Referenzierung
  und Methodenaufruf erzielt werden.
- Unity und C# bieten mehrere Möglichkeiten um die Kommunikation mittels
+ Unity3D und C# bieten mehrere Möglichkeiten um die Kommunikation mittels
  Events umzusetzen.
  In dieser Arbeit wird davon abgesehen, darzustellen wie C# Events implementiert
  werden, da sie ohne Mediation oder Statics nicht das Problem der Referenzierung
@@ -5200,27 +5391,12 @@ Alternativ kann die Kommunikation zwischen Objekten auch über Events erfolgen.
  Wird ein gewöhnliches C# Event als Kommunikationskanal gewählt, so muss
  der Empfänger über einen der im letzten Abschnitt beschriebenen Wege Zugriff
  auf den Sender erhalten.
- Um diese Limitierung zu umgehen, bietet Unity ab der Version 4.6 eine eigene
- Implementierung von Events.
+ Um diese Limitierung zu umgehen, bietet Unity3D ab der Version 4.6 eine
+ eigene Implementierung von Events.
 \end_layout
 
 \begin_layout Subsubsection*
-UnityEvent (Unity 4.6+)
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-
-public abstract class UnityEvent<T,...,Tn>
-\end_layout
-
-\end_inset
-
-
+UnityEvent (Unity3D 4.6+)
 \end_layout
 
 \begin_layout Standard
@@ -5253,7 +5429,7 @@ Start
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -5432,7 +5608,7 @@ reference "fig:UnityEvent"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
@@ -5504,25 +5680,19 @@ Sending Messages
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset listings
 inline false
 status open
 
 \begin_layout Plain Layout
 
-public void SendMessage(string methodName, object value = null, SendMessageOptio
-ns options = SendMessageOptions.RequireReceiver);
-\end_layout
-
-\begin_layout Plain Layout
-
 public void SendMessage(string methodName, SendMessageOptions options);
-\end_layout
-
-\begin_layout Plain Layout
-
-public void BroadcastMessage(string methodName, object parameter = null,
- SendMessageOptions options = SendMessageOptions.RequireReceiver);
 \end_layout
 
 \begin_layout Plain Layout
@@ -5535,10 +5705,39 @@ public void BroadcastMessage(string methodName, SendMessageOptions options);
 public void SendMessageUpwards(string methodName, SendMessageOptions options);
 \end_layout
 
-\begin_layout Plain Layout
+\end_inset
 
-public void SendMessageUpwards(string methodName, object value = null, SendMessa
-geOptions options = SendMessageOptions.RequireReceiver);
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Methoden der Klasse MonoBehaviour zur Message-Kommunikation.
+ Quelle: Eigene Abbildung 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Methoden der Klasse MonoBehaviour zur Message-Kommunikation
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:SendMessage-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -5548,7 +5747,15 @@ geOptions options = SendMessageOptions.RequireReceiver);
 
 \begin_layout Standard
 MonoBehaviours bieten die Funktionalität, untereinander mittels Messages
- zu kommunizieren.
+ zu kommunizieren (siehe Abb.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:SendMessage-1"
+
+\end_inset
+
+).
  
 \shape italic
 SendMessage
@@ -5607,7 +5814,7 @@ SendMessage
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -5779,10 +5986,16 @@ key "Unity2015:MessagingSystem"
 \end_layout
 
 \begin_layout Subsubsection*
-UnityEngine.EventSystems (Unity 4.6+)
+UnityEngine.EventSystems (Unity3D 4.6+)
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset listings
 inline false
 status open
@@ -5804,8 +6017,47 @@ Data eventData, EventFunction<T> callbackFunction);
 
 \end_layout
 
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Methodensignaturen des Eventsystems.
+ Quelle: Eigene Abbildung 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Methodensignaturen des Eventsystems
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Methodensignaturen-des-Event"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
-Das Eventsystem wurde in Verbindung mit uGUI in Unity 4.6 eingeführt.
+Das Eventsystem wurde in Verbindung mit uGUI in Unity3D 4.6 eingeführt.
  Es wird dazu verwendet, um Events bei Nutzereingaben zu senden.
  Man kann es jedoch auch für benutzerdefinierte Events verwenden.
  Anstelle eines Strings wird ein Interface verwendet, um eine Komponente
@@ -5815,7 +6067,16 @@ ren.
 \shape italic
 ExecuteHierarchy
 \shape default
- in der Objekthierarchie nach oben, jedoch nicht nach unten, gesendet werden.
+ in der Objekthierarchie nach oben, jedoch nicht nach unten, gesendet werden
+ (siehe Abb.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Methodensignaturen-des-Event"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -5858,7 +6119,7 @@ IEventTarget
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -6019,12 +6280,16 @@ Verwenden von UnityEngine.EventSystems
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
 Das neue Eventsystem ist ein typsicherer Ansatz Events an Komponenten in
  der Szenehierarchie zu senden.
  Publisher und Subscriber sind lose miteinander gekoppelt.
  Bei der Verwendung entsteht jedoch eine Abhängigkeit zu der statischen
  ExecuteEvents-Klasse.
- Testbarkeit ist somit nur innerhalb von Unity gewährleistet.
+ Testbarkeit ist somit nur innerhalb von Unity3D gewährleistet.
  Ohne das Spielobjekt der Empfängerkomponente zu kennen, kann jedoch nur
  an das eigene oder direkte Parent-Spielobjekte gesendet werden.
  
@@ -6040,7 +6305,7 @@ Unitys komponentenbasierte Architektur hilft dabei, Klassen mit lediglich
  Spielobjekte lassen sich durch Komposition aus Komponenten in der Szenehierarch
 ie arrangieren.
  Um koordinieren zu können, müssen Komponenten miteinander kommunizieren.
- Unity stellt dafür unterschiedliche Wege zur Kommunikation mit anderen
+ Unity3D stellt dafür unterschiedliche Wege zur Kommunikation mit anderen
  Komponenten bereit.
  Durch Verwendung dieser Kommunikationsmittel entstehen Abhängigkeiten und
  damit eine Form von Kopplung.
@@ -6057,7 +6322,7 @@ MonoBehaviour
 \end_layout
 
 \begin_layout Standard
-Der Architektur von Unity fehlt ein Mittel zum Umgang mit geteilter Logik,
+Der Architektur von Unity3D fehlt ein Mittel zum Umgang mit geteilter Logik,
  die keinem einzelnen Spielobjekt zugeordnet werden kann.
  Es wird sich in der Regel auf einem von zwei Wegen Abhilfe geschaffen:
  
@@ -6105,10 +6370,10 @@ Find
 -Methoden wird der Rest der Anwendung eng mit diesen gekoppelt.
  Es wird unmöglich einzelne Komponenten zu testen und in anderen Projekten
  wiederzuverwenden.
- Es besteht folglich auch in Unity das Bedürfnis nach einer Alternative,
+ Es besteht folglich auch in Unity3D das Bedürfnis nach einer Alternative,
  die es ermöglicht lose Kopplung umzusetzen, ohne dabei die Kommunikation
  auf Komponenten oder Spielobjekte zu beschränken.
- Im nächsten Kapitel wird beschrieben, wie Dependency Injection in Unity
+ Im nächsten Kapitel wird beschrieben, wie Dependency Injection in Unity3D
  umgesetzt werden kann, um diese Ansprüche zu erfüllen.
 \end_layout
 
@@ -6117,18 +6382,18 @@ Dependency Injection in Unity3D
 \end_layout
 
 \begin_layout Standard
-Aus dem Fazit des letzten Kapitels geht hervor, dass keiner der in Unity
+Aus dem Fazit des letzten Kapitels geht hervor, dass keiner der in Unity3D
  zur Verfügung stehenden Kommunikationsmechanismen den gewünschten Ansprüchen
  entspricht.
- Das Ziel lose Kopplung in Unity umzusetzen, besteht weiterhin.
- Weiter wurde im letzten Kapitel festgestellt, dass Unity Programmierer
+ Das Ziel lose Kopplung in Unity3D umzusetzen, besteht weiterhin.
+ Weiter wurde im letzten Kapitel festgestellt, dass Unity3D Programmierer
  in vieler Hinsicht einschränkt.
  Kommunikation ist auf die in der Szene existierenden Spielobjekte und deren
  Komponenten beschränkt.
  Es wurde festgestellt, dass die Kontrolle über die Komposition von Objekten
  bereits invertiert ist.
  In diesem Kapitel soll beschrieben werden, wie es dennoch ermöglicht wurde,
- Dependency Injection in Unity umzusetzen.
+ Dependency Injection in Unity3D umzusetzen.
  
 \end_layout
 
@@ -6164,9 +6429,9 @@ ten zu automatisieren.
 \end_layout
 
 \begin_layout Standard
-In Unity ist diese Automatisierung zwangsläufig erforderlich.
+In Unity3D ist diese Automatisierung zwangsläufig erforderlich.
  Die Kontrolle über die Erstellung von Komponenten liegt in den Händen von
- Unity.
+ Unity3D.
  Es ist nicht möglich, Komponenten über den Konstruktor mit ihren Abhängigkeiten
  zu versorgen.
  Es existiert kein klarer Einstiegspunkt in die Anwendung, der es ermöglichen
@@ -6185,13 +6450,13 @@ Die Kontrolle über die Komposition von Objekten soll an einen sogenannten
  ihren registrierten konkreten Abhängigkeiten und managt die Lebenszeit
  aller Objekte.
  Im Folgenden wird eine Möglichkeit der Implementation eines Inversion Of
- Control Containers in Unity beschrieben.
+ Control Containers in Unity3D beschrieben.
  Dabei soll besonders darauf eingegangen werden, wo aufgrund von Unitys
  Architektur Einschränkungen gemacht werden müssen.
 \end_layout
 
 \begin_layout Section
-Umsetzung eines Inversion Of Control Containers für Unity
+Umsetzung eines Inversion Of Control Containers für Unity3D
 \end_layout
 
 \begin_layout Standard
@@ -6226,7 +6491,7 @@ name "sub:Definieren-des-Composition"
 \end_layout
 
 \begin_layout Standard
-In Unity steht kein klarer Einstiegspunkt in die Anwendung zur Verfügung.
+In Unity3D steht kein klarer Einstiegspunkt in die Anwendung zur Verfügung.
  Es existiert kein Zugriff auf eine 
 \shape italic
 Main
@@ -6266,7 +6531,7 @@ key "Unity2015:ScriptExecution"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
@@ -6393,7 +6658,7 @@ Init
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -6746,7 +7011,7 @@ Das Interface des DI Containers
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -6862,7 +7127,7 @@ Registrieren und Speichern von Typzuordnungen
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -7123,7 +7388,7 @@ Resolve
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -7344,7 +7609,7 @@ res von C# die diese Funktionalität ermöglichen, vorgestellt werden: Attribute
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -7542,7 +7807,7 @@ SerializeField
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -7626,7 +7891,7 @@ InjectAttribute
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -7739,7 +8004,7 @@ InjectAttribute
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -7897,7 +8162,7 @@ reference "fig:Zugriff-auf-Typinformationen"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -8102,7 +8367,7 @@ Resolve
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -8256,7 +8521,7 @@ SetValue
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -8366,23 +8631,23 @@ Auflösen von Properties durch die InjectProperties-Methode
 
 \begin_layout Standard
 Damit ist die grundlegende Implementation des Containers abgeschlossen.
- Zur optimalen Zusammenarbeit mit Unity sollten jedoch noch einige Erweiterungen
- vorgenommen werden.
+ Zur optimalen Zusammenarbeit mit Unity3D sollten jedoch noch einige Erweiterung
+en vorgenommen werden.
  Diese Erweiterungen sollen im folgenden Abschnitt beschrieben werden.
 \end_layout
 
 \begin_layout Subsection
-Erweiterungen des Containers für die Zusammenarbeit mit Unity
+Erweiterungen des Containers für die Zusammenarbeit mit Unity3D
 \end_layout
 
 \begin_layout Standard
-Damit bessere Zusammenarbeit des Containers mit Unity gewährleistet werden
+Damit bessere Zusammenarbeit des Containers mit Unity3D gewährleistet werden
  kann, sollten noch einige Erweiterungen an diesem vorgenommen werden.
  Es gibt beispielsweise derzeit keine Möglichkeit Abhängigkeiten in MonoBehaviou
 rs zu injizieren.
  Die Umsetzungen dieser Erweiterungen werden in diesem Abschnitt präsentiert.
  Es wird verdeutlicht, wo Hürden und Einschränkungen bei der Umsetzung von
- Dependency Injection in Unity vorhanden sind.
+ Dependency Injection in Unity3D vorhanden sind.
 \end_layout
 
 \begin_layout Subsubsection
@@ -8390,7 +8655,7 @@ Injecting into MonoBehaviours
 \end_layout
 
 \begin_layout Standard
-Wie bereits in den vorigen Abschnitten festgestellt, übernimmt Unity selbst
+Wie bereits in den vorigen Abschnitten festgestellt, übernimmt Unity3D selbst
  die Verantwortung über die Erstellung von MonoBehaviours.
  Es existiert folglich kein Konstruktor über den Abhängigkeiten aufgelöst
  werden können.
@@ -8438,7 +8703,7 @@ Container
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -8672,7 +8937,7 @@ reference "fig:Erweiterungsmethode"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -8798,7 +9063,7 @@ IMonoInjectionHandler
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -9015,7 +9280,7 @@ CompositionRoot
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -9223,7 +9488,7 @@ reference "fig:GameObjectFactory"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -9480,7 +9745,7 @@ reference "fig:Implementation-des-Coroutine"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -9743,7 +10008,7 @@ container.RegisterTransient<ICoroutineRunner, CoroutineRunner>();
 
 \begin_layout Standard
 Sie kann nun in alle anderen Module injiziert und genutzt werden.
- Damit ist eine grundlegende Zusammenarbeit zwischen Unity und dem Inversion
+ Damit ist eine grundlegende Zusammenarbeit zwischen Unity3D und dem Inversion
  Of Control Container gewährleistet.
  Um die gezeigten Beispiele auf das Wesentliche zu reduzieren, wurde auf
  die Darstellung und Implementierung einiger Funktionalitäten verzichtet.
@@ -9766,7 +10031,7 @@ Proof Of Concept
 
 .
  Die Funktionsweise, sowie nötige Sprachfeatures sollten beschrieben und
- eine Zusammenarbeit mit Unity gewährleistet werden.
+ eine Zusammenarbeit mit Unity3D gewährleistet werden.
  Auf eine ausführliche Beschreibung aller Details wurde verzichtet.
  So wird beispielsweise das 
 \begin_inset Quotes gld
@@ -9902,7 +10167,7 @@ Aus diesen Gründen wird von dem Autor dieser Arbeit davon abgeraten, den
 In den vorherigen Abschnitten dieser Arbeit wurden Prinzipien, Praktiken
  und Funktionsweise von Dependency Injection und Inversion Of Control Containern
  beschrieben.
- Dieser Abschnitt soll eine Übersicht über die für Unity verfügbaren Inversion
+ Dieser Abschnitt soll eine Übersicht über die für Unity3D verfügbaren Inversion
  Of Control Container geben.
  Ihre Funktionsumfänge und Besonderheiten sollen beschrieben werden.
  Oft bieten diese Frameworks Funktionalitäten, die weit über automated Dependenc
@@ -9910,11 +10175,11 @@ y Injection hinausgehen.
 \end_layout
 
 \begin_layout Standard
-Die vorzustellenden Container wurden speziell für die Verwendung mit Unity
+Die vorzustellenden Container wurden speziell für die Verwendung mit Unity3D
  entwickelt.
  Ein Grund hierfür ist, dass - wie im vorherigen Abschnitt ausführlich beschrieb
 en - einige Erweiterungen notwendig sind, um die Verwendung eines Containers
- in Unity zu ermöglichen.
+ in Unity3D zu ermöglichen.
  Ein weiterer Grund ist, dass Unitys Mono Laufzeitumgebung lediglich Kompatibili
 tät zum .NET Framework 3.5 aufweist.
  Die meisten existierenden Inversion Of Control Container für .NET verwenden
@@ -9924,7 +10189,7 @@ tät zum .NET Framework 3.5 aufweist.
 
 \begin_layout Standard
 Das Grundkonzept für die Implementation eines Inversion Of Control Containers
- für Unity lieferte Sebastiano Mandalà im September 2012 in einer Serie
+ für Unity3D lieferte Sebastiano Mandalà im September 2012 in einer Serie
  von Blogeinträgen.
  Auf dieser Basis haben sich mit der Zeit eine Reihe von Frameworks entwickelt.
  Im Folgenden sollen die Frameworks Zenject, adic und StrangeIoC vorgestellt
@@ -9971,7 +10236,7 @@ adic
 \end_layout
 
 \begin_layout Standard
-Adic ist ein weiterer Dependency Injection Container für Unity, der sich
+Adic ist ein weiterer Dependency Injection Container für Unity3D, der sich
  vor allem durch seine Einfachheit in Umsetzung und Verwendung auszeichnet.
  Dennoch bietet er die vollständige Funktionalität eines Dependency Injection
  Containers und noch einige weitere Optionen.
@@ -10022,7 +10287,7 @@ key "StrangeIoC2015:Main"
 \end_layout
 
 \begin_layout Section
-MVC(S)-Architektur in Unity mithilfe von StrangeIoC
+MVC(S)-Architektur in Unity3D mithilfe von StrangeIoC
 \end_layout
 
 \begin_layout Standard
@@ -10136,7 +10401,7 @@ t werden können.
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -10383,7 +10648,7 @@ Methode.
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -10507,7 +10772,7 @@ Execute
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -10706,7 +10971,7 @@ View
  nicht unbedingt wörtlich zu nehmen: Sie übernehmen jegliche Ein- und Ausgabelog
 ik, wie Rendering, Darstellungslogik von User Interfaces, Audioausgabe und
  eventuell Interaktion mit der Physikengine.
- Es sind Aufgaben, für die die Interaktion mit Unity notwendig ist.
+ Es sind Aufgaben, für die die Interaktion mit Unity3D notwendig ist.
  Aus diesem Grund sind Views MonoBehaviours.
  Sie beinhalten jedoch keinerlei Anwendungslogik und kommunizieren lediglich
  zu ihren Mediatoren über Events.
@@ -10766,7 +11031,7 @@ reference "fig:Schaubild-Mediation"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -11051,8 +11316,8 @@ Wie im Beispiel deutlich wird, agieren Mediatoren lediglich als Brücke zwischen
  Dafür gibt es zahlreiche Gründe: Darstellungslogik tendiert dazu mit der
  Zeit unüberschaubar zu werden, da an ihr oft Änderungen in letzter Minute
  vorgenommen werden.
- Weiter verwendet die Darstellungslogik eines Views die API von Unity, die
- durch statische Klassen und fehlendem Interfacesupport zu enger Kopplung
+ Weiter verwendet die Darstellungslogik eines Views die API von Unity3D,
+ die durch statische Klassen und fehlendem Interfacesupport zu enger Kopplung
  und damit zu eingeschränkter Testbarkeit führt.
 \end_layout
 
@@ -11154,7 +11419,7 @@ key "StrangeIoC2015:Howto"
 \end_layout
 
 \begin_layout Standard
-Die komponentenbasierte Architektur von Unity berücksichtigt StrangeIoC
+Die komponentenbasierte Architektur von Unity3D berücksichtigt StrangeIoC
  nur teilweise: Es ist möglich einzelne Komponenten zu mediieren, dies würde
  jedoch zu einer stark erhöhten Komplexität der Anwendung führen.
  In der Praxis werden Spielobjekte deshalb als ein Ganzes -- einem View
@@ -11174,8 +11439,8 @@ name "chap:Fazit"
 \end_layout
 
 \begin_layout Standard
-Die Spieleengine Unity erfreut sich immer größerer Beliebtheit unter Spieleentwi
-cklern.
+Die Spieleengine Unity3D erfreut sich immer größerer Beliebtheit unter Spieleent
+wicklern.
  Gründe dafür sind Plattformunabhängigkeit, ausgereifte Rendertechniken,
  Benutzerfreundlichkeit und der einfache Einstieg.
  Mit Wachstum eines Softwareprojektes und Teams werden weitere, nichtfunktionale
@@ -11189,7 +11454,7 @@ täten.
  muss, um zu funktionieren.
  Damit wurde das Ziel dieser Arbeit deutlich: Es soll untersucht werden,
  wie Kopplung zwischen Entitäten bei der Entwicklung von Videospielen in
- Unity minimiert werden kann.
+ Unity3D minimiert werden kann.
  
 \end_layout
 
@@ -11217,22 +11482,22 @@ rt.
 \end_layout
 
 \begin_layout Section
-Kopplung in Unity
+Kopplung in Unity3D
 \end_layout
 
 \begin_layout Standard
 Nachdem die Vorteile und eine mögliche Umsetzung von loser Kopplung durch
- Inversion Of Control deutlich gemacht wurden, wurde Unity auf die Anwendung
+ Inversion Of Control deutlich gemacht wurden, wurde Unity3D auf die Anwendung
  des Paradigmas untersucht.
  Es wurde zunächst untersucht, inwieweit sich Unitys komponentenbasierte
  Architektur von der einer klassischen objektorientierten Vererbungshierarchie
  unterscheidet.
- Es wurde festgestellt, dass in Unity bereits Inversion Of Control stattfindet.
+ Es wurde festgestellt, dass in Unity3D bereits Inversion Of Control stattfindet.
  Die Kontrolle über die Komposition und Lebenszeit von Objekten ist bereits
  invertiert.
  Aus diesem Grund können Abhängigkeiten nicht auf herkömmlichen Wegen aufgelöst
  werden.
- Als Alternative stellt Unity eine Vielzahl von Kommunikationsmechanismen
+ Als Alternative stellt Unity3D eine Vielzahl von Kommunikationsmechanismen
  bereit.
  Diese wurden auf ihre Fähigkeit lose Kopplung umzusetzen untersucht.
  Es wurde festgestellt, dass diese Kommunikationsmechanismen bestimmten
@@ -11245,12 +11510,12 @@ GetComponent,
 \shape default
 möglich lose Kopplung umzusetzen, jedoch ist die Kommunikation auf Objekte
  innerhalb der Szenehierarchie eingeschränkt.
- Der Architektur von Unity fehlt ein Mittel zum Umgang mit geteilter Logik,
+ Der Architektur von Unity3D fehlt ein Mittel zum Umgang mit geteilter Logik,
  die keinem einzelnen Spielobjekt zugeordnet werden kann.
  Das Resultat ist die häufige Verwendung von Anti-Patterns wie Managern,
  God Objects und Singletons, die zu enger Kopplung führen.
  Aus diesem Grund wurde die Entscheidung getroffen, Dependency Injection
- auch in Unity umzusetzen, um es so zu ermöglichen lose Kopplung umzusetzen,
+ auch in Unity3D umzusetzen, um es so zu ermöglichen lose Kopplung umzusetzen,
  ohne dabei die Kommunikation auf Komponenten oder Spielobjekte zu beschränken.
 \end_layout
 
@@ -11285,8 +11550,8 @@ künstlicher
  sollte, ist das Caching von Reflectionaufrufen.
  Für eine tatsächliche Verwendung bei der Entwicklung eines Videospiels
  sollte somit ein ausgereifteres Framework verwendet werden.
- In dieser Arbeit wurde ein überblick über die für Unity entwickelten Inversion
- Of Control Frameworks geliefert, um diese Entscheidung zu erleichtern.
+ In dieser Arbeit wurde ein überblick über die für Unity3D entwickelten
+ Inversion Of Control Frameworks geliefert, um diese Entscheidung zu erleichtern.
  
 \end_layout
 
@@ -11323,22 +11588,22 @@ Zusammenfassend kann gesagt werden, dass Dependency Injection auch in Unitys
  komponentenbasierter Architektur seine Existenzberechtigung hat.
  Im Gegensatz zu integrierten Kommunikationsmechanismen ist die Kommunikation
  nicht auf Spielobjekte und Komponenten in der Szene beschränkt.
- Durch Dependency Injection wird es ermöglicht, lose Kopplung in Unity umzusetze
-n.
- Inversion Of Control Container und dessen Integration in Unity geht jedoch
+ Durch Dependency Injection wird es ermöglicht, lose Kopplung in Unity3D
+ umzusetzen.
+ Inversion Of Control Container und dessen Integration in Unity3D geht jedoch
  nicht nur mit Vorteilen einher: Injections können einen negativen Einfluss
  auf Performance haben.
  Da der Composition Root selbst ein Spielobjekt in der Szene sein muss,
  kann er streng genommen mit dem Manager Anti-Pattern in Verbindung gebracht
  werden.
  Es handelt sich um eine Einschränkung, die direkt auf die komponentenbasierte
- Architektur von Unity zurückzuführen ist.
+ Architektur von Unity3D zurückzuführen ist.
 \end_layout
 
 \begin_layout Standard
 Ferner ist es jedoch die Verantwortung der Engine, ein Kommunikationsmittel
  bereitzustellen, das lose Kopplung zwischen Entitäten ermöglicht.
- Ein Ansatz hierfür wäre, dass Unity von sich aus einen Composition Root
+ Ein Ansatz hierfür wäre, dass Unity3D von sich aus einen Composition Root
  oder sogar eine integrierte Form von Dependency Injection zur Verfügung
  stellt.
  Eine weitere Alternative wäre der Schritt zu einer Entity Component System
@@ -11357,9 +11622,9 @@ Ferner ist es jedoch die Verantwortung der Engine, ein Kommunikationsmittel
 \end_layout
 
 \begin_layout Standard
-Die Ansätze schließen sich nicht gegenseitig aus: Dependency Injection kann
- auch in einer Entity Component System Architektur angewendet werden, um
- Abhängigkeiten von Systemen lose mit diesen zu koppeln.
+Die Ansätze schließen sich nicht gegenseitig aus: Depe ndency Injection
+ kann auch in einer Entity Component System Architektur angewendet werden,
+ um Abhängigkeiten von Systemen lose mit diesen zu koppeln.
  Es könnte sogar ein Dependency Injection Container zur Implementation einer
  Entity Component System Architektur genutzt werden.
 \end_layout
@@ -11453,6 +11718,14 @@ description "Interfaces sollen nur die Funktionalität wiederspiegeln die ihre K
 LatexCommand nomenclature
 symbol "Dependency Inversion Principle"
 description "High-Level Klassen sollen nicht von Low-Level Klassen abhängig sein, sondern beide von Interfaces. Interfaces sollen nicht von Details abhängig sein sondern Details von Interfaces"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "System Under Test"
+description "Ein System Under Test bezeichnet das eine zu testende Enität in einem Testszenario."
 
 \end_inset
 
@@ -11587,7 +11860,7 @@ MVC(S) Architekturübersicht
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
@@ -11660,7 +11933,7 @@ Mediation in StrangeIoC
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
