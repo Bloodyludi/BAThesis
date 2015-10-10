@@ -11409,7 +11409,7 @@ key "StrangeIoC2015:Howto"
 ).
  Eine Empfehlung ist, MVC(S) als Anwendungsarchitektur auf einer höheren
  Ebene anzusehen: Es handelt sich um ein Gerüst, das auf die meisten Teile
- des Progamms anwendbar ist.
+ des Programms anwendbar ist.
  So eignet sich die Architektur beispielsweise dazu Benutzeroberflächen,
  Dateizugriff und Client-Server Kommunikation umzusetzen.
  Ob die Architektur auch im Game Loop angewendet werden kann, muss für ein
@@ -11443,7 +11443,7 @@ Die Spieleengine Unity3D erfreut sich immer größerer Beliebtheit unter Spielee
 wicklern.
  Gründe dafür sind Plattformunabhängigkeit, ausgereifte Rendertechniken,
  Benutzerfreundlichkeit und der einfache Einstieg.
- Mit Wachstum eines Softwareprojektes und Teams werden weitere, nichtfunktionale
+ Mit Wachstum eines Softwareprojektes und Teams werden weitere nichtfunktionale
  Anforderungen wie Wartbarkeit, Erweiterbarkeit, Wiederverwendbarkeit, Testbarke
 it und die Möglichkeit zur parallelen Entwicklung deutlich.
  In Kapitel 2 wurde beschrieben, dass sich Kopplung zwischen Entitäten maßgeblic
@@ -11467,17 +11467,17 @@ rt.
  Control durch die Umkehr der Kontrolle über die Auflösung von Abhängigkeiten
  präsentiert.
  Es handelt sich um eine Reihe von Praktiken und Mustern, die es unter Wahrung
- der SOLID-Prinzipien ermöglichen, lose Kopplung umzusetzen.
+ der SOLID-Prinzipien ermöglichen, lose Kopplung zu erreichen.
  Die Vorteile loser Kopplung wurden durch die Umsetzung von Dependency Injection
  anhand eines Beispiels innerhalb einer Konsolenanwendung deutlich gemacht:
  Dadurch, dass Abhängigkeiten lediglich in Form von Interfaces vorliegen,
- ist es nicht notwedig, dass die eigentliche Implementierung überhaupt bekannt
- sein muss.
- Wie diese Implementierung tatsächlich aussieht ergibt sich erst zur Laufzeit
+ ist es nicht notwendig, dass die eigentliche Implementierung überhaupt
+ bekannt sein muss.
+ Wie diese Implementierung tatsächlich aussieht, ergibt sich erst zur Laufzeit
  durch späte Bindung.
- Entitäten sind somit unabhängig voneinander Austauschbar und Erweiterbar.
+ Entitäten sind somit unabhängig voneinander austauschbar und erweiterbar.
  Durch diese Unabhängigkeit ist eine parallele Entwicklung gewährleistet.
- Austauschbarkeit macht einzelne Entitäten testbar, indem sie in Isolation
+ Lose Kopplung macht einzelne Entitäten testbar, indem sie in Isolation
  betrachtet werden können.
 \end_layout
 
@@ -11574,7 +11574,7 @@ Dependency Injection allein führt noch nicht zu einer guten Softwarearchitektur
  Mit diesem gernerellen Architekturansatz lässt sich ein breites Spektrum
  von Anwendungen umsetzen.
  Es gibt jedoch auch Fälle, für die die MVC(S)-Architektur weniger gut geeignet
- sind.
+ ist.
  Dies sind unter anderem Videospiele, die viel zeitkritische Logik beinhalten
  oder stark von der komponentenbasierten Architektur Unitys gebrauch machen.
 \end_layout
@@ -11590,7 +11590,7 @@ Zusammenfassend kann gesagt werden, dass Dependency Injection auch in Unitys
  nicht auf Spielobjekte und Komponenten in der Szene beschränkt.
  Durch Dependency Injection wird es ermöglicht, lose Kopplung in Unity3D
  umzusetzen.
- Inversion Of Control Container und dessen Integration in Unity3D geht jedoch
+ Inversion Of Control Container und deren Integration in Unity geht jedoch
  nicht nur mit Vorteilen einher: Injections können einen negativen Einfluss
  auf Performance haben.
  Da der Composition Root selbst ein Spielobjekt in der Szene sein muss,
@@ -11618,7 +11618,15 @@ Ferner ist es jedoch die Verantwortung der Engine, ein Kommunikationsmittel
  wird, gibt es keinen Grund für Systeme untereinander zu kommunizieren.
  In einer Entity Component System Architektur existiert Kopplung somit lediglich
  in Form von Daten und Events von Komponenten, die von mehreren Systemen
- genutzt werden.
+ genutzt werden 
+\begin_inset CommandInset citation
+LatexCommand citep
+before "vgl."
+key "Mandala2015"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
