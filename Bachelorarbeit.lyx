@@ -5,6 +5,7 @@
 \textclass scrreprt
 \begin_preamble
 \usepackage[titletoc]{appendix}
+
 % verschieden Symbole, Zeichen wie (c), €
 \usepackage{textcomp,units}
 
@@ -725,49 +726,6 @@ Ludwig Lauer
 
 \series bold
 \size huge
-Sperrvermerk
-\end_layout
-
-\begin_layout Standard
-Die vorliegende Bachelorarbeit enthält vertrauliche Informationen der Firma
- Wooga GmbH, die der Geheimhaltung unterliegen.
- Veröffentlichungen oder Vervielfältigungen der Bachelorarbeit - auch nur
- auszugsweise - sind ohne ausdrückliche Genehmigung der Firma Wooga GmbH
- nicht gestattet.
- Die Bachelorarbeit ist nur den Mitarbeitern des betreuenden Lehrstuhls
- sowie den Mitgliedern des Prüfungsausschusses zugänglich zu machen.
- Alle Rechte zum Erwerb und zur Anmeldung gewerblicher Schutzrechte, insbesonder
-e zur Anmeldung von Patenten, Gebrauchsmustern und/oder Geschmacksmustern
- sind der Firma Wooga GmbH vorbehalten.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset space ~
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset VSpace 17.1mm
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\noindent
-\align left
-
-\series bold
-\size huge
 Exposé
 \end_layout
 
@@ -882,7 +840,7 @@ pagenumbering{roman}
 
 
 \backslash
-setcounter{page}{7}
+setcounter{page}{6}
 \end_layout
 
 \end_inset
@@ -892,21 +850,6 @@ setcounter{page}{7}
 
 \begin_layout Standard
 \begin_inset FloatList figure
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset FloatList table
 
 \end_inset
 
@@ -1027,18 +970,25 @@ Nun implementiert Unity keine klassische objektorientierte Hierarchie, sondern
 \end_layout
 
 \begin_layout Section
-Zielsetzung
+Zielsetzung und Aufbau
 \end_layout
 
 \begin_layout Standard
 In dieser Arbeit wird sich auf ein Problem beschränkt: die Kopplung von
  Abhängigkeiten zwischen Entitäten in Unity.
- Ziel dieser Arbeit ist es die Umsetzung von Spielen in Unity zu ermöglichen,
- ohne dessen Entitäten eng miteinander zu koppeln.
+ Ziel ist es die Umsetzung von Spielen in Unity zu ermöglichen, ohne dessen
+ Entitäten eng miteinander zu koppeln.
 \end_layout
 
 \begin_layout Standard
-Zunächst soll die Problematik der Kopplung beschrieben werden.
+In Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Grundlagen"
+
+\end_inset
+
+ soll zunächst die Problematik der Kopplung beschrieben werden.
  Voraussetzung dafür ist, zu erläutern, was Abhängigkeiten sind und warum
  diese entstehen.
  Weiter sollen die Folgen von enger Kopplung erläutert werden.
@@ -1055,7 +1005,14 @@ Nachfolgend soll anhand eines Beispiels erklärt werden, wie lose Kopplung
 \end_layout
 
 \begin_layout Standard
-Infolgedessen soll der Schritt zu Unity getätigt werden.
+Infolgedessen soll in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Analyse-der-Architektur"
+
+\end_inset
+
+ der Schritt zu Unity getätigt werden.
  Es soll untersucht werden, inwiefern Unity von einer herkömmlichen objektorient
 ierten Hierarchie abweicht und ob dies hinderlich dabei ist, lose Kopplung
  umzusetzen.
@@ -1072,8 +1029,8 @@ hen.
 \end_layout
 
 \begin_layout Standard
-Im nächsten Teil dieser Arbeit soll ein Inversion Of Control Container für
- Unity implementiert werden.
+Im vierten Kapitel dieser Arbeit soll ein Inversion Of Control Container
+ für Unity implementiert werden.
  Dieser Container soll Dependency Injection in MonoBehaviours automatisieren
  und somit die lose Kopplung unter MonoBehaviours ermöglichen.
  Die technische Umsetzung soll erläutert werden.
@@ -1088,9 +1045,15 @@ n beschrieben werden.
 \end_layout
 
 \begin_layout Standard
-Auf Basis dieser Analysen soll eine Aussage über die Tauglichkeit von Inversion
- Of Control Frameworks in der komponentenbasierten Architektur Unitys getroffen
- werden.
+Auf Basis dieser Analysen soll in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Fazit"
+
+\end_inset
+
+ eine Aussage über die Tauglichkeit von Inversion Of Control Frameworks
+ in der komponentenbasierten Architektur Unitys getroffen werden.
  Im Speziellen soll ein Fazit über die MVC(S)-Architektur von StrangeIoC
  zur Entwicklung von Spielen in Unity gezogen werden.
  Es soll entschieden werden, für welche Anwendungsgebiete die Architektur
@@ -1100,100 +1063,15 @@ Auf Basis dieser Analysen soll eine Aussage über die Tauglichkeit von Inversion
  
 \end_layout
 
-\begin_layout Section
-Aufbau der Arbeit
-\end_layout
-
-\begin_layout Standard
-Brauche ich das hier?
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-todo{Stichpunkte ausformulieren!}
-\end_layout
+\begin_layout Chapter
+Grundlagen
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Grundlagen"
 
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-Teil 1
-\end_layout
-
-\begin_layout Itemize
-Grundlagen: Abhängigkeiten, Kopplung, Kohäsion, Dependency Injection, SOLID
-\end_layout
-
-\begin_layout Itemize
-Beispielhafte Umsetzung DI
-\end_layout
-
-\begin_layout Itemize
-Vorteile und Möglichkeiten
-\end_layout
-
-\begin_layout Standard
-Teil 2
-\end_layout
-
-\begin_layout Itemize
-Analyse von Unity
-\end_layout
-
-\begin_layout Itemize
-Architektur und Kommunikationsmittel
-\end_layout
-
-\begin_layout Itemize
-Wertung: Notwendigkeit von DI
-\end_layout
-
-\begin_layout Standard
-Teil 3
-\end_layout
-
-\begin_layout Itemize
-Implementation Inversion Of Control Container für Unity
-\end_layout
-
-\begin_layout Itemize
-Existierende Inversion Of Control Frameworks in Unity
-\end_layout
-
-\begin_layout Itemize
-MVC(S) in StrangeIoC
-\end_layout
-
-\begin_layout Standard
-Teil 5 
-\end_layout
-
-\begin_layout Itemize
-Kritische Betrachtung DI
-\end_layout
-
-\begin_layout Itemize
-Anwendungsgebiete MVC(S) von StrangeIoC
-\end_layout
-
-\begin_layout Itemize
-Alternative Architekturansätze
-\end_layout
-
-\begin_layout Itemize
-Fazit
-\end_layout
-
-\begin_layout Chapter
-Grundlagen
 \end_layout
 
 \begin_layout Standard
@@ -1285,29 +1163,17 @@ Kopplung steht im Kontrast zu dem Begriff der Kohäsion.
  die einer einzelnen, wohldefinierten Aufgabe dienen.
  Mit anderen Worten: Eine Entität weist eine hohe Kohäsion auf, wenn ihre
  Elemente in einem engen Zusammenhang stehen.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-todo {Quelle fuer Kohasion}
-\end_layout
+ Ein qualitativ hochwertiges Softwaredesign weist demzufolge hohe Kohäsion
+ unter minimaler Kopplung auf 
+\begin_inset CommandInset citation
+LatexCommand citep
+after "S. 31"
+before "vgl."
+key "Schatten2010"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Kohäsion beschreibt wie gut Entitäten aufgeteilt wurden.
- Kopplung beschreibt wie gut die Verbindungen zwischen Entitäten sind.
- Ein qualitativ hochwertiges Softwaredesign weist demzufolge hohe Kohäsion
- unter minimaler Kopplung auf.
+.
  Im nächsten Abschnitt soll Inversion Of Control als Maßnahme präsentiert
  werden, um Kopplung zu minimieren.
 \end_layout
@@ -1386,8 +1252,8 @@ key "Fowler2005"
 \end_layout
 
 \begin_layout Standard
-Inversion Of Control ist eines der zentralen Merkmale, welches Frameworks
- von Bibliotheken unterscheidet.
+Inversion Of Control ist das zentrale Merkmal, welches Frameworks von Bibliothek
+en unterscheidet.
  Allein Inversion Of Control ermöglicht die Definition einer wiederverwendbaren
  Softwarearchitektur, ohne dabei die konkrete Implementation einer Anwendung
  zu kennen.
@@ -1399,6 +1265,8 @@ Inversion Of Control ist eines der zentralen Merkmale, welches Frameworks
 \begin_layout Standard
 Es gibt zahlreiche Wege und Entwurfsmuster um Inversion Of Control in unterschie
 dlichen Aspekten einer Anwendung umzusetzen.
+ Einige Beispiele hierfür sind die Entwurfsmuster Factory, Strategy und
+ Template Method.
  In dieser Arbeit soll der Fokus auf die Umkehr der Kontrolle über die Auflösung
  von Abhängigkeiten liegen, mit dem Ziel lose Kopplung zu ermöglichen.
  Um diese spezielle Art von Inversion Of Control besser abzugrenzen, verwendet
@@ -1460,8 +1328,16 @@ key "Seemann2011"
 \begin_layout Standard
 Dependency Injection umfasst eine Reihe von Praktiken, die es ermöglichen
  lose Kopplung umzusetzen.
- Dabei lässt sich der Kern von Dependency Injection jedoch auf eine einzige
- Praktik reduzieren.
+ Um welche Praktiken es sich genau handelt, wird in Abschnitt 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Umsetzung-von-Dependency"
+
+\end_inset
+
+ anhand eines Beispiels erläutert.
+ Der Kern von Dependency Injection lässt sich jedoch auf eine einzige Praktik
+ reduzieren.
  James Shore beschreibt diese auf seiner Webseite wie folgt:
 \end_layout
 
@@ -1507,15 +1383,30 @@ key "Bender2011"
 \end_inset
 
 .
+ Diese werden in Abschnitt 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:SOLID-Prinzipien"
+
+\end_inset
+
+ näher beschrieben.
 \end_layout
 
 \begin_layout Section
-SOLID
+SOLID Prinzipien
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:SOLID-Prinzipien"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-SOLID ist ein Akronym, welches für die folgenden Prinzipien steht: das Single-Re
-sponsibility Principle, das Open/Closed Principle, das Liskov Substitution
+SOLID ist ein Akronym, welches für die folgenden Prinzipien steht: das Single
+ Responsibility Principle, das Open/Closed Principle, das Liskov Substitution
  Principle, das Interface Segregation Principle und das Dependency-Inversion
  Principle.
  Es handelt sich um eine Sammlung von Richtlinien im Umgang mit Abhängigkeiten,
@@ -1529,18 +1420,16 @@ key "Metz2009"
 \end_inset
 
 .
- An dieser Stelle wird auf eine ausführliche Beschreibung aller Prinzipien
- verzichtet.
- Es soll jedoch eine kurze Vorstellung der Prinzipien stattfinden und auf
- ihre Relevanz bei der Umsetzung von Dependency Injection eingegangen werden.
+ Im folgenden Abschnitt werden die diese Prinzipen vorgestellt und ihre
+ Relevanz bei der Umsetzung von Dependency Injection beschrieben.
 \end_layout
 
 \begin_layout Subsection
-Single-Responsibility Principle
+Single Responsibility Principle
 \end_layout
 
 \begin_layout Standard
-Das Single-Responsibility Principle besagt, dass es niemals mehr als einen
+Das Single Responsibility Principle besagt, dass es niemals mehr als einen
  Grund geben sollte, um eine Klasse zu ändern.
  Darauf Folgend wird ein 
 \begin_inset Quotes gld
@@ -1574,16 +1463,16 @@ key "Martin2003"
 \end_layout
 
 \begin_layout Standard
-Wird das Single-Responsibility Principle gewahrt, so ist in der Regel davon
+Wird das Single Responsibility Principle gewahrt, so ist in der Regel davon
  auszugehen, dass Klassen hohe Kohäsion aufweisen.
- Hohe Kohäsion ist jedoch nicht immer auf das Single-Responsibility Principle
+ Hohe Kohäsion ist jedoch nicht immer auf das Single Responsibility Principle
  zurückzuführen.
  So kann eine Klasse hohe Kohäsion aufweisen, aber trotzdem mehrere Verantwortun
 gen haben.
 \end_layout
 
 \begin_layout Standard
-Dependency Injection wendet das Single-Responsibility Principle an, indem
+Dependency Injection wendet das Single Responsibility Principle an, indem
  es Klassen die Verantwortung über die Erstellung von Instanzen ihrer Abhängigke
 iten entzieht (vgl.
  
@@ -1716,16 +1605,8 @@ Interface Segregation Principle
 \end_layout
 
 \begin_layout Standard
-Anstatt große (
-\begin_inset Quotes gld
-\end_inset
-
-fat
-\begin_inset Quotes grd
-\end_inset
-
-) Interfaces zu nutzen, sollten diese in mehrere schlanke Interfaces aufgeteilt
- werden.
+Anstatt umfangreiche Interfaces zu nutzen, sollten diese in mehrere kleine
+ Interfaces aufgeteilt werden.
  Die Aufteilung soll nach Methodengruppen erfolgen, entsprechend wie sie
  von anderen Entitäten, die das Interface nutzen, gebraucht werden.
  So wird gewährleistet, dass andere Entitäten nur von Abstraktionen mit
@@ -1765,11 +1646,11 @@ key "Seemann2011"
 \end_layout
 
 \begin_layout Subsection
-Dependency-Inversion Principle
+Dependency Inversion Principle
 \end_layout
 
 \begin_layout Standard
-Das Dependency-Inversion Principle besteht aus zwei Teilen:
+Das Dependency Inversion Principle besteht aus zwei Teilen:
 \end_layout
 
 \begin_layout Itemize
@@ -1792,7 +1673,7 @@ key "Martin2003"
 \end_layout
 
 \begin_layout Standard
-Zum einen beschreibt das Dependency-Inversion Principle, dass die Architektur
+Zum einen beschreibt das Dependency Inversion Principle, dass die Architektur
  einer Anwendung in Schichten erfolgen sollte.
  Dabei soll die abstraktere, höher liegende Schicht ihre Abhängigkeiten
  in Form von Interfaces deklarieren.
@@ -1884,7 +1765,7 @@ Invertierung der Abhängigkeiten zwischen Schichten.
 \begin_inset CommandInset citation
 LatexCommand citealp
 after "S.129"
-before "Quelle: modifiziert übernommen aus"
+before "Quelle: in Anlehnung an"
 key "Martin2003"
 
 \end_inset
@@ -1894,7 +1775,7 @@ key "Martin2003"
 status open
 
 \begin_layout Plain Layout
-Dependency-Inversion Principle
+Dependency Inversion Principle
 \end_layout
 
 \end_inset
@@ -1921,7 +1802,7 @@ name "fig:DIP"
 
 \begin_layout Standard
 Zum anderen beschreibt Martin eine weitere, allgemeinere Interpretation
- des Dependency-Inversion Principles:
+ des Dependency Inversion Principles:
 \end_layout
 
 \begin_layout Quote
@@ -1985,6 +1866,13 @@ Die Deklaration von Abhängigkeiten in Form von Abstraktionen ist eine Grundlage
 
 \begin_layout Section
 Umsetzung von Dependency Injection
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Umsetzung-von-Dependency"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2016,7 +1904,10 @@ reference "fig:Ausgangssituation"
 DamageRenderer
 \shape default
  setzt diese Funktionalität um.
- Zunächst scheint alles zu stimmen.
+ Alle qualitativen und funktionalen Anforderungen werden von der Klasse
+ erfüllt.
+ Sie kann von allen Objekten wiederverwendet werden, wenn diese Schaden
+ nehmen.
  Die Klasse beschränkt ihre Verantwortung auf eine einzige Funktionalität:
  Sie formatiert die Information in ein lesbares Format und gibt diese in
  der Konsole aus.
@@ -2078,10 +1969,21 @@ public class DamageRenderer
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Ausgangssituation des Beispiels
+Ausgangssituation des Beispiels.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Ausgangssituation"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Ausgangssituation des Beispiels
+\end_layout
 
 \end_inset
 
@@ -2256,10 +2158,21 @@ public class EnglishLocalization
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Extraction der englischen Lokalisierung aus der existierenden Klasse
+Extraction der englischen Lokalisierung aus der existierenden Klasse.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Extraction"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Extraction der englischen Lokalisierung
+\end_layout
 
 \end_inset
 
@@ -2379,10 +2292,21 @@ public class GermanLocalization
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Deutsche Lokalisierung 
+Deutsche Lokalisierung.
+ Quelle: Eigene Abbildung 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Deutsche-Lokalisierung"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Implementation deutsche Lokalisierung
+\end_layout
 
 \end_inset
 
@@ -2666,10 +2590,29 @@ Depend on abstractions
 \begin_inset Quotes grd
 \end_inset
 
- 
+.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Depend-Abstractions"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Beispiel von 
+\begin_inset Quotes gld
+\end_inset
+
+Depend on abstractions
+\begin_inset Quotes grd
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -2863,10 +2806,21 @@ public class DamageRenderer
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Beispiel von Constructor Injection
+Beispiel von Constructor Injection.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Beispiel-von-Constructor"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Beispiel Constructor Injection
+\end_layout
 
 \end_inset
 
@@ -3043,10 +2997,21 @@ public class DamageRenderer : IDamageRenderer
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Beispiel von Property Injection
+Beispiel von Property Injection.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Beispiel-von-Property"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Beispiel Property Injection
+\end_layout
 
 \end_inset
 
@@ -3179,10 +3144,21 @@ public class CompositionRoot
 
 \begin_layout Plain Layout
 Die Main-Methode erfüllt die Eigenschaften des Composition Roots in einer
- Konsolenanwendung
+ Konsolenanwendung.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:CompositionRoot"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Main-Methode als Composition Root in einer Konsolenanwendung
+\end_layout
 
 \end_inset
 
@@ -3208,7 +3184,7 @@ Im Composition Root wird die Konfiguration der Anwendung vorgenommen.
 \end_layout
 
 \begin_layout Subsection
-Stable and volatile Dependencies
+Feste und unbeständige Abhängigkeiten
 \end_layout
 
 \begin_layout Standard
@@ -3383,22 +3359,6 @@ iten gekoppelt sind.
  so kann sie einfach ausgetauscht werden.
 \end_layout
 
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-todo{Genauer erläutern!}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Subsection
 Parallele Entwicklung
 \end_layout
@@ -3410,22 +3370,6 @@ Lose Kopplung ermöglicht die parallele Entwicklung einer Softwareanwendung,
 llen geeinigt werden.
  Die konkreten Implementationen sind nicht mehr relevant und können unabhängig
  voneinander im Parallelen umgesetzt werden.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-todo{Genauer erläutern!}
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection
@@ -3611,10 +3555,21 @@ public interface IRandom
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Beispiel einer durch Dependency Injection testbaren Klasse
+Beispiel einer durch Dependency Injection testbaren Klasse.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Beispiel-Testability"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Testbare Klasse durch Dependency Injection
+\end_layout
 
 \end_inset
 
@@ -3857,10 +3812,25 @@ public class GuessANumberTests
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Testen der GuessANumber Klasse
+Testen der 
+\shape italic
+GuessANumber
+\shape default
+-Klasse.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:GuessANumber-UnitTest"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Testen der GuessANumber-Klasse
+\end_layout
 
 \end_inset
 
@@ -3898,6 +3868,13 @@ key "Bender2011"
 
 \begin_layout Chapter
 Analyse der Architektur von Unity3D
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Analyse-der-Architektur"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4020,7 +3997,7 @@ Doppelte Logik aufgrund einer monolithischen Vererbungshierarchie.
 \begin_inset CommandInset citation
 LatexCommand citealp
 after "S. 215"
-before "Quelle: modifiziert übernommen aus"
+before "Quelle: in Anlehnung an"
 key "Nystrom2014"
 
 \end_inset
@@ -4143,7 +4120,7 @@ Vereinfachte Darstellung der komponentenbasierten Architektur Unitys.
 \begin_inset CommandInset citation
 LatexCommand citealp
 after "S. 886"
-before "Quelle: modifiziert übernommen aus"
+before "Quelle: in Anlehnung an"
 key "Gregory2014"
 
 \end_inset
@@ -4261,6 +4238,16 @@ name "fig:Unity-Editor"
 \end_inset
 
  
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Das Benutzerinterface vom Unity Editor
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4574,10 +4561,21 @@ public class SomeBehaviour : MonoBehaviour
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-SerializeField mit Guard Clause in OnValidate
+SerializeField mit Guard Clause in OnValidate.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:SerializeField"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+SerializeField mit Guard Clause in OnValidate
+\end_layout
 
 \end_inset
 
@@ -5030,10 +5028,21 @@ public class Singleton : MonoBehaviour
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Implementation des Singleton Patterns in Form eines MonoBehaviours
+Implementation des Singleton Patterns in Form eines MonoBehaviours.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Singleton"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Implementation des Singleton Patterns
+\end_layout
 
 \end_inset
 
@@ -5288,10 +5297,21 @@ public class EventSubscriber : MonoBehaviour
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Beispiel eines Publishers und Subscribers unter Verwendung eines UnityEvents
+Beispiel eines Publishers und Subscribers unter Verwendung eines UnityEvents.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:UnityEventCode"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+UnityEvent Publisher und Subscriber
+\end_layout
 
 \end_inset
 
@@ -5345,10 +5365,21 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Hinzufügen einer Callback-Methode für einen UnityEvent im Editor
+Hinzufügen einer Callback-Methode für einen UnityEvent im Editor.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:UnityEvent"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Hinzufügen einer Callback-Methode für einen UnityEvent im Editor
+\end_layout
 
 \end_inset
 
@@ -5590,10 +5621,21 @@ public class MessageSubscriber : MonoBehaviour
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Verwendung von SendMessage
+Verwendung von SendMessage.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:SendMessage"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Verwendung von SendMessage
+\end_layout
 
 \end_inset
 
@@ -5864,10 +5906,21 @@ public class EventSubscriber : MonoBehaviour, IEventTarget
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Verwenden von UnityEngine.EventSystems
+Verwenden von UnityEngine.EventSystems.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:EventSystems"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Verwenden von UnityEngine.EventSystems
+\end_layout
 
 \end_inset
 
@@ -6147,7 +6200,8 @@ status open
 
 \begin_layout Plain Layout
 Script Execution Order Settings mit Composition Root Komponente an oberster
- Stelle
+ Stelle.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Script-Execution-Order"
@@ -6155,6 +6209,16 @@ name "fig:Script-Execution-Order"
 \end_inset
 
  
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Script Execution Order Settings mit Composition Root
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -6349,10 +6413,21 @@ namespace Container.Framework
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Die Klasse CompositionRoot.cs 
+Die Klasse CompositionRoot.cs.
+ Quelle: Eigene Abbildung 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:CompositionRoot-Klasse"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Klasse CompositionRoot.cs
+\end_layout
 
 \end_inset
 
@@ -6633,10 +6708,21 @@ public interface IContainer
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Minimales IContainer Interface
+Minimales IContainer-Interface.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Minimales-IBinder-Interface"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Minimales IContainer-Interface
+\end_layout
 
 \end_inset
 
@@ -6845,10 +6931,21 @@ public class Container : IContainer
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Implementation der Register-Methoden in Container.cs
+Implementation der Register-Methoden in Container.cs.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:RegisterMappings"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Implementation der Register-Methoden in Container.cs
+\end_layout
 
 \end_inset
 
@@ -7079,10 +7176,21 @@ private object Resolve(Type type)
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Implementation der Resolve-Methode
+Implementation der Resolve-Methode.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Implementation-Resolve"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Implementation der Resolve-Methode
+\end_layout
 
 \end_inset
 
@@ -7265,10 +7373,21 @@ private object Instantiate(Type type)
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Instantiate-Methode in Binder.cs
+Instantiate-Methode in Container.cs.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Instantiate-Methode"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Instantiate-Methode in Container.cs
+\end_layout
 
 \end_inset
 
@@ -7364,10 +7483,21 @@ private Text sampleWithAttribute;
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Beispiel für die Verwendung eines Attributes
+Beispiel für die Verwendung eines Attributes.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Verwendung-Attribute"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Beispiel für die Verwendung eines Attributes
+\end_layout
 
 \end_inset
 
@@ -7447,10 +7577,21 @@ public class InjectAttribute : Attribute
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Definition des Inject-Attributs
+Definition des Inject-Attributs.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Definition-des-Inject-Attributs"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Definition des Inject-Attributs
+\end_layout
 
 \end_inset
 
@@ -7589,10 +7730,21 @@ public class SampleClass
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Verwendungsmöglichkeiten des Inject-Attributes
+Verwendungsmöglichkeiten des Inject-Attributes.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Verwendungmöglichkeiten"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Verwendungsmöglichkeiten des Inject-Attributes
+\end_layout
 
 \end_inset
 
@@ -7757,10 +7909,21 @@ bute)));
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Zugriff auf Typinformationen mittels Reflektion in der Methode GetConstructor
+Zugriff auf Typinformationen mittels Reflektion in der Methode GetConstructor.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Zugriff-auf-Typinformationen"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Zugriff auf Typinformationen mittels Reflektion
+\end_layout
 
 \end_inset
 
@@ -7929,10 +8092,21 @@ private object[] ResolveParameters(ParameterInfo[] parameterInfos)
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Auflösen der Konstruktorparameter durch die ResolveParameters-Methode
+Auflösen der Konstruktorparameter durch die ResolveParameters-Methode.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Auflösen-Konstruktorparameter"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Auflösen von Konstruktorparametern durch ResolveParameters-Methode
+\end_layout
 
 \end_inset
 
@@ -8074,10 +8248,21 @@ public void InjectProperties(object instance)
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Auflösen von Properties durch die InjectProperties-Methode
+Auflösen von Properties durch die InjectProperties-Methode.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Auflösen-von-Properties"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Auflösen von Properties durch die InjectProperties-Methode
+\end_layout
 
 \end_inset
 
@@ -8281,10 +8466,21 @@ public static class ServiceLocator
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Implementation des Service Locators
+Implementation des Service Locators.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Implementation-Service-Locator"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Implementation des Service Locators
+\end_layout
 
 \end_inset
 
@@ -8447,10 +8643,21 @@ public static class MonoInjectionExtension
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Erweiterungsmethode für MonoBehaviours
+Erweiterungsmethode für MonoBehaviours.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Erweiterungsmethode"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Erweiterungsmethode für MonoBehaviours
+\end_layout
 
 \end_inset
 
@@ -8590,10 +8797,21 @@ public abstract class CompositionRoot : IMonoInjectionHandler
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Implementation von IMonoInjectionHandler
+Implementation von IMonoInjectionHandler.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:IMonoInjectionHandler"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Implementation von IMonoInjectionHandler
+\end_layout
 
 \end_inset
 
@@ -8827,10 +9045,21 @@ public abstract class CompositionRoot
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Hinzugefügte ResolveScene-Methode in CompositionRoot.cs
+Hinzugefügte ResolveScene-Methode in CompositionRoot.cs.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:ResolveScene"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Hinzugefügte ResolveScene-Methode in CompositionRoot.cs
+\end_layout
 
 \end_inset
 
@@ -9011,10 +9240,21 @@ public class GameObjectFactory : IGameObjectFactory
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Ausschnitt GameObjectFactory.cs
+Ausschnitt GameObjectFactory.cs.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:GameObjectFactory"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Ausschnitt GameObjectFactory.cs
+\end_layout
 
 \end_inset
 
@@ -9155,7 +9395,7 @@ reference "fig:Implementation-des-Coroutine"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -9321,10 +9561,21 @@ public class CoroutineRunner : ICoroutineRunner
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Implementation des CoroutineRunners
+Implementation des CoroutineRunners.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Implementation-des-Coroutine"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Implementation des CoroutineRunners
+\end_layout
 
 \end_inset
 
@@ -9448,17 +9699,8 @@ lazy-loading
 \begin_inset Quotes grd
 \end_inset
 
- von Singletons der tatsächlichen Implementierung 
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Siehe Anhang!
-\end_layout
-
-\end_inset
-
- unterstützt.
+ von Singletons der tatsächlichen Implementierung unterstützt.
+ Die Implementation ist auf der beigelegten CD zu dieser Arbeit zu finden.
 \end_layout
 
 \begin_layout Standard
@@ -9970,10 +10212,21 @@ public class SampleContext : MVCSContext
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Beispiel eines Contexts für ein Brettspiel
+Beispiel eines Contexts für ein Brettspiel.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Beispiel-Context"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Beispiel eines Contexts für ein Brettspiel
+\end_layout
 
 \end_inset
 
@@ -10099,7 +10352,8 @@ clickSignal.Dispatch(12);
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Beispiel der Deklaration und Verwendung eines Signals
+Beispiel der Deklaration und Verwendung eines Signals.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Signals-Definition"
@@ -10107,6 +10361,16 @@ name "fig:Signals-Definition"
 \end_inset
 
  
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Beispiel der Deklaration und Verwendung eines Signals
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -10258,10 +10522,21 @@ class ToggleSelectionCommand : Command
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Beispiel für einen Command
+Beispiel für einen Command.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Beispiel-Command"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Beispiel für einen Command
+\end_layout
 
 \end_inset
 
@@ -10597,10 +10872,21 @@ public class SampleMediator : Mediator
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Beispiel der Implementation eines Mediators
+Beispiel der Implementation eines Mediators.
+ Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Implementation-Mediator"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Beispiel der Implementation eines Mediators
+\end_layout
 
 \end_inset
 
@@ -10793,6 +11079,13 @@ Die komponentenbasierte Architektur von Unity berücksichtigt StrangeIoC
 
 \begin_layout Chapter
 Kritische Betrachtung & Fazit
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Fazit"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -11008,12 +11301,6 @@ status open
 
 \begin_layout Plain Layout
 
-% Dieser Code ist noetig, da sonst die falsche Seitenzahl im Inhaltsverzeichnis
- angezeigt wird
-\end_layout
-
-\begin_layout Plain Layout
-
 
 \backslash
 clearpage
@@ -11100,12 +11387,6 @@ set_width "auto"
 \begin_layout Standard
 \begin_inset ERT
 status open
-
-\begin_layout Plain Layout
-
-% Dieser Code ist noetig, da sonst die falsche Seitenzahl im Inhaltsverzeichnis
- angezeigt wird
-\end_layout
 
 \begin_layout Plain Layout
 
