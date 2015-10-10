@@ -980,8 +980,8 @@ Unity3D hat sich in den letzten Jahren zu einer der bedeutendsten Spieleengines
 \begin_inset space ~
 \end_inset
 
-% des globalen Marktanteils unter Spieleengines trägt Unity maßgeblich zu
- dem Independent Videogame Boom der letzten Jahre bei 
+% des globalen Marktanteils unter Spieleengines trägt Unity3D maßgeblich
+ zu dem Independent Videogame Boom der letzten Jahre bei 
 \begin_inset CommandInset citation
 LatexCommand citep
 before "vgl."
@@ -993,8 +993,8 @@ key "Unity2015:CompanyFacts"
  Unity3D ermöglicht die plattformunabhängige Erstellung von 2D- und 3D-Spielen.
  Dies hat besonders auf dem fragmentierten Markt der mobilen Spieleindustrie
  Anklang gefunden.
- Mit sich fortlaufend verbessernder Performance und Rendertechniken sind
- fortlaufend ambitioniertere Projekte möglich.
+ Mit sich kontinuierlich verbessernder Performance und Rendertechniken sind
+ stets ambitioniertere Projekte möglich.
  Dies bewegt nicht nur Indieentwickler und kleine Teams dazu, sich die Vorteile
  der Engine zunutze zu machen: Unity3D findet immer mehr Einzug in professionell
 e Spieleprojekte mit mittleren und großen Teams.
@@ -1033,8 +1033,8 @@ key "Reddit2015,Suzdalnitski2015,Cann2014,Dabrowski2014"
 \end_layout
 
 \begin_layout Standard
-Oft sollen die Ursachen gerade die Dinge sein, die unerfahrenen Programmierern
- den einfachen Einstieg in Unity3D ermöglichen.
+Oft sollen die Ursachen gerade die Funktionalitäten sein, die unerfahrenen
+ Programmierern den einfachen Einstieg in Unity3D ermöglichen.
  Eine Ursache ist so gut wie immer vertreten: die Auflösung von Abhängigkeiten
  und die Kommunikation zwischen Objekten.
  Enge Kopplung von Abhängigkeiten zwischen Objekten führt zu Starrheit und
@@ -1074,64 +1074,61 @@ reference "chap:Grundlagen"
 
 \end_inset
 
- soll zunächst die Problematik der Kopplung beschrieben werden.
+ wird zunächst die Problematik der Kopplung beschrieben.
  Voraussetzung dafür ist, zu erläutern, was Abhängigkeiten sind und warum
  diese entstehen.
- Weiter sollen die Folgen von enger Kopplung erläutert werden.
- Dem Leser soll verdeutlicht werden, dass Kopplung direkten Einfluss auf
- die Testbarkeit und Erweiterbarkeit des Programmcodes hat.
+ Weiter werden die Folgen von enger Kopplung erläutert.
+ Dem Leser soll damit verdeutlicht werden, dass Kopplung direkten Einfluss
+ auf die Testbarkeit und Erweiterbarkeit des Programmcodes hat.
  
 \end_layout
 
 \begin_layout Standard
-Nachfolgend soll anhand eines Beispiels erklärt werden, wie lose Kopplung
- mittels Dependency Injection umzusetzen ist.
- In diesem Zusammenhang sollen auch zugrunde liegende Prinzipien erläutert
- werden.
+Nachfolgend wird anhand eines Beispiels erklärt, wie lose Kopplung mittels
+ Dependency Injection umzusetzen ist.
+ In diesem Zusammenhang werden auch zugrunde liegende Prinzipien erläutert.
 \end_layout
 
 \begin_layout Standard
-Infolgedessen soll in Kapitel 
+Infolgedessen wird in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:Analyse-der-Architektur"
 
 \end_inset
 
- der Schritt zu Unity3D getätigt werden.
- Es soll untersucht werden, inwiefern Unity3D von einer herkömmlichen objektorie
-ntierten Hierarchie abweicht und ob dies hinderlich dabei ist, lose Kopplung
- umzusetzen.
- Es sollen häufig verwendete Praktiken wie das Singletonpattern und Managerobjek
-te untersucht werden.
+ der Schritt zu Unity3D getätigt.
+ Es wird untersucht, inwiefern Unity3D von einer herkömmlichen objektorientierte
+n Hierarchie abweicht und ob dies hinderlich dabei ist, lose Kopplung umzusetzen.
+ Es werden häufig verwendete Praktiken wie das Singletonpattern und Managerobjek
+te untersucht.
  Wie im Verlauf der Arbeit im Detail erklärt wird, entstehen Abhängigkeiten
  unter anderem dadurch, dass Objekte miteinander kommunizieren müssen.
  Unity3D stellt unterschiedliche Wege der Kommunikation bereit.
- Es soll nachgeprüft werden, ob diese Wege es bereits ermöglichen lose Kopplung
+ Es wird nachgeprüft, ob diese Wege es bereits ermöglichen lose Kopplung
  umzusetzen.
- Auf Basis dieser Erkenntnisse soll ein Zwischenfazit gezogen werden, um
- die Notwendigkeit eines Inversion Of Control Frameworks für Unity3D zu
- verdeutlichen.
+ Auf Basis dieser Erkenntnisse wird ein Zwischenfazit gezogen, um die Notwendigk
+eit eines Inversion Of Control Frameworks für Unity3D zu verdeutlichen.
 \end_layout
 
 \begin_layout Standard
-Im vierten Kapitel dieser Arbeit soll ein Inversion Of Control Container
- für Unity3D implementiert werden.
+Im vierten Kapitel dieser Arbeit wird ein Inversion Of Control Container
+ für Unity3D implementiert.
  Dieser Container soll Dependency Injection in MonoBehaviours automatisieren
  und somit die lose Kopplung unter MonoBehaviours ermöglichen.
- Die technische Umsetzung soll erläutert werden.
- Die mit Unity3D in Verbindung stehenden Hürden bei der Umsetzung sollen
- überwunden und beschrieben werden.
- Im Anschluss soll ein Überblick über die vorhandenen Inversion Of Control
- Frameworks für Unity3D geliefert werden.
- Besonderheiten, Funktionsweise und -Umfang sollen beschrieben werden.
- Besondere Betrachtung soll StrangeIoC finden: Die frameworkeigene MVC(S)-Archit
-ektur und die damit verbundenen Muster und Praktiken sollen anhand von Beispiele
-n beschrieben werden.
+ Die technische Umsetzung wird erläutert.
+ Die mit Unity3D in Verbindung stehenden Hürden bei der Umsetzung werden
+ überwunden und beschrieben.
+ Im Anschluss wird ein Überblick über die vorhandenen Inversion Of Control
+ Frameworks für Unity3D geliefert.
+ Besonderheiten, Funktionsweisen und -umfänge der Frameworks werden beschrieben.
+ Besondere Betrachtung wird StrangeIoC gewidmet: Die frameworkeigene MVC(S)-Arch
+itektur und die damit verbundenen Muster und Praktiken werden anhand von
+ Beispielen beschrieben.
 \end_layout
 
 \begin_layout Standard
-Auf Basis dieser Analysen soll in Kapitel 
+Auf Basis dieser Analysen wird in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:Fazit"
@@ -1139,14 +1136,21 @@ reference "chap:Fazit"
 \end_inset
 
  eine Aussage über die Tauglichkeit von Inversion Of Control Frameworks
- in der komponentenbasierten Architektur Unitys getroffen werden.
- Im Speziellen soll ein Fazit über die MVC(S)-Architektur von StrangeIoC
- zur Entwicklung von Spielen in Unity3D gezogen werden.
- Es soll entschieden werden, für welche Anwendungsgebiete die Architektur
- besonders geeignet ist und für welche nicht.
- Für diese Anwendungsgebiete sollen alternative Architekturansätze in Aussicht
- gestellt werden.
- 
+ in der komponentenbasierten Architektur Unitys getroffen.
+ Im Speziellen wird ein Fazit über die MVC(S)-Architektur von StrangeIoC
+ zur Entwicklung von Spielen in Unity3D gezogen.
+ Es wird eine Entscheidung getroffen, für welche Anwendungsgebiete die Architekt
+ur besonders geeignet ist und für welche nicht.
+ Für diese wird ein alternativer Architekturansatz in Aussicht gestellt.
+\end_layout
+
+\begin_layout Section
+Textliche Konventionen
+\end_layout
+
+\begin_layout Standard
+In dieser Arbeit werden Fachbegriffe in englischer Sprache verwendet, sofern
+ kein deutsches Gegenstück gebräuchlich ist.
 \end_layout
 
 \begin_layout Chapter
@@ -1165,13 +1169,13 @@ Geringe Kopplung unter Softwareentitäten (Modulen, Klassen, Methoden) wird
  als Indiz für gute Softwarearchitektur angesehen.
  Inversion Of Control und genauer Dependency Injection sind Werkzeuge, die
  dabei helfen sollen, lose Kopplung umzusetzen.
- In diesem Teil der Arbeit soll zunächst erläutert werden, was Kopplung
- zwischen Entitäten ist und wie diese zustande kommt.
+ In diesem Teil der Arbeit wird zunächst erläutert, was Kopplung zwischen
+ Entitäten ist und wie diese zustande kommt.
  Es wird verdeutlicht, warum hohe Kohäsion unter minimaler Kopplung anzustreben
  ist.
- Die Vorteile loser Kopplung sollen deutlich gemacht werden.
+ Die Vorteile loser Kopplung werden verdeutlicht.
  Inversion Of Control, Dependency Injection und die eng mit diesen Begriffen
- zusammenhängenden SOLID-Prinzipien sollen beschrieben werden.
+ zusammenhängenden SOLID-Prinzipien werden beschrieben.
  Zum besseren Verständnis der vorgestellten Prinzipien, Muster und Praktiken
  wird lose Kopplung anhand eines Beispiels in einer Konsolenanwendung umgesetzt.
 \end_layout
@@ -1506,8 +1510,8 @@ key "Metz2009"
 \end_inset
 
 .
- Im folgenden Abschnitt werden die diese Prinzipen vorgestellt und ihre
- Relevanz bei der Umsetzung von Dependency Injection beschrieben.
+ Im folgenden Abschnitt werden diese Prinzipen vorgestellt und ihre Relevanz
+ bei der Umsetzung von Dependency Injection beschrieben.
 \end_layout
 
 \begin_layout Subsection
@@ -1614,15 +1618,14 @@ key "Martin2003"
 Abstraktion ermöglicht die Umsetzung des Open/Closed Principles.
  Wird von einer abstrakten Basisklasse geerbt, so ist es möglich das Verhalten
  der Abstraktion zu ändern, ohne die Abstraktion selbst zu manipulieren.
- Die Entwurfsmuster Strategy und Template-Method sind Beispiele für das
+ Die Entwurfsmuster Strategy und Template Method sind Beispiele für das
  Open/Closed Principle.
 \end_layout
 
 \begin_layout Standard
 Auch Dependency Injection setzt das Open/Closed Principle um, indem Abhängigkeit
 en lediglich in Form von Abstraktionen existieren.
- Damit ist dieses Prinzip ist eine wichtige Grundlage für lose Kopplung
- (vgl.
+ Damit ist dieses Prinzip eine wichtige Grundlage für lose Kopplung (vgl.
  
 \begin_inset CommandInset citation
 LatexCommand citealp
@@ -1639,7 +1642,7 @@ Liskov Substitution Principle
 \end_layout
 
 \begin_layout Standard
-Das Liskov Substitution Principle beschreibt einer grundlegende Anforderung
+Das Liskov Substitution Principle beschreibt eine grundlegende Anforderung
  beim Einsatz von Vererbung: Untertypen einer Basisklasse sollen untereinander
  ersetzbar sein, ohne dabei das Verhalten des Programms selbst zu verändern.
  Das Programm selbst darf zu keinem Zeitpunkt einen Untertyp anders als
@@ -1672,7 +1675,7 @@ key "Seemann2011"
 \end_layout
 
 \begin_layout Standard
-Dieses Prinzip kommt besonders beim Unit-Testing zum Vorschein: Abhängigkeiten
+Dieses Prinzip kommt besonders beim Unittesting zum Vorschein: Abhängigkeiten
  eines Systems Under Test können durch Test Doubles ersetzt werden, ohne
  das Verhalten des Systems selbst zu verändern (vgl.
  
@@ -1806,13 +1809,16 @@ Mechanism
 Policy
 \shape default
 -Moduls.
- Die tatsächliche Implementation erfolgt innerhalb des untergeordneten Mechanism
--Moduls, wodurch eine Abhängigkeit an das 
+ Die tatsächliche Implementation erfolgt innerhalb des untergeordneten 
+\shape italic
+Mechanism-
+\shape default
+Moduls, wodurch eine Abhängigkeit an das 
 \shape italic
 Policy
 \shape default
 -Modul entsteht.
- Folglich haben Änderungen des 
+ Demzufolge haben Änderungen des 
 \shape italic
 Mechanism-
 \shape default
@@ -1827,7 +1833,7 @@ Policy
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \noindent
@@ -1887,8 +1893,8 @@ name "fig:DIP"
 \end_layout
 
 \begin_layout Standard
-Zum anderen beschreibt Martin eine weitere, allgemeinere Interpretation
- des Dependency Inversion Principles:
+Zum anderen beschreibt Martin eine weitere, allgemeine Interpretation des
+ Dependency Inversion Principles:
 \end_layout
 
 \begin_layout Quote
@@ -1964,9 +1970,9 @@ name "sec:Umsetzung-von-Dependency"
 \begin_layout Standard
 Um zu erläutern, wie die in den vorherigen Abschnitten erklärten Prinzipien
  bei der Umsetzung von Inversion Of Control mittels Dependency Injection
- zusammenspielen, soll ein Beispiel herangezogen werden.
- Anhand dieses Beispiels sollen Patterns die im direkten Zusammenhang zu
- Dependency Injection stehen, beschrieben werden.
+ zusammenspielen, wird ein Beispiel herangezogen.
+ Anhand dieses Beispiels werden Entwurfsmuster die im direkten Zusammenhang
+ zu Dependency Injection stehen, beschrieben.
  Um das Beispiel so einfach wie möglich zu halten, wurde hierfür eine Konsolenan
 wendung in C# gewählt.
 \end_layout
@@ -1976,7 +1982,7 @@ Ausgangssituation
 \end_layout
 
 \begin_layout Standard
-Eine gewünschte Funktionalität eines zu entwickelnden Spiels ist, auszugeben,
+Eine gewünschte Funktionalität eines zu entwickelnden Spiels ist es, auszugeben,
  dass ein verwundbares Objekt Schaden genommen hat.
  Die in Abbildung 
 \begin_inset CommandInset ref
@@ -2091,8 +2097,8 @@ Neue Anforderungen
 \end_layout
 
 \begin_layout Standard
-Im Verlauf der Entwicklung des Spieles wird klar, dass das Spiel in verschiedene
-n Sprachen veröffentlicht werden soll.
+Im Verlauf der Entwicklung des Spieles wird deutlich, dass das Spiel in
+ verschiedenen Sprachen veröffentlicht werden soll.
  Diese auch als Lokalisierung bekannte Anforderung ist eine gängige Anforderung
  für jegliche Art von Software.
  Es wird mit dem Refactoring begonnen und die Klasse 
@@ -2280,7 +2286,7 @@ Die Klasse
 \shape italic
 DamageRenderer
 \shape default
- funktioniert weiterhin wie im vorherigen Beispiel.
+ funktioniert weiterhin wie im vorherig gezeigten Beispiel.
  Der Unterschied ist, dass 
 \shape italic
 DamageRenderer
@@ -2298,7 +2304,7 @@ reference "fig:Deutsche-Lokalisierung"
 
 \end_inset
 
- auszutauchen? Das Problem hierbei ist, dass 
+ auszutauschen? Das Problem hierbei ist, dass 
 \shape italic
 DamageRenderer
 \shape default
@@ -2417,15 +2423,14 @@ Programming to an Interface
 Um lose Kopplung umzusetzen, darf keine Abhängigkeit zu einer konkreten
  Implementation existieren.
  Stattdessen muss sich auf eine Abstraktion als Abhängigkeit verlassen werden.
- In dem Beispiel in Abb.
- 
+ In dem Beispiel in Abbildung 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "fig:Depend-Abstractions"
 
 \end_inset
 
- wird dies umgesetzt indem 
+ wird dies umgesetzt, indem 
 \shape italic
 English-
 \shape default
@@ -2447,7 +2452,7 @@ DamageRenderer
 ILocalizationService
 \shape default
  hält, lässt sich die konkrete Implementation austauschen.
- Dies ist jedoch immer noch nur möglich, indem 
+ Voraussetzung hierfür ist jedoch weiterhin, dass 
 \shape italic
 DamageRenderer
 \shape default
@@ -2727,13 +2732,13 @@ Um die Klassen lose miteinander zu koppeln, kommt an dieser Stelle der Einsatz
  Die Verantwortung über die Auflösung der Abhängigkeiten wird abgegeben.
  Die Klasse selbst macht lediglich deutlich, dass Sie ein Objekt benötigt,
  welches die abstrakten Bedürfnisse eines Interfaces umsetzt.
- In diesem Fall, die eines 
+ In diesem Fall handelt es sich um die Bedürfnisse eines 
 \shape italic
 ILocalizationServices
 \shape default
 .
  Dependency Injection lässt sich auf unterschiedlichen Wegen umsetzen.
- Die gebräuchlichsten sind Constructor Injection und Property Injection.
+ Die Gebräuchlichsten sind Constructor Injection und Property Injection.
 \end_layout
 
 \begin_layout Subsubsection
@@ -2768,10 +2773,13 @@ ch verfügbar ist, indem eine Instanziierung des Objektes (ein Konstruktoraufruf
  ohne diese nicht möglich ist.
  Damit wird erzwungen, dass der gesamte Abhängigkeitsgraph aufgebaut wird,
  bevor die Klasse genutzt werden kann.
- Eine Guard Clause stellt sicher, dass nicht null als Argument übergeben
- wird.
+ Eine Guard Clause stellt sicher, dass nicht 
+\shape italic
+null
+\shape default
+ als Argument übergeben wird.
  Constructor Injection sollte in den meisten Fällen angewandt werden, denn
- in den meisten Fällen ist eine Abhängigkeit zwingend notwendig.
+ in der Regel ist eine Abhängigkeit zwingend notwendig.
  
 \end_layout
 
@@ -2946,7 +2954,8 @@ reference "fig:Beispiel-von-Property"
 \shape italic
 LocalizationService
 \shape default
- bereitgestellt wird, beispielsweise im Getter eine Instanz von 
+ bereitgestellt wird, beispielsweise im Getter des Properties eine Instanz
+ von 
 \shape italic
 EnglishLocalization
 \shape default
@@ -2985,7 +2994,7 @@ B.
  ASP.NET -- auf Constructor Injection verzichtet werden.
  Das Framework schreibt das Vorhandensein eines Default Constructors vor,
  der zur Initialisierung genutzt wird.
- In diesem Fällen kann auch alternativ auf Property Injection zurückgegriffen
+ In diesen Fällen kann auch alternativ auf Property Injection zurückgegriffen
  werden.
 \end_layout
 
@@ -3126,17 +3135,17 @@ name "sub:Composition-Root"
 \end_layout
 
 \begin_layout Standard
-In den letzten Abschnitten wurde verdeutlicht, dass Dependency Injection
+In den vorangegangenen Abschnitten wurde verdeutlicht, dass Dependency Injection
  es verlangt, die Verantwortung über die Auflösung der Abhängigkeiten abzugeben.
  Es wurde jedoch nicht beschrieben, an wen diese Verantwortung übertragen
  werden soll.
- Die Antwort ergibt sich, wenn man Dependency Injection konsequent umsetzt:
- Abhängigkeiten werden in der Objekthierarchie nach oben gereicht, bis dies
- nicht mehr möglich ist.
- Die Auflösung der Abhängigkeiten sollte also so nah wie möglich beim Einstiegsp
-unkt der Applikation geschehen.
- Soweit möglich sollte die Initialisierungslogik aller Objekte an diesem
- zentralen Ort umgesetzt werden.
+ Die Antwort ergibt sich durch die konsequente Umsetzung von Dependency
+ Injection: Abhängigkeiten werden in der Objekthierarchie nach oben gereicht
+ bis dies nicht mehr möglich ist.
+ Die Auflösung der Abhängigkeiten sollte demzufolge so nah wie möglich beim
+ Einstiegspunkt der Applikation geschehen.
+ Soweit es möglich ist, sollte die Initialisierungslogik aller Objekte an
+ diesem zentralen Ort umgesetzt werden.
  Dieser zentrale Ort wird als Composition Root bezeichnet (vgl.
  
 \begin_inset CommandInset citation
@@ -3313,11 +3322,11 @@ Die Klasse oder das Modul existiert bereits.
 
 \begin_layout Itemize
 Es ist zu erwarten, dass neue Versionen der Abhängigkeit keine Änderungen
- enthalten werden, die Auswirkungen auf den Programmcode haben werden.
+ enthalten werden, die Auswirkungen auf den Programmcode haben.
 \end_layout
 
 \begin_layout Itemize
-Das Modul lediglich deterministische Algorithmen beinhaltet.
+Das Modul beinhaltet ausschließlich deterministische Algorithmen.
 \end_layout
 
 \begin_layout Itemize
@@ -3344,8 +3353,8 @@ Die Abhängigkeit existiert noch nicht.
 \end_layout
 
 \begin_layout Itemize
-Die Abhängigkeit nutzt eine Thrid-Party Library, die nicht auf allen Systemen
- vorhanden ist.
+Die Abhängigkeit nutzt eine Bibliothek, die nicht auf allen Systemen vorhanden
+ ist.
 \end_layout
 
 \begin_layout Itemize
@@ -3379,11 +3388,11 @@ Resultierende Vorteile und Möglichkeiten
 \begin_layout Standard
 In den vorherigen Abschnitten wurde ausführlich beschrieben, wie und warum
  lose Kopplung umzusetzen ist.
- Jedoch sind eventuell die Gründe für lose Kopplung, aufgrund des einfachen
- Beispiels, noch nicht ganz klar geworden.
+ Jedoch sind eventuell die Gründe für lose Kopplung, aufgrund des einfach
+ gehaltenen Beispiels, noch nicht ganz ersichtlich geworden.
  Besonders große und komplexe Softwareprojekte profitieren maßgeblich von
  loser Kopplung.
- Welche Faktoren genau beeinflusst werden, soll im Folgenden erläutert werden.
+ Welche Faktoren genau beeinflusst werden, wird im Folgenden erläutert.
 \end_layout
 
 \begin_layout Subsection
@@ -3394,7 +3403,8 @@ Erweiterbarkeit
 Während der Entwicklung einer Anwendung werden neue Anforderungen bekannt
  und existierende Anforderungen beginnen sich zu verändern.
  Trotzdem muss die Anwendung erweiterbar und wartbar bleiben.
- Erweiterbarkeit wird problematischer, je größer die Anwendung ist.
+ Mit zunehmender Größe der Anwendung, wird es umso problematischer sie zu
+ erweitern.
  In sehr großen Softwareprojekten ist es schwer abzusehen, welche Auswirkungen
  auch nur die kleinste Änderung hat.
  Aus diesem Grund ist es notwendig, Entitäten so autonom wie möglich zu
@@ -3408,7 +3418,7 @@ Während der Entwicklung einer Anwendung werden neue Anforderungen bekannt
 Lose Kopplung setzt das Open/Closed Principle in die Tat um: Module sind
  offen für Erweiterung und geschlossen für Veränderung.
  Maßgeblich verantwortlich hierfür ist das Konzept der späten Bindung, welches
- durch 
+ sich durch 
 \begin_inset Quotes gld
 \end_inset
 
@@ -3416,7 +3426,7 @@ programming to an interface
 \begin_inset Quotes grd
 \end_inset
 
- konsequent umgesetzt wird.
+ konsequent umsetzen lässt.
  Die konkrete Implementation ist austauschbar und wird erst zur Laufzeit
  bekannt.
  Sie ist unabhängig vom Rest der Anwendung veränderbar.
@@ -3425,7 +3435,7 @@ programming to an interface
 \begin_layout Standard
 Dependency Injection hilft dabei, Verantwortungen klarer aufzuteilen und
  zu definieren.
- Durch das Einhalten des Single Responcibility Principles wird es deutlicher
+ Durch das Einhalten des Single Responsibility Principles wird es deutlicher
  an welchen Stellen Änderungen gemacht werden müssen.
  Oft genügt es eine konkrete Implementation durch eine andere auszutauschen,
  um ein gewünschtes Verhalten zu erzielen.
@@ -3471,8 +3481,8 @@ reference "fig:Beispiel-Testability"
 
 \end_inset
 
- zeigt die Implementation eines sehr simplen Spiels: Der Spieler soll das
- Resultat eines Würfelwurfs erraten.
+ zeigt die Implementation eines simplen Spiels: Der Spieler soll das Resultat
+ eines Würfelwurfs erraten.
  Mit der 
 \shape italic
 Roll
@@ -3720,7 +3730,7 @@ reference "fig:GuessANumber-UnitTest"
 
 \end_inset
 
- zeigt einen Unit-Test, der sicherstellen soll, dass die 
+ zeigt einen Unittest, der sicherstellen soll, dass die 
 \shape italic
 MakeGuess
 \shape default
@@ -3729,7 +3739,7 @@ MakeGuess
 \shape italic
 GuessANumber
 \shape default
--Klasse durch einen Unit-Test auf korrekte Funktionalität prüfen zu können,
+-Klasse durch einen Unittest auf korrekte Funktionalität prüfen zu können,
  muss das Resultat deterministisch sein.
  Hierzu wird anstatt einer echten Implementation einer 
 \shape italic
@@ -3769,7 +3779,7 @@ Roll
 \shape italic
 MakeGuess
 \shape default
--Methode mit dem vorgegebenen Wert 
+-Methode mit dem vorgegebenen Wert, 
 \begin_inset Quotes gld
 \end_inset
 
@@ -3939,7 +3949,7 @@ Lose Kopplung ermöglicht, dass Module in Isolation betrachtet werden können.
  Abstraktion durch Fakes, Mocks und Stubs ausgetauscht werden.
  Es muss mit Bedacht auf die Testbarkeit einer Anwendung entschieden werden,
  ob eine Abhängigkeit fest oder unbeständig ist.
- Der sicherste Weg Testbarkeit zu gewährleisten, ist Test Driven Development
+ Der sicherste Weg Testbarkeit zu gewährleisten, ist es Test Driven Development
  in Kombination mit Dependency Injection zu praktizieren 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -3967,18 +3977,16 @@ name "chap:Analyse-der-Architektur"
 In dem letzten Kapitel wurde beschrieben, was lose Kopplung ist und wie
  Inversion Of Control, und genauer Dependency Injection, dabei helfen, diese
  umzusetzen.
- Es wurde beschrieben, dass lose Kopplung maßgeblich zu der Qualität des
+ Es wurde beschrieben, dass lose Kopplung maßgeblich zu der Qualität eines
  Softwareproduktes beiträgt.
  Dependency Injection wurde beispielhaft in einer Konsolenanwendung angewendet.
- In diesem Kapitel sollen relevante Unterschiede zwischen der klassischen
+ In diesem Kapitel werden relevante Unterschiede zwischen der klassischen
  objektorientierten Programmierung bei der Entwicklung einer Konsolenanwendung
- und der komponentenbasierten Architektur von Unity3D beschrieben werden.
- Gute und schlechte Praktiken bei der Arbeit mit Unity3D sollen erläutert
- werden.
- Unity stellt von sich aus Mittel bereit, um die Kommunikation zwischen
+ und der komponentenbasierten Architektur von Unity3D beschrieben.
+ Gute und schlechte Praktiken bei der Arbeit mit Unity3D werden erläutert.
+ Unity3D stellt von sich aus Mittel bereit, um die Kommunikation zwischen
  Klassen zu ermöglichen.
- Es soll untersucht werden, ob diese es bereits ermöglichen lose Kopplung
- umzusetzen.
+ Es wird untersucht, ob diese es bereits ermöglichen lose Kopplung umzusetzen.
 \end_layout
 
 \begin_layout Section
@@ -4023,10 +4031,10 @@ In klassischen objektorientierten Implementationen eines Game Object Models
 GameObject
 \shape default
  abgeleitet.
- Diese Basisklasse enthält Funktionalität, die für alle Klassen notwendig
- ist.
+ Diese Basisklasse enthält Funktionalitäten, die für alle Klassen notwendig
+ sind.
  Ein Beispiel hierfür ist Serialisierung.
- Mit Wachstum des Projektes wächst auch die Hierarchie immer tiefer und
+ Mit Wachstum des Projektes wächst auch die Hierarchie stets tiefer und
  weiter.
  Es folgt eine Reihe von Problemen: Klassen, die sich tief in der Vererbungshier
 archie befinden, sind schwierig zu verstehen und zu verändern, da hierfür
@@ -4037,7 +4045,8 @@ archie befinden, sind schwierig zu verstehen und zu verändern, da hierfür
 Es kann nur ein Merkmal als Basis für eine Vererbungshierarchie gewählt
  werden.
  Ein Merkmal kann beispielsweise die Beweglichkeit eines Objekts sein.
- Ein Anderes die Fähigkeit mit anderen Objekten zu kollidieren.
+ Eine andere Charakteristik wäre die Fähigkeit mit anderen Objekten zu kollidier
+en.
  Möchte man ein Objekt mit beiden Merkmalen haben, so stößt man schnell
  an die Grenzen einer solchen Architektur: Die benötigten Funktionalitäten
  müssen in der Hierarchie nach oben verschoben werden und bewirken so, dass
@@ -4119,8 +4128,8 @@ name "fig:monolitic"
 \end_layout
 
 \begin_layout Standard
-Um diesen Problemen vorzubeugen, implementiert Unity3D ein komponentenbasiertes
- Game Object Model.
+Um dem Auftreten dieser Probleme vorzubeugen, implementiert Unity3D ein
+ komponentenbasiertes Game Object Model.
  Das Grundprinzip dieses Models ist Komposition der Vererbung vorzuziehen.
  Anstatt Objekte mittels Vererbung und des 
 \begin_inset Quotes gld
@@ -4260,7 +4269,7 @@ MonoBehaviours
 hängige Entwicklung von Komponenten in C# und UnityScript zu ermöglichen.
  Dem Nutzer stehen folglich objektorientierte Sprachfeatures wie Polymorphismus
  und Vererbung innerhalb der Komponenten zur Verfügung.
- Komponenten können durch die Implementierung von einer Reihe von vordefinierten
+ Komponenten können durch die Implementation von einer Reihe von vordefinierten
  Eventfunktionen Einfluss auf das Spielgeschehen nehmen.
 \end_layout
 
@@ -4367,7 +4376,7 @@ MonoBehaviours
  Abhängigkeiten zu versorgen.
  Aus diesem Grund stellt Unity3D alternative Wege zur Referenzierung und
  Kommunikation mit anderen Komponenten bereit.
- Diese sollen im folgenden Abschnitt erläutert werden.
+ Diese werden im folgenden Abschnitt erläutert.
 \end_layout
 
 \begin_layout Section
@@ -4396,7 +4405,7 @@ key "Nystrom2014"
 \end_layout
 
 \begin_layout Standard
-Oft beschränkt sich diese Kommunikation auf Komponenten desselben GameObjects.
+Oft beschränkt sich die Kommunikation auf Komponenten desselben GameObjects.
  Es kommt jedoch auch vor, dass ein MonoBehaviour mit einem MonoBehaviour
  eines anderen GameObjects kommunizieren muss.
  Folglich wird zwischen zwei Arten der Kommunikation unterschieden:
@@ -4419,13 +4428,13 @@ In beiden Fällen kann die Kommunikation direkt oder indirekt erfolgen.
  Eines der Objekte hat also eine Abhängigkeit zu dem anderen.
  Kommunikation ist indirekt, wenn sie über ein drittes Objekt -- einem Vermittle
 r -- erfolgt.
- In den meisten Fällen jedoch wird eine Referenz auf ein weiteres Objekt
- benötigt und es existiert somit eine Abhängigkeit zu diesem.
+ In den meisten Fällen wird eine Referenz auf ein weiteres Objekt benötigt
+ und es existiert somit eine Abhängigkeit zu diesem.
 \end_layout
 
 \begin_layout Standard
-Im folgenden Abschnitt soll untersucht werden, ob Unitys integrierte Möglichkeit
-en Abhängigkeiten aufzulösen es ermöglichen, lose Kopplung zwischen Komponenten
+Im folgenden Abschnitt wird untersucht, ob Unitys integrierte Möglichkeiten
+ Abhängigkeiten aufzulösen es ermöglichen, lose Kopplung zwischen Komponenten
  umzusetzen.
 \end_layout
 
@@ -4487,14 +4496,15 @@ Quaternion
 Color
 \shape default
 , sowie Strings, Enums und Structs.
- Des Weiteren ist es möglich, Referenzen zu Klassen und Objekten durch Drag-and-
-Drop im Editor zu setzen.
+ Des Weiteren können Referenzen zu Klassen und Objekten durch Drag-and-Drop
+ im Editor gesetzt werden.
  Dabei ist zu beachten, dass diese Objekte vom Typ 
 \shape italic
 UnityEngine.Object
 \shape default
  ableiten müssen.
- Es ist also nur möglich andere Komponenten oder Spielobjekte zu referenzieren.
+ Es können also ausschließlich Komponenten oder Spielobjekte referenziert
+ werden.
  Aufgrund dieser Limitierung ist es nicht möglich, Interfaces im Editor
  zugänglich zu machen.
  Mit dem 
@@ -11374,12 +11384,12 @@ Beurteilung der Anwendbarkeit von MVC(S) in der Spieleentwicklung
 \end_layout
 
 \begin_layout Standard
-Wie aus den vorgestellten Konzepten klar wird, wurde die MVC(S)-Architektur
- von StrangeIoC speziell mit der Absicht entworfen, Kopplung zu minimieren.
+Wie aus den vorgestellten Konzepten ersichtlich wird, wurde die MVC(S)-Architekt
+ur von StrangeIoC speziell mit der Absicht entworfen, Kopplung zu minimieren.
  Durch die Architektur ist es möglich Daten, Präsentation und Anwendungslogik
- eines Videospiels zu großen Teilen voneinander zu entkoppeln.
- Dennoch kann keine klare Empfehlung zur generellen Verwendung der Architektur
- in der Spieleentwicklung gegeben werden.
+ eines Videospiels weitestgehend voneinander zu entkoppeln.
+ Dennoch kann keine eindeutige Empfehlung zur generellen Verwendung der
+ Architektur in der Spieleentwicklung gegeben werden.
 \end_layout
 
 \begin_layout Standard
@@ -11401,7 +11411,7 @@ key "Hooks2011"
  (vgl.
  
 \begin_inset CommandInset citation
-LatexCommand citet
+LatexCommand citealp
 key "StrangeIoC2015:Howto"
 
 \end_inset
@@ -11410,18 +11420,18 @@ key "StrangeIoC2015:Howto"
  Eine Empfehlung ist, MVC(S) als Anwendungsarchitektur auf einer höheren
  Ebene anzusehen: Es handelt sich um ein Gerüst, das auf die meisten Teile
  des Programms anwendbar ist.
- So eignet sich die Architektur beispielsweise dazu Benutzeroberflächen,
- Dateizugriff und Client-Server Kommunikation umzusetzen.
- Ob die Architektur auch im Game Loop angewendet werden kann, muss für ein
- Spiel im Speziellen entschieden werden.
+ So eignet sich die Architektur beispielsweise dazu, Benutzeroberflächen,
+ Dateizugriffe und Client-Server-Kommunikation umzusetzen.
+ Ob die Architektur auch innerhalb des Game Loop angewendet werden kann,
+ muss für ein Spiel im Speziellen entschieden werden.
  Sie kann dennoch für die restlichen Programmabschnitte des Spiels verwendet
  werden.
 \end_layout
 
 \begin_layout Standard
 Die komponentenbasierte Architektur von Unity3D berücksichtigt StrangeIoC
- nur teilweise: Es ist möglich einzelne Komponenten zu mediieren, dies würde
- jedoch zu einer stark erhöhten Komplexität der Anwendung führen.
+ nur teilweise: Es ist möglich einzelne Komponenten zu mediieren.
+ Dies würde jedoch zu einer stark erhöhten Komplexität der Anwendung führen.
  In der Praxis werden Spielobjekte deshalb als ein Ganzes -- einem View
  -- angesehen.
  
@@ -11442,12 +11452,12 @@ name "chap:Fazit"
 Die Spieleengine Unity3D erfreut sich immer größerer Beliebtheit unter Spieleent
 wicklern.
  Gründe dafür sind Plattformunabhängigkeit, ausgereifte Rendertechniken,
- Benutzerfreundlichkeit und der einfache Einstieg.
+ Benutzerfreundlichkeit und der einfache Einstieg in die Entwicklungsumgebung.
  Mit Wachstum eines Softwareprojektes und Teams werden weitere nichtfunktionale
  Anforderungen wie Wartbarkeit, Erweiterbarkeit, Wiederverwendbarkeit, Testbarke
 it und die Möglichkeit zur parallelen Entwicklung deutlich.
- In Kapitel 2 wurde beschrieben, dass sich Kopplung zwischen Entitäten maßgeblic
-h auf diese Anforderungen auswirkt.
+ Im zweiten Kapitel dieser Arbeit wurde beschrieben, dass sich Kopplung
+ zwischen Entitäten maßgeblich auf diese Anforderungen auswirkt.
  Kopplung beschreibt die Anzahl und Stärke von Abhängigkeiten unter Softwareenti
 täten.
  Eine Abhängigkeit entsteht, sobald eine Entität mit einer anderen kommunizieren
@@ -11475,7 +11485,7 @@ rt.
  bekannt sein muss.
  Wie diese Implementierung tatsächlich aussieht, ergibt sich erst zur Laufzeit
  durch späte Bindung.
- Entitäten sind somit unabhängig voneinander austauschbar und erweiterbar.
+ Entitäten sind unabhängig voneinander austauschbar und erweiterbar.
  Durch diese Unabhängigkeit ist eine parallele Entwicklung gewährleistet.
  Lose Kopplung macht einzelne Entitäten testbar, indem sie in Isolation
  betrachtet werden können.
@@ -11488,12 +11498,11 @@ Kopplung in Unity3D
 \begin_layout Standard
 Nachdem die Vorteile und eine mögliche Umsetzung von loser Kopplung durch
  Inversion Of Control deutlich gemacht wurden, wurde Unity3D auf die Anwendung
- des Paradigmas untersucht.
- Es wurde zunächst untersucht, inwieweit sich Unitys komponentenbasierte
- Architektur von der einer klassischen objektorientierten Vererbungshierarchie
- unterscheidet.
+ des Paradigmas geprüft.
+ Zunächst wurde untersucht, inwieweit sich Unitys komponentenbasierte Architektu
+r von einer klassischen objektorientierten Vererbungshierarchie unterscheidet.
  Es wurde festgestellt, dass in Unity3D bereits Inversion Of Control stattfindet.
- Die Kontrolle über die Komposition und Lebenszeit von Objekten ist bereits
+ Die Kontrolle über die Komposition und Lebenszeit von Objekten ist längst
  invertiert.
  Aus diesem Grund können Abhängigkeiten nicht auf herkömmlichen Wegen aufgelöst
  werden.
@@ -11509,14 +11518,14 @@ Nachdem die Vorteile und eine mögliche Umsetzung von loser Kopplung durch
 GetComponent, 
 \shape default
 möglich lose Kopplung umzusetzen, jedoch ist die Kommunikation auf Objekte
- innerhalb der Szenehierarchie eingeschränkt.
+ innerhalb der Szenenhierarchie beschränkt.
  Der Architektur von Unity3D fehlt ein Mittel zum Umgang mit geteilter Logik,
  die keinem einzelnen Spielobjekt zugeordnet werden kann.
  Das Resultat ist die häufige Verwendung von Anti-Patterns wie Managern,
  God Objects und Singletons, die zu enger Kopplung führen.
  Aus diesem Grund wurde die Entscheidung getroffen, Dependency Injection
- auch in Unity3D umzusetzen, um es so zu ermöglichen lose Kopplung umzusetzen,
- ohne dabei die Kommunikation auf Komponenten oder Spielobjekte zu beschränken.
+ auch in Unity3D umzusetzen, um es so zu ermöglichen lose Kopplung zu realisiere
+n, ohne dabei die Kommunikation auf Komponenten oder Spielobjekte zu beschränken.
 \end_layout
 
 \begin_layout Subsection
@@ -11528,7 +11537,7 @@ Aufgrund der bereits beschriebenen Einschränkungen durch Unitys Architektur,
  ist es nicht möglich Dependency Injection manuell durchzuführen.
  Aus diesem Grund wurde sich dazu entschieden Dependency Injection durch
  Implementation eines Inversion Of Control Frameworks zu automatisieren.
- Dabei gab es einige Hürden zu überwinden: Es musste zunächst ein 
+ Dabei gab es einige Probleme zu bewältigen: Es musste zunächst ein 
 \begin_inset Quotes gld
 \end_inset
 
@@ -11543,14 +11552,14 @@ künstlicher
  Anzumerken ist, dass bei allen Methoden Property Injection verwendet werden
  muss.
  Bei der Implementation des Frameworks wurde deutlich, dass ein Dependency
- Injection Container von Attributes und Reflection gebrauch macht.
+ Injection Container von Attributes und Reflection Gebrauch macht.
  Da Reflection sehr performanceintensiv ist, sollte in zeitkritischen Momenten
  auf Dependency Injection verzichtet werden.
  Eine Funktionalität die deswegen noch zum Framework hinzugefügt werden
  sollte, ist das Caching von Reflectionaufrufen.
  Für eine tatsächliche Verwendung bei der Entwicklung eines Videospiels
  sollte somit ein ausgereifteres Framework verwendet werden.
- In dieser Arbeit wurde ein überblick über die für Unity3D entwickelten
+ In dieser Arbeit wurde ein Überblick über die für Unity3D entwickelten
  Inversion Of Control Frameworks geliefert, um diese Entscheidung zu erleichtern.
  
 \end_layout
@@ -11590,7 +11599,7 @@ Zusammenfassend kann gesagt werden, dass Dependency Injection auch in Unitys
  nicht auf Spielobjekte und Komponenten in der Szene beschränkt.
  Durch Dependency Injection wird es ermöglicht, lose Kopplung in Unity3D
  umzusetzen.
- Inversion Of Control Container und deren Integration in Unity geht jedoch
+ Inversion Of Control Container und deren Integration in Unity gehen jedoch
  nicht nur mit Vorteilen einher: Injections können einen negativen Einfluss
  auf Performance haben.
  Da der Composition Root selbst ein Spielobjekt in der Szene sein muss,
@@ -11608,8 +11617,8 @@ Ferner ist es jedoch die Verantwortung der Engine, ein Kommunikationsmittel
  stellt.
  Eine weitere Alternative wäre der Schritt zu einer Entity Component System
  Architektur.
- In einer solchen Architektur beinhalten Komponenten lediglich simple Daten
- und müssen somit nicht miteinander kommunizieren.
+ In einer solchen Architektur beinhalten Komponenten lediglich Daten und
+ müssen somit nicht miteinander kommunizieren.
  Jegliches Verhalten wird von Systemen abgebildet.
  Die Engine sorgt dafür, dass das System Referenzen zu relevanten Komponenten
  aller Entities erhält.
@@ -11630,9 +11639,9 @@ key "Mandala2015"
 \end_layout
 
 \begin_layout Standard
-Die Ansätze schließen sich nicht gegenseitig aus: Depe ndency Injection
- kann auch in einer Entity Component System Architektur angewendet werden,
- um Abhängigkeiten von Systemen lose mit diesen zu koppeln.
+Die Ansätze schließen sich nicht gegenseitig aus: Dependency Injection kann
+ auch in einer Entity Component System Architektur angewendet werden, um
+ Abhängigkeiten von Systemen lose mit diesen zu koppeln.
  Es könnte sogar ein Dependency Injection Container zur Implementation einer
  Entity Component System Architektur genutzt werden.
 \end_layout
