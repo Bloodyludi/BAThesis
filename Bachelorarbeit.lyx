@@ -11438,8 +11438,8 @@ OnRemove
 \end_layout
 
 \begin_layout Standard
-Wie im Beispiel deutlich wird, agieren Mediatoren lediglich als Brücke zwischen
- Darstellungs- und Anwendungslogik.
+Wie durch das Beispiel deutlich wird, agieren Mediatoren lediglich als Brücke
+ zwischen Darstellungs- und Anwendungslogik.
  Sie sollten somit leichtgewichtig sein und möglichst keine eigene Logik
  beinhalten.
  Sie dienen einzig dazu, Anwendungslogik aus den Views herauszuhalten.
@@ -11823,14 +11823,14 @@ addcontentsline{toc}{chapter}{Glossar}
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 symbol "Single Responsibility Principle"
-description "Eine Klasse soll nur eine Verantowrtlichkeit haben."
+description "Eine Klasse soll nur eine Verantwortlichkeit haben."
 
 \end_inset
 
 
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
-symbol "Open Closed Principle"
+symbol "Open/Closed Principle"
 description "Eine Klasse soll offen für Erweiterung, jedoch geschlossen für Modifikation sein."
 
 \end_inset
@@ -11839,7 +11839,7 @@ description "Eine Klasse soll offen für Erweiterung, jedoch geschlossen für Mo
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 symbol "Liskov Subsitituion Principle"
-description "Abgeleite Klassen sollen sich so verhalten wie der Basistyp es von ihnen erwartet."
+description "Abgeleite Klassen sollen sich so verhalten, wie der Basistyp es von ihnen erwartet."
 
 \end_inset
 
@@ -11855,7 +11855,7 @@ description "Interfaces sollen nur die Funktionalität wiederspiegeln die ihre K
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 symbol "Dependency Inversion Principle"
-description "High-Level Klassen sollen nicht von Low-Level Klassen abhängig sein, sondern beide von Interfaces. Interfaces sollen nicht von Details abhängig sein sondern Details von Interfaces"
+description "High-Level Klassen sollen nicht von Low-Level Klassen abhängig sein, sondern beide von Interfaces. Interfaces sollen nicht von Details abhängig sein, sondern Details von Interfaces"
 
 \end_inset
 
@@ -11863,7 +11863,87 @@ description "High-Level Klassen sollen nicht von Low-Level Klassen abhängig sei
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 symbol "System Under Test"
-description "Ein System Under Test bezeichnet das eine zu testende Enität in einem Testszenario."
+description "Ein System Under Test bezeichnet eine zu testende Entität in einem Testszenario."
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "JSON"
+description "Die JavaScript Object Notation ist ein textbasiertes Datenformat zum Datenaustausch zwischen Anwendungen."
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "XML"
+description "Die Extensible Markup Language ist eine textbasierte Auszeichnungssprache für hierarchisch strukturierte Daten."
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "Prefab"
+description "Mithilfe eines Prefabs lassen sich Vorlagen bzw. Prototypen von GameObjects definieren, um zur Laufzeit Instanzen von diesem erzeugen zu können."
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "Template Method"
+description "Die Template Method (\"Schablonenmethode\") ist ein Entwurfsmuster, mit dem sich Teile eines in einer Basisklasse definierten Algorithmus durch Vererbung neu definieren lassen. "
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "Test Double"
+description "Test Double ist ein Oberbegriff für Klassen, die in Unittests als Ersatz für reale Abhängigkeiten eingesetzt werden. (Siehe Mock, Stub)"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "Mock"
+description "Ein Test Double, welches prüfen kann, ob tatsächlich Interaktion mit diesem stattgefunden hat."
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "Stub"
+description "Ein Test Double, welches bei Aufruf einen vorgegebenen Wert liefert."
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "MVC(S)"
+description "Kurzform für Model, View, Controler, Service. Siehe Kapitel 4.4"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "Strategy Pattern"
+description "Das Strategy Pattern ist ein Entwurfsmuster, welches Algorithmen zur Laufzeit austauschbar macht, indem diese von einer gemeinsamen Abstraktion ableiten."
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "YAGNI"
+description "Akronym für “You Aren’t Gonna Need It”. Einem Programm soll keine überflüssige Logik hinzugefügt werden."
 
 \end_inset
 
@@ -11941,7 +12021,6 @@ JabRef
 \begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
-btprint "btPrintAll"
 bibfiles "bibtex-daten/bachelorarbeit-info"
 options "bibtotoc,natdin"
 
