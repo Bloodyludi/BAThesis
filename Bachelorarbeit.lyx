@@ -4531,7 +4531,7 @@ public
 
 \begin_layout Standard
 Ist bereits vor Ausführung des Spiels bekannt, welche Referenzen benötigt
- werden, sollten diese wenn möglich über 
+ werden, sollten diese, wenn möglich, über 
 \shape italic
 SerializeField
 \shape default
@@ -4542,14 +4542,14 @@ SerializeField
 OnValidate
 \shape default
 -Funktion der Komponente hinzuzufügen.
- Abb.
+ In Abbildung
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "fig:SerializeField"
 
 \end_inset
 
- verdeutlicht dies anhand eines einfachen Beispiels.
+ wird dies anhand eines einfachen Beispiels verdeutlicht.
 \end_layout
 
 \begin_layout Standard
@@ -4758,8 +4758,15 @@ reference "alg:Signaturen-der-GetComponent"
 
 \end_inset
 
- zeigt die Signaturen, der in der Klasse MonoBehavior zur Verfügung stehenden
- GetComponent-Methoden.
+ zeigt die Signaturen, der in der Klasse 
+\shape italic
+MonoBehavior
+\shape default
+ zur Verfügung stehenden 
+\shape italic
+GetComponent
+\shape default
+-Methoden.
  Ist keine Komponente des gewünschten Typs vorhanden, wird 
 \shape italic
 null
@@ -4777,15 +4784,22 @@ RequireComponent
  bewirkt, dass die benötigte Komponente automatisch an das GameObject angefügt
  wird.
  Um auf Komponenten von anderen GameObjects in der über- und untergeordneten
- Hierarchieebene zugreifen zu können, werden zusätzlich folgende Methoden
- bereitgestellt:
+ Hierarchieebene zugreifen zu können, werden zusätzlich die in Abbildung
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:GetComponentInChildren"
+
+\end_inset
+
+ gezeigten Methoden bereitgestellt.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -4872,7 +4886,7 @@ T
 \shape italic
 UnityEngine.Object
 \shape default
- -- eingeschränkt wird, ist es möglich, anstatt konkreten Komponenten, auch
+ -- beschränkt wird, ist es möglich, anstatt konkreten Komponenten auch
  Komponenten anhand eines Interfaces zu finden.
  Enge Kopplung zu einer konkreten Implementation einer Komponente entsteht
  so nicht.
@@ -4886,7 +4900,7 @@ GetComponent
 \shape italic
 GetComponent
 \shape default
- funktioniert entgegengesetzt zum Hollywood-Prinzip.
+ funktioniert somit entgegengesetzt zum Hollywood-Prinzip.
  Es ist von außen nicht sichtbar, dass die Komponente Abhängigkeiten hat.
  Ohne die Implementation der Komponente zu kennen, kann keine Aussage darüber
  getroffen werden, welche Abhängigkeiten notwendig sind, damit sie funktioniert.
@@ -4999,9 +5013,9 @@ reference "fig:Find-stringbasierten"
 GetComponent
 \shape default
  ausfindig gemacht werden.
- Die Funktionen unterscheiden sich im Verhalten, falls kein GameObject mit
- dem passenden Namen gefunden wird: Wird kein Objekt mit dem passenden Namen
- gefunden, gibt 
+ Die Funktionen unterscheiden sich im Verhalten, falls kein passendes GameObject
+ gefunden wird: Wird kein Objekt mit einem passenden Namen gefunden, gibt
+ 
 \shape italic
 Find
 \shape default
@@ -5010,7 +5024,7 @@ Find
 null
 \shape default
  zurück.
- Wird kein Objekt mit dem passenden Tag gefunden, wirft 
+ Wird kein Objekt mit einem passenden Tag gefunden, wirft 
 \shape italic
 FindWithTag
 \shape default
@@ -5025,8 +5039,8 @@ UnityException
 Generell ist von der Nutzung beider Funktionen abzuraten, da diese nicht
  gewährleisten, dass das gesuchte GameObject tatsächlich auffindbar ist.
  Es wird sich darauf verlassen, dass ein GameObject mit bestimmtem Namen
- oder Tag in der Szene existiert und bestimmte Komponenten an diesem vorhanden
- sind.
+ oder Tag in der Szene existiert und die gewünschten Komponenten an diesem
+ vorhanden sind.
  Es gibt somit viel Raum für Fehlkonfiguration.
 \end_layout
 
@@ -5152,7 +5166,7 @@ In der Dokumentation der Funktion wird angemerkt, dass
 FindObjectOfType
 \shape default
  sehr langsam ist.
- Sie sollte daher nicht jeden Frame genutzt werden.
+ Sie sollte daher nicht in jedem Frame aufgerufen werden.
  Als Alternative wird das Singleton Pattern vorgeschlagen 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -5178,8 +5192,7 @@ FindObjectOfType
 \shape default
  genutzt werden können, mit der Beschränkung, dass sie auf eine Instanz
  limitiert sind.
- Abb.
- 
+ Abbildung 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "fig:Singleton"
@@ -5349,9 +5362,18 @@ Implementation des Singleton Patterns
 Die abgebildete Implementation des Singletons erlaubt es, Funktionalitäten
  eines MonoBehaviours, wie dem Update Loop, zu nutzen.
  Sollten diese Funktionalitäten nicht notwendig sein, kann auch ein klassischer
- Singleton nach der Gang Of Four verwendet werden.
- Sollte gar keine Vererbung notwendig sein, gibt es oft jedoch gar keinen
- Grund ein Singleton zu implementieren.
+ Singleton nach der Gang Of Four verwendet werden 
+\begin_inset CommandInset citation
+LatexCommand citep
+after "S. 127"
+before "siehe"
+key "Gamma1994"
+
+\end_inset
+
+.
+ Ist gar keine Vererbung notwendig, gibt es keinen Grund ein Singleton zu
+ implementieren.
  Stattdessen kann eine statische Klasse verwendet werden.
 \end_layout
 
@@ -5386,17 +5408,17 @@ Events und Messages
 Alternativ kann die Kommunikation zwischen Objekten auch über Events erfolgen.
  Events können im Unterschied zu Methodenaufrufen keinen oder mehrere Empfänger
  haben.
- Events sind eine Umsetzung des Observer Patterns.
- Die Klasse, die das Event auslöst, wird als Publisher und die Klassen,
- die das Ereignis behandeln als Subscriber, bezeichnet.
+ Grundlage für Events ist das Observer Pattern.
+ Die Klasse, die das Event auslöst, wird als Sender und die Klassen, die
+ das Event behandeln als Empfänger, bezeichnet.
  Ein typischer Anwendungsfall für Events sind UI-Elemente wie Buttons, Slider
  und Toggles.
- Mit Events kann nichtsdestotrotz das gleiche Ergebnis wie mit Referenzierung
+ Nichtsdestotrotz kann mit Events das gleiche Ergebnis wie mit Referenzierung
  und Methodenaufruf erzielt werden.
  Unity3D und C# bieten mehrere Möglichkeiten um die Kommunikation mittels
  Events umzusetzen.
- In dieser Arbeit wird davon abgesehen, darzustellen wie C# Events implementiert
- werden, da sie ohne Mediation oder Statics nicht das Problem der Referenzierung
+ In dieser Arbeit wird die Implementation von C# Events nicht aufgeführt,
+ da sie ohne Mediation oder Statics nicht das Problem der Referenzierung
  lösen.
  Wird ein gewöhnliches C# Event als Kommunikationskanal gewählt, so muss
  der Empfänger über einen der im letzten Abschnitt beschriebenen Wege Zugriff
@@ -5412,25 +5434,30 @@ UnityEvent (Unity3D 4.6+)
 \begin_layout Standard
 UnityEvents ermöglichen das Setzen von Callbacks über das Editorfenster.
  Auf diese Weise sind Sender und Empfänger komplett voneinander entkoppelt.
- Zudem bieten UnityEvents zusätzlich nahezu identische Funktionalität wie
- klassische C# Events.
+ Darüber hinaus bieten UnityEvents zusätzlich nahezu identische Funktionalität
+ wie klassische C# Events.
 \end_layout
 
 \begin_layout Standard
-Abbildung 
+Die Verwendung eines nicht-generischen UnityEvents ohne Parameter wird in
+ Abbildung 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "fig:UnityEventCode"
 
 \end_inset
 
- zeigt die Verwendung eines nicht generischen UnityEvents ohne Parameter.
- Die Publisher Komponente löst das Event in der 
+ gezeigt.
+ Die 
+\shape italic
+Publisher
+\shape default
+ Komponente löst das Event in der 
 \shape italic
 Start
 \shape default
 -Methode aus.
- Ein Subscriber benötigt lediglich eine öffentliche Methode mit der passenden
+ Ein Empfänger benötigt lediglich eine öffentliche Methode mit der passenden
  Signatur.
  
 \end_layout
@@ -5439,7 +5466,7 @@ Start
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset listings
@@ -5568,7 +5595,7 @@ public class EventSubscriber : MonoBehaviour
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Beispiel eines Publishers und Subscribers unter Verwendung eines UnityEvents.
+Beispiel eines Senders und Empfängers unter Verwendung eines UnityEvents.
  Quelle: Eigene Abbildung
 \begin_inset CommandInset label
 LatexCommand label
@@ -5600,8 +5627,8 @@ UnityEvent Publisher und Subscriber
 \end_layout
 
 \begin_layout Standard
-Auffällig ist, dass bis jetzt noch keine Verbindung zwischen Publisher und
- Subscriber existiert.
+Auffällig ist, dass bis jetzt noch keine Verbindung zwischen Sender und
+ Empfänger existiert.
  Diese kann im Editor gesetzt werden (siehe Abbildung 
 \begin_inset CommandInset ref
 LatexCommand vref
@@ -5670,23 +5697,23 @@ Hinzufügen einer Callback-Methode für einen UnityEvent im Editor
 \begin_layout Standard
 UnityEvents bieten eine Möglichkeit, Sender von Empfänger komplett voneinander
  zu entkoppeln.
- Andererseits gibt es auch hier viel Raum zur Fehlkonfiguration.
- Es ist nicht im Programmcode ersichtlich, ob und wer die Subscriber eines
- Events sind.
- Genauso wenig ist ersichtlich, ob eine als öffentlich gekennzeichnete Methode
+ Allerdings besteht ebenfalls ein hohes Risiko einer Fehlkonfiguration.
+ Es ist nicht im Programmcode ersichtlich, ob Empfänger existieren und wer
+ diese sind.
+ Genauso wenig wird deutlich, ob eine als öffentlich gekennzeichnete Methode
  als Callback genutzt wird oder nicht.
  Oft werden Methoden und Events, auf die keine Referenzen im Programmcode
  existieren, einfach gelöscht.
 \end_layout
 
 \begin_layout Standard
-Events sind ein geeignetes Mittel, um optionale Abhängigkeiten aufzulösen.
+Events sind dafür geeignet optionale Abhängigkeiten aufzulösen.
  Ist eine Abhängigkeit jedoch zwingend erforderlich, sollte zu einer anderen
  Möglichkeit gegriffen werden.
 \end_layout
 
 \begin_layout Subsubsection*
-Sending Messages
+Senden von Messages
 \end_layout
 
 \begin_layout Standard
@@ -5775,7 +5802,7 @@ SendMessage
 \shape italic
 BroadcastMessage
 \shape default
- sendet eine Message an das aufrufende Spielobjekt und dessen Children.
+ sendet eine Message an das aufrufende Spielobjekt und dessen Kindobjekte.
  
 \shape italic
 SendMessageUpwards
@@ -5797,11 +5824,11 @@ reference "fig:SendMessage"
 SendMessage
 \shape default
  anhand von zwei Komponenten, die sich am gleichen Spielobjekt befinden.
- Der Publisher eines Events spezifiziert die Callbackmethode mittels eines
+ Der Sender einer Message spezifiziert die Callbackmethode mittels eines
  Stringparameters.
- Dieser String repräsentiert den Namen der gesuchten Callbackmethode.
+ Dieser String repräsentiert den Namen der gewünschten Callbackmethode.
  Der Zugriffsmodifizierer der Callbackmethode ist dabei nicht relevant.
- Sie kann wie im Beispiel auch als 
+ Sie kann, wie im Beispiel gezeigt, auch als 
 \shape italic
 private
 \shape default
@@ -6072,7 +6099,7 @@ Das Eventsystem wurde in Verbindung mit uGUI in Unity3D 4.6 eingeführt.
  Man kann es jedoch auch für benutzerdefinierte Events verwenden.
  Anstelle eines Strings wird ein Interface verwendet, um eine Komponente
  zu kennzeichnen, die eine Callbackfunktion für ein bestimmtes Event implementie
-ren.
+rt.
  Events können mittels 
 \shape italic
 ExecuteHierarchy
@@ -6090,15 +6117,15 @@ reference "fig:Methodensignaturen-des-Event"
 \end_layout
 
 \begin_layout Standard
-Abbildung 
+Ein Beispiel zur Verwendung des Eventsystems wird in Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:EventSystems"
 
 \end_inset
 
- zeigt ein Beispiel zur Verwendung des Eventsystems.
- Der Publisher löst ein Event durch den Aufruf der 
+ gezeigt.
+ Der Sender löst ein Event durch den Aufruf der 
 \shape italic
 Execute
 \shape default
@@ -6117,8 +6144,8 @@ on.
 \shape italic
 Recieve
 \shape default
--Methode des Subscribers aufgerufen.
- Hierzu muss der Subscriber das 
+-Methode des Empfängers aufgerufen.
+ Hierzu muss der Empfänger das 
 \shape italic
 IEventTarget
 \shape default
@@ -6296,12 +6323,16 @@ Verwenden von UnityEngine.EventSystems
 \begin_layout Standard
 Das neue Eventsystem ist ein typsicherer Ansatz Events an Komponenten in
  der Szenehierarchie zu senden.
- Publisher und Subscriber sind lose miteinander gekoppelt.
+ Sender und Empfänger sind lose miteinander gekoppelt.
  Bei der Verwendung entsteht jedoch eine Abhängigkeit zu der statischen
- ExecuteEvents-Klasse.
+ 
+\shape italic
+ExecuteEvents
+\shape default
+-Klasse.
  Testbarkeit ist somit nur innerhalb von Unity3D gewährleistet.
  Ohne das Spielobjekt der Empfängerkomponente zu kennen, kann jedoch nur
- an das eigene oder direkte Parent-Spielobjekte gesendet werden.
+ an das eigene oder an direkte Parent-Spielobjekte gesendet werden.
  
 \end_layout
 
@@ -6321,8 +6352,8 @@ ie arrangieren.
  damit eine Form von Kopplung.
  Einige Methoden ermöglichen zwar lose Kopplung, aber nicht durch Inversion
  Of Control.
- Eine Sache haben jedoch alle Kommunikationsmittel gemeinsam: Objekte müssen
- Komponenten oder Spielobjekte sein.
+ Eines haben jedoch alle Kommunikationsmittel gemeinsam: Die Kommunizierenden
+ müssen Komponenten oder Spielobjekte sein.
  Dies führt dazu, dass Objekte, um überhaupt kommunizieren zu können, von
  
 \shape italic
@@ -6352,13 +6383,21 @@ leere
 \end_layout
 
 \begin_layout Itemize
-Durch Singletons und statische Klassen, die globalen Zugriff ermöglichen.
+Durch Singletons und statischen Klassen, die globalen Zugriff ermöglichen.
 \end_layout
 
 \begin_layout Standard
-Solche Klassen haben oft keine klar definierten Aufgaben.
- Sie wachsen mit der Zeit und werden somit zu Gottobjekten.
- Managerobjekte verletzen das Single-Responcibility Principle somit gleich
+Solche Klassen haben oft keine eindeutig definierten Aufgaben.
+ Sie wachsen mit der Zeit und werden somit zu 
+\begin_inset Quotes gld
+\end_inset
+
+God Objects
+\begin_inset Quotes grd
+\end_inset
+
+.
+ Managerobjekte verletzen das Single-Responsibility Principle somit gleich
  auf mehreren Ebenen: Sie haben oft mehr als nur eine Aufgabe.
  Sie vermischen Darstellungs- mit Anwendungslogik, indem sie als Spielobjekte
  in der Szene existieren.
