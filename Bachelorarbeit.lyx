@@ -11056,8 +11056,8 @@ Retain
 -Methode ermöglicht, seine Zerstörung zu verzögern.
  Die Ausführung der Anwendung wird nicht eingeschränkt, da der Aufruf eines
  Commands asynchron erfolgt.
- Sehr nützlich ist Erhalten eines Commands beispielsweise bei der Client-Server-
-Kommunikation: In dem gezeigten Beispiel in Abbildung 
+ Nützlich ist das Erhalten eines Commands beispielsweise bei der Client-Server-K
+ommunikation: In dem gezeigten Beispiel in Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Beispiel-Command"
@@ -11066,15 +11066,19 @@ reference "fig:Beispiel-Command"
 
  wird der Command so lange am Leben erhalten, bis dieser eine Antwort vom
  Server erhält.
- Dies geschieht durch den Aufruf der Release-Methode im Callback der Anfrage.
+ Dies geschieht durch den Aufruf der 
+\shape italic
+Release
+\shape default
+-Methode im Callback der Anfrage.
 \end_layout
 
 \begin_layout Standard
-Commands bieten eine sehr effiziente Möglichkeit Anwendungsschichten voneinander
+Commands bieten eine effiziente Möglichkeit Anwendungsschichten voneinander
  zu entkoppeln.
- Der Grund hierfür ist, dass sie sich nur durch Signale ausführen lassen:
- Es gibt für Models, Services und Mediatoren keinen Grund überhaupt von
- ihnen zu wissen.
+ Dies lässt sich damit begründen, dass sie sich nur durch Signale ausführen
+ lassen: Für Models, Services und Mediatoren gibt es keinen Grund überhaupt
+ von ihnen zu wissen.
  Models und Mediatoren brauchen lediglich Signale auszulösen, um die Ausführung
  der Anwendung in Gang zu setzen.
 \end_layout
@@ -11084,9 +11088,8 @@ Views
 \end_layout
 
 \begin_layout Standard
-Wie bereits erwähnt sind Views oder View-Komponenten für die Darstellung
- der Benutzeroberfläche und der Verarbeitung von Interaktionen mit dem Benutzer
- verantwortlich.
+Wie bereits erwähnt sind Views für die Darstellung der Benutzeroberfläche
+ und der Verarbeitung von Interaktionen mit dem Benutzer verantwortlich.
  Dabei ist der Begriff 
 \begin_inset Quotes gld
 \end_inset
@@ -11095,17 +11098,17 @@ View
 \begin_inset Quotes grd
 \end_inset
 
- nicht unbedingt wörtlich zu nehmen: Sie übernehmen jegliche Ein- und Ausgabelog
-ik, wie Rendering, Darstellungslogik von User Interfaces, Audioausgabe und
- eventuell Interaktion mit der Physikengine.
- Es sind Aufgaben, für die die Interaktion mit Unity3D notwendig ist.
+ nicht unbedingt wörtlich zu nehmen: Views übernehmen jegliche Ein- und
+ Ausgabelogik, wie Rendering, Darstellungslogik von User Interfaces, Audioausgab
+e und eventuelle Interaktion mit der Physikengine.
+ Es handelt sich um Aufgaben, für die eine Interaktion mit Unity3D notwendig
+ ist.
  Aus diesem Grund sind Views MonoBehaviours.
  Sie beinhalten jedoch keinerlei Anwendungslogik und kommunizieren lediglich
  zu ihren Mediatoren über Events.
  Ansonsten sind sie komplett autonome Komponenten, die ausschließlich ihren
  eigenen Zustand manipulieren können.
- Aus diesem Grund sollten auch keine Injections in MonoBehaviours vorgenommen
- werden.
+ Deswegen sollten keine Injections in MonoBehaviours vorgenommen werden.
  Die Absicht hierbei ist, das Unity-Framework soweit wie möglich aus der
  Anwendungslogik rauszuhalten, um eine enge Kopplung zu diesem zu verhindern.
 \end_layout
@@ -11137,18 +11140,17 @@ key "Gamma1994"
 \end_layout
 
 \begin_layout Standard
-In Abbildung 
+Durch die Abbildung 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "fig:Schaubild-Mediation"
 
 \end_inset
 
- wird veranschaulicht, wie der Mediations-Prozess in StrangeIoC vonstattengeht:
- Sobald ein View in eine Scene geladen wird, sendet dieser automatisch in
- der Awake-Methode eine Message an den ContextView.
- Dafür muss zwangsläufig jeder View ein Childobject des jeweiligen ContextViews
- sein.
+ im Anhang wird veranschaulicht, wie der Mediations-Prozess in StrangeIoC
+ vonstattengeht: Sobald ein View in eine Szene geladen wird, sendet dieser
+ automatisch in der Awake-Methode eine Message an den ContextView.
+ Dafür muss zwangsläufig jedes View ein Childobject eines ContextViews sein.
  Über den Context des ContextViews wird der MediationBinder aufgerufen.
  Dieser instanziiert einen zuvor an den View gebundenen Mediator und versorgt
  ihn mit seinen Abhängigkeiten mithilfe des Injectors.
@@ -11381,14 +11383,15 @@ Beispiel der Implementation eines Mediators
 \end_layout
 
 \begin_layout Standard
-In Abbildung 
+Ein Beispiel für eine mögliche Implementation eines Mediators wird in Abbildung
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Implementation-Mediator"
 
 \end_inset
 
- wird ein Beispiel für eine mögliche Implementation eines Mediators gezeigt.
+ aufgeführt.
  Der Mediator reagiert auf das 
 \shape italic
 OnBoardClicked
@@ -11467,7 +11470,7 @@ Services stehen eng mit Models in Verbindung.
  Dennoch sollten sie getrennt voneinander existieren.
  Ein Service beschafft -- oft durch die Kommunikation zur Außenwelt -- Daten.
  Ein Model speichert diese Daten.
- Services kommunizieren mit externen Ressourcen einer Applikation.
+ Services kommunizieren mit externen Ressourcen einer Anwendung.
  Beispiele für solche Ressourcen sind unter anderem: Webserver und -Services,
  das Dateisystem und Datenbanken.
  Der Zugriff aus Services erfolgt über Commands, wie bereits in Abbildung
@@ -11521,7 +11524,7 @@ key "Hooks2011"
 \end_inset
 
 .
- Es werden weitaus weniger performancekritische Operationen als in Videospielen
+ Es werden weitaus weniger zeitkritische Operationen als in Videospielen
  ausgeführt.
  In besonders performancekritischen Momenten innerhalb des Game Loops sollte
  deshalb auf eine hohe Anzahl an Injections und Signals verzichtet werden
@@ -11672,12 +11675,13 @@ künstlicher
  Injection Container von Attributes und Reflection Gebrauch macht.
  Da Reflection sehr performanceintensiv ist, sollte in zeitkritischen Momenten
  auf Dependency Injection verzichtet werden.
- Eine Funktionalität die deswegen noch zum Framework hinzugefügt werden
+ Eine Funktionalität, die deswegen noch zum Framework hinzugefügt werden
  sollte, ist das Caching von Reflectionaufrufen.
  Für eine tatsächliche Verwendung bei der Entwicklung eines Videospiels
  sollte somit ein ausgereifteres Framework verwendet werden.
  In dieser Arbeit wurde ein Überblick über die für Unity3D entwickelten
- Inversion Of Control Frameworks geliefert, um diese Entscheidung zu erleichtern.
+ Inversion Of Control Frameworks geliefert, um eine Entscheidungshilfe zu
+ bieten.
  
 \end_layout
 
@@ -11702,7 +11706,7 @@ Dependency Injection allein führt noch nicht zu einer guten Softwarearchitektur
  Es gibt jedoch auch Fälle, für die die MVC(S)-Architektur weniger gut geeignet
  ist.
  Dies sind unter anderem Videospiele, die viel zeitkritische Logik beinhalten
- oder stark von der komponentenbasierten Architektur Unitys gebrauch machen.
+ oder stark von der komponentenbasierten Architektur Unitys Gebrauch machen.
 \end_layout
 
 \begin_layout Section
@@ -11737,9 +11741,9 @@ Ferner ist es jedoch die Verantwortung der Engine, ein Kommunikationsmittel
  In einer solchen Architektur beinhalten Komponenten lediglich Daten und
  müssen somit nicht miteinander kommunizieren.
  Jegliches Verhalten wird von Systemen abgebildet.
- Die Engine sorgt dafür, dass das System Referenzen zu relevanten Komponenten
+ Die Engine sorgt dafür, dass ein System Referenzen zu relevanten Komponenten
  aller Entities erhält.
- Somit machen auch Entity Component Systems gebrauch von Inversion Of Control.
+ Somit machen auch Entity Component Systems Gebrauch von Inversion Of Control.
  Indem der Zustand einer Anwendung ausschließlich in Komponenten gehalten
  wird, gibt es keinen Grund für Systeme untereinander zu kommunizieren.
  In einer Entity Component System Architektur existiert Kopplung somit lediglich
@@ -11759,7 +11763,7 @@ key "Mandala2015"
 Die Ansätze schließen sich nicht gegenseitig aus: Dependency Injection kann
  auch in einer Entity Component System Architektur angewendet werden, um
  Abhängigkeiten von Systemen lose mit diesen zu koppeln.
- Es könnte sogar ein Dependency Injection Container zur Implementation einer
+ Es könnte sogar ein Inversion Of Control Container zur Implementation einer
  Entity Component System Architektur genutzt werden.
 \end_layout
 
