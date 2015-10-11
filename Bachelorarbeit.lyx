@@ -5382,22 +5382,34 @@ An dieser Stelle sei anzumerken, dass Singletons aus vielen Gründen als
  Anti-Pattern angesehen werden.
  Eine der Ursachen dafür ist, dass sie einen globalen Zustand einführen.
  Gleiches gilt für statische Klassen.
+ Globaler Zustand führt dazu, dass Klassen nicht in Isolation testbar sind.
+ Wird Zustand von einem Testfall auf einen anderen übertragen, kann dieser
+ das Verhalten des Tests manipulieren.
+ 
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-todo{Singleton als Anti-Pattern erläutern und Quellen angeben}
+Eine Klasse die einen Singleton verwendet, verschleiert ihre Abhängigkeit
+ zu diesem.
+ Von außerhalb ist nicht ersichtlich, dass die Klasse überhaupt eine Abhängigkei
+t hat.
+ Damit ist der Singleton eng mit der Klasse gekoppelt und nicht austauschbar.
+ In Unittests kann eine solche Abhängigkeit nicht durch ein Test Double
+ ausgetauscht werden.
 \end_layout
+
+\begin_layout Standard
+Singletons verletzen das Single Responsibility Principle: Zusätzlich zu
+ ihrer Anwendungslogik erhält eine Klasse die Verantwortung, sicherzustellen,
+ dass lediglich eine einzige Instanz von ihr existiert 
+\begin_inset CommandInset citation
+LatexCommand citep
+before "vgl."
+key "Densmore2004"
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Subsection
@@ -6401,7 +6413,7 @@ God Objects
  auf mehreren Ebenen: Sie haben oft mehr als nur eine Aufgabe.
  Sie vermischen Darstellungs- mit Anwendungslogik, indem sie als Spielobjekte
  in der Szene existieren.
- Des Weiteren verletzen insbesondere Singletons das Single-Responcibility
+ Des Weiteren verletzen insbesondere Singletons das Single Responsibility
  Principle, indem sie ihre Erstellung mit anderer Anwendungslogik mischen.
  
 \end_layout
@@ -10186,7 +10198,7 @@ reference "fig:Implementation-des-Coroutine"
  wird.
  Die Gefahr hierbei ist jedoch, dass Properties zu diesem Zeitpunkt noch
  nicht inijziert wurden.
- Desweiteren sollte das Single-Responcibility-Principle gewahrt werden,
+ Desweiteren sollte das Single Responsibility Principle gewahrt werden,
  indem im Konstruktor lediglich Initialisierungslogik ausgeführt wird.
  Aus diesem Grund sollte ein weiteres Attribut namens 
 \shape italic
